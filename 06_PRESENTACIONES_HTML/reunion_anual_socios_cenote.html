@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CENOTE - Reunión Anual Socios 2024</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.3;
+            padding: 10px;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            height: 100%;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .header h2 {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+
+        .date-time {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 0.9rem;
+            margin: 5px 10px 0 0;
+        }
+
+        .socios {
+            background: rgba(255,255,255,0.15);
+            padding: 8px 15px;
+            border-radius: 10px;
+            display: inline-block;
+            font-size: 0.9rem;
+            margin: 5px 0 0 10px;
+        }
+
+        .main-container {
+            padding: 0;
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 1px;
+            background: #f0f0f0;
+        }
+
+        .section {
+            background: white;
+            padding: 15px;
+            overflow-y: auto;
+        }
+
+        .section.wide {
+            grid-column: span 2;
+        }
+
+        .section.tall {
+            grid-row: span 2;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .section-icon {
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .section-subtitle {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            margin-left: auto;
+            font-style: italic;
+        }
+
+        .topic-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .topic-item {
+            background: #f8f9fc;
+            padding: 8px 10px;
+            border-radius: 8px;
+            border-left: 3px solid;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            font-size: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .topic-item.financiero { border-left-color: #e74c3c; }
+        .topic-item.estrategico { border-left-color: #3498db; }
+        .topic-item.operativo { border-left-color: #27ae60; }
+        .topic-item.legal { border-left-color: #9b59b6; }
+        .topic-item.expansion { border-left-color: #f39c12; }
+        .topic-item.inversion { border-left-color: #e67e22; }
+
+        .numero-destacado {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            background: #ecf0f1;
+            padding: 8px;
+            border-radius: 5px;
+            text-align: center;
+            margin: 5px 0;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+
+        .status-verde { background: #27ae60; }
+        .status-amarillo { background: #f39c12; }
+        .status-rojo { background: #e74c3c; }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+            font-size: 0.7rem;
+            padding: 5px;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 5px;
+        }
+
+        .timeline-date {
+            font-weight: 600;
+            color: #3498db;
+            margin-right: 8px;
+            min-width: 60px;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .kpi-card {
+            background: #f8f9fc;
+            padding: 8px;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .kpi-numero {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .kpi-label {
+            font-size: 0.65rem;
+            color: #7f8c8d;
+            margin-top: 2px;
+        }
+
+        .decision-box {
+            background: #ffe6e6;
+            border: 2px dashed #e74c3c;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 8px 0;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #c0392b;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌮 CENOTE - REUNIÓN ANUAL SOCIOS</h1>
+            <h2>Estado Actual, Visión 2025 y Decisiones Estratégicas</h2>
+            <div style="margin-top: 10px;">
+                <div class="date-time">
+                    📅 Reunión Anual 2024
+                </div>
+                <div class="socios">
+                    👥 <strong>SOCIOS:</strong> Nico, Diego, Sacha, Agus, Angie + Invitados
+                </div>
+            </div>
+        </div>
+
+        <div class="main-container">
+
+            <!-- SECCIÓN 1: ESTADO FINANCIERO ACTUAL -->
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-icon">💰</span>
+                    <h3 class="section-title">ESTADO FINANCIERO 2024</h3>
+                    <span class="section-subtitle">Números reales</span>
+                </div>
+
+                <div class="numero-destacado">
+                    Target: USD 210k/mes
+                </div>
+
+                <div class="topic-list">
+                    <div class="topic-item financiero">
+                        <span class="status-indicator status-verde"></span>
+                        <strong>Martínez:</strong> Equilibrio financiero estable
+                    </div>
+                    <div class="topic-item financiero">
+                        <span class="status-indicator status-amarillo"></span>
+                        <strong>Núñez:</strong> Break-even (18 meses), deuda USD 90k
+                    </div>
+                    <div class="topic-item operativo">
+                        <span class="status-indicator status-verde"></span>
+                        <strong>Operaciones:</strong> Pagos semanales, todo al día
+                    </div>
+                    <div class="topic-item financiero">
+                        <span class="status-indicator status-verde"></span>
+                        <strong>Inversión reciente:</strong> USD 10k (8% anual)
+                    </div>
+                </div>
+
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-numero">15%</div>
+                        <div class="kpi-label">EBITDA Target</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-numero">38%</div>
+                        <div class="kpi-label">Food Cost</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN 2: ESTRUCTURA SOCIETARIA -->
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-icon">🏢</span>
+                    <h3 class="section-title">ESTRUCTURA SOCIETARIA</h3>
+                    <span class="section-subtitle">Actual vs Futura</span>
+                </div>
+
+                <div style="font-size: 0.8rem; font-weight: 600; margin: 8px 0; color: #2c3e50;">
+                    ACTUAL:
+                </div>
+                <div class="topic-list">
+                    <div class="topic-item legal">
+                        <strong>New Mexico SRL:</strong> Local Martínez
+                    </div>
+                    <div class="topic-item legal">
+                        <strong>Triple Campana SRL:</strong> Local Núñez
+                    </div>
+                    <div class="topic-item legal">
+                        <strong>Grupo Agave SRL:</strong> Oficina + Franquicias
+                    </div>
+                </div>
+
+                <div style="font-size: 0.8rem; font-weight: 600; margin: 8px 0; color: #3498db;">
+                    PROPUESTA FUTURA:
+                </div>
+                <div class="topic-list">
+                    <div class="topic-item estrategico">
+                        <strong>New Mexico:</strong> Mantener Martínez
+                    </div>
+                    <div class="topic-item estrategico">
+                        <strong>Nueva Sociedad:</strong> 4 locales CABA
+                    </div>
+                    <div class="topic-item estrategico">
+                        <strong>Separación:</strong> Nordelta para hermano
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    ¿DEFINIR ESTRUCTURA LEGAL FINAL?
+                </div>
+            </div>
+
+            <!-- SECCIÓN 3: PLAN EXPANSIÓN 2025 (ANCHO) -->
+            <div class="section wide">
+                <div class="section-header">
+                    <span class="section-icon">🚀</span>
+                    <h3 class="section-title">PLAN EXPANSIÓN 2025-2030</h3>
+                    <span class="section-subtitle">Hoja de ruta crecimiento</span>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 10px;">
+
+                    <div>
+                        <div style="font-size: 0.8rem; font-weight: 600; margin-bottom: 5px; color: #e74c3c;">
+                            LOCAL #3 (2025):
+                        </div>
+                        <div class="topic-item expansion">
+                            Presupuesto: USD 250k
+                        </div>
+                        <div class="topic-item expansion">
+                            Ubicación: CABA Norte
+                        </div>
+                        <div class="topic-item expansion">
+                            Timeline: 12 meses
+                        </div>
+                    </div>
+
+                    <div>
+                        <div style="font-size: 0.8rem; font-weight: 600; margin-bottom: 5px; color: #f39c12;">
+                            LOCALES #4-5 (2026-2027):
+                        </div>
+                        <div class="topic-item expansion">
+                            Inversión: USD 500k total
+                        </div>
+                        <div class="topic-item expansion">
+                            Modelo: Franquicia o sucursal
+                        </div>
+                        <div class="topic-item expansion">
+                            ROI target: 15% EBITDA
+                        </div>
+                    </div>
+
+                    <div>
+                        <div style="font-size: 0.8rem; font-weight: 600; margin-bottom: 5px; color: #3498db;">
+                            OBJETIVOS AÑO 5:
+                        </div>
+                        <div class="topic-item estrategico">
+                            Revenue: USD 5.76M
+                        </div>
+                        <div class="topic-item estrategico">
+                            EBITDA: USD 864k
+                        </div>
+                        <div class="topic-item estrategico">
+                            Valuación: USD 6.05M
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 10px;">
+                    <div style="font-size: 0.8rem; font-weight: 600; margin-bottom: 5px; color: #2c3e50;">
+                        TIMELINE CRÍTICO:
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-date">Q1 2025:</span>
+                        Inversión USD 1M - 33% equity
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-date">Q2 2025:</span>
+                        Apertura Local #3 CABA
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-date">2026-27:</span>
+                        Expansión locales #4 y #5
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-date">2030:</span>
+                        Exit strategy / Valuación final
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN 4: INVERSIÓN Y FUNDING -->
+            <div class="section tall">
+                <div class="section-header">
+                    <span class="section-icon">💎</span>
+                    <h3 class="section-title">INVERSIÓN & FUNDING</h3>
+                    <span class="section-subtitle">Búsqueda activa</span>
+                </div>
+
+                <div class="numero-destacado">
+                    USD 1M por 33% equity
+                </div>
+
+                <div class="topic-list">
+                    <div class="topic-item inversion">
+                        <strong>Valuación actual:</strong> USD 3M
+                    </div>
+                    <div class="topic-item inversion">
+                        <strong>ROI inversor:</strong> 14.9% anual
+                    </div>
+                    <div class="topic-item inversion">
+                        <strong>Use of funds:</strong> Expansión + working capital
+                    </div>
+                    <div class="topic-item inversion">
+                        <strong>Control:</strong> Founders mantienen 67%
+                    </div>
+                </div>
+
+                <div style="font-size: 0.8rem; font-weight: 600; margin: 12px 0 5px 0; color: #2c3e50;">
+                    STATUS BÚSQUEDA:
+                </div>
+                <div class="topic-list">
+                    <div class="topic-item estrategico">
+                        <span class="status-indicator status-amarillo"></span>
+                        Due diligence en proceso
+                    </div>
+                    <div class="topic-item estrategico">
+                        <span class="status-indicator status-verde"></span>
+                        Documentación financiera completa
+                    </div>
+                    <div class="topic-item estrategico">
+                        <span class="status-indicator status-amarillo"></span>
+                        Pipeline inversores activo
+                    </div>
+                </div>
+
+                <div style="font-size: 0.8rem; font-weight: 600; margin: 12px 0 5px 0; color: #2c3e50;">
+                    DISTRIBUCIÓN EQUITY POST-INVERSIÓN:
+                </div>
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-numero">33%</div>
+                        <div class="kpi-label">Inversor</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-numero">67%</div>
+                        <div class="kpi-label">Founders + Team</div>
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    ¿APROBAR ESTRUCTURA DE INVERSIÓN?
+                </div>
+            </div>
+
+            <!-- SECCIÓN 5: TEMAS OPERATIVOS CLAVE -->
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-icon">⚙️</span>
+                    <h3 class="section-title">TEMAS OPERATIVOS</h3>
+                    <span class="section-subtitle">Decisiones inmediatas</span>
+                </div>
+
+                <div class="topic-list">
+                    <div class="topic-item operativo">
+                        <strong>Contador nuevo:</strong> Miguel vs nuevo perfil
+                    </div>
+                    <div class="topic-item operativo">
+                        <strong>Estructura RRHH:</strong> Formalizar roles
+                    </div>
+                    <div class="topic-item operativo">
+                        <strong>Sistemas:</strong> Integrar MaxiRest completo
+                    </div>
+                    <div class="topic-item operativo">
+                        <strong>Proveedores:</strong> Centralizar facturación
+                    </div>
+                    <div class="topic-item operativo">
+                        <strong>Marketing:</strong> Estrategia unificada
+                    </div>
+                    <div class="topic-item operativo">
+                        <strong>Delivery:</strong> Optimizar comisiones
+                    </div>
+                </div>
+
+                <div style="font-size: 0.8rem; font-weight: 600; margin: 12px 0 5px 0; color: #2c3e50;">
+                    DESARROLLO GASTRONÓMICO:
+                </div>
+                <div class="topic-list">
+                    <div class="topic-item operativo">
+                        Tacos dulces - testing
+                    </div>
+                    <div class="topic-item operativo">
+                        Estética platos - standardización
+                    </div>
+                    <div class="topic-item operativo">
+                        Menú formato noche
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    ¿PRIORIDADES OPERATIVAS Q1 2025?
+                </div>
+            </div>
+
+            <!-- SECCIÓN 6: VISIÓN LARGO PLAZO -->
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-icon">🔮</span>
+                    <h3 class="section-title">VISIÓN 2030</h3>
+                    <span class="section-subtitle">Beyond restaurants</span>
+                </div>
+
+                <div class="topic-list">
+                    <div class="topic-item estrategico">
+                        <strong>Plataforma Luchadores:</strong> Subscription model
+                    </div>
+                    <div class="topic-item estrategico">
+                        <strong>Centro productivo:</strong> B2B supply
+                    </div>
+                    <div class="topic-item estrategico">
+                        <strong>Franquicias:</strong> Modelo escalable
+                    </div>
+                    <div class="topic-item estrategico">
+                        <strong>Tech integration:</strong> POS + delivery + loyalty
+                    </div>
+                    <div class="topic-item estrategico">
+                        <strong>Market expansion:</strong> Beyond CABA
+                    </div>
+                </div>
+
+                <div style="font-size: 0.8rem; font-weight: 600; margin: 12px 0 5px 0; color: #2c3e50;">
+                    EXIT STRATEGY OPTIONS:
+                </div>
+                <div class="topic-list">
+                    <div class="topic-item inversion">
+                        Strategic buyer (food group)
+                    </div>
+                    <div class="topic-item inversion">
+                        Private equity rollup
+                    </div>
+                    <div class="topic-item inversion">
+                        IPO (largo plazo)
+                    </div>
+                    <div class="topic-item inversion">
+                        Management buyout
+                    </div>
+                </div>
+
+                <div class="numero-destacado">
+                    Target: USD 6M+ valuación
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

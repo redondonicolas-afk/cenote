@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CENOTE - Presentación Inversores</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        .slide {
+            width: 100vw;
+            min-height: 100vh;
+            display: none;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 20px;
+            background: white;
+            position: relative;
+        }
+        
+        .slide.active {
+            display: flex;
+        }
+        
+        .slide-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+        }
+        
+        .slide-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            color: #764ba2;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+        
+        .slide-subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.8rem);
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 1200px;
+            margin-bottom: 30px;
+        }
+        
+        .content-box {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #764ba2;
+        }
+        
+        .content-box h3 {
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .number-highlight {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin: 10px 0;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 20px 0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px 0;
+        }
+        
+        .timeline-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+            border-top: 4px solid #764ba2;
+        }
+        
+        .timeline-month {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-investment {
+            font-size: 1.3rem;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .timeline-action {
+            font-size: 0.95rem;
+            color: #666;
+        }
+        
+        table {
+            width: 100%;
+            max-width: 900px;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            background: #764ba2;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        td {
+            font-size: 0.9rem;
+        }
+        
+        .department-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            width: 100%;
+            max-width: 1000px;
+        }
+        
+        .department-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            font-size: 0.9rem;
+        }
+        
+        .department-name {
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 5px;
+        }
+        
+        .navigation {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: #764ba2;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #667eea;
+            transform: translateY(-2px);
+        }
+        
+        .slide-counter {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            z-index: 1000;
+        }
+        
+        .emoji {
+            margin-right: 8px;
+        }
+        
+        ul {
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        
+        @media (max-width: 768px) {
+            .slide {
+                padding: 15px;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .timeline {
+                grid-template-columns: 1fr;
+            }
+            
+            .department-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation {
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            .nav-btn {
+                padding: 10px 15px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SLIDE 1: PORTADA -->
+    <div class="slide active">
+        <div class="slide-header">
+            <div class="slide-title">💙 CENOTE</div>
+            <div class="slide-subtitle">Empresa que explota marca AGAVE en Martínez y Capital Federal</div>
+        </div>
+        
+        <div class="highlight-box">
+            <h2>🎯 PROPUESTA DE INVERSIÓN</h2>
+            <div style="font-size: 2.5rem; margin: 15px 0;">$1,000,000 USD</div>
+            <h3>33% Equity • 15% Retorno (ROI) Anual</h3>
+        </div>
+        
+        <div class="content-grid">
+            <div class="content-box">
+                <h3><span class="emoji">🏢</span>Estado Actual</h3>
+                <div class="number-highlight">2 Locales</div>
+                <p>Martínez: $120k • Núñez: $90k</p>
+                <div class="number-highlight">$210k</div>
+                <p>USD/mes facturación total</p>
+            </div>
+            
+            <div class="content-box">
+                <h3><span class="emoji">🚀</span>Expansión</h3>
+                <div class="number-highlight">+3 Locales</div>
+                <p>CABA Premium</p>
+                <div class="number-highlight">60 Meses</div>
+                <p>Proyecto completo (36 meses operativo pleno)</p>
+            </div>
+            
+            <div class="content-box">
+                <h3><span class="emoji">👥</span>Equipo</h3>
+                <div class="number-highlight">15 Años</div>
+                <p>Experiencia comprobada</p>
+                <div class="number-highlight">Nico • Diego • Sacha</div>
+                <p>Equipo consolidado</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 2: HISTORIA -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-title">🌱 NUESTRA HISTORIA</div>
+            <div class="slide-subtitle">De los Aprendizajes al Éxito</div>
+        </div>
+        
+        <div class="content-grid">
+            <div class="content-box">
+                <h3><span class="emoji">🥙</span>2008: Entrada Gastronomía</h3>
+                <p><strong>Taco Box Nordelta:</strong> Franquicia fantasma, tex-mex como concepto</p>
+                <p>Solo contexto de entrada al rubro gastronómico</p>
+            </div>
+            
+            <div class="content-box">
+                <h3><span class="emoji">⚡</span>Punto de Inflexión</h3>
+                <p><strong>Decisión clave:</strong> Hacer las cosas bien vs parches</p>
+                <p><strong>Filosofía:</strong> Todo basado en <strong>procesos sólidos</strong></p>
+            </div>
+            
+            <div class="content-box">
+                <h3><span class="emoji">🌵</span>Filosofía AGAVE</h3>
+                <p><strong>Orientación cliente y servicio:</strong> Procesos hacia atrás</p>
+                <p><strong>Adaptabilidad:</strong> Mundo dinámico gastronomía</p>
+                <p><strong>Escalabilidad:</strong> Procesos + tecnología</p>
+                <p><strong>Diseño gráfico:</strong> Origen del nombre</p>
+            </div>
+            
+            <div class="content-box">
+                <h3><span class="emoji">📅</span>Cronología 2011-2025</h3>
+                <p><strong>2011:</strong> Agave Nordelta</p>
+                <p><strong>2014:</strong> Venta + fábrica panificados</p>
+                <p><strong>2018:</strong> Vuelta gastronomía + Sacha/Diego + Martínez</p>
+                <p><strong>2023:</strong> Apertura Núñez</p>
+                <p><strong>2025:</strong> CENOTE oficinas + proyecto + formato mediodía</p>
+            </div>
+            
+            <div class="content-box">
+                <h3><span class="emoji">🏢</span>Estructura Actual Marca</h3>
+                <p><strong>CENOTE:</strong> Maneja Martínez + Núñez</p>
+                <p><strong>Nordelta:</strong> Independiente, sin marca CENOTE</p>
+                <p><strong>Formato mediodía:</strong> Núñez → Martínez</p>
+            </div>
+            
+            <div class="content-box">
+                <h3><span class="emoji">🌊</span>¿Por qué CENOTE?</h3>
+                <p>Orientación desde diseño gráfico</p>
+                <p><strong>Ecosistema:</strong> Donde florece AGAVE</p>
+                <p><strong>Conexión:</strong> Todos los elementos del negocio</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 3: CRONOGRAMA 60 MESES -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-title">📅 CRONOGRAMA PROYECTO 60 MESES</div>
+            <div class="slide-subtitle">Tres Timelines Integrados</div>
+        </div>
+        
+        <div class="highlight-box">
+            <h3>💰 Timeline Inversión Capital</h3>
+            <p>Mes 0: $500k USD • Mes 12: $250k USD • Mes 20: $250k USD • Total: $1M USD</p>
+        </div>
+        
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-month">MES 0-12</div>
+                <div class="timeline-investment">$500k USD</div>
+                <div class="timeline-action">Setup + preparación<br>Local #3 (2do CABA)<br>Consolidación CENOTE</div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-month">MES 12-20</div>
+                <div class="timeline-investment">$250k USD</div>
+                <div class="timeline-action">Apertura Local #3<br>Setup Local #4<br>Operación 3 locales</div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-month">MES 20-30</div>
+                <div class="timeline-investment">$250k USD</div>
+                <div class="timeline-action">Apertura Local #4<br>Setup Local #5<br>Operación 4 locales</div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-month">MES 30-36</div>
+                <div class="timeline-investment">Curva Aprendizaje</div>
+                <div class="timeline-action">Apertura Local #5<br>5 locales operativos<br>Optimización continua</div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-month">MES 36-60</div>
+                <div class="timeline-investment">OPERACIÓN PLENA</div>
+                <div class="timeline-action">5 locales rendimiento<br>Valuación completa<br>Retorno (ROI) inversor</div>
+            </div>
+        </div>
+        
+        <div class="highlight-box">
+            <h3>📈 Curva Aprendizaje Mejorada</h3>
+            <p>Núñez inicial: 18 meses • Nuevos locales: 6 meses pleno rendimiento</p>
+        </div>
+    </div>
+
+    <!-- SLIDE 4: EVOLUCIÓN LUCHADORES -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-title">👥 ECOSISTEMA LUCHADORES</div>
+            <div class="slide-subtitle">Evolución Personal • Gestión RRHH con Odoo</div>
+        </div>
+        
+        <div class="highlight-box">
+            <h3>⚡ Todo el personal será parte del ecosistema Luchadores</h3>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Mes</th>
+                    <th>Locales Operativos</th>
+                    <th>Luchadores Locales</th>
+                    <th>Team CENOTE</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>0</strong></td>
+                    <td>2 (Mtz + Núñez)</td>
+                    <td>50</td>
+                    <td>6</td>
+                    <td><strong>56</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>12</strong></td>
+                    <td>3 (+Local #3)</td>
+                    <td>75</td>
+                    <td>8</td>
+                    <td><strong>83</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>20</strong></td>
+                    <td>4 (+Local #4)</td>
+                    <td>100</td>
+                    <td>10</td>
+                    <td><strong>110</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>30</strong></td>
+                    <td>5 (+Local #5)</td>
+                    <td>125</td>
+                    <td>12</td>
+                    <td><strong>137</strong></td>
+                </tr>
+                <tr style="background: #f0f8ff;">
+                    <td><strong>36-60</strong></td>
+                    <td>5 (pleno rendimiento)</td>
+                    <td>125</td>
+                    <td>15</td>
+                    <td><strong>140</strong></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="content-grid">
+            <div class="content-box">
+                <h3><span class="emoji">📅</span>Timeline Nuevos Luchadores</h3>
+                <p><strong>Mes 0-12:</strong> +25 Luchadores (Local #3)</p>
+                <p><strong>Mes 12-20:</strong> +25 Luchadores (Local #4)</p>
+                <p><strong>Mes 20-30:</strong> +25 Luchadores (Local #5)</p>
+                <p><strong>Total:</strong> +75 integrados al ecosistema</p>
+            </div>
+            
+            <div class="content-box">
+                <h3><span class="emoji">🖥️</span>Gestión RRHH con Odoo</h3>
+                <p><strong>Reclutamiento:</strong> Pipeline automatizado</p>
+                <p><strong>Onboarding:</strong> Proceso estandarizado</p>
+                <p><strong>Capacitación:</strong> Módulos por departamento</p>
+                <p><strong>Cultura:</strong> Filosofía CENOTE en crecimiento</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 5: DEPARTAMENTOS CENOTE -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-title">🏢 DEPARTAMENTOS CENOTE</div>
+            <div class="slide-subtitle">13 Áreas Especializadas • Estructura 5 Años</div>
+        </div>
+        
+        <div class="department-list">
+            <div class="department-item">
+                <div class="department-name">1. Marketing</div>
+                <div>Estrategia de marca, campañas, adquisición clientes</div>
+            </div>
+            <div class="department-item">
+                <div class="department-name">2. Comunicación</div>
+                <div>Redes sociales, relaciones públicas, contenido, comunidad</div>
+            </div>
+            <div class="department-item">
+                <div class="department-name">3. Operativo</div>
+                <div>Gestión diaria 5 locales, eficiencia operativa</div>
+            </div>
+            <div class="department-item">
+                <div class="department-name">4. Calidad</div>
+                <div>Estándares culinarios, auditorías, control calidad</div>
+            </div>
+            <div class="department-item">
+                <div class="department-name">5. Merchandise</div>
+                <div>Productos de marca, retail, experiencia física</div>
+            </div>
+            <div class="department-item">
+                <div class="department-name">6. Luchadores</div>
+                <div>Plataforma suscripción, tecnología, experiencia usuario</div>
+            </div>
+            <div class="department-item">
+                <div class="department-name">7. Investigación y Desarrollo</div>
+                <div>Innovación menús, procesos, tendencias</div>
+            </div>
+            <div class="department-item">
+                <div class="department-name">8. Administración</div>
+                <div>Recursos humanos, operaciones internas, cumplimiento</div>
+            </div>
+            <div class="department-item">
+                <div class="department-name">9. Dirección</div>
+                <div>Estrategia general, liderazgo, visión largo plazo</div>
+            </div>
+            <div class="department-item">
+                <div class="department-name">10. Crecimiento</div>
+                <div>Expansión, nuevos mercados, desarrollo franquicias</div>
+            </div>
+            <div class="department-item">
+                <div class="department-name">11. Diseño Integral</div>
+                <div>Gráfico, experiencia cliente, espacios, protocolos</div>
+            </div>
+            <div class="department-item">
+                <div class="department-name">12. Contabilidad y Finanzas</div>
+                <div>Estados financieros, análisis, reportes, presupuestos</div>
+            </div>
+            <div class="department-item">
+                <div class="department-name">13. Análisis de Datos</div>
+                <div>Métricas, insights, inteligencia de negocios</div>
+            </div>
+        </div>
+        
+        <div class="highlight-box">
+            <h3>🖥️ PLATAFORMA ODOO ERP - BACKBONE TECNOLÓGICO</h3>
+            <p>Unifica 13 departamentos • Control tiempo real 5 ubicaciones • Escalabilidad exponencial</p>
+        </div>
+    </div>
+
+    <!-- SLIDE 6: MODELO OPERATIVO -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-title">📊 MODELO OPERATIVO</div>
+            <div class="slide-subtitle">Base del Modelo de Capital</div>
+        </div>
+        
+        <div class="content-grid">
+            <div class="content-box">
+                <h3><span class="emoji">🍽️</span>Cubierto Promedio</h3>
+                <div class="number-highlight">$14</div>
+                <p>Canal mediodía USD</p>
+                <div class="number-highlight">$20</div>
+                <p>Canal noche USD</p>
+            </div>
+            
+            <div class="content-box">
+                <h3><span class="emoji">📅</span>Objetivos Semanales</h3>
+                <div class="number-highlight">1,020</div>
+                <p>cubiertos totales</p>
+                <div class="number-highlight">$13,850</div>
+                <p>facturación semanal</p>
+            </div>
+            
+            <div class="content-box">
+                <h3><span class="emoji">💰</span>Proyección Mensual</h3>
+                <div class="number-highlight">4,284</div>
+                <p>cubiertos (x4.2 multiplicador)</p>
+                <div class="number-highlight">$58,268</div>
+                <p>facturación cubiertos (55% total)</p>
+            </div>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Día</th>
+                    <th>Mediodía</th>
+                    <th>Noche</th>
+                    <th>Total Día</th>
+                    <th>Facturación</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Lunes</td><td>45</td><td>35</td><td>80</td><td>$1,330</td></tr>
+                <tr><td>Martes</td><td>50</td><td>40</td><td>90</td><td>$1,500</td></tr>
+                <tr><td>Miércoles</td><td>55</td><td>45</td><td>100</td><td>$1,670</td></tr>
+                <tr><td>Jueves</td><td>60</td><td>50</td><td>110</td><td>$1,840</td></tr>
+                <tr><td>Viernes</td><td>70</td><td>80</td><td>150</td><td>$2,580</td></tr>
+                <tr><td>Sábado</td><td>80</td><td>90</td><td>170</td><td>$2,920</td></tr>
+                <tr><td>Domingo</td><td>65</td><td>55</td><td>120</td><td>$2,010</td></tr>
+            </tbody>
+        </table>
+        
+        <div class="highlight-box">
+            <h3>🎯 OBJETIVO POR LOCAL: $105k USD/mes • Margen 18-22% • $15.75k ganancia</h3>
+            <p>Este modelo de cubiertos por día/turno es la BASE DEL MODELO DE CAPITAL</p>
+        </div>
+    </div>
+
+    <!-- SLIDE 7: ESTRUCTURA ACCIONARIA -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-title">⚖️ ESTRUCTURA ACCIONARIA</div>
+            <div class="slide-subtitle">Distribución Individual de Equity</div>
+        </div>
+        
+        <div class="content-grid">
+            <div class="content-box">
+                <h3><span class="emoji">👑</span>Nico (CEO): 37%</h3>
+                <div class="number-highlight">37%</div>
+                <p>Liderazgo estratégico</p>
+                <p>15 años experiencia</p>
+                <p>Visión de marca</p>
+            </div>
+            
+            <div class="content-box">
+                <h3><span class="emoji">💰</span>Accionista Inversor: 33%</h3>
+                <div class="number-highlight">$1,000,000</div>
+                <p>Inversión USD</p>
+                <div class="number-highlight">15%</div>
+                <p>Retorno (ROI) anual = $150k USD/año</p>
+                <p>Participación estratégica integral CENOTE</p>
+            </div>
+            
+            <div class="content-box">
+                <h3><span class="emoji">👨‍💼</span>Diego (COO): 10%</h3>
+                <div class="number-highlight">10%</div>
+                <p>Excelencia operativa</p>
+                <p>Capacidad escalamiento</p>
+            </div>
+            
+            <div class="content-box">
+                <h3><span class="emoji">👨‍🍳</span>Sacha (Chef): 10%</h3>
+                <div class="number-highlight">10%</div>
+                <p>Innovación gastronómica</p>
+                <p>Estándares de calidad</p>
+            </div>
+            
+            <div class="content-box">
+                <h3><span class="emoji">👥</span>Equipo de Trabajo: 10%</h3>
+                <div class="number-highlight">10%</div>
+                <p>Agus, Angie, Mati</p>
+                <p>Llevarán adelante proyecto 60 meses</p>
+                <p>Operaciones core</p>
+            </div>
+        </div>
+        
+        <div class="highlight-box">
+            <h3>🤝 Control Operativo: 67% vs 33%</h3>
+            <p>Equipo fundador/operativo mantiene control • El inversor es parte integral de CENOTE</p>
+        </div>
+    </div>
+
+    <!-- SLIDE 8: VALUACIÓN Y MOMENTO PERFECTO -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-title">💰 VALUACIÓN Y MOMENTO PERFECTO</div>
+            <div class="slide-subtitle">Metodología • Retorno (ROI) • Timing</div>
+        </div>
+        
+        <div class="content-grid">
+            <div class="content-box">
+                <h3><span class="emoji">📊</span>Metodología Valuación</h3>
+                <p><strong>EBITDA mes 36:</strong> $945k USD anuales</p>
+                <p><strong>Múltiplo Argentina:</strong> 6.4x EBITDA</p>
+                <div class="number-highlight">$6.06M</div>
+                <p>Valuación empresa mes 60</p>
+            </div>
+            
+            <div class="content-box">
+                <h3><span class="emoji">💵</span>Rendimiento Inversor</h3>
+                <p><strong>Inversión inicial:</strong> $1M USD = 33%</p>
+                <div class="number-highlight">$2.00M</div>
+                <p>Valor equity mes 60</p>
+                <div class="number-highlight">100%</div>
+                <p>Retorno (ROI) total en 60 meses</p>
+            </div>
+            
+            <div class="content-box">
+                <h3><span class="emoji">📈</span>Timeline Valuación Empresa</h3>
+                <p><strong>Mes 0:</strong> $3.03M USD (valuación actual)</p>
+                <p><strong>Mes 12:</strong> $3.80M USD (3 locales)</p>
+                <p><strong>Mes 24:</strong> $4.90M USD (4 locales)</p>
+                <p><strong>Mes 36:</strong> $6.06M USD (operación plena)</p>
+                <p><strong>Mes 60:</strong> $6.06M USD (valuación madura)</p>
+            </div>
+            
+            <div class="content-box">
+                <h3><span class="emoji">💰</span>Valor Equity Inversor 33%</h3>
+                <p><strong>Mes 0:</strong> $1.00M USD (inversión inicial)</p>
+                <p><strong>Mes 12:</strong> $1.25M USD (+25%)</p>
+                <p><strong>Mes 24:</strong> $1.62M USD (+62%)</p>
+                <p><strong>Mes 36:</strong> $2.00M USD (+100%)</p>
+                <p><strong>Mes 60:</strong> $2.00M USD (ROI completo)</p>
+            </div>
+        </div>
+        
+        <div class="highlight-box">
+            <h2>🎯 ¿POR QUÉ ES EL MOMENTO PERFECTO?</h2>
+        </div>
+        
+        <div class="content-grid">
+            <div class="content-box">
+                <h3><span class="emoji">✅</span>Modelo Validado</h3>
+                <p>Núñez operando exitosamente 18 meses</p>
+                <p>Procesos definidos en 15 años experiencia</p>
+                <p>Formato mediodía desarrollado</p>
+            </div>
+            
+            <div class="content-box">
+                <h3><span class="emoji">🚀</span>Equipo y Tecnología</h3>
+                <p>Equipo Nico + Diego + Sacha consolidado</p>
+                <p>Odoo implementado para escalar</p>
+                <p>Diferenciación experiencia premium única</p>
+            </div>
+            
+            <div class="content-box">
+                <h3><span class="emoji">📈</span>Timing Económico</h3>
+                <p>CABA premium demostrado receptivo</p>
+                <p>Post-pandemia, consumo recuperándose</p>
+                <p>24 meses operación plena mes 36-60</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="navigation">
+        <button class="nav-btn" onclick="previousSlide()">← Anterior</button>
+        <button class="nav-btn" onclick="nextSlide()">Siguiente →</button>
+    </div>
+    
+    <!-- Slide Counter -->
+    <div class="slide-counter">
+        <span id="slideCounter">1 / 8</span>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            document.getElementById('slideCounter').textContent = `${currentSlide + 1} / ${totalSlides}`;
+        }
+        
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+        
+        function previousSlide() {
+            showSlide(currentSlide - 1);
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') previousSlide();
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            }
+        });
+        
+        // Touch navigation for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) nextSlide();
+            if (touchEndX > touchStartX + 50) previousSlide();
+        }
+        
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>

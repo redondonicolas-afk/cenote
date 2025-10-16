@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CENOTE - Presentación Socios</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.4;
+            padding: 20px;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            height: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header h2 {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        .tagline {
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            font-size: 1.1rem;
+            margin-top: 15px;
+            font-weight: 500;
+        }
+
+        .content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            padding: 30px;
+            background: #f8f9fa;
+        }
+
+        .section {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #eee;
+        }
+
+        .section-icon {
+            font-size: 2rem;
+            margin-right: 15px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .highlight-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #e74c3c;
+            text-align: center;
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9fc;
+            border-radius: 10px;
+        }
+
+        .info-item {
+            background: #f8f9fc;
+            padding: 15px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .info-item.financiero { border-left-color: #e74c3c; }
+        .info-item.operativo { border-left-color: #27ae60; }
+        .info-item.estrategico { border-left-color: #3498db; }
+
+        .status-good {
+            color: #27ae60;
+            font-weight: 600;
+        }
+
+        .status-attention {
+            color: #f39c12;
+            font-weight: 600;
+        }
+
+        .key-point {
+            background: #ffe6e6;
+            border: 2px solid #e74c3c;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            text-align: center;
+            font-weight: 600;
+            color: #c0392b;
+        }
+
+        .timeline-item {
+            background: #e8f4f8;
+            padding: 10px 15px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+            font-size: 0.95rem;
+        }
+
+        .timeline-date {
+            font-weight: 600;
+            color: #2980b9;
+        }
+
+        .bottom-banner {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌮 CENOTE</h1>
+            <h2>Presentación para Socios 2024</h2>
+            <div class="tagline">
+                Estado Actual • Oportunidades • Decisiones
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- COLUMNA 1: SITUACIÓN ACTUAL -->
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-icon">📊</span>
+                    <h3 class="section-title">SITUACIÓN ACTUAL</h3>
+                </div>
+
+                <div class="highlight-number">
+                    2 LOCALES OPERATIVOS
+                </div>
+
+                <div class="info-item financiero">
+                    <strong>Martínez:</strong> <span class="status-good">Estable financieramente</span><br>
+                    Operando con equilibrio sostenido
+                </div>
+
+                <div class="info-item financiero">
+                    <strong>Núñez:</strong> <span class="status-attention">Recién en equilibrio</span><br>
+                    18 meses operando, deuda USD 90k
+                </div>
+
+                <div class="info-item operativo">
+                    <strong>Target mensual:</strong> USD 210k<br>
+                    Martínez: USD 120k • Núñez: USD 90k
+                </div>
+
+                <div class="info-item operativo">
+                    <strong>Márgenes:</strong> 15% EBITDA target<br>
+                    Food cost: 38% del revenue
+                </div>
+
+                <div class="key-point">
+                    BASE SÓLIDA PARA EXPANSIÓN
+                </div>
+            </div>
+
+            <!-- COLUMNA 2: OPORTUNIDAD -->
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-icon">🚀</span>
+                    <h3 class="section-title">OPORTUNIDAD</h3>
+                </div>
+
+                <div class="highlight-number">
+                    USD 1M INVERSIÓN
+                </div>
+
+                <div class="info-item estrategico">
+                    <strong>A cambio de:</strong> 33% equity<br>
+                    Socios mantienen control (67%)
+                </div>
+
+                <div class="info-item estrategico">
+                    <strong>Objetivo:</strong> Expansión a 5 locales<br>
+                    Timeline: 5 años
+                </div>
+
+                <div class="info-item financiero">
+                    <strong>ROI Inversor:</strong> 14.9% anual<br>
+                    Proyección conservadora
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <div style="font-weight: 600; margin-bottom: 10px; color: #2c3e50;">PLAN EXPANSIÓN:</div>
+                    <div class="timeline-item">
+                        <span class="timeline-date">Año 1:</span> Local #3 CABA (USD 250k)
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-date">Año 2-3:</span> Locales #4 y #5
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-date">Año 5:</span> Valuación USD 6.05M
+                    </div>
+                </div>
+
+                <div class="key-point">
+                    MOMENTO IDEAL PARA ESCALAR
+                </div>
+            </div>
+
+            <!-- COLUMNA 3: DECISIONES -->
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-icon">⚡</span>
+                    <h3 class="section-title">DECISIONES</h3>
+                </div>
+
+                <div style="font-weight: 600; margin-bottom: 15px; color: #2c3e50; font-size: 1.2rem;">
+                    ¿AVANZAMOS CON LA EXPANSIÓN?
+                </div>
+
+                <div class="info-item estrategico">
+                    <strong>PROS:</strong><br>
+                    • Marca consolidada y probada<br>
+                    • Equipo operativo experimentado<br>
+                    • Modelo financiero validado<br>
+                    • Timing de mercado favorable
+                </div>
+
+                <div class="info-item financiero">
+                    <strong>CONSIDERACIONES:</strong><br>
+                    • Inversión significativa requerida<br>
+                    • Riesgo operativo de scaling<br>
+                    • Dilución equity actual<br>
+                    • Compromiso largo plazo
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <div style="font-weight: 600; margin-bottom: 10px; color: #2c3e50;">TEMAS A DEFINIR HOY:</div>
+                    <div class="timeline-item">
+                        <strong>1.</strong> ¿Estructura societaria final?
+                    </div>
+                    <div class="timeline-item">
+                        <strong>2.</strong> ¿Timing de búsqueda inversión?
+                    </div>
+                    <div class="timeline-item">
+                        <strong>3.</strong> ¿Roles y responsabilidades?
+                    </div>
+                    <div class="timeline-item">
+                        <strong>4.</strong> ¿Estrategia y prioridades?
+                    </div>
+                </div>
+
+                <div class="key-point">
+                    DECISIÓN ESTRATÉGICA CRÍTICA
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-banner">
+            🎯 OBJETIVO: Decidir si CENOTE está listo para el próximo nivel de crecimiento
+        </div>
+    </div>
+</body>
+</html>

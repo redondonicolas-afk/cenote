@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Trabajo Completo - Mati Operations Manager</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 15px;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+
+        .intro-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border-left: 5px solid #667eea;
+        }
+
+        .intro-text {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .week-section {
+            margin-bottom: 60px;
+            background: #f8f9fa;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .week-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 25px 40px;
+            text-align: center;
+        }
+
+        .week-title {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .week-subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .week-content {
+            padding: 40px;
+        }
+
+        .week-overview {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 5px solid #28a745;
+        }
+
+        .overview-title {
+            color: #28a745;
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .overview-text {
+            font-size: 1.05em;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .day-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .day-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .day-title {
+            color: #667eea;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .day-description {
+            font-size: 1em;
+            color: #666;
+            margin-bottom: 20px;
+            font-style: italic;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .task-list {
+            margin-top: 15px;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: flex-start;
+            margin: 12px 0;
+            padding: 12px 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 3px solid #28a745;
+            transition: background 0.3s ease;
+        }
+
+        .task-item:hover {
+            background: #e9ecef;
+        }
+
+        .task-checkbox {
+            margin-right: 15px;
+            margin-top: 3px;
+            transform: scale(1.2);
+        }
+
+        .task-text {
+            flex: 1;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        .expected-results {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .results-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .results-list {
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+
+        .results-list li {
+            margin: 8px 0;
+            padding-left: 10px;
+        }
+
+        .key-interactions {
+            background: #e8f4f8;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 25px;
+            border-left: 5px solid #17a2b8;
+        }
+
+        .interactions-title {
+            color: #17a2b8;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .interaction-item {
+            margin: 10px 0;
+            padding: 10px 15px;
+            background: white;
+            border-radius: 8px;
+            border-left: 3px solid #17a2b8;
+        }
+
+        .objectives-section {
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 50px 0;
+        }
+
+        .objectives-title {
+            color: #667eea;
+            font-size: 2.5em;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .objective-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 35px;
+            border-radius: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .objective-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .objective-period {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .objective-description {
+            font-size: 1.1em;
+            margin-bottom: 25px;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .objective-list {
+            text-align: left;
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+
+        .objective-list li {
+            margin: 12px 0;
+            padding-left: 10px;
+        }
+
+        .success-metrics {
+            background: #fff3cd;
+            border: 2px solid #ffeaa7;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 25px;
+        }
+
+        .metrics-title {
+            color: #856404;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .metric-item {
+            margin: 8px 0;
+            padding: 8px 12px;
+            background: white;
+            border-radius: 8px;
+            color: #856404;
+            font-weight: 500;
+        }
+
+        .implementation-tips {
+            background: #d1ecf1;
+            border: 2px solid #bee5eb;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .tips-title {
+            color: #0c5460;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .tip-item {
+            margin: 12px 0;
+            padding: 12px 15px;
+            background: white;
+            border-radius: 8px;
+            color: #0c5460;
+            border-left: 4px solid #17a2b8;
+        }
+
+        .final-section {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 50px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 50px 0;
+        }
+
+        .final-title {
+            font-size: 2.5em;
+            margin-bottom: 25px;
+        }
+
+        .final-text {
+            font-size: 1.3em;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        .contact-info {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .contact-title {
+            color: #667eea;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .contact-item {
+            margin: 10px 0;
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        .print-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin: 30px auto;
+            display: block;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .print-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+                padding: 20px;
+            }
+            .print-btn {
+                display: none;
+            }
+            .week-section {
+                page-break-inside: avoid;
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            .days-grid {
+                grid-template-columns: 1fr;
+            }
+            .objectives-grid {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 2em;
+            }
+            .week-title {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 PLAN DE TRABAJO INTEGRAL</h1>
+            <p>MATI - OPERATIONS MANAGER | CENOTE</p>
+            <p>Roadmap Detallado 90 Días | Transformación Operacional</p>
+        </div>
+
+        <div class="intro-section">
+            <h2 style="color: #667eea; margin-bottom: 20px;">📋 INTRODUCCIÓN AL PLAN</h2>
+            <div class="intro-text">
+                <p><strong>Bienvenido Mati</strong>, este es tu plan de trabajo integral para los primeros 90 días como Operations Manager de CENOTE. Este roadmap ha sido diseñado específicamente para transformar nuestras operaciones, optimizar costos y preparar la empresa para su crecimiento escalable.</p>
+                <br>
+                <p><strong>Tu misión</strong> es implementar sistemas eficientes, controlar el food cost, estandarizar procesos y preparar la tecnología (especialmente Odoo) que nos permita crecer de 2 a 5 locales manteniendo la calidad y rentabilidad.</p>
+                <br>
+                <p><strong>Este plan</strong> está estructurado en 4 fases progresivas, cada una con objetivos específicos, tareas detalladas y métricas de éxito claras. Al final de estos 90 días, habrás transformado completamente nuestra operación.</p>
+            </div>
+        </div>
+
+        <!-- SEMANA 1-2 -->
+        <div class="week-section">
+            <div class="week-header">
+                <div class="week-title">🔍 SEMANA 1-2</div>
+                <div class="week-subtitle">DIAGNÓSTICO Y CONOCIMIENTO PROFUNDO</div>
+            </div>
+            <div class="week-content">
+                <div class="week-overview">
+                    <div class="overview-title">🎯 OBJETIVO GENERAL DE ESTA FASE</div>
+                    <div class="overview-text">
+                        Durante estas dos semanas, tu objetivo principal es realizar un diagnóstico profundo y completo de la operación actual. No intervengas aún en los procesos, solo observa, analiza y documenta todo lo que ves. Esta fase es crítica porque determinará las prioridades y estrategias para las siguientes fases. Al final de estas 2 semanas, deberás tener un mapa completo de la situación actual, identificar las oportunidades de mejora más importantes y haber establecido relaciones sólidas con todo el equipo.
+                    </div>
+                </div>
+
+                <div class="days-grid">
+                    <div class="day-card">
+                        <div class="day-title">📊 DÍAS 1-3: AUDITORÍA INICIAL</div>
+                        <div class="day-description">
+                            Inmersión total en ambos locales para entender la operación actual sin interferir. Tu objetivo es ser una esponja que absorbe toda la información posible.
+                        </div>
+                        <div class="task-list">
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Día 1:</strong> Observación completa en Martínez - turno mañana (9-15hs). Mapear flujo de trabajo, identificar puntos críticos, documentar con fotos procesos de cocina, observar interacción del equipo.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Día 2:</strong> Observación completa en Martínez - turno noche (19-24hs). Comparar diferencias entre turnos, analizar picos de demanda, observar manejo del estrés en horarios críticos.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Día 3:</strong> Repetir proceso completo en Núñez - ambos turnos. Identificar diferencias operativas entre locales, documentar variations en procesos, analizar eficiencia comparativa.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Documentación visual:</strong> Crear un registro fotográfico/video de todos los procesos críticos, layouts de cocina, sistemas de almacenamiento, flujos de trabajo.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Primeras observaciones:</strong> Crear documento preliminar con las 10 oportunidades de mejora más evidentes que hayas identificado.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="day-card">
+                        <div class="day-title">👥 DÍAS 3-5: REUNIONES ESTRATÉGICAS</div>
+                        <div class="day-description">
+                            Sesiones one-on-one con cada miembro del equipo directivo para entender expectativas, prioridades y contexto histórico de cada área.
+                        </div>
+                        <div class="task-list">
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Reunión con Diego (COO) - 2 horas:</strong> Entender expectativas específicas, prioridades del puesto, recursos disponibles, timeline de resultados esperados, challenges identificados.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Reunión con Sacha (Chef) - 1.5 horas:</strong> Comprender estándares gastronómicos no negociables, procesos de calidad actuales, recetas críticas, visión culinaria de marca.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Reunión con managers de cada local - 1 hora c/u:</strong> Conocer challenges operativos diarios, pain points del equipo, sugerencias de mejora, dinámicas de personal.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Reunión con Agustina (Supply Chain) - 1.5 horas:</strong> Entender flujos de proveedores, challenges de costos, proceso de compras, oportunidades de optimización.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Reunión con Angie (CFO) - 1.5 horas:</strong> Revisar números actuales, entender métricas críticas, identificar impacto financiero de mejoras operativas.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="day-card">
+                        <div class="day-title">💰 DÍAS 4-7: ANÁLISIS FOOD COST</div>
+                        <div class="day-description">
+                            Deep dive en los números para entender exactamente dónde están las oportunidades de ahorro más importantes y cuantificar el impacto potencial.
+                        </div>
+                        <div class="task-list">
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Análisis histórico:</strong> Revisar food cost de últimos 3 meses, identificar tendencias, comparar performance entre locales, analizar estacionalidad.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Top 10 productos críticos:</strong> Identificar los productos con mayor impacto en costos totales, calcular potencial de ahorro por producto, priorizar intervenciones.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Análisis de merma:</strong> Documentar desperdicios actuales por categoría, identificar causas raíz, cuantificar oportunidad de mejora.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Benchmarking interno:</strong> Comparar métricas detalladas entre Martínez y Núñez, identificar best practices para replicar.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Proyección de impacto:</strong> Calcular ahorro potencial si implementas mejoras, crear business case para justificar inversiones necesarias.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="day-card">
+                        <div class="day-title">💻 DÍAS 6-10: EVALUACIÓN TECNOLÓGICA</div>
+                        <div class="day-description">
+                            Assessment completo de la infraestructura tecnológica actual y requirements para implementar Odoo y otros sistemas necesarios.
+                        </div>
+                        <div class="task-list">
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Audit del sistema POS:</strong> Documentar limitaciones actuales, analizar reportes disponibles vs necesarios, identificar gaps críticos de información.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Research Odoo:</strong> Investigar módulos específicos para restaurantes, contactar 3 proveedores locales, obtener cotizaciones preliminares, definir timeline de implementación.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Integración de sistemas:</strong> Mapear cómo integrar POS actual con futuro sistema de inventario, definir data flows necesarios.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Infraestructura IT:</strong> Evaluar WiFi, hardware, backup systems, identificar upgrades necesarios para soportar nuevos sistemas.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Plan de implementación tech:</strong> Crear roadmap detallado para implementación tecnológica con timelines, resources y budget estimado.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="expected-results">
+                    <div class="results-title">✅ RESULTADOS ESPERADOS AL FINAL DE SEMANA 2</div>
+                    <ul class="results-list">
+                        <li><strong>Diagnóstico completo:</strong> Documento detallado con situación actual, strengths, weaknesses y opportunities identificadas</li>
+                        <li><strong>Relationships establecidas:</strong> Rapport sólido con todo el equipo directivo y managers de local</li>
+                        <li><strong>Prioridades definidas:</strong> Lista clara de las 5 mejoras que generarán mayor impacto en food cost</li>
+                        <li><strong>Plan tecnológico:</strong> Roadmap detallado para implementación de Odoo con timelines y budget</li>
+                        <li><strong>Quick wins identificados:</strong> 3-5 mejoras que se pueden implementar inmediatamente sin costo</li>
+                    </ul>
+                </div>
+
+                <div class="key-interactions">
+                    <div class="interactions-title">🤝 INTERACCIONES CLAVE ESTA SEMANA</div>
+                    <div class="interaction-item"><strong>Diego:</strong> Check-in diario de 15 min a las 9 AM para updates y guidance</div>
+                    <div class="interaction-item"><strong>Equipo de cocina:</strong> Presentarte como parte del team, ganar confianza sin generar resistencia</div>
+                    <div class="interaction-item"><strong>Managers:</strong> Positioning como support, no inspector - eres ahí para ayudarlos a ser más exitosos</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEMANA 3-4 -->
+        <div class="week-section">
+            <div class="week-header">
+                <div class="week-title">⚙️ SEMANA 3-4</div>
+                <div class="week-subtitle">ESTANDARIZACIÓN BÁSICA E IMPLEMENTACIÓN</div>
+            </div>
+            <div class="week-content">
+                <div class="week-overview">
+                    <div class="overview-title">🎯 OBJETIVO GENERAL DE ESTA FASE</div>
+                    <div class="overview-text">
+                        Ahora que tienes el diagnóstico completo, es momento de implementar los controles básicos que generarán impacto inmediato. Esta fase se enfoca en estandarizar las operaciones más críticas, implementar los procedimientos de control de costos que ya están documentados, y establecer sistemas de reporte que den visibilidad diaria a la operación. El objetivo es que al final de estas 2 semanas, tengamos control sobre los costos principales y procesos estandarizados que todo el equipo siga consistentemente.
+                    </div>
+                </div>
+
+                <div class="days-grid">
+                    <div class="day-card">
+                        <div class="day-title">📏 SEMANA 3: ESTANDARIZACIÓN DE PORCIONES</div>
+                        <div class="day-description">
+                            Implementar los procedimientos de control de costos ya creados, enfocándose en los 4 elementos críticos: mozzarella, guacamole, proteínas y tortillas.
+                        </div>
+                        <div class="task-list">
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Lunes:</strong> Instalar balanzas digitales en ambas cocinas, capacitar a todo el equipo en su uso correcto, establecer ubicaciones fijas para cada balanza.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Martes:</strong> Implementar control de mozzarella - definir porciones exactas por plato, capacitar personal, establecer responsable por turno.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Miércoles:</strong> Implementar control de guacamole - estandarizar preparación, definir vida útil, establecer controles de merma.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Jueves:</strong> Implementar control de proteínas - estandarizar peso por porción, establecer protocolos de cocción, minimizar merma.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Viernes:</strong> Implementar control de tortillas - estandarizar cantidad por plato, optimizar almacenamiento, reducir desperdicios.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Sábado-Domingo:</strong> Observar implementación durante horarios pico, ajustar procesos según feedback del equipo.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="day-card">
+                        <div class="day-title">📋 SEMANA 3-4: PROTOCOLOS DE COCINA</div>
+                        <div class="day-description">
+                            Trabajar con Sacha para documentar y estandarizar todos los procesos críticos de cocina, asegurando consistencia entre locales y turnos.
+                        </div>
+                        <div class="task-list">
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Sesiones con Sacha (3 sesiones de 2 horas):</strong> Documentar recetas exactas con porciones, tiempos, temperaturas y técnicas específicas.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Manual por estación:</strong> Crear guías visuales para cada estación de trabajo - parrilla, ensaladas, guarniciones, bebidas.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Checklist apertura:</strong> Crear y implementar checklist detallado para opening duties - limpieza, prep, stock check, equipment check.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Checklist cierre:</strong> Establecer protocolo de cierre - limpieza profunda, inventory count, prep para siguiente día.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Protocolos de seguridad:</strong> Implementar estándares de seguridad alimentaria, HACCP básico, manejo de temperatures.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Training del equipo:</strong> Capacitar a todos en nuevos protocolos, asegurar understanding y buy-in.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="day-card">
+                        <div class="day-title">📊 SEMANA 4: SISTEMA DE REPORTES</div>
+                        <div class="day-description">
+                            Establecer sistema de reportes diarios que dé visibilidad inmediata a las métricas críticas y permita tomar decisiones data-driven.
+                        </div>
+                        <div class="task-list">
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Planilla unificada:</strong> Crear template de reporte diario que capture food cost, merma, sales, incidents, staff performance.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Rutina de reporte:</strong> Establecer que cada manager reporte a las 18hs diariamente, definir formato y proceso de review.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Dashboard básico:</strong> Crear dashboard en Google Sheets/Excel que consolide data de ambos locales y muestre trends.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>KPIs definidos:</strong> Establecer 5-7 KPIs críticos que se trackeen diariamente - food cost %, merma %, service time, customer complaints.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Training en reportes:</strong> Capacitar managers en cómo completar reportes, interpretation de data, escalation de issues.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Review semanal:</strong> Establecer rutina de review semanal con Diego para analizar trends y definir actions.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="expected-results">
+                    <div class="results-title">✅ RESULTADOS ESPERADOS AL FINAL DE SEMANA 4</div>
+                    <ul class="results-list">
+                        <li><strong>Food cost controlado:</strong> Control implementado en los 4 elementos críticos con reducción inmediata del 10-15%</li>
+                        <li><strong>Procesos estandarizados:</strong> Todos los protocolos críticos documentados y siendo seguidos consistentemente</li>
+                        <li><strong>Visibilidad diaria:</strong> Sistema de reportes funcionando que dé data actionable todos los días</li>
+                        <li><strong>Team alignment:</strong> Todo el equipo trained y siguiendo nuevos protocolos sin resistencia</li>
+                        <li><strong>Merma reducida:</strong> Desperdicios controlados y medidos, con reducción del 20-30% vs baseline</li>
+                    </ul>
+                </div>
+
+                <div class="success-metrics">
+                    <div class="metrics-title">📊 MÉTRICAS DE ÉXITO PARA ESTA FASE</div>
+                    <div class="metric-item">Food cost de mozzarella reducido en 15% vs semanas anteriores</div>
+                    <div class="metric-item">Merma de guacamole menor al 5% diario</div>
+                    <div class="metric-item">100% compliance con pesado de proteínas</div>
+                    <div class="metric-item">Reportes diarios entregados on-time 95% de los días</div>
+                    <div class="metric-item">Zero incidentes de seguridad alimentaria</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEMANA 5-8 -->
+        <div class="week-section">
+            <div class="week-header">
+                <div class="week-title">🔧 SEMANA 5-8</div>
+                <div class="week-subtitle">OPTIMIZACIÓN Y PROCESOS AVANZADOS</div>
+            </div>
+            <div class="week-content">
+                <div class="week-overview">
+                    <div class="overview-title">🎯 OBJETIVO GENERAL DE ESTA FASE</div>
+                    <div class="overview-text">
+                        Con los controles básicos funcionando, ahora es momento de optimizar para eficiencia máxima. Esta fase se enfoca en reducir tiempos, mejorar workflows, implementar controles avanzados de costos y desarrollar al equipo. El objetivo es que al final de estas 4 semanas tengamos una operación que no solo esté controlada, sino que sea eficiente, rápida y tenga un equipo capacitado que pueda mantener los estándares sin supervisión constante. Esta fase también prepara para la implementación tecnológica de la siguiente fase.
+                    </div>
+                </div>
+
+                <div class="days-grid">
+                    <div class="day-card">
+                        <div class="day-title">⏱️ SEMANA 5-6: OPTIMIZACIÓN DE TIEMPOS</div>
+                        <div class="day-description">
+                            Enfoque en speed y efficiency - reducir tiempos de preparación y servicio sin comprometer calidad, optimizando workflows y layouts.
+                        </div>
+                        <div class="task-list">
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Time studies:</strong> Medir tiempo de preparación de cada plato durante horarios pico, identificar bottlenecks, documentar current state vs target state.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Layout optimization:</strong> Rediseñar estaciones de trabajo para minimizar movimientos, reorganizar equipment para maximum efficiency, implementar lean principles.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Mise en place avanzado:</strong> Crear sistema de prep que tenga todo listo para horarios pico, estandarizar prep quantities, implementar batch cooking.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Workflow redesign:</strong> Optimizar flujo entre estaciones, eliminar redundancies, implementar parallel processing donde sea posible.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Target: 20% reduction:</strong> Objetivo específico de reducir tiempo promedio de servicio en 20% sin comprometer calidad.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="day-card">
+                        <div class="day-title">💰 SEMANA 6-7: CONTROL AVANZADO DE COSTOS</div>
+                        <div class="day-description">
+                            Implementar controles sofisticados de costos que vayan más allá de portions - manejo de inventory, supplier optimization, waste elimination.
+                        </div>
+                        <div class="task-list">
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>FIFO estricto:</strong> Implementar sistema de rotación de stock foolproof, labeling system, training de todo el equipo en inventory management.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Smart alerts:</strong> Crear sistema de alertas automáticas para stock mínimo, expiration dates, reorder points.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Supplier negotiations:</strong> Trabajar con Agustina para renegociar con top 3 suppliers, conseguir mejores prices o terms, evaluar suppliers alternativos.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Weekly variance analysis:</strong> Crear reporte semanal que analice variations en costos, identifique root causes, proponga corrective actions.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Category management:</strong> Implementar control granular por categoría de producto - proteins, vegetables, dairy, etc.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="day-card">
+                        <div class="day-title">👨‍🍳 SEMANA 7-8: DESARROLLO DEL EQUIPO</div>
+                        <div class="day-description">
+                            Invertir en el development del equipo para asegurar sustainability de las mejoras y preparar para growth futuro.
+                        </div>
+                        <div class="task-list">
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Training program estructurado:</strong> Crear curriculum de training para cada posición - desde entry level hasta supervisor, con clear progression path.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Performance evaluations:</strong> Implementar sistema de evaluación mensual con clear criteria, feedback constructivo, development plans.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Incentive system:</strong> Crear sistema de incentivos tied a performance metrics - efficiency, quality, cost control, customer satisfaction.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Documentation digital:</strong> Convertir todos los procedures a formato digital accessible - videos, photos, step-by-step guides.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Feedback loops:</strong> Establecer sistema de feedback continuo - weekly one-on-ones, suggestion system, open communication channels.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="expected-results">
+                    <div class="results-title">✅ RESULTADOS ESPERADOS AL FINAL DE SEMANA 8</div>
+                    <ul class="results-list">
+                        <li><strong>Efficiency gains:</strong> 20% reduction en service time, workflows optimizados, layouts mejorados</li>
+                        <li><strong>Advanced cost control:</strong> Food cost total reducido 15-20% vs baseline, waste minimizado</li>
+                        <li><strong>Team development:</strong> Equipo capacitado y motivated, clear career paths, performance-based incentives</li>
+                        <li><strong>Sustainable processes:</strong> Sistemas que funcionan sin supervisión constante</li>
+                        <li><strong>Scalability ready:</strong> Procesos documentados y replicables para expansion</li>
+                    </ul>
+                </div>
+
+                <div class="implementation-tips">
+                    <div class="tips-title">💡 TIPS CRÍTICOS PARA ESTA FASE</div>
+                    <div class="tip-item"><strong>Change management:</strong> Las optimizations pueden generar resistance. Involucra al equipo en el diseño de solutions.</div>
+                    <div class="tip-item"><strong>Measure everything:</strong> Documenta improvements con numbers. El equipo directivo necesita ver ROI tangible.</div>
+                    <div class="tip-item"><strong>Quick wins first:</strong> Implementa cambios que den results inmediatos para build momentum.</div>
+                    <div class="tip-item"><strong>Communication is key:</strong> Explica el 'why' behind cada change. El equipo debe entender los benefits.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEMANA 9-12 -->
+        <div class="week-section">
+            <div class="week-header">
+                <div class="week-title">💻 SEMANA 9-12</div>
+                <div class="week-subtitle">IMPLEMENTACIÓN TECNOLÓGICA Y SISTEMATIZACIÓN</div>
+            </div>
+            <div class="week-content">
+                <div class="week-overview">
+                    <div class="overview-title">🎯 OBJETIVO GENERAL DE ESTA FASE</div>
+                    <div class="overview-text">
+                        La fase final se enfoca en la implementación de Odoo y la sistematización completa de todas las mejoras implementadas. Con los procesos optimizados y el equipo trained, ahora podemos implementar la tecnología que automatizará muchos procesos y dará la visibility necesaria para manage múltiples locales. Al final de esta fase, CENOTE debe tener una operación completamente sistematizada, tecnologically enabled, y ready para scale a 5 locales. También debes tener documentada una metodología replicable para implementar en futuras ubicaciones.
+                    </div>
+                </div>
+
+                <div class="days-grid">
+                    <div class="day-card">
+                        <div class="day-title">🔄 SEMANA 9-10: PREPARACIÓN E IMPLEMENTACIÓN ODOO</div>
+                        <div class="day-description">
+                            Implementación completa de Odoo como sistema central de management, integrado con POS y operaciones diarias.
+                        </div>
+                        <div class="task-list">
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Requirements finalization:</strong> Sesión con equipo directivo para finalizar requirements específicos, modules needed, integrations required.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Vendor selection:</strong> Seleccionar proveedor final de Odoo, negociar contract, establecer timeline detallado de implementation.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Data preparation:</strong> Preparar all historical data para migration - products, suppliers, recipes, costs, employees.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>User setup:</strong> Definir users, roles, permissions para cada member del equipo, crear user guides específicos.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Testing phase:</strong> Implementar en ambiente de test, validar funcionalities, training inicial del equipo core.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Go-live preparation:</strong> Plan detallado para go-live, backup procedures, contingency plans.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="day-card">
+                        <div class="day-title">📱 SEMANA 10-11: INTEGRACIÓN DE SISTEMAS</div>
+                        <div class="day-description">
+                            Conectar todos los sistemas para crear un ecosystem integrado que dé visibility completa de la operación.
+                        </div>
+                        <div class="task-list">
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>POS integration:</strong> Conectar sistema POS con Odoo para automatic sync de sales data, inventory updates, real-time reporting.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Automated reporting:</strong> Setup de reportes automáticos - daily sales, inventory levels, cost analysis, performance metrics.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Inventory automation:</strong> Implementar automatic stock alerts, reorder points, expiration tracking.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Executive dashboard:</strong> Crear dashboard for management team con real-time KPIs, trends, alerts.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Backup systems:</strong> Implementar robust backup procedures, data security measures, disaster recovery plans.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="day-card">
+                        <div class="day-title">📈 SEMANA 11-12: OPTIMIZACIÓN Y DOCUMENTACIÓN</div>
+                        <div class="day-description">
+                            Análisis final de results, fine-tuning de systems, y documentación completa para future scalability.
+                        </div>
+                        <div class="task-list">
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>90-day analysis:</strong> Análisis comprensivo de improvements achieved vs baseline - costs, efficiency, quality, team satisfaction.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>System optimization:</strong> Fine-tuning de todos los systems based en usage patterns, feedback del equipo, performance data.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Scalability preparation:</strong> Documentar methodology para replicar improvements en nuevo local, crear implementation playbook.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Complete documentation:</strong> Finalizar documentation de todos los processes, create knowledge base, training materials.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Handover plan:</strong> Crear plan para sustainable management de improvements sin supervisión constante.</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text"><strong>Future roadmap:</strong> Crear roadmap para continuous improvement, next phase goals, expansion preparation.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="expected-results">
+                    <div class="results-title">✅ RESULTADOS ESPERADOS AL FINAL DE SEMANA 12</div>
+                    <ul class="results-list">
+                        <li><strong>Odoo fully operational:</strong> Sistema completamente implementado y siendo usado daily por todo el equipo</li>
+                        <li><strong>Integrated systems:</strong> POS, inventory, reporting - todo conectado y working seamlessly</li>
+                        <li><strong>Automated processes:</strong> Reportes automáticos, alerts, minimized manual work</li>
+                        <li><strong>Scalability ready:</strong> Methodology documented para replicar en nuevos locales</li>
+                        <li><strong>ROI demonstrated:</strong> Clear numbers showing return on investment del puesto</li>
+                    </ul>
+                </div>
+
+                <div class="success-metrics">
+                    <div class="metrics-title">📊 MÉTRICAS FINALES DE ÉXITO (90 DÍAS)</div>
+                    <div class="metric-item">Food cost reducido 15-20% vs baseline (target específico según analysis inicial)</div>
+                    <div class="metric-item">Service time reducido 20% maintaining quality standards</div>
+                    <div class="metric-item">Waste/merma reducido 30% through better inventory management</div>
+                    <div class="metric-item">100% team compliance con new procedures</div>
+                    <div class="metric-item">Odoo system operational con 95%+ uptime</div>
+                    <div class="metric-item">Real-time reporting giving daily actionable insights</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OBJETIVOS CONSOLIDADOS -->
+        <div class="objectives-section">
+            <div class="objectives-title">🎯 OBJETIVOS CONSOLIDADOS POR PERÍODO</div>
+
+            <div class="objectives-grid">
+                <div class="objective-card">
+                    <div class="objective-period">PRIMEROS 30 DÍAS</div>
+                    <div class="objective-description">Foundation y Control Básico</div>
+                    <ul class="objective-list">
+                        <li>✅ Diagnóstico 100% completo de situación actual</li>
+                        <li>✅ Relaciones sólidas con todo el equipo</li>
+                        <li>✅ Control implementado en 4 elementos críticos</li>
+                        <li>✅ Reducción inmediata de merma 25-30%</li>
+                        <li>✅ Sistema de reportes diarios operational</li>
+                        <li>✅ Quick wins implemented con results measurable</li>
+                    </ul>
+                </div>
+
+                <div class="objective-card">
+                    <div class="objective-period">60 DÍAS</div>
+                    <div class="objective-description">Optimización y Eficiencia</div>
+                    <ul class="objective-list">
+                        <li>✅ Food cost total reducido 15-20% sustained</li>
+                        <li>✅ Procesos completamente estandarizados</li>
+                        <li>✅ Service time reducido 20% sin comprometer calidad</li>
+                        <li>✅ Equipo trained y working independently</li>
+                        <li>✅ Advanced cost controls operational</li>
+                        <li>✅ Performance metrics y KPIs established</li>
+                    </ul>
+                </div>
+
+                <div class="objective-card">
+                    <div class="objective-period">90 DÍAS</div>
+                    <div class="objective-description">Sistematización y Scalabilidad</div>
+                    <ul class="objective-list">
+                        <li>✅ Odoo implemented y fully operational</li>
+                        <li>✅ Reportes automated y actionable</li>
+                        <li>✅ Sistemas integrated y optimized</li>
+                        <li>✅ Methodology replicable para local 3</li>
+                        <li>✅ ROI clearly demonstrated con numbers</li>
+                        <li>✅ Organization ready para 5-local expansion</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="final-section">
+            <div class="final-title">🏆 MISIÓN CUMPLIDA</div>
+            <div class="final-text">
+                Al completar este plan de 90 días, habrás transformado completamente la operación de CENOTE. No solo habrás optimizado costos y eficiencia, sino que habrás creado una foundation sólida para el crecimiento sostenible.
+                <br><br>
+                Tu éxito se medirá no solo en numbers, sino en haber creado una cultura de excellence operational que perdure y se replique en cada nuevo local.
+                <br><br>
+                <strong>¡Vamos por esos resultados extraordinarios!</strong>
+            </div>
+        </div>
+
+        <div class="contact-info">
+            <div class="contact-title">📞 CONTACTO Y SOPORTE</div>
+            <div class="contact-item"><strong>Reporte directo:</strong> Diego (COO) - Reunión diaria 9 AM</div>
+            <div class="contact-item"><strong>Reporte semanal:</strong> Equipo directivo completo - Viernes 17hs</div>
+            <div class="contact-item"><strong>Escalation:</strong> Issues críticos directly a Nico (CEO)</div>
+            <div class="contact-item"><strong>Soporte:</strong> Todo el equipo directivo committed a tu éxito</div>
+        </div>
+
+        <button class="print-btn" onclick="window.print()">🖨️ DESCARGAR / IMPRIMIR PLAN COMPLETO</button>
+    </div>
+</body>
+</html>

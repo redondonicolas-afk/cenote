@@ -1,0 +1,2558 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CENOTE Dashboard Personal - Nico</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* LOGIN SCREEN */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-logo {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #2a5298;
+        }
+
+        .login-title {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #2a5298;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #2a5298, #1e3c72);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* DASHBOARD */
+        .dashboard {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(255,255,255,0.95);
+            padding: 20px 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-logo {
+            font-size: 2rem;
+            margin-right: 20px;
+            color: #2a5298;
+        }
+
+        .header-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .dolar-info {
+            background: #f8f9fa;
+            padding: 10px 15px;
+            border-radius: 10px;
+            border-left: 4px solid #28a745;
+        }
+
+        .logout-btn {
+            padding: 10px 20px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .container {
+            display: flex;
+            height: calc(100vh - 80px);
+        }
+
+        .sidebar {
+            width: 250px;
+            background: rgba(255,255,255,0.95);
+            padding: 20px;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-item {
+            padding: 15px 20px;
+            margin: 5px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-item:hover {
+            background: #e3f2fd;
+            color: #2a5298;
+        }
+
+        .nav-item.active {
+            background: #2a5298;
+            color: white;
+        }
+
+        .nav-item i {
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-right: 15px;
+            font-size: 2.2rem;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f1f3f4;
+        }
+
+        .card-icon {
+            font-size: 1.8rem;
+            margin-right: 15px;
+            color: #2a5298;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2a5298;
+            margin: 15px 0;
+        }
+
+        .metric-label {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .metric-change {
+            font-size: 0.9rem;
+            padding: 5px 10px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .metric-change.positive {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .metric-change.negative {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .table-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+
+        .table-title i {
+            margin-right: 15px;
+            color: #2a5298;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 15px;
+            border-bottom: 1px solid #e1e5e9;
+        }
+
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .status-actual {
+            background: #fff3cd;
+            color: #856404;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .status-target {
+            background: #d1ecf1;
+            color: #0c5460;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .comment-box {
+            background: #f8f9fa;
+            border-left: 4px solid #2a5298;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .comment-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .last-updated {
+            color: #666;
+            font-size: 0.9rem;
+            text-align: right;
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        /* CALENDARIO STYLES */
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+        }
+
+        .calendar-nav {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .calendar-nav button {
+            padding: 10px 20px;
+            background: #2a5298;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+
+        .calendar-nav button:hover {
+            transform: scale(1.05);
+        }
+
+        .calendar-month-year {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2a5298;
+        }
+
+        .calendar-grid {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .calendar-weekday {
+            text-align: center;
+            font-weight: 700;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            color: #2a5298;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+
+        .calendar-day {
+            min-height: 120px;
+            padding: 10px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: white;
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .calendar-day:hover {
+            border-color: #2a5298;
+            box-shadow: 0 4px 15px rgba(42, 82, 152, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .calendar-day.other-month {
+            opacity: 0.3;
+            background: #f8f9fa;
+        }
+
+        .calendar-day.today {
+            border: 3px solid #28a745;
+            background: linear-gradient(135deg, #d4edda 0%, #fff 100%);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
+        }
+
+        .calendar-day.current-week {
+            background: #e3f2fd;
+        }
+
+        .calendar-day-number {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .calendar-day.today .calendar-day-number {
+            color: #28a745;
+            font-size: 1.3rem;
+        }
+
+        .calendar-events {
+            font-size: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .calendar-event {
+            padding: 4px 6px;
+            margin-bottom: 4px;
+            border-radius: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-weight: 500;
+        }
+
+        .event-feriado {
+            background: #f8d7da;
+            color: #721c24;
+            border-left: 3px solid #dc3545;
+        }
+
+        .event-gastronomico {
+            background: #fff3cd;
+            color: #856404;
+            border-left: 3px solid #ffc107;
+        }
+
+        .event-cumpleanos {
+            background: #cce5ff;
+            color: #004085;
+            border-left: 3px solid #007bff;
+        }
+
+        .event-custom {
+            background: #d1ecf1;
+            color: #0c5460;
+            border-left: 3px solid #17a2b8;
+        }
+
+        .week-number {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 0.7rem;
+            color: #666;
+            background: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        /* Modal para agregar eventos */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #2a5298;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-modal {
+            font-size: 2rem;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .close-modal:hover {
+            color: #333;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #2a5298;
+        }
+
+        .event-type-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .event-type-btn {
+            padding: 10px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .event-type-btn.selected {
+            border-color: #2a5298;
+            background: #e3f2fd;
+            color: #2a5298;
+        }
+
+        .save-event-btn {
+            width: 100%;
+            padding: 15px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .save-event-btn:hover {
+            background: #218838;
+        }
+
+        .calendar-legend {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        /* TIMELINE EXPANSION */
+        .timeline-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .timeline-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2a5298;
+        }
+
+        .timeline-current {
+            background: #28a745;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .timeline-track {
+            position: relative;
+            height: 80px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .timeline-progress {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
+            transition: width 0.5s ease;
+            border-radius: 10px 0 0 10px;
+        }
+
+        .timeline-markers {
+            position: relative;
+            height: 120px;
+            width: 100%;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            text-align: center;
+            transform: translateX(-50%);
+        }
+
+        .timeline-dot {
+            width: 16px;
+            height: 16px;
+            background: white;
+            border: 3px solid #dee2e6;
+            border-radius: 50%;
+            margin: 0 auto 8px;
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s;
+        }
+
+        .timeline-marker.completed .timeline-dot {
+            background: #28a745;
+            border-color: #28a745;
+            box-shadow: 0 0 0 4px rgba(40, 167, 69, 0.2);
+        }
+
+        .timeline-marker.current .timeline-dot {
+            background: #ffc107;
+            border-color: #ffc107;
+            border-width: 4px;
+            width: 20px;
+            height: 20px;
+            box-shadow: 0 0 0 6px rgba(255, 193, 7, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 6px rgba(255, 193, 7, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(255, 193, 7, 0.1);
+            }
+        }
+
+        .timeline-marker.future .timeline-dot {
+            background: white;
+            border-color: #dee2e6;
+        }
+
+        .timeline-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .timeline-marker.current .timeline-label {
+            color: #ffc107;
+            font-size: 0.75rem;
+        }
+
+        .timeline-marker.completed .timeline-label {
+            color: #28a745;
+        }
+
+        .timeline-event {
+            font-size: 0.65rem;
+            color: #999;
+            line-height: 1.2;
+            max-width: 80px;
+            margin: 0 auto;
+        }
+
+        .timeline-marker.milestone .timeline-event {
+            color: #2a5298;
+            font-weight: 600;
+        }
+
+        .timeline-marker.current .timeline-event {
+            color: #333;
+            font-weight: 700;
+        }
+
+        .timeline-legend {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #dee2e6;
+            font-size: 0.85rem;
+        }
+
+        .timeline-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .timeline-legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <!-- LOGIN SCREEN -->
+    <div id="loginScreen" class="login-container">
+        <div class="login-box">
+            <div class="login-logo">🌮</div>
+            <h1 class="login-title">CENOTE Dashboard</h1>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Usuario:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="login-btn">Ingresar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="dashboard">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <div class="header-logo">🌮</div>
+                <div class="header-title">CENOTE Dashboard Personal</div>
+            </div>
+            <div class="header-right">
+                <div class="dolar-info">
+                    <strong>💵 Blue:</strong> $<span id="dolarBlue">1.465</span> ARS/USD
+                </div>
+                <button class="logout-btn" onclick="logout()">Salir</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="nav-item active" onclick="showSection('finanzas')" data-section="finanzas">
+                    <i>💰</i> Finanzas
+                </div>
+                <div class="nav-item" onclick="showSection('equipo')" data-section="equipo">
+                    <i>👥</i> Equipo
+                </div>
+                <div class="nav-item" onclick="showSection('expansion')" data-section="expansion">
+                    <i>🚀</i> Expansión
+                </div>
+                <div class="nav-item" onclick="showSection('operaciones')" data-section="operaciones">
+                    <i>📊</i> Operaciones
+                </div>
+                <div class="nav-item" onclick="showSection('calendario')" data-section="calendario">
+                    <i>📅</i> Calendario
+                </div>
+                <div class="nav-item" onclick="showSection('reuniones')" data-section="reuniones">
+                    <i>📋</i> Reuniones
+                </div>
+                <div class="nav-item" onclick="showSection('notas')" data-section="notas">
+                    <i>📝</i> Notas
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- FINANZAS SECTION -->
+                <div id="finanzas" class="content-section active">
+                    <h2 class="section-title">
+                        <i>💰</i> Finanzas CENOTE
+                    </h2>
+
+                    <div class="cards-grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon">📈</div>
+                                <div class="card-title">Facturación Mensual</div>
+                            </div>
+                            <div class="metric-value">U$S 180k</div>
+                            <div class="metric-label">Martínez: U$S 100k • Núñez: U$S 80k</div>
+                            <div class="metric-change positive">Base por cubiertos alineada ✓</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon">💡</div>
+                                <div class="card-title">EBITDA Actual</div>
+                            </div>
+                            <div class="metric-value">U$S 27k</div>
+                            <div class="metric-label">15% margen mensual</div>
+                            <div class="metric-change positive">Target alcanzado ✓</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon">🎯</div>
+                                <div class="card-title">Pool Propinas</div>
+                            </div>
+                            <div class="metric-value">U$S 2.7k</div>
+                            <div class="metric-label">10% EBITDA mensual / 6 personas</div>
+                            <div class="metric-change positive">U$S 450 por persona</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon">💸</div>
+                                <div class="card-title">Gastos Sueldos</div>
+                            </div>
+                            <div class="metric-value">U$S 4.1k</div>
+                            <div class="metric-label">Actual vs Target U$S 11.9k</div>
+                            <div class="metric-change negative">Gap U$S 7.8k</div>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <h3 class="table-title">
+                            <i>👥</i> Estructura Salarial - Actual vs Target
+                        </h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Sueldo Actual</th>
+                                    <th>Target 2026</th>
+                                    <th>Gap Mensual</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Nico (CEO)</strong></td>
+                                    <td>$0</td>
+                                    <td>U$S 2.950</td>
+                                    <td>+U$S 2.950</td>
+                                    <td><span class="status-target">Target</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Diego (COO)</strong></td>
+                                    <td>U$S 2.048</td>
+                                    <td>U$S 3.450</td>
+                                    <td>+U$S 1.402</td>
+                                    <td><span class="status-actual">Actual</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Angie (Admin)</strong></td>
+                                    <td>U$S 819</td>
+                                    <td>U$S 1.950</td>
+                                    <td>+U$S 1.131</td>
+                                    <td><span class="status-actual">Actual</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Agus (Marketing)</strong></td>
+                                    <td>U$S 819</td>
+                                    <td>U$S 1.950</td>
+                                    <td>+U$S 1.131</td>
+                                    <td><span class="status-actual">Actual</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Sacha (Chef)</strong></td>
+                                    <td>$0</td>
+                                    <td>U$S 1.950</td>
+                                    <td>+U$S 1.950</td>
+                                    <td><span class="status-target">Target</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Mati (Operations)</strong></td>
+                                    <td>U$S 410</td>
+                                    <td>U$S 1.350</td>
+                                    <td>+U$S 940</td>
+                                    <td><span class="status-actual">Parcial</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="comment-box">
+                        <div class="comment-title">💭 Decisiones Clave:</div>
+                        <p><strong>Inversión necesaria:</strong> U$S 100k del millón para cubrir gap salarial año 1</p>
+                        <p><strong>Timeline:</strong> Sueldos target desde entrada de inversión (esperada fin 2025)</p>
+                        <p><strong>Sistema propinas:</strong> 10% EBITDA trimestral, partes iguales</p>
+                        <p><strong>Política:</strong> Todos los sueldos 1.5x mercado gastronómico argentino</p>
+                    </div>
+
+                    <div class="last-updated">
+                        Última actualización: 11 de octubre 2025 - Datos alineados con facturación real por cubiertos
+                    </div>
+                </div>
+
+                <!-- EQUIPO SECTION -->
+                <div id="equipo" class="content-section">
+                    <h2 class="section-title">
+                        <i>👥</i> Gestión de Equipo
+                    </h2>
+
+                    <div class="table-container">
+                        <h3 class="table-title">
+                            <i>👔</i> Equipo Directivo Actual
+                        </h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Persona</th>
+                                    <th>Cargo</th>
+                                    <th>Área Principal</th>
+                                    <th>Responsabilidades Secundarias</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Nico</strong></td>
+                                    <td>CEO</td>
+                                    <td>Dirección Ejecutiva</td>
+                                    <td>Desarrollo de Negocio</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Diego</strong></td>
+                                    <td>COO</td>
+                                    <td>Operaciones & Expansión</td>
+                                    <td>Expansión Locales</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Angie</strong></td>
+                                    <td>CFO</td>
+                                    <td>Finanzas & Administrativa</td>
+                                    <td>Legal & Compliance (coordinación)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Agustina</strong></td>
+                                    <td>Supply Chain Director</td>
+                                    <td>Supply Chain & Compras</td>
+                                    <td>R&D Gastronómico (sourcing)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Mati</strong></td>
+                                    <td>Operations Excellence Director</td>
+                                    <td>Operaciones & Calidad</td>
+                                    <td>Customer Experience (hasta año 3)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Sacha</strong></td>
+                                    <td>Chef Ejecutivo</td>
+                                    <td>Visión Gastronómica</td>
+                                    <td>R&D Gastronómico</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="table-container">
+                        <h3 class="table-title">
+                            <i>📋</i> Posiciones a Contratar - Prioridad Alta (Q1 2025)
+                        </h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Posición</th>
+                                    <th>Timeline</th>
+                                    <th>Status</th>
+                                    <th>Costo Anual</th>
+                                    <th>Prioridad</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>IT Coordinator</strong> (Medio tiempo)</td>
+                                    <td>Trimestre 1</td>
+                                    <td><span class="status-actual" style="background: #f8d7da; color: #721c24;">🔴 Urgente</span></td>
+                                    <td>USD 25k</td>
+                                    <td><span class="status-actual" style="background: #f8d7da; color: #721c24;">🔴 Alta</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>HR Coordinator</strong> (Compartido)</td>
+                                    <td>Trimestre 2-3</td>
+                                    <td><span class="status-actual" style="background: #fff3cd; color: #856404;">🟡 Planificado</span></td>
+                                    <td>USD 20k</td>
+                                    <td><span class="status-actual" style="background: #f8d7da; color: #721c24;">🔴 Alta</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="table-container">
+                        <h3 class="table-title">
+                            <i>🚀</i> Posiciones Futuras - Roadmap
+                        </h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Posición</th>
+                                    <th>Timeline</th>
+                                    <th>Status</th>
+                                    <th>Costo Anual</th>
+                                    <th>Trigger</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Marketing Manager</strong></td>
+                                    <td>Año 2</td>
+                                    <td><span class="status-target">🟢 Planificado</span></td>
+                                    <td>USD 35k</td>
+                                    <td>Post-Local #3</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Business Development Manager</strong></td>
+                                    <td>Año 3</td>
+                                    <td><span class="status-target">🟢 Planificado</span></td>
+                                    <td>USD 40k</td>
+                                    <td>4+ locales</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>CX Manager</strong></td>
+                                    <td>Año 3</td>
+                                    <td><span class="status-target">🟢 Planificado</span></td>
+                                    <td>USD 30k</td>
+                                    <td>Scale operations</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Legal Counsel</strong> (Interno)</td>
+                                    <td>Año 4</td>
+                                    <td><span class="status-target">🟢 Planificado</span></td>
+                                    <td>USD 50k</td>
+                                    <td>Franquicias</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>R&D Specialist</strong></td>
+                                    <td>Año 4</td>
+                                    <td><span class="status-target">🟢 Planificado</span></td>
+                                    <td>USD 35k</td>
+                                    <td>Innovation push</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="cards-grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon">👥</div>
+                                <div class="card-title">Headcount Total</div>
+                            </div>
+                            <div class="metric-value">6</div>
+                            <div class="metric-label">Equipo Directivo Actual</div>
+                            <div class="metric-change positive">Core team completo</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon">📊</div>
+                                <div class="card-title">Staff por Local</div>
+                            </div>
+                            <div class="metric-value">15-18</div>
+                            <div class="metric-label">Target ratio por local</div>
+                            <div class="metric-change positive">En rango</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon">🎯</div>
+                                <div class="card-title">Turnover Rate</div>
+                            </div>
+                            <div class="metric-value">___%</div>
+                            <div class="metric-label">Target: <10% mensual</div>
+                            <div class="metric-change positive">A completar</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon">💼</div>
+                                <div class="card-title">Costo Laboral</div>
+                            </div>
+                            <div class="metric-value">___%</div>
+                            <div class="metric-label">Target: 35-38% ventas</div>
+                            <div class="metric-change positive">A completar</div>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <h3 class="table-title">
+                            <i>🏪</i> Staff Operativo por Local
+                        </h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+                                <h4 style="margin-bottom: 15px; color: #2a5298;">📍 Martínez</h4>
+                                <p><strong>Personal count:</strong> ___ personas</p>
+                                <p><strong>Gerente de Local:</strong> ___________</p>
+                                <p><strong>Encargados:</strong> ___________</p>
+                                <p><strong>Staff cocina:</strong> ___________</p>
+                                <p><strong>Staff salón:</strong> ___________</p>
+                            </div>
+                            <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+                                <h4 style="margin-bottom: 15px; color: #2a5298;">📍 Núñez</h4>
+                                <p><strong>Personal count:</strong> ___ personas</p>
+                                <p><strong>Gerente de Local:</strong> ___________</p>
+                                <p><strong>Encargados:</strong> ___________</p>
+                                <p><strong>Staff cocina:</strong> ___________</p>
+                                <p><strong>Staff salón:</strong> ___________</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comment-box">
+                        <div class="comment-title">🎯 Hiring Pipeline Activo</div>
+                        <p><strong>IT Coordinator:</strong> ___ candidatos | Stage: ___________ | Decision Date: __________</p>
+                        <p><strong>HR Coordinator:</strong> ___ candidatos | Stage: ___________ | Decision Date: __________</p>
+                    </div>
+
+                    <div class="last-updated">
+                        Última actualización: 15 de octubre 2025 - Estructura de equipo completa definida
+                    </div>
+                </div>
+
+                <div id="expansion" class="content-section">
+                    <h2 class="section-title">
+                        <i>🚀</i> Plan de Expansión
+                    </h2>
+
+                    <!-- TIMELINE VISUAL -->
+                    <div class="timeline-container">
+                        <div class="timeline-header">
+                            <div class="timeline-title">📅 Timeline Expansión CENOTE (60 meses)</div>
+                            <div class="timeline-current">📍 Estamos en: Mes 1 - Octubre 2025</div>
+                        </div>
+
+                        <div class="timeline-track">
+                            <div class="timeline-progress" style="width: 1.67%;"></div>
+                        </div>
+
+                        <div class="timeline-markers">
+                            <!-- Mes 0: Apertura Núñez (0/60 = 0%) -->
+                            <div class="timeline-marker completed milestone" style="left: 0%;">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-label">M0</div>
+                                <div class="timeline-event">Sep 2025<br>Apertura Núñez</div>
+                            </div>
+
+                            <!-- Mes 1: ACTUAL (1/60 = 1.67%) -->
+                            <div class="timeline-marker current" style="left: 1.67%;">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-label">M1</div>
+                                <div class="timeline-event">Oct 2025<br>HOY</div>
+                            </div>
+
+                            <!-- Mes 6: Inicio obra Local #3 (6/60 = 10%) -->
+                            <div class="timeline-marker future milestone" style="left: 10%;">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-label">M6</div>
+                                <div class="timeline-event">Mar 2026<br>Inicio obra L3</div>
+                            </div>
+
+                            <!-- Mes 12: Apertura Local #3 (12/60 = 20%) -->
+                            <div class="timeline-marker future milestone" style="left: 20%;">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-label">M12</div>
+                                <div class="timeline-event">Sep 2026<br>Apertura L3</div>
+                            </div>
+
+                            <!-- Mes 20: Apertura Local #4 (20/60 = 33.33%) -->
+                            <div class="timeline-marker future milestone" style="left: 33.33%;">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-label">M20</div>
+                                <div class="timeline-event">May 2027<br>Apertura L4</div>
+                            </div>
+
+                            <!-- Mes 30: Apertura Local #5 (30/60 = 50%) -->
+                            <div class="timeline-marker future milestone" style="left: 50%;">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-label">M30</div>
+                                <div class="timeline-event">Mar 2028<br>Apertura L5</div>
+                            </div>
+
+                            <!-- Mes 36: Operación Plena (36/60 = 60%) -->
+                            <div class="timeline-marker future milestone" style="left: 60%;">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-label">M36</div>
+                                <div class="timeline-event">Sep 2028<br>5 Locales Plenos</div>
+                            </div>
+
+                            <!-- Mes 60: Fin Timeline (60/60 = 100%) -->
+                            <div class="timeline-marker future" style="left: 100%;">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-label">M60</div>
+                                <div class="timeline-event">Sep 2030<br>Madurez</div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-legend">
+                            <div class="timeline-legend-item">
+                                <div class="timeline-legend-dot" style="background: #28a745;"></div>
+                                <span>Completado</span>
+                            </div>
+                            <div class="timeline-legend-item">
+                                <div class="timeline-legend-dot" style="background: #ffc107;"></div>
+                                <span>Mes Actual</span>
+                            </div>
+                            <div class="timeline-legend-item">
+                                <div class="timeline-legend-dot" style="background: white; border: 2px solid #dee2e6;"></div>
+                                <span>Futuro</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <h3 class="table-title">
+                            <i>📊</i> Timeline General Expansión
+                        </h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Milestone</th>
+                                    <th>Timeline</th>
+                                    <th>Inversión</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Local #3 (2do CABA)</strong></td>
+                                    <td>Mes 12</td>
+                                    <td>USD 250k</td>
+                                    <td><span class="status-actual" style="background: #fff3cd; color: #856404;">🟡 Planificación</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Local #4 (3ro CABA)</strong></td>
+                                    <td>Mes 20</td>
+                                    <td>USD 250k</td>
+                                    <td><span class="status-target">🟢 Roadmap</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Local #5 (4to CABA)</strong></td>
+                                    <td>Mes 30</td>
+                                    <td>USD 250k</td>
+                                    <td><span class="status-target">🟢 Roadmap</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Operación Plena 5 Locales</strong></td>
+                                    <td>Mes 36</td>
+                                    <td>-</td>
+                                    <td><span class="status-target">🟢 Target</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="table-container">
+                        <h3 class="table-title">
+                            <i>🏪</i> Local #3 - 2do CABA (Mes 12)
+                        </h3>
+
+                        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                            <h4 style="margin-bottom: 15px; color: #2a5298;">📍 Site Selection</h4>
+                            <p><strong>Zona target:</strong> ___________</p>
+                            <p><strong>Shortlist opciones:</strong> ___________</p>
+                            <p><strong>Site visits realizadas:</strong> ___________</p>
+                            <p><strong>Decision date:</strong> ___________</p>
+                        </div>
+
+                        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                            <h4 style="margin-bottom: 15px; color: #2a5298;">💰 Budget & Financials</h4>
+                            <p><strong>Inversión total:</strong> USD 250k</p>
+                            <p><strong>Punto equilibrio:</strong> 12-18 meses</p>
+                            <p><strong>Facturación target:</strong> USD 80k/mes</p>
+                            <p><strong>Ganancia target:</strong> USD 12k/mes (15% margen)</p>
+                        </div>
+
+                        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                            <h4 style="margin-bottom: 15px; color: #2a5298;">📋 Milestones Clave</h4>
+                            <label style="display: block; margin-bottom: 10px;"><input type="checkbox"> Site selection finalizada</label>
+                            <label style="display: block; margin-bottom: 10px;"><input type="checkbox"> Contrato firmado</label>
+                            <label style="display: block; margin-bottom: 10px;"><input type="checkbox"> Permits y habilitaciones</label>
+                            <label style="display: block; margin-bottom: 10px;"><input type="checkbox"> Setup & construcción</label>
+                            <label style="display: block; margin-bottom: 10px;"><input type="checkbox"> Staff hiring (25 personas)</label>
+                            <label style="display: block; margin-bottom: 10px;"><input type="checkbox"> Opening</label>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                            <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+                                <h4 style="margin-bottom: 15px; color: #2a5298;">👥 Team Requirements</h4>
+                                <p><strong>Gerente de Local:</strong> ___________</p>
+                                <p><strong>Staff total:</strong> 25 personas</p>
+                                <p><strong>Timeline hiring:</strong> ___________</p>
+                            </div>
+                            <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+                                <h4 style="margin-bottom: 15px; color: #2a5298;">🎯 KPIs Target</h4>
+                                <p><strong>Cubiertos/día:</strong> 150 promedio</p>
+                                <p><strong>Ticket promedio:</strong> USD 17.50</p>
+                                <p><strong>Food cost:</strong> 28-30%</p>
+                                <p><strong>Labor cost:</strong> 30-35%</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cards-grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon">🏪</div>
+                                <div class="card-title">Local #4 - 3ro CABA</div>
+                            </div>
+                            <div class="metric-value">Mes 20</div>
+                            <div class="metric-label">8 meses post-Local #3</div>
+                            <div class="metric-change positive">Budget: USD 250k</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon">🏪</div>
+                                <div class="card-title">Local #5 - 4to CABA</div>
+                            </div>
+                            <div class="metric-value">Mes 30</div>
+                            <div class="metric-label">10 meses post-Local #4</div>
+                            <div class="metric-change positive">Budget: USD 250k</div>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <h3 class="table-title">
+                            <i>📈</i> Proyección Crecimiento
+                        </h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Mes</th>
+                                    <th>Locales</th>
+                                    <th>Empleados</th>
+                                    <th>Facturación Mensual</th>
+                                    <th>EBITDA Mensual</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>0</strong></td>
+                                    <td>2</td>
+                                    <td>56</td>
+                                    <td>USD 210k</td>
+                                    <td>USD 31.5k</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>12</strong></td>
+                                    <td>3</td>
+                                    <td>83</td>
+                                    <td>USD 315k</td>
+                                    <td>USD 47.3k</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>20</strong></td>
+                                    <td>4</td>
+                                    <td>110</td>
+                                    <td>USD 420k</td>
+                                    <td>USD 63k</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>30</strong></td>
+                                    <td>5</td>
+                                    <td>137</td>
+                                    <td>USD 525k</td>
+                                    <td>USD 78.8k</td>
+                                </tr>
+                                <tr style="background: #e3f2fd;">
+                                    <td><strong>36</strong></td>
+                                    <td><strong>5</strong></td>
+                                    <td><strong>140</strong></td>
+                                    <td><strong>USD 525k</strong></td>
+                                    <td><strong>USD 78.8k</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="comment-box">
+                        <div class="comment-title">🎯 Curva de Aprendizaje</div>
+                        <p><strong>Núñez inicial:</strong> 18 meses hasta equilibrio</p>
+                        <p><strong>Nuevos locales:</strong> 3 meses equilibrio + 6 meses pleno rendimiento</p>
+                        <p><strong>Ventaja replicación:</strong> Procesos ya validados y optimizados</p>
+                    </div>
+
+                    <div class="comment-box">
+                        <div class="comment-title">💡 Updates Esta Semana - Local #3</div>
+                        <p><strong>Site Selection:</strong></p>
+                        <p>• ___________</p>
+                        <p>• ___________</p>
+                        <p><strong>Legal & Permits:</strong></p>
+                        <p>• ___________</p>
+                        <p><strong>Budget & Planning:</strong></p>
+                        <p>• ___________</p>
+                    </div>
+
+                    <div class="last-updated">
+                        Última actualización: 15 de octubre 2025 - Plan de expansión completo definido
+                    </div>
+                </div>
+
+                <div id="operaciones" class="content-section">
+                    <h2 class="section-title">
+                        <i>📊</i> Operaciones Diarias
+                    </h2>
+
+                    <div class="cards-grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon">📅</div>
+                                <div class="card-title">Fecha de Hoy</div>
+                            </div>
+                            <div class="metric-value" style="font-size: 1.5rem;">___________</div>
+                            <div class="metric-label">Actualización en tiempo real</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon">📊</div>
+                                <div class="card-title">Semana del Año</div>
+                            </div>
+                            <div class="metric-value">Semana ___</div>
+                            <div class="metric-label">de 2025</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon">📈</div>
+                                <div class="card-title">Performance Reportada</div>
+                            </div>
+                            <div class="metric-value">Semana ___</div>
+                            <div class="metric-label">Semana vencida</div>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <h3 class="table-title">
+                            <i>📋</i> To Do List - Temas Varios
+                        </h3>
+
+                        <div style="background: #fff3cd; padding: 20px; border-radius: 10px; margin-bottom: 15px;">
+                            <h4 style="margin-bottom: 15px; color: #721c24;">🔴 Urgentes (Esta Semana)</h4>
+                            <label style="display: block; margin-bottom: 10px;"><input type="checkbox"> _____________________</label>
+                            <label style="display: block; margin-bottom: 10px;"><input type="checkbox"> _____________________</label>
+                            <label style="display: block; margin-bottom: 10px;"><input type="checkbox"> _____________________</label>
+                        </div>
+
+                        <div style="background: #fff8e1; padding: 20px; border-radius: 10px; margin-bottom: 15px;">
+                            <h4 style="margin-bottom: 15px; color: #856404;">🟡 Importantes (Este Mes)</h4>
+                            <label style="display: block; margin-bottom: 10px;"><input type="checkbox"> _____________________</label>
+                            <label style="display: block; margin-bottom: 10px;"><input type="checkbox"> _____________________</label>
+                            <label style="display: block; margin-bottom: 10px;"><input type="checkbox"> _____________________</label>
+                        </div>
+
+                        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+                            <h4 style="margin-bottom: 15px; color: #155724;">🟢 Backlog</h4>
+                            <label style="display: block; margin-bottom: 10px;"><input type="checkbox"> _____________________</label>
+                            <label style="display: block; margin-bottom: 10px;"><input type="checkbox"> _____________________</label>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <h3 class="table-title">
+                            <i>🏢</i> Oficina CENOTE (Casa Matriz Martínez)
+                        </h3>
+
+                        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                            <h4 style="margin-bottom: 15px; color: #2a5298;">📝 Notas Operativas</h4>
+                            <textarea rows="4" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd; resize: vertical;" placeholder="Escribir notas operativas de la oficina..."></textarea>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                            <div style="background: #fff3cd; padding: 20px; border-radius: 10px;">
+                                <h4 style="margin-bottom: 15px; color: #856404;">⚠️ Issues/Alertas</h4>
+                                <p>• _____________________</p>
+                                <p>• _____________________</p>
+                            </div>
+                            <div style="background: #d4edda; padding: 20px; border-radius: 10px;">
+                                <h4 style="margin-bottom: 15px; color: #155724;">✅ Completado Esta Semana</h4>
+                                <p>• _____________________</p>
+                                <p>• _____________________</p>
+                            </div>
+                        </div>
+
+                        <div style="background: #e3f2fd; padding: 20px; border-radius: 10px;">
+                            <h4 style="margin-bottom: 15px; color: #2a5298;">📅 Próxima Semana</h4>
+                            <label style="display: block; margin-bottom: 10px;"><input type="checkbox"> _____________________</label>
+                            <label style="display: block; margin-bottom: 10px;"><input type="checkbox"> _____________________</label>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <h3 class="table-title">
+                            <i>🏪</i> Local 1 - Martínez
+                        </h3>
+
+                        <div style="background: #e3f2fd; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                            <h4 style="margin-bottom: 15px; color: #2a5298;">📎 Informe Semana Vencida</h4>
+                            <p><strong>Archivo:</strong> _____________________</p>
+                            <p><strong>Path:</strong> _____________________</p>
+                        </div>
+
+                        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                            <h4 style="margin-bottom: 15px; color: #2a5298;">📝 Notas Operativas</h4>
+                            <textarea rows="4" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd; resize: vertical;" placeholder="Escribir notas operativas del local Martínez..."></textarea>
+                        </div>
+
+                        <div style="background: #e8f5e9; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                            <h4 style="margin-bottom: 15px; color: #2a5298;">📊 Performance Semana Vencida (Semana ___)</h4>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                <p><strong>Facturación:</strong> USD ___k</p>
+                                <p><strong>Cubiertos:</strong> ___</p>
+                                <p><strong>Incidentes:</strong> ___</p>
+                                <p><strong>Staff attendance:</strong> ___%</p>
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                            <div style="background: #fff3cd; padding: 20px; border-radius: 10px;">
+                                <h4 style="margin-bottom: 15px; color: #856404;">⚠️ Issues/Alertas</h4>
+                                <p>• _____________________</p>
+                                <p>• _____________________</p>
+                            </div>
+                            <div style="background: #d4edda; padding: 20px; border-radius: 10px;">
+                                <h4 style="margin-bottom: 15px; color: #155724;">✅ Completado Esta Semana</h4>
+                                <p>• _____________________</p>
+                                <p>• _____________________</p>
+                            </div>
+                        </div>
+
+                        <div style="background: #e3f2fd; padding: 20px; border-radius: 10px;">
+                            <h4 style="margin-bottom: 15px; color: #2a5298;">📅 Próxima Semana</h4>
+                            <label style="display: block; margin-bottom: 10px;"><input type="checkbox"> _____________________</label>
+                            <label style="display: block; margin-bottom: 10px;"><input type="checkbox"> _____________________</label>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <h3 class="table-title">
+                            <i>🏪</i> Local 2 - Núñez
+                        </h3>
+
+                        <div style="background: #e3f2fd; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                            <h4 style="margin-bottom: 15px; color: #2a5298;">📎 Informe Semana Vencida</h4>
+                            <p><strong>Archivo:</strong> _____________________</p>
+                            <p><strong>Path:</strong> _____________________</p>
+                        </div>
+
+                        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                            <h4 style="margin-bottom: 15px; color: #2a5298;">📝 Notas Operativas</h4>
+                            <textarea rows="4" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd; resize: vertical;" placeholder="Escribir notas operativas del local Núñez..."></textarea>
+                        </div>
+
+                        <div style="background: #e8f5e9; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                            <h4 style="margin-bottom: 15px; color: #2a5298;">📊 Performance Semana Vencida (Semana ___)</h4>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                <p><strong>Facturación:</strong> USD ___k</p>
+                                <p><strong>Cubiertos:</strong> ___</p>
+                                <p><strong>Incidentes:</strong> ___</p>
+                                <p><strong>Staff attendance:</strong> ___%</p>
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                            <div style="background: #fff3cd; padding: 20px; border-radius: 10px;">
+                                <h4 style="margin-bottom: 15px; color: #856404;">⚠️ Issues/Alertas</h4>
+                                <p>• _____________________</p>
+                                <p>• _____________________</p>
+                            </div>
+                            <div style="background: #d4edda; padding: 20px; border-radius: 10px;">
+                                <h4 style="margin-bottom: 15px; color: #155724;">✅ Completado Esta Semana</h4>
+                                <p>• _____________________</p>
+                                <p>• _____________________</p>
+                            </div>
+                        </div>
+
+                        <div style="background: #e3f2fd; padding: 20px; border-radius: 10px;">
+                            <h4 style="margin-bottom: 15px; color: #2a5298;">📅 Próxima Semana</h4>
+                            <label style="display: block; margin-bottom: 10px;"><input type="checkbox"> _____________________</label>
+                            <label style="display: block; margin-bottom: 10px;"><input type="checkbox"> _____________________</label>
+                        </div>
+                    </div>
+
+                    <div class="last-updated">
+                        Última actualización: 15 de octubre 2025 - Sistema de operaciones diarias implementado
+                    </div>
+                </div>
+
+                <!-- CALENDARIO SECTION -->
+                <div id="calendario" class="content-section">
+                    <h2 class="section-title">
+                        <i>📅</i> Calendario CENOTE
+                    </h2>
+
+                    <!-- Calendar Header with Navigation -->
+                    <div class="calendar-header">
+                        <div class="calendar-nav">
+                            <button onclick="prevMonth()">◀ Anterior</button>
+                            <button onclick="goToToday()">Hoy</button>
+                            <button onclick="nextMonth()">Siguiente ▶</button>
+                        </div>
+                        <div class="calendar-month-year" id="calendarMonthYear">Octubre 2025</div>
+                        <div>
+                            <button onclick="openEventModal()" style="padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">+ Agregar Evento</button>
+                        </div>
+                    </div>
+
+                    <!-- Calendar Grid -->
+                    <div class="calendar-grid">
+                        <div class="calendar-weekdays">
+                            <div class="calendar-weekday">Domingo</div>
+                            <div class="calendar-weekday">Lunes</div>
+                            <div class="calendar-weekday">Martes</div>
+                            <div class="calendar-weekday">Miércoles</div>
+                            <div class="calendar-weekday">Jueves</div>
+                            <div class="calendar-weekday">Viernes</div>
+                            <div class="calendar-weekday">Sábado</div>
+                        </div>
+                        <div class="calendar-days" id="calendarDays">
+                            <!-- Days will be generated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Calendar Legend -->
+                    <div class="calendar-legend">
+                        <div class="legend-item">
+                            <div class="legend-color event-feriado"></div>
+                            <span>Feriados</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color event-gastronomico"></div>
+                            <span>Días Gastronómicos</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color event-cumpleanos"></div>
+                            <span>Cumpleaños</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color event-custom"></div>
+                            <span>Eventos Personalizados</span>
+                        </div>
+                    </div>
+
+                    <div class="comment-box">
+                        <div class="comment-title">💡 Próximas Funciones:</div>
+                        <p><strong>Google Calendar Integration:</strong> Sincroniza con tu Google Calendar personal</p>
+                        <p><strong>Recordatorios:</strong> Notificaciones para eventos importantes</p>
+                        <p><strong>Vista Semanal:</strong> Zoom a eventos de la semana actual</p>
+                    </div>
+
+                    <div class="last-updated">
+                        Calendario interactivo implementado - 15 de octubre 2025
+                    </div>
+                </div>
+
+                <!-- REUNIONES SECTION -->
+                <div id="reuniones" class="content-section">
+                    <h2 class="section-title">
+                        <i>📅</i> Seguimiento de Reuniones
+                    </h2>
+
+                    <div class="cards-grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon">📅</div>
+                                <div class="card-title">Próxima Reunión</div>
+                            </div>
+                            <div class="metric-value">Lunes 13hs</div>
+                            <div class="metric-label">Planning Session Semanal</div>
+                            <div class="metric-change positive">Equipo completo</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon">✅</div>
+                                <div class="card-title">Action Items</div>
+                            </div>
+                            <div class="metric-value">5</div>
+                            <div class="metric-label">Pendientes esta semana</div>
+                            <div class="metric-change negative">2 retrasados</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon">🎯</div>
+                                <div class="card-title">Efectividad</div>
+                            </div>
+                            <div class="metric-value">85%</div>
+                            <div class="metric-label">Decisiones implementadas</div>
+                            <div class="metric-change positive">Mejorando</div>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <h3 class="table-title">
+                            <i>📋</i> Minutas Recientes
+                        </h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Tipo</th>
+                                    <th>Participantes</th>
+                                    <th>Temas Principales</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>11/10/2025</strong></td>
+                                    <td>Planning</td>
+                                    <td>Nico, Claude</td>
+                                    <td>Estructura salarial, Dashboard, Sistema propinas</td>
+                                    <td><span class="status-target">Completado</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>10/10/2025</strong></td>
+                                    <td>Financiero</td>
+                                    <td>Nico, Claude</td>
+                                    <td>Alineación facturación, Cubiertos reales, Sueldos</td>
+                                    <td><span class="status-target">Completado</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>07/10/2025</strong></td>
+                                    <td>Estratégico</td>
+                                    <td>Nico, Sacha</td>
+                                    <td>Visita Núñez, Operaciones</td>
+                                    <td><span class="status-actual">Pendiente minuta</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Próxima</strong></td>
+                                    <td>Planning</td>
+                                    <td>Equipo completo</td>
+                                    <td>Dashboard, Timeline inversión, Local #3</td>
+                                    <td><span class="status-actual">Programada</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="table-container">
+                        <h3 class="table-title">
+                            <i>📝</i> Nueva Minuta - Reunión de Hoy
+                        </h3>
+
+                        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                            <h4 style="margin-bottom: 15px; color: #333;">📅 Información de la Reunión</h4>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                                <div>
+                                    <strong>Fecha:</strong> <input type="date" id="meetingDate" style="padding: 5px; border-radius: 5px; border: 1px solid #ddd;">
+                                </div>
+                                <div>
+                                    <strong>Duración:</strong> <input type="text" id="meetingDuration" placeholder="ej: 2 horas" style="padding: 5px; border-radius: 5px; border: 1px solid #ddd;">
+                                </div>
+                            </div>
+
+                            <div style="margin-bottom: 20px;">
+                                <strong>Participantes:</strong>
+                                <div style="margin-top: 10px;">
+                                    <label><input type="checkbox" checked> Nico</label>
+                                    <label style="margin-left: 20px;"><input type="checkbox"> Diego</label>
+                                    <label style="margin-left: 20px;"><input type="checkbox"> Sacha</label>
+                                    <label style="margin-left: 20px;"><input type="checkbox"> Angie</label>
+                                    <label style="margin-left: 20px;"><input type="checkbox"> Agus</label>
+                                    <label style="margin-left: 20px;"><input type="checkbox"> Mati</label>
+                                </div>
+                            </div>
+
+                            <h4 style="margin-bottom: 15px; color: #333;">📋 Temas Tratados</h4>
+                            <textarea id="meetingTopics" rows="4" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd; resize: vertical;" placeholder="Describe los temas principales que se discutieron..."></textarea>
+
+                            <h4 style="margin-top: 20px; margin-bottom: 15px; color: #333;">✅ Decisiones Tomadas</h4>
+                            <textarea id="meetingDecisions" rows="4" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd; resize: vertical;" placeholder="Lista las decisiones concretas que se tomaron..."></textarea>
+
+                            <h4 style="margin-top: 20px; margin-bottom: 15px; color: #333;">🎯 Action Items</h4>
+                            <div id="actionItems">
+                                <div style="display: flex; gap: 10px; margin-bottom: 10px; align-items: center;">
+                                    <input type="text" placeholder="Descripción de la tarea..." style="flex: 1; padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                                    <select style="padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                                        <option>Nico</option>
+                                        <option>Diego</option>
+                                        <option>Sacha</option>
+                                        <option>Angie</option>
+                                        <option>Agus</option>
+                                        <option>Mati</option>
+                                    </select>
+                                    <input type="date" style="padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                                </div>
+                            </div>
+                            <button onclick="addActionItem()" style="padding: 8px 15px; background: #2a5298; color: white; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;">+ Agregar Action Item</button>
+
+                            <div style="margin-top: 30px; text-align: center;">
+                                <button onclick="saveMinuta()" style="padding: 12px 30px; background: #28a745; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 1.1rem; font-weight: 600;">💾 Guardar Minuta</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comment-box">
+                        <div class="comment-title">💡 Próximos Pasos:</div>
+                        <p><strong>Framework reuniones:</strong> Lunes Planning (13-15hs) + Viernes Review (13-15hs)</p>
+                        <p><strong>Dashboard integration:</strong> Action items automáticos desde minutas</p>
+                        <p><strong>Follow-up:</strong> Notificaciones automáticas por deadlines</p>
+                    </div>
+
+                    <div class="last-updated">
+                        Sistema de minutas integrado - 11 de octubre 2025
+                    </div>
+                </div>
+
+                <div id="notas" class="content-section">
+                    <h2 class="section-title">
+                        <i>📝</i> Notas y Comentarios
+                    </h2>
+                    <div class="comment-box">
+                        <div class="comment-title">🚧 En construcción</div>
+                        <p>Próximamente: área para tus notas, comentarios sobre decisiones, ideas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL para agregar/editar eventos -->
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span id="modalTitle">Agregar Evento</span>
+                <span class="close-modal" onclick="closeEventModal()">&times;</span>
+            </div>
+
+            <input type="text" id="eventTitle" class="form-input" placeholder="Título del evento">
+
+            <label style="font-weight: 600; margin-bottom: 8px; display: block;">Tipo de evento:</label>
+            <div class="event-type-selector">
+                <div class="event-type-btn" onclick="selectEventType('feriado')">🔴 Feriado</div>
+                <div class="event-type-btn" onclick="selectEventType('gastronomico')">🟡 Gastronómico</div>
+                <div class="event-type-btn" onclick="selectEventType('cumpleanos')">🔵 Cumpleaños</div>
+                <div class="event-type-btn selected" onclick="selectEventType('custom')">💧 Personalizado</div>
+            </div>
+
+            <input type="date" id="eventDate" class="form-input">
+
+            <textarea id="eventNotes" class="form-input" rows="3" placeholder="Notas adicionales (opcional)"></textarea>
+
+            <input type="hidden" id="eventIndex" value="">
+
+            <div style="display: flex; gap: 10px;">
+                <button class="save-event-btn" onclick="saveEvent()" style="flex: 1;">💾 Guardar Evento</button>
+                <button id="deleteEventBtn" class="save-event-btn" onclick="deleteEvent()" style="flex: 1; background: #dc3545; display: none;">🗑️ Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Login functionality
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Simple authentication (in real app, this would be more secure)
+            if (username === 'nico' && password === 'cenote2025') {
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+            } else {
+                alert('Usuario o contraseña incorrectos');
+            }
+        });
+
+        // Navigation
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => section.classList.remove('active'));
+
+            // Remove active class from nav items
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+
+            // Add active class to clicked nav item
+            const clickedNav = document.querySelector(`[data-section="${sectionId}"]`);
+            if (clickedNav) {
+                clickedNav.classList.add('active');
+            }
+        }
+
+        // Logout
+        function logout() {
+            document.getElementById('dashboard').style.display = 'none';
+            document.getElementById('loginScreen').style.display = 'flex';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        }
+
+        // Update dolar blue (placeholder - in real app would fetch from API)
+        function updateDolarBlue() {
+            // This would fetch real-time data
+            document.getElementById('dolarBlue').textContent = '1.465';
+        }
+
+        // Meeting functions
+        function addActionItem() {
+            const container = document.getElementById('actionItems');
+            const newItem = document.createElement('div');
+            newItem.style.cssText = 'display: flex; gap: 10px; margin-bottom: 10px; align-items: center;';
+            newItem.innerHTML = `
+                <input type="text" placeholder="Descripción de la tarea..." style="flex: 1; padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                <select style="padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                    <option>Nico</option>
+                    <option>Diego</option>
+                    <option>Sacha</option>
+                    <option>Angie</option>
+                    <option>Agus</option>
+                    <option>Mati</option>
+                </select>
+                <input type="date" style="padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                <button onclick="this.parentElement.remove()" style="padding: 8px; background: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer;">❌</button>
+            `;
+            container.appendChild(newItem);
+        }
+
+        function saveMinuta() {
+            const date = document.getElementById('meetingDate').value;
+            const duration = document.getElementById('meetingDuration').value;
+            const topics = document.getElementById('meetingTopics').value;
+            const decisions = document.getElementById('meetingDecisions').value;
+
+            // Get participants
+            const participants = [];
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            checkboxes.forEach(cb => {
+                if (cb.parentElement.textContent.trim()) {
+                    participants.push(cb.parentElement.textContent.trim());
+                }
+            });
+
+            // Get action items
+            const actionItems = [];
+            const actionRows = document.querySelectorAll('#actionItems > div');
+            actionRows.forEach(row => {
+                const inputs = row.querySelectorAll('input, select');
+                if (inputs[0].value) {
+                    actionItems.push({
+                        task: inputs[0].value,
+                        assignee: inputs[1].value,
+                        deadline: inputs[2].value
+                    });
+                }
+            });
+
+            if (!date || !topics) {
+                alert('Por favor completa al menos la fecha y los temas tratados');
+                return;
+            }
+
+            // In a real app, this would save to a database
+            // For now, we'll just show a success message
+            alert('Minuta guardada exitosamente!\n\nFecha: ' + date + '\nParticipantes: ' + participants.join(', ') + '\nAction items: ' + actionItems.length);
+
+            // Clear form
+            document.getElementById('meetingDate').value = '';
+            document.getElementById('meetingDuration').value = '';
+            document.getElementById('meetingTopics').value = '';
+            document.getElementById('meetingDecisions').value = '';
+
+            // Reset checkboxes
+            document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+                cb.checked = cb.parentElement.textContent.trim() === 'Nico';
+            });
+
+            // Clear action items except first one
+            const actionContainer = document.getElementById('actionItems');
+            const firstAction = actionContainer.firstElementChild;
+            actionContainer.innerHTML = '';
+            actionContainer.appendChild(firstAction);
+            firstAction.querySelector('input').value = '';
+            firstAction.querySelector('input[type="date"]').value = '';
+        }
+
+        // Initialize
+        updateDolarBlue();
+        setInterval(updateDolarBlue, 300000); // Update every 5 minutes
+
+        // ====== LOCALSTORAGE FUNCTIONALITY ======
+        // Esta es la "magia" que guarda tus datos en el browser
+
+        // Función para GUARDAR datos
+        function saveToLocalStorage(key, value) {
+            // localStorage solo acepta texto, así que convertimos todo a JSON
+            localStorage.setItem(key, JSON.stringify(value));
+            console.log('💾 Guardado:', key); // Para que veas en consola qué se guarda
+        }
+
+        // Función para LEER datos guardados
+        function loadFromLocalStorage(key, defaultValue = null) {
+            const saved = localStorage.getItem(key);
+            return saved ? JSON.parse(saved) : defaultValue;
+        }
+
+        // ====== AUTO-SAVE para TEXTAREAS de OPERACIONES ======
+        // Cada textarea tiene un ID único, lo guardamos cuando escribís
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Buscar TODOS los textareas en la página
+            const textareas = document.querySelectorAll('textarea');
+
+            textareas.forEach((textarea, index) => {
+                // Crear un ID único para cada textarea
+                const textareaId = `textarea_operaciones_${index}`;
+                textarea.setAttribute('data-storage-id', textareaId);
+
+                // CARGAR datos guardados al iniciar
+                const savedValue = loadFromLocalStorage(textareaId);
+                if (savedValue) {
+                    textarea.value = savedValue;
+                    console.log('📖 Cargado:', textareaId);
+                }
+
+                // GUARDAR cuando escribís (espera 1 segundo después de dejar de escribir)
+                let saveTimeout;
+                textarea.addEventListener('input', function() {
+                    clearTimeout(saveTimeout);
+                    saveTimeout = setTimeout(() => {
+                        saveToLocalStorage(textareaId, this.value);
+                    }, 1000); // Espera 1 segundo para no guardar en cada tecla
+                });
+            });
+
+            // ====== AUTO-SAVE para CHECKBOXES de TO-DO LIST ======
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+            checkboxes.forEach((checkbox, index) => {
+                const checkboxId = `checkbox_${index}`;
+                checkbox.setAttribute('data-storage-id', checkboxId);
+
+                // CARGAR estado guardado
+                const savedChecked = loadFromLocalStorage(checkboxId);
+                if (savedChecked !== null) {
+                    checkbox.checked = savedChecked;
+                }
+
+                // GUARDAR cuando tildás/destildás
+                checkbox.addEventListener('change', function() {
+                    saveToLocalStorage(checkboxId, this.checked);
+                });
+            });
+
+            console.log('✅ LocalStorage inicializado - Tus datos se guardan automáticamente');
+        });
+
+        // BONUS: Función para LIMPIAR todo (útil para testing)
+        function clearAllData() {
+            if (confirm('¿Estás seguro? Esto borrará TODOS los datos guardados')) {
+                localStorage.clear();
+                location.reload(); // Recarga la página
+            }
+        }
+        // Para usarla, abrí la consola del browser (F12) y escribí: clearAllData()
+
+        // ====== CALENDARIO FUNCTIONALITY ======
+
+        let currentMonth = new Date().getMonth();
+        let currentYear = new Date().getFullYear();
+        let selectedEventType = 'custom';
+
+        // Fechas importantes predefinidas (Argentina 2025)
+        const predefinedEvents = {
+            // Feriados Argentina 2025
+            '2025-01-01': { title: 'Año Nuevo', type: 'feriado' },
+            '2025-02-24': { title: 'Carnaval', type: 'feriado' },
+            '2025-02-25': { title: 'Carnaval', type: 'feriado' },
+            '2025-03-24': { title: 'Día de la Memoria', type: 'feriado' },
+            '2025-04-02': { title: 'Día del Veterano', type: 'feriado' },
+            '2025-04-18': { title: 'Viernes Santo', type: 'feriado' },
+            '2025-05-01': { title: 'Día del Trabajador', type: 'feriado' },
+            '2025-05-25': { title: 'Revolución de Mayo', type: 'feriado' },
+            '2025-06-16': { title: 'Paso a la Inmortalidad del Gral. Güemes', type: 'feriado' },
+            '2025-06-20': { title: 'Paso a la Inmortalidad del Gral. Belgrano', type: 'feriado' },
+            '2025-07-09': { title: 'Día de la Independencia', type: 'feriado' },
+            '2025-08-17': { title: 'Paso a la Inmortalidad del Gral. San Martín', type: 'feriado' },
+            '2025-10-12': { title: 'Día del Respeto a la Diversidad Cultural', type: 'feriado' },
+            '2025-11-24': { title: 'Día de la Soberanía Nacional', type: 'feriado' },
+            '2025-12-08': { title: 'Inmaculada Concepción de María', type: 'feriado' },
+            '2025-12-25': { title: 'Navidad', type: 'feriado' },
+
+            // Días gastronómicos importantes
+            '2025-02-14': { title: 'San Valentín', type: 'gastronomico' },
+            '2025-05-11': { title: 'Día de la Madre (AR)', type: 'gastronomico' },
+            '2025-06-15': { title: 'Día del Padre (AR)', type: 'gastronomico' },
+            '2025-09-21': { title: 'Día de la Primavera', type: 'gastronomico' },
+            '2025-11-10': { title: 'Día de la Tradición', type: 'gastronomico' },
+            '2025-12-24': { title: 'Nochebuena', type: 'gastronomico' },
+            '2025-12-31': { title: 'Fin de Año', type: 'gastronomico' }
+        };
+
+        // Generar calendario
+        function generateCalendar() {
+            const monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+            document.getElementById('calendarMonthYear').textContent =
+                monthNames[currentMonth] + ' ' + currentYear;
+
+            const firstDay = new Date(currentYear, currentMonth, 1);
+            const lastDay = new Date(currentYear, currentMonth + 1, 0);
+            const prevLastDay = new Date(currentYear, currentMonth, 0);
+
+            const firstDayIndex = firstDay.getDay();
+            const lastDayDate = lastDay.getDate();
+            const prevLastDayDate = prevLastDay.getDate();
+
+            const today = new Date();
+            const todayDate = today.getDate();
+            const todayMonth = today.getMonth();
+            const todayYear = today.getFullYear();
+
+            const calendarDays = document.getElementById('calendarDays');
+            calendarDays.innerHTML = '';
+
+            // Calcular semana actual
+            const currentWeek = getWeekNumber(today);
+
+            // Días del mes anterior (ahora domingo es primer día)
+            const startDay = firstDayIndex; // 0 = Domingo, 1 = Lunes, etc.
+            for (let x = startDay; x > 0; x--) {
+                const day = prevLastDayDate - x + 1;
+                const dayEl = createDayElement(day, 'other-month', null, null, false);
+                calendarDays.appendChild(dayEl);
+            }
+
+            // Días del mes actual
+            for (let day = 1; day <= lastDayDate; day++) {
+                const dayDate = new Date(currentYear, currentMonth, day);
+                const weekNum = getWeekNumber(dayDate);
+                const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+
+                // Es domingo? (0 = domingo)
+                const isDomingo = dayDate.getDay() === 0;
+
+                let classes = '';
+
+                // Día de hoy
+                if (day === todayDate && currentMonth === todayMonth && currentYear === todayYear) {
+                    classes += ' today';
+                }
+
+                // Semana actual
+                if (weekNum === currentWeek) {
+                    classes += ' current-week';
+                }
+
+                const dayEl = createDayElement(day, classes, weekNum, dateStr, isDomingo);
+                calendarDays.appendChild(dayEl);
+            }
+
+            // Días del próximo mes
+            const remainingCells = 42 - calendarDays.children.length;
+            for (let day = 1; day <= remainingCells; day++) {
+                const dayEl = createDayElement(day, 'other-month', null, null, false);
+                calendarDays.appendChild(dayEl);
+            }
+        }
+
+        function createDayElement(day, classes, weekNum, dateStr, isDomingo) {
+            const dayEl = document.createElement('div');
+            dayEl.className = 'calendar-day' + (classes ? ' ' + classes : '');
+
+            // Número del día
+            const dayNumber = document.createElement('div');
+            dayNumber.className = 'calendar-day-number';
+            dayNumber.textContent = day;
+            dayEl.appendChild(dayNumber);
+
+            // Número de semana - SOLO en domingos
+            if (weekNum && isDomingo) {
+                const weekLabel = document.createElement('div');
+                weekLabel.className = 'week-number';
+                weekLabel.textContent = 'S' + weekNum;
+                dayEl.appendChild(weekLabel);
+            }
+
+            // Eventos
+            if (dateStr) {
+                const eventsContainer = document.createElement('div');
+                eventsContainer.className = 'calendar-events';
+
+                // Eventos predefinidos
+                if (predefinedEvents[dateStr]) {
+                    const event = predefinedEvents[dateStr];
+                    const eventEl = document.createElement('div');
+                    eventEl.className = `calendar-event event-${event.type}`;
+                    eventEl.textContent = event.title;
+                    eventEl.title = event.title;
+                    eventsContainer.appendChild(eventEl);
+                }
+
+                // Eventos personalizados del localStorage
+                const customEvents = loadFromLocalStorage('calendar_events', {});
+                if (customEvents[dateStr]) {
+                    customEvents[dateStr].forEach((event, index) => {
+                        const eventEl = document.createElement('div');
+                        eventEl.className = `calendar-event event-${event.type}`;
+                        eventEl.textContent = event.title;
+                        eventEl.title = event.title + (event.notes ? '\n' + event.notes : '') + '\n\nClick para editar';
+
+                        // Click en evento para editar
+                        eventEl.addEventListener('click', function(e) {
+                            e.stopPropagation(); // Evitar que se abra el modal de nuevo evento
+                            openEditEventModal(dateStr, index, event);
+                        });
+
+                        eventsContainer.appendChild(eventEl);
+                    });
+                }
+
+                dayEl.appendChild(eventsContainer);
+
+                // Click en el día para agregar evento
+                dayEl.addEventListener('click', function() {
+                    document.getElementById('eventDate').value = dateStr;
+                    openEventModal();
+                });
+            }
+
+            return dayEl;
+        }
+
+        // Calcular número de semana del año
+        function getWeekNumber(date) {
+            const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+            const dayNum = d.getUTCDay() || 7;
+            d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+            const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+            return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+        }
+
+        // Navegación del calendario
+        function prevMonth() {
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            generateCalendar();
+        }
+
+        function nextMonth() {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            generateCalendar();
+        }
+
+        function goToToday() {
+            const today = new Date();
+            currentMonth = today.getMonth();
+            currentYear = today.getFullYear();
+            generateCalendar();
+        }
+
+        // Modal de eventos
+        function openEventModal() {
+            const modal = document.getElementById('eventModal');
+            modal.style.display = 'flex';
+
+            // Modo AGREGAR
+            document.getElementById('modalTitle').textContent = 'Agregar Evento';
+            document.getElementById('deleteEventBtn').style.display = 'none';
+            document.getElementById('eventIndex').value = '';
+
+            // Si no hay fecha seleccionada, usar hoy
+            if (!document.getElementById('eventDate').value) {
+                const today = new Date();
+                const dateStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+                document.getElementById('eventDate').value = dateStr;
+            }
+        }
+
+        function openEditEventModal(dateStr, index, event) {
+            const modal = document.getElementById('eventModal');
+            modal.style.display = 'flex';
+
+            // Modo EDITAR
+            document.getElementById('modalTitle').textContent = 'Editar Evento';
+            document.getElementById('deleteEventBtn').style.display = 'block';
+
+            // Cargar datos del evento
+            document.getElementById('eventTitle').value = event.title;
+            document.getElementById('eventDate').value = dateStr;
+            document.getElementById('eventNotes').value = event.notes || '';
+            document.getElementById('eventIndex').value = index;
+
+            // Seleccionar tipo
+            selectedEventType = event.type;
+            document.querySelectorAll('.event-type-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+
+            const typeButtons = document.querySelectorAll('.event-type-btn');
+            const typeMap = { 'feriado': 0, 'gastronomico': 1, 'cumpleanos': 2, 'custom': 3 };
+            if (typeMap[event.type] !== undefined) {
+                typeButtons[typeMap[event.type]].classList.add('selected');
+            }
+        }
+
+        function closeEventModal() {
+            const modal = document.getElementById('eventModal');
+            modal.style.display = 'none';
+
+            // Limpiar formulario
+            document.getElementById('eventTitle').value = '';
+            document.getElementById('eventNotes').value = '';
+            document.getElementById('eventIndex').value = '';
+            selectedEventType = 'custom';
+
+            // Reset botones
+            document.querySelectorAll('.event-type-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            document.querySelectorAll('.event-type-btn')[3].classList.add('selected');
+
+            // Ocultar botón eliminar
+            document.getElementById('deleteEventBtn').style.display = 'none';
+        }
+
+        function selectEventType(type) {
+            selectedEventType = type;
+
+            // Actualizar UI
+            document.querySelectorAll('.event-type-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            event.target.classList.add('selected');
+        }
+
+        function saveEvent() {
+            const title = document.getElementById('eventTitle').value;
+            const date = document.getElementById('eventDate').value;
+            const notes = document.getElementById('eventNotes').value;
+            const eventIndex = document.getElementById('eventIndex').value;
+
+            if (!title || !date) {
+                alert('Por favor completa el título y la fecha del evento');
+                return;
+            }
+
+            // Obtener eventos existentes
+            const events = loadFromLocalStorage('calendar_events', {});
+
+            if (eventIndex !== '') {
+                // MODO EDITAR - Buscar la fecha original del evento
+                let originalDate = null;
+                for (const [dateKey, eventsArray] of Object.entries(events)) {
+                    if (eventsArray[eventIndex]) {
+                        originalDate = dateKey;
+                        break;
+                    }
+                }
+
+                if (originalDate) {
+                    // Eliminar evento de fecha original
+                    events[originalDate].splice(eventIndex, 1);
+                    if (events[originalDate].length === 0) {
+                        delete events[originalDate];
+                    }
+                }
+
+                // Agregar evento en nueva fecha (o misma si no cambió)
+                if (!events[date]) {
+                    events[date] = [];
+                }
+
+                events[date].push({
+                    title: title,
+                    type: selectedEventType,
+                    notes: notes,
+                    updated: new Date().toISOString()
+                });
+
+                console.log('✅ Evento editado:', title, 'en', date);
+            } else {
+                // MODO AGREGAR - Nuevo evento
+                if (!events[date]) {
+                    events[date] = [];
+                }
+
+                events[date].push({
+                    title: title,
+                    type: selectedEventType,
+                    notes: notes,
+                    created: new Date().toISOString()
+                });
+
+                console.log('✅ Evento creado:', title, 'en', date);
+            }
+
+            // Guardar
+            saveToLocalStorage('calendar_events', events);
+
+            // Cerrar modal y regenerar calendario
+            closeEventModal();
+            generateCalendar();
+        }
+
+        function deleteEvent() {
+            if (!confirm('¿Estás seguro de que querés eliminar este evento?')) {
+                return;
+            }
+
+            const date = document.getElementById('eventDate').value;
+            const eventIndex = parseInt(document.getElementById('eventIndex').value);
+
+            // Obtener eventos existentes
+            const events = loadFromLocalStorage('calendar_events', {});
+
+            if (events[date] && events[date][eventIndex]) {
+                const eventTitle = events[date][eventIndex].title;
+
+                // Eliminar evento
+                events[date].splice(eventIndex, 1);
+
+                // Si no quedan eventos en esa fecha, eliminar la fecha
+                if (events[date].length === 0) {
+                    delete events[date];
+                }
+
+                // Guardar
+                saveToLocalStorage('calendar_events', events);
+
+                console.log('🗑️ Evento eliminado:', eventTitle);
+
+                // Cerrar modal y regenerar calendario
+                closeEventModal();
+                generateCalendar();
+            }
+        }
+
+        // Cerrar modal al hacer click afuera
+        window.onclick = function(event) {
+            const modal = document.getElementById('eventModal');
+            if (event.target === modal) {
+                closeEventModal();
+            }
+        }
+
+        // Inicializar calendario cuando se abre la sección
+        document.addEventListener('DOMContentLoaded', function() {
+            generateCalendar();
+        });
+    </script>
+</body>
+</html>

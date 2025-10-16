@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Trabajo - Mati Operations Manager</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .header h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.2em;
+        }
+
+        .timeline {
+            position: relative;
+            margin: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .timeline-period {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .timeline-period:nth-child(odd) .period-content {
+            margin-right: 60%;
+        }
+
+        .timeline-period:nth-child(even) .period-content {
+            margin-left: 60%;
+        }
+
+        .period-content {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .period-content:hover {
+            transform: translateY(-5px);
+        }
+
+        .period-title {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        .timeline-icon {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            color: white;
+            z-index: 2;
+        }
+
+        .task-list {
+            margin-top: 15px;
+        }
+
+        .task-category {
+            margin-bottom: 20px;
+        }
+
+        .task-category h4 {
+            color: #667eea;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: flex-start;
+            margin: 8px 0;
+            padding: 8px 12px;
+            background: white;
+            border-radius: 8px;
+            border-left: 3px solid #28a745;
+        }
+
+        .task-checkbox {
+            margin-right: 10px;
+            margin-top: 2px;
+        }
+
+        .task-text {
+            flex: 1;
+            font-size: 0.95em;
+        }
+
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .objective-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .objective-period {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .objective-list {
+            text-align: left;
+            font-size: 0.95em;
+        }
+
+        .objective-list li {
+            margin: 8px 0;
+            padding-left: 5px;
+        }
+
+        .kpis-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .kpis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .kpi-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .kpi-title {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .kpi-item {
+            margin: 8px 0;
+            font-size: 0.95em;
+        }
+
+        .support-section {
+            background: #e8f4f8;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .support-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #17a2b8;
+        }
+
+        .alert-section {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .alert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .alert-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #f39c12;
+        }
+
+        .section-title {
+            color: #667eea;
+            font-size: 1.8em;
+            font-weight: bold;
+            margin: 40px 0 20px 0;
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .final-objective {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .print-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 20px auto;
+            display: block;
+            transition: background 0.3s ease;
+        }
+
+        .print-btn:hover {
+            background: #5a6fd8;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+            .print-btn {
+                display: none;
+            }
+            .timeline::before {
+                display: none;
+            }
+            .timeline-icon {
+                position: relative;
+                margin-bottom: 10px;
+            }
+            .period-content {
+                margin: 0 !important;
+                margin-bottom: 20px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 PLAN DE TRABAJO - MATI</h1>
+            <p>Operations Manager | Roadmap 30-60-90 Días | CENOTE</p>
+        </div>
+
+        <div class="section-title">📅 CRONOGRAMA DE IMPLEMENTACIÓN</div>
+
+        <div class="timeline">
+            <div class="timeline-period">
+                <div class="timeline-icon">🔍</div>
+                <div class="period-content">
+                    <div class="period-title">SEMANA 1-2: DIAGNÓSTICO Y CONOCIMIENTO</div>
+
+                    <div class="task-list">
+                        <div class="task-category">
+                            <h4>🔍 AUDITORÍA INICIAL (Días 1-3)</h4>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Visitar ambos locales (Martínez y Núñez) 2 días completos c/u</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Observar operación en horarios pico (12-14hs y 20-22hs)</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Mapear procesos actuales de cocina sin intervenir</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Identificar diferencias operativas entre locales</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Documentar con fotos/videos los procesos críticos</span>
+                            </div>
+                        </div>
+
+                        <div class="task-category">
+                            <h4>👥 REUNIONES CLAVE (Días 3-5)</h4>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Reunión con Diego (COO) - Expectativas y prioridades</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Reunión con Sacha (Chef) - Estándares gastronómicos</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Reunión con managers de cada local</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Reunión con Agustina (Supply Chain) - Proveedores y costos</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Reunión con Angie (CFO) - Análisis financiero actual</span>
+                            </div>
+                        </div>
+
+                        <div class="task-category">
+                            <h4>📝 ANÁLISIS FOOD COST (Días 4-7)</h4>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Revisar planillas existentes de control de costos</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Analizar food cost de las últimas 4 semanas</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Identificar los 10 productos con mayor impacto en costos</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Comparar food cost entre Martínez y Núñez</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Documentar mermas y desperdicios observados</span>
+                            </div>
+                        </div>
+
+                        <div class="task-category">
+                            <h4>💻 EVALUACIÓN TECNOLÓGICA (Días 6-10)</h4>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Revisar sistema POS actual y sus limitaciones</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Evaluar integración con sistema de inventario</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Analizar reportes disponibles vs necesarios</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Research preliminar de Odoo para gastronomía</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Identificar gaps tecnológicos críticos</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-period">
+                <div class="timeline-icon">⚙️</div>
+                <div class="period-content">
+                    <div class="period-title">SEMANA 3-4: ESTANDARIZACIÓN BÁSICA</div>
+
+                    <div class="task-list">
+                        <div class="task-category">
+                            <h4>📏 ESTANDARIZACIÓN DE PORCIONES (Semana 3)</h4>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Implementar los procedimientos de control de costos ya creados</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Instalar balanzas digitales en ambas cocinas</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Capacitar personal en pesado de porciones estándar</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Crear checklist de control diario por local</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Establecer responsables de control por turno</span>
+                            </div>
+                        </div>
+
+                        <div class="task-category">
+                            <h4>📋 PROTOCOLOS DE COCINA (Semana 3-4)</h4>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Documentar recetas estándar con Sacha</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Crear manual de preparación por estación</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Implementar checklist apertura/cierre cocina</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Establecer protocolos de limpieza y seguridad</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Definir flujo de trabajo optimizado</span>
+                            </div>
+                        </div>
+
+                        <div class="task-category">
+                            <h4>📊 SISTEMA DE REPORTES DIARIOS (Semana 4)</h4>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Implementar planilla de control diario unificada</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Establecer rutina de reporte a las 18hs</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Crear dashboard básico en Excel/Google Sheets</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Definir KPIs de seguimiento diario</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Capacitar managers en nuevo sistema de reportes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-period">
+                <div class="timeline-icon">🔧</div>
+                <div class="period-content">
+                    <div class="period-title">SEMANA 5-8: OPTIMIZACIÓN Y PROCESOS</div>
+
+                    <div class="task-list">
+                        <div class="task-category">
+                            <h4>⏱️ OPTIMIZACIÓN DE TIEMPOS (Semana 5-6)</h4>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Medir tiempos de preparación por plato</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Optimizar layout de estaciones de trabajo</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Implementar sistema de mise en place estandarizado</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Crear cronograma de preparaciones por turno</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Reducir tiempo promedio de servicio en 20%</span>
+                            </div>
+                        </div>
+
+                        <div class="task-category">
+                            <h4>💰 CONTROL AVANZADO DE COSTOS (Semana 6-7)</h4>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Implementar sistema de rotación FIFO estricto</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Establecer alertas de stock mínimo automáticas</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Negociar con proveedores principales junto a Agustina</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Crear análisis semanal de variaciones de costo</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Implementar control de merma por categoría</span>
+                            </div>
+                        </div>
+
+                        <div class="task-category">
+                            <h4>👨‍🍳 CAPACITACIÓN DEL PERSONAL (Semana 7-8)</h4>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Crear programa de training por posición</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Implementar evaluaciones de desempeño mensuales</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Establecer sistema de incentivos por performance</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Documentar procedimientos en formato digital</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Crear sistema de feedback continuo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-period">
+                <div class="timeline-icon">💻</div>
+                <div class="period-content">
+                    <div class="period-title">SEMANA 9-12: IMPLEMENTACIÓN TECNOLÓGICA</div>
+
+                    <div class="task-list">
+                        <div class="task-category">
+                            <h4>🔄 PREPARACIÓN ODOO (Semana 9-10)</h4>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Definir requerimientos específicos con equipo directivo</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Contactar proveedores/consultores de Odoo</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Crear cronograma de implementación</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Preparar datos para migración</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Definir usuarios y permisos por rol</span>
+                            </div>
+                        </div>
+
+                        <div class="task-category">
+                            <h4>📱 INTEGRACIÓN DE SISTEMAS (Semana 10-11)</h4>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Conectar POS con sistema de inventario</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Automatizar reportes de ventas diarias</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Implementar alertas automáticas de stock</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Crear dashboard ejecutivo en tiempo real</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Establecer backup automático de datos</span>
+                            </div>
+                        </div>
+
+                        <div class="task-category">
+                            <h4>📈 OPTIMIZACIÓN CONTINUA (Semana 11-12)</h4>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Análisis de 30 días de data con nuevos procesos</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Ajustes basados en resultados obtenidos</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Preparación para implementación en local 3</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Documentación completa de todos los procesos</span>
+                            </div>
+                            <div class="task-item">
+                                <input type="checkbox" class="task-checkbox">
+                                <span class="task-text">Plan de escalabilidad para crecimiento</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">🎯 OBJETIVOS POR PERÍODO</div>
+
+        <div class="objectives-grid">
+            <div class="objective-card">
+                <div class="objective-period">PRIMEROS 30 DÍAS</div>
+                <ul class="objective-list">
+                    <li>✅ Diagnóstico completo de operación actual</li>
+                    <li>✅ Implementación de controles básicos de food cost</li>
+                    <li>✅ Estandarización de porciones y procesos críticos</li>
+                    <li>✅ Reducción de merma en 30%</li>
+                    <li>✅ Sistema de reportes diarios funcionando</li>
+                </ul>
+            </div>
+
+            <div class="objective-card">
+                <div class="objective-period">60 DÍAS</div>
+                <ul class="objective-list">
+                    <li>✅ Food cost controlado y optimizado (reducir 15-20%)</li>
+                    <li>✅ Procesos de cocina completamente estandarizados</li>
+                    <li>✅ Personal capacitado en nuevos procedimientos</li>
+                    <li>✅ Tiempos de servicio optimizados</li>
+                    <li>✅ KPIs de performance establecidos</li>
+                </ul>
+            </div>
+
+            <div class="objective-card">
+                <div class="objective-period">90 DÍAS</div>
+                <ul class="objective-list">
+                    <li>✅ Odoo implementado y funcionando</li>
+                    <li>✅ Reportes automatizados</li>
+                    <li>✅ Sistemas integrados y optimizados</li>
+                    <li>✅ Procesos listos para replicar en local 3</li>
+                    <li>✅ ROI del puesto demostrado con números</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section-title">📊 KPIs DE SEGUIMIENTO</div>
+
+        <div class="kpis-section">
+            <div class="kpis-grid">
+                <div class="kpi-card">
+                    <div class="kpi-title">📈 SEMANALES</div>
+                    <div class="kpi-item">• Food cost % por local</div>
+                    <div class="kpi-item">• Tiempo promedio de servicio</div>
+                    <div class="kpi-item">• Merma % por categoría de producto</div>
+                    <div class="kpi-item">• Cumplimiento de procedimientos %</div>
+                    <div class="kpi-item">• Satisfacción del personal (survey semanal)</div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-title">📊 MENSUALES</div>
+                    <div class="kpi-item">• Eficiencia operativa vs mes anterior</div>
+                    <div class="kpi-item">• Ahorro en costos implementado</div>
+                    <div class="kpi-item">• Procesos documentados/optimizados</div>
+                    <div class="kpi-item">• Performance del equipo de cocina</div>
+                    <div class="kpi-item">• Avance en implementación tecnológica</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">🤝 ESTRUCTURA DE SOPORTE</div>
+
+        <div class="support-section">
+            <div class="support-grid">
+                <div class="support-card">
+                    <h4 style="color: #17a2b8; margin-bottom: 15px;">📋 REPORTA A:</h4>
+                    <div>• <strong>Diego (COO)</strong> - Reunión diaria 15 min a las 9 AM</div>
+                    <div>• <strong>Reporte semanal</strong> - Viernes 17hs con equipo directivo</div>
+                </div>
+
+                <div class="support-card">
+                    <h4 style="color: #17a2b8; margin-bottom: 15px;">🤝 COORDINA CON:</h4>
+                    <div>• <strong>Sacha (Chef)</strong> - Estándares gastronómicos</div>
+                    <div>• <strong>Agustina (Supply Chain)</strong> - Proveedores y costos</div>
+                    <div>• <strong>Angie (CFO)</strong> - Análisis financiero</div>
+                    <div>• <strong>Managers</strong> - Implementación día a día</div>
+                </div>
+
+                <div class="support-card">
+                    <h4 style="color: #17a2b8; margin-bottom: 15px;">🛠️ RECURSOS DISPONIBLES:</h4>
+                    <div>• Presupuesto para herramientas/software</div>
+                    <div>• Acceso completo a ambos locales</div>
+                    <div>• Autoridad para cambios operativos</div>
+                    <div>• Soporte del equipo directivo</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">⚠️ ALERTAS Y CONTINGENCIAS</div>
+
+        <div class="alert-section">
+            <div class="alert-grid">
+                <div class="alert-card">
+                    <h4 style="color: #f39c12; margin-bottom: 15px;">📉 SI LOS NÚMEROS NO MEJORAN EN 30 DÍAS:</h4>
+                    <div>• Reunión de evaluación con Diego y Nico</div>
+                    <div>• Ajuste de estrategia y prioridades</div>
+                    <div>• Recursos adicionales si es necesario</div>
+                </div>
+
+                <div class="alert-card">
+                    <h4 style="color: #f39c12; margin-bottom: 15px;">👥 SI HAY RESISTENCIA DEL PERSONAL:</h4>
+                    <div>• Involucrar a managers en el proceso</div>
+                    <div>• Comunicar beneficios claramente</div>
+                    <div>• Ajustar velocidad de implementación</div>
+                    <div>• Reforzar training y acompañamiento</div>
+                </div>
+
+                <div class="alert-card">
+                    <h4 style="color: #f39c12; margin-bottom: 15px;">⏰ SI LA IMPLEMENTACIÓN SE RETRASA:</h4>
+                    <div>• Re-priorizar tareas críticas</div>
+                    <div>• Buscar apoyo externo si es necesario</div>
+                    <div>• Comunicar nuevos timelines claramente</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="final-objective">
+            <h2>🎯 OBJETIVO FINAL</h2>
+            <p style="font-size: 1.2em; margin-top: 15px;">
+                En 90 días, Mati debe haber transformado la operación de CENOTE en un sistema eficiente, controlado y escalable, listo para soportar la expansión a 5 locales, con procesos documentados y ROI demostrable.
+            </p>
+        </div>
+
+        <button class="print-btn" onclick="window.print()">🖨️ IMPRIMIR PLAN DE TRABAJO</button>
+    </div>
+</body>
+</html>

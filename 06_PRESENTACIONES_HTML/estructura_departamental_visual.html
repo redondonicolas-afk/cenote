@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CENOTE - Estructura Departamental</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .header h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.2em;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .dept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .dept-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .dept-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .dept-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .dept-icon {
+            font-size: 2em;
+            margin-right: 15px;
+        }
+
+        .dept-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .dept-person {
+            background: #667eea;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .dept-topics {
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .urgent {
+            border-left-color: #e74c3c;
+        }
+
+        .future {
+            border-left-color: #f39c12;
+        }
+
+        .costs-table {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .costs-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .costs-table th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .costs-table td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .costs-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .timeline {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .timeline-period {
+            background: #667eea;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            margin-right: 20px;
+            font-weight: bold;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .roles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .role-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .role-name {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .role-dept {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .print-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 20px auto;
+            display: block;
+            transition: background 0.3s ease;
+        }
+
+        .print-btn:hover {
+            background: #5a6fd8;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+            .print-btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏢 ESTRUCTURA DEPARTAMENTAL CENOTE</h1>
+            <p>Organización Estratégica para Crecimiento Sostenible</p>
+        </div>
+
+        <div class="section">
+            <div class="section-title">📊 DEPARTAMENTOS ACTUALES - SOCIOS Y EQUIPO</div>
+            <div class="dept-grid">
+                <div class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-icon">👑</div>
+                        <div class="dept-title">Comando Central</div>
+                    </div>
+                    <div class="dept-person">Nico (CEO/Socio)</div>
+                    <div class="dept-topics">
+                        <strong>5 Temas Críticos:</strong><br>
+                        • Decisiones estratégicas<br>
+                        • Comunicación stakeholders<br>
+                        • Cultura organizacional<br>
+                        • Performance general<br>
+                        • Planificación largo plazo
+                    </div>
+                </div>
+
+                <div class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-icon">⚙️</div>
+                        <div class="dept-title">Operaciones & Calidad</div>
+                    </div>
+                    <div class="dept-person">Diego (COO/Socio) + Mati (Operations Manager)</div>
+                    <div class="dept-topics">
+                        <strong>5 Temas Críticos:</strong><br>
+                        • Estandarización procesos<br>
+                        • Control calidad y food cost<br>
+                        • Gestión personal<br>
+                        • Eficiencia operativa<br>
+                        • Customer experience<br><br>
+                        <strong>Mati - Especialista en:</strong><br>
+                        • Implementación procesos cocina<br>
+                        • Control food cost y calidad<br>
+                        • Implementación Odoo<br>
+                        • Optimización procesos operativos
+                    </div>
+                </div>
+
+                <div class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-icon">🔬</div>
+                        <div class="dept-title">R&D Gastronómico</div>
+                    </div>
+                    <div class="dept-person">Sacha (Chef/Socio)</div>
+                    <div class="dept-topics">
+                        <strong>5 Temas Críticos:</strong><br>
+                        • Innovación de menú<br>
+                        • Optimización recetas<br>
+                        • Desarrollo productos retail<br>
+                        • Kitchen technology<br>
+                        • Control calidad culinaria
+                    </div>
+                </div>
+
+                <div class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-icon">💰</div>
+                        <div class="dept-title">Finanzas & Admin</div>
+                    </div>
+                    <div class="dept-person">Angie (CFO)</div>
+                    <div class="dept-topics">
+                        <strong>5 Temas Críticos:</strong><br>
+                        • Control flujo caja<br>
+                        • Rentabilidad por local<br>
+                        • Compliance legal<br>
+                        • Control interno<br>
+                        • Reporting inteligente
+                    </div>
+                </div>
+
+                <div class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-icon">📦</div>
+                        <div class="dept-title">Supply Chain</div>
+                    </div>
+                    <div class="dept-person">Agustina (SCM)</div>
+                    <div class="dept-topics">
+                        <strong>5 Temas Críticos:</strong><br>
+                        • Gestión proveedores<br>
+                        • Control inventario/merma<br>
+                        • Optimización costos<br>
+                        • Logística distribución<br>
+                        • Desarrollo nuevos productos
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🚨 DEPARTAMENTOS URGENTES A CREAR</div>
+            <div class="dept-grid">
+                <div class="dept-card urgent">
+                    <div class="dept-header">
+                        <div class="dept-icon">📱</div>
+                        <div class="dept-title">Coordinación Tecnológica</div>
+                    </div>
+                    <div class="dept-person">A Contratar - IT Semi-Senior (medio tiempo)</div>
+                    <div class="dept-topics">
+                        <strong>Prioridad:</strong> CRÍTICA<br><br>
+                        <strong>5 Temas Críticos:</strong><br>
+                        • Integración sistemas POS<br>
+                        • Plataformas delivery<br>
+                        • Infraestructura IT<br>
+                        • Automatización procesos<br>
+                        • Escalabilidad tecnológica
+                    </div>
+                </div>
+
+                <div class="dept-card urgent">
+                    <div class="dept-header">
+                        <div class="dept-icon">👥</div>
+                        <div class="dept-title">Coordinación RRHH</div>
+                    </div>
+                    <div class="dept-person">A Contratar - HR Coordinator (compartido)</div>
+                    <div class="dept-topics">
+                        <strong>Prioridad:</strong> ALTA<br><br>
+                        <strong>5 Temas Críticos:</strong><br>
+                        • Reclutamiento y selección<br>
+                        • Onboarding y training<br>
+                        • Gestión performance<br>
+                        • Compliance laboral<br>
+                        • Cultura y retención
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🚀 DEPARTAMENTOS FUTUROS (AÑO 2-4)</div>
+            <div class="dept-grid">
+                <div class="dept-card future">
+                    <div class="dept-header">
+                        <div class="dept-icon">📈</div>
+                        <div class="dept-title">Marketing & Comunicación</div>
+                    </div>
+                    <div class="dept-person">A Contratar - Año 2</div>
+                    <div class="dept-topics">
+                        • Brand management<br>
+                        • Marketing digital<br>
+                        • Customer acquisition<br>
+                        • Local marketing<br>
+                        • Data & analytics
+                    </div>
+                </div>
+
+                <div class="dept-card future">
+                    <div class="dept-header">
+                        <div class="dept-icon">🔍</div>
+                        <div class="dept-title">Desarrollo de Negocio</div>
+                    </div>
+                    <div class="dept-person">A Contratar - Año 3</div>
+                    <div class="dept-topics">
+                        • Expansión geográfica<br>
+                        • Desarrollo franquicias<br>
+                        • Partnerships estratégicos<br>
+                        • Nuevas líneas negocio<br>
+                        • M&A oportunidades
+                    </div>
+                </div>
+
+                <div class="dept-card future">
+                    <div class="dept-header">
+                        <div class="dept-icon">😊</div>
+                        <div class="dept-title">Customer Experience</div>
+                    </div>
+                    <div class="dept-person">A Contratar - Año 3</div>
+                    <div class="dept-topics">
+                        • Customer journey<br>
+                        • Feedback management<br>
+                        • Loyalty & retention<br>
+                        • Quality assurance<br>
+                        • Customer data & insights
+                    </div>
+                </div>
+
+                <div class="dept-card future">
+                    <div class="dept-header">
+                        <div class="dept-icon">⚖️</div>
+                        <div class="dept-title">Legal & Compliance</div>
+                    </div>
+                    <div class="dept-person">A Contratar - Año 4</div>
+                    <div class="dept-topics">
+                        • Corporate governance<br>
+                        • Regulatory compliance<br>
+                        • Contracts & risk<br>
+                        • Intellectual property<br>
+                        • Litigation prevention
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="section">
+            <div class="section-title">🎯 CRONOGRAMA DE IMPLEMENTACIÓN</div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-period">TRIMESTRE 1</div>
+                    <div class="timeline-content">
+                        ✅ Contratar Mati (Operations Manager)<br>
+                        ✅ Contratar IT Coordinator<br>
+                        ✅ Definir HR Coordinator role<br>
+                        ✅ Protocolos departamentos actuales
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-period">TRIMESTRE 2-3</div>
+                    <div class="timeline-content">
+                        📋 Contratar HR Coordinator<br>
+                        📋 Setup tecnológico completo<br>
+                        📋 Documentar procesos
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-period">AÑO 2</div>
+                    <div class="timeline-content">
+                        📋 Marketing Manager<br>
+                        📋 Preparar local 3<br>
+                        📋 Evaluar BD Manager
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-period">AÑO 3-4</div>
+                    <div class="timeline-content">
+                        📋 Equipo completo según crecimiento<br>
+                        📋 Estructura para 5 locales<br>
+                        📋 Exit strategy preparation
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">👥 ASIGNACIÓN DE RESPONSABILIDADES</div>
+            <div class="roles-grid">
+                <div class="role-card">
+                    <div class="role-name">NICO (CEO)</div>
+                    <div class="role-dept">Comando Central + Desarrollo Negocio</div>
+                </div>
+                <div class="role-card">
+                    <div class="role-name">DIEGO (COO)</div>
+                    <div class="role-dept">Operaciones + Customer Experience</div>
+                </div>
+                <div class="role-card">
+                    <div class="role-name">MATI (Ops Manager)</div>
+                    <div class="role-dept">Procesos Cocina + Food Cost + Odoo</div>
+                </div>
+                <div class="role-card">
+                    <div class="role-name">SACHA (Chef)</div>
+                    <div class="role-dept">R&D Gastronómico + Calidad Culinaria</div>
+                </div>
+                <div class="role-card">
+                    <div class="role-name">ANGIE (CFO)</div>
+                    <div class="role-dept">Finanzas + Legal Compliance</div>
+                </div>
+                <div class="role-card">
+                    <div class="role-name">AGUSTINA (SCM)</div>
+                    <div class="role-dept">Supply Chain + R&D Sourcing</div>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 10px;">
+            <h2>🏆 OBJETIVO FINAL</h2>
+            <p style="font-size: 1.2em; margin-top: 15px;">
+                Crear una organización profesional, escalable y eficiente que soporte el crecimiento sostenible de CENOTE manteniendo la calidad, cultura y rentabilidad en todos los touchpoints.
+            </p>
+        </div>
+
+        <button class="print-btn" onclick="window.print()">🖨️ IMPRIMIR DOCUMENTO</button>
+    </div>
+</body>
+</html>
