@@ -5,7 +5,9 @@
       "Bash(dir:*)",
       "WebSearch",
       "Bash(git init:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nAgregar calendario interactivo y timeline de expansión al dashboard\n\nNuevas funcionalidades implementadas:\n- Calendario mensual interactivo con vista de mes completo\n- Semana comienza en domingo con número de semana visible\n- Día actual y semana actual destacados visualmente\n- Eventos predefinidos: feriados Argentina 2025 y días gastronómicos\n- Sistema completo de gestión de eventos (agregar/editar/eliminar)\n- 4 tipos de eventos con código de colores\n- Persistencia de eventos con LocalStorage\n- Modal interactivo para crear y editar eventos\n- Timeline de expansión 60 meses con posicionamiento proporcional\n- Visualización de progreso actual (M1) y milestones futuros\n- Barra de progreso animada con indicador de mes actual\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git config:*)"
     ],
     "deny": [],
     "ask": []

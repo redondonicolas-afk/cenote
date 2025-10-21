@@ -128,10 +128,10 @@ La propuesta de equity se estructura de la siguiente manera:
 **Todo el personal será parte del ecosistema Luchadores**
 
 ### 📅 TIMELINE INCORPORACIÓN NUEVOS LUCHADORES
-- **Mes 0-12**: +25 Luchadores (setup Local #3)
-- **Mes 12-20**: +25 Luchadores (setup Local #4)  
-- **Mes 20-30**: +25 Luchadores (setup Local #5)
-- **Mes 30-36**: Optimización equipos existentes
+- **M17-M29**: +25 Luchadores (setup Local #3)
+- **M29-M37**: +25 Luchadores (setup Local #4)
+- **M37-M47**: +25 Luchadores (setup Local #5)
+- **M47-M53**: Optimización equipos existentes
 - **Total**: +75 nuevos Luchadores integrados al ecosistema
 
 ### 👥 GESTIÓN RRHH CON INTEGRACIÓN ODOO
@@ -182,29 +182,36 @@ La propuesta de equity se estructura de la siguiente manera:
 - **Núñez**: Primer local formato CABA (modelo validado) - $90k USD/mes
 - **Total**: 2 locales operativos generando $210k USD/mes
 
+### 📊 CRONOLOGÍA DEL PLAN
+- **M0 (Mayo 2024)**: Apertura Núñez - Inicio del plan de expansión
+- **M17 (Octubre 2025)**: MES ACTUAL - 28.33% del plan completado
+- **M60 (Mayo 2029)**: Madurez del plan - Valuación completa
+
 ### 📊 TIMELINE INVERSIÓN DE CAPITAL
-- **Mes 0**: $500,000 USD
-- **Mes 12**: $250,000 USD  
-- **Mes 20**: $250,000 USD
+- **M17 (Oct 2025)**: $500,000 USD - Inversión inicial
+- **M29 (Oct 2026)**: $250,000 USD - Local #3
+- **M37 (Jun 2027)**: $250,000 USD - Local #4
 - **Total**: $1,000,000 USD
 
 ### 🏪 TIMELINE APERTURAS
-- **Mes 12**: Apertura Local #3 (2do CABA)
-- **Mes 20**: Apertura Local #4 (3ro CABA)  
-- **Mes 30**: Apertura Local #5 (4to CABA)
+- **M29 (Oct 2026)**: Apertura Local #3 (2do CABA)
+- **M37 (Jun 2027)**: Apertura Local #4 (3ro CABA)
+- **M47 (Abr 2028)**: Apertura Local #5 (4to CABA)
+- **M53 (Oct 2028)**: Operación plena 5 locales
 
 ### 🎯 TIMELINE EVOLUCIÓN 60 MESES
-- **Mes 0-12**: Setup + preparación primer local CABA
-- **Mes 12-20**: Operación 3 locales + setup segundo local CABA
-- **Mes 20-30**: Operación 4 locales + setup tercer local CABA  
-- **Mes 30-36**: Operación 5 locales + curva aprendizaje
-- **Mes 36-60**: **Operación plena 5 locales** + optimización continua
+- **M0-M17 (May2024-Oct2025)**: Apertura y validación Núñez - YA COMPLETADO
+- **M17-M29**: Setup + preparación Local #3 CABA
+- **M29-M37**: Operación 3 locales + setup Local #4
+- **M37-M47**: Operación 4 locales + setup Local #5
+- **M47-M53**: Operación 5 locales + curva aprendizaje
+- **M53-M60**: **Operación plena 5 locales** + optimización continua
 
 ### 📈 CURVA DE APRENDIZAJE MEJORADA
-- **Núñez inicial**: 18 meses hasta equilibrio
+- **Núñez (M0-M17)**: 17 meses operando - Modelo validado y en equilibrio
 - **Nuevos locales**: 3 meses equilibrio + 6 meses pleno rendimiento
-- **Mes 36**: Todos los locales en operación plena
-- **Mes 60**: Valuación completa + retorno (ROI) inversor
+- **M53**: Todos los locales en operación plena
+- **M60**: Valuación completa + retorno (ROI) inversor
 
 ---
 
@@ -358,32 +365,33 @@ La propuesta de equity se estructura de la siguiente manera:
 ## 💰 VALUACIÓN Y RETORNO DE INVERSIÓN
 
 ### 📊 METODOLOGÍA DE VALUACIÓN
-**EBITDA mes 36**: $945k USD anuales (5 locales x $15.75k ganancia/mes x 12)
+**EBITDA M53**: $945k USD anuales (5 locales x $15.75k ganancia/mes x 12)
 **Múltiplo Argentina**: 6.4x EBITDA (benchmark mercado argentino)
-**Valuación empresa mes 60**: $6.06M USD
+**Valuación empresa M60**: $6.06M USD
 
 ### 💵 RENDIMIENTO PARA EL INVERSOR
 **Inversión inicial**: $1,000,000 USD = 33% equity
-**Valor equity mes 60**: $2.00M USD (33% de $6.06M)
-**Retorno (ROI) total**: 100% en 60 meses
-**Retorno anual compuesto**: 12.2% anual
+**Valor equity M60**: $2.00M USD (33% de $6.06M)
+**Retorno (ROI) total**: 100% en 43 meses (desde M17 hasta M60)
+**Retorno anual compuesto**: 16.5% anual
 
 ### ⏰ TIMELINE VALUACIÓN EMPRESA
-- **Mes 0**: $3.03M USD (valuación actual - ya valemos)
-- **Mes 12**: $3.80M USD (crecimiento con 3 locales)
-- **Mes 24**: $4.90M USD (crecimiento con 4 locales)  
-- **Mes 36**: $6.06M USD (operación plena 5 locales)
-- **Mes 60**: $6.06M USD (valuación madura consolidada)
+- **M0 (Mayo 2024)**: $3.03M USD (valuación inicial - 2 locales)
+- **M17 (Oct 2025)**: $3.20M USD (HOY - validación modelo Núñez)
+- **M29 (Oct 2026)**: $3.80M USD (crecimiento con 3 locales)
+- **M40 (Sep 2027)**: $4.90M USD (crecimiento con 4 locales)
+- **M53 (Oct 2028)**: $6.06M USD (operación plena 5 locales)
+- **M60 (Mayo 2029)**: $6.06M USD (valuación madura consolidada)
 
 ### 💰 VALOR EQUITY INVERSOR 33%
-- **Mes 0**: $1.00M USD (inversión inicial)
-- **Mes 12**: $1.25M USD (+25% crecimiento)
-- **Mes 24**: $1.62M USD (+62% crecimiento)
-- **Mes 36**: $2.00M USD (+100% ROI objetivo)
-- **Mes 60**: $2.00M USD (retorno completo)
+- **M17 (Oct 2025)**: $1.00M USD (inversión inicial - HOY)
+- **M29 (Oct 2026)**: $1.25M USD (+25% crecimiento)
+- **M40 (Sep 2027)**: $1.62M USD (+62% crecimiento)
+- **M53 (Oct 2028)**: $2.00M USD (+100% ROI objetivo)
+- **M60 (Mayo 2029)**: $2.00M USD (retorno completo)
 
 ### 🎯 ¿POR QUÉ ES EL MOMENTO PERFECTO?
-- **Modelo validado**: Núñez operando exitosamente 18 meses
+- **Modelo validado**: Núñez operando exitosamente 17 meses (M0-M17)
 - **Equipo consolidado**: Dream team Nico + Diego + Sacha funcionando
 - **Procesos definidos**: 15 años de experiencia sistematizada  
 - **Tecnología lista**: Odoo implementado para escalar

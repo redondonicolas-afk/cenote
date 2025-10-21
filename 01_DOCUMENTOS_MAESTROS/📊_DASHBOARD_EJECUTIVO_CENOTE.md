@@ -66,23 +66,28 @@
 
 ### **2. 🏪 EXPANSIÓN 3 NUEVOS LOCALES**
 **Status**: 🟢 En track
-**Timeline**: 36 meses
+**Timeline**: 60 meses (M0 = Mayo 2024, M17 = Octubre 2025 actual)
 **Owner**: Diego
 
 ---
 
 #### **📊 TIMELINE GENERAL EXPANSIÓN**
 
+**Cronología del Plan:**
+- **M0 (Mayo 2024)**: Apertura Núñez
+- **M17 (Octubre 2025)**: MES ACTUAL - 28.33% del plan completado
+- **M60 (Mayo 2029)**: Madurez del plan
+
 | **Milestone** | **Timeline** | **Inversión** | **Status** |
 |--------------|-------------|---------------|------------|
-| **Local #3 (2do CABA)** | Mes 12 | USD 250k | 🟡 Planificación |
-| **Local #4 (3ro CABA)** | Mes 20 | USD 250k | 🟢 Roadmap |
-| **Local #5 (4to CABA)** | Mes 30 | USD 250k | 🟢 Roadmap |
-| **Operación Plena 5 Locales** | Mes 36 | - | 🟢 Target |
+| **Local #3 (2do CABA)** | Mes 29 (Oct 2026) | USD 250k | 🟡 Planificación |
+| **Local #4 (3ro CABA)** | Mes 37 (Jun 2027) | USD 250k | 🟢 Roadmap |
+| **Local #5 (4to CABA)** | Mes 47 (Abr 2028) | USD 250k | 🟢 Roadmap |
+| **Operación Plena 5 Locales** | Mes 53 (Oct 2028) | - | 🟢 Target |
 
 ---
 
-#### **🏪 LOCAL #3 - 2do CABA (MES 12)**
+#### **🏪 LOCAL #3 - 2do CABA (MES 29 - OCT 2026)**
 
 **📍 Site Selection:**
 - Zona target: ___________
@@ -117,7 +122,7 @@
 
 ---
 
-#### **🏪 LOCAL #4 - 3ro CABA (MES 20)**
+#### **🏪 LOCAL #4 - 3ro CABA (MES 37 - JUN 2027)**
 
 **📍 Planificación:**
 - Zona target: ___________
@@ -128,7 +133,7 @@
 
 ---
 
-#### **🏪 LOCAL #5 - 4to CABA (MES 30)**
+#### **🏪 LOCAL #5 - 4to CABA (MES 47 - ABR 2028)**
 
 **📍 Planificación:**
 - Zona target: ___________
@@ -141,13 +146,15 @@
 
 #### **📈 PROYECCIÓN CRECIMIENTO**
 
-| **Mes** | **Locales** | **Empleados** | **Facturación Mensual** | **EBITDA Mensual** |
-|---------|-------------|---------------|------------------------|-------------------|
-| 0 | 2 | 56 | USD 210k | USD 31.5k |
-| 12 | 3 | 83 | USD 315k | USD 47.3k |
-| 20 | 4 | 110 | USD 420k | USD 63k |
-| 30 | 5 | 137 | USD 525k | USD 78.8k |
-| 36 | 5 | 140 | USD 525k | USD 78.8k |
+| **Mes** | **Fecha** | **Locales** | **Empleados** | **Facturación Mensual** | **EBITDA Mensual** |
+|---------|-----------|-------------|---------------|------------------------|-------------------|
+| M0 | Mayo 2024 | 2 | 56 | USD 210k | USD 31.5k |
+| **M17** | **Oct 2025** | **2** | **~56** | **USD ~210k** | **USD ~31.5k** |
+| M29 | Oct 2026 | 3 | 83 | USD 315k | USD 47.3k |
+| M37 | Jun 2027 | 4 | 110 | USD 420k | USD 63k |
+| M47 | Abr 2028 | 5 | 137 | USD 525k | USD 78.8k |
+| M53 | Oct 2028 | 5 | 140 | USD 525k | USD 78.8k |
+| M60 | Mayo 2029 | 5 | 140 | USD 525k | USD 78.8k |
 
 ---
 
