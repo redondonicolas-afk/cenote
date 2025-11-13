@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reunión Arquitectos - 5 Nov 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #2d3561 0%, #1f2747 100%);
+            color: #e0e0e0;
+            padding: 15px;
+            line-height: 1.4;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+            color: #ffa500;
+        }
+
+        .meta {
+            font-size: 0.9em;
+            color: #888;
+        }
+
+        .sections-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            height: fit-content;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section h2 {
+            color: #ffa500;
+            font-size: 1.3em;
+        }
+
+        .timing {
+            background: rgba(255, 165, 0, 0.2);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            color: #ffa500;
+            font-size: 0.85em;
+        }
+
+        .subsection {
+            margin: 10px 0;
+            padding-left: 12px;
+            border-left: 2px solid #ffa500;
+        }
+
+        .subsection h3 {
+            color: #4ecdc4;
+            margin-bottom: 8px;
+            font-size: 1em;
+        }
+
+        .checklist {
+            list-style: none;
+            margin: 8px 0;
+            font-size: 0.9em;
+        }
+
+        .checklist li {
+            margin: 6px 0;
+            padding: 6px 8px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+        }
+
+        .checklist input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+            cursor: pointer;
+            accent-color: #ffa500;
+        }
+
+        .alert {
+            background: rgba(255, 107, 107, 0.2);
+            border-left: 3px solid #ff6b6b;
+            padding: 8px;
+            margin: 8px 0;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        .alert strong {
+            color: #ff6b6b;
+        }
+
+        .info-box {
+            background: rgba(78, 205, 196, 0.15);
+            border: 2px solid #4ecdc4;
+            padding: 8px;
+            margin: 8px 0;
+            border-radius: 4px;
+            font-size: 0.85em;
+        }
+
+        .info-box strong {
+            color: #4ecdc4;
+        }
+
+        .decision-box {
+            background: rgba(255, 165, 0, 0.15);
+            border: 2px solid #ffa500;
+            padding: 8px;
+            margin: 8px 0;
+            border-radius: 4px;
+            font-size: 0.85em;
+        }
+
+        .decision-box strong {
+            color: #ffa500;
+        }
+
+        .roles-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 6px;
+            padding: 10px;
+            margin: 8px 0;
+            font-size: 0.85em;
+        }
+
+        .roles-box ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .roles-box li {
+            padding: 5px;
+            margin: 4px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+        }
+
+        .roles-box strong {
+            color: #ffa500;
+        }
+
+        .cierre-section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .cierre-section h2 {
+            color: #ffa500;
+            margin-bottom: 12px;
+            font-size: 1.3em;
+        }
+
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .action-item {
+            padding: 6px 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            font-size: 0.85em;
+        }
+
+        .action-item input[type="checkbox"] {
+            margin-right: 8px;
+            width: 14px;
+            height: 14px;
+            accent-color: #4ecdc4;
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏗️ REUNIÓN ARQUITECTOS - 5 NOV 2025 - 10:00HS</h1>
+            <div class="meta">
+                Nico + Sofi (Arquitecta) + Javo | 1.5 horas
+            </div>
+        </header>
+
+        <div class="sections-grid">
+            <!-- PROYECTO COCINA -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>PROYECTO COCINA MARTÍNEZ</h2>
+                    <span class="timing">40min</span>
+                </div>
+
+                <div class="subsection">
+                    <h3>PRESENTACIÓN PROYECTO (15min)</h3>
+                    <ul class="checklist">
+                        <li><input type="checkbox"> Planos finales cocina</li>
+                        <li><input type="checkbox"> Alcance de obra completo</li>
+                        <li><input type="checkbox"> Timeline Nov-Dic</li>
+                        <li><input type="checkbox"> Etapas del proyecto</li>
+                        <li><input type="checkbox"> Puntos críticos</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <h3>EQUIPO DE OBRA (15min)</h3>
+                    <div class="alert">
+                        <strong>Nico NO puede liderar esta obra</strong>
+                    </div>
+
+                    <div class="roles-box">
+                        <ul>
+                            <li><strong>PM:</strong> Sofi (decisiones técnicas, coordina CENOTE)</li>
+                            <li><strong>Co-PM:</strong> Diego O Mati (operativa diaria, enlace locales)</li>
+                            <li><strong>Admin:</strong> Angie + Agus (docs, compras, pagos - 8hs disponibles)</li>
+                            <li><strong>Apoyo:</strong> Sacha (visión gastronómica - NO dependencia)</li>
+                        </ul>
+                    </div>
+
+                    <div class="decision-box">
+                        <strong>Decisión:</strong> ¿Diego o Mati como co-PM?
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>DOCUMENTACIÓN (10min)</h3>
+                    <ul class="checklist">
+                        <li><input type="checkbox"> TODO en Google Drive CENOTE</li>
+                        <li><input type="checkbox"> Recuperar docs obras anteriores</li>
+                        <li><input type="checkbox"> Tracking gastos en tiempo real</li>
+                        <li><input type="checkbox"> Angie responsable documentación</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- OPTIMIZACIÓN COSTOS -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>OPTIMIZACIÓN COSTOS</h2>
+                    <span class="timing">30min</span>
+                </div>
+
+                <div class="subsection">
+                    <h3>ANÁLISIS OBRA ANTERIOR (10min)</h3>
+                    <ul class="checklist">
+                        <li><input type="checkbox"> ¿Cuánto salió Sofi en % proyecto total?</li>
+                        <li><input type="checkbox"> Eficiencia del sistema actual</li>
+                        <li><input type="checkbox"> Objetivo: valor fijo próximas obras</li>
+                    </ul>
+                    <div class="info-box">
+                        <strong>Discusión:</strong> Modelo de trabajo a futuro
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>OBREROS MANU (10min)</h3>
+                    <div class="info-box">
+                        <strong>Sistema actual:</strong> 2 obreros a $100k/día ambos<br>
+                        Saben: electricidad, plomería, instalación<br>
+                        Mucho más económico que cotizaciones tradicionales
+                    </div>
+                    <ul class="checklist">
+                        <li><input type="checkbox"> Usar para esta obra + siguientes</li>
+                        <li><input type="checkbox"> ¿Cómo integramos al proyecto?</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <h3>BALANCE CALIDAD/COSTO (10min)</h3>
+                    <div class="alert">
+                        <strong>Preocupación:</strong> Hacemos cosas muy pro → cotizaciones muy altas
+                    </div>
+                    <div class="info-box">
+                        <strong>Discusión:</strong> ¿Cómo optimizar sin perder calidad?
+                    </div>
+                </div>
+            </div>
+
+            <!-- FRENTE LOCAL -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>FRENTE LOCAL MARTÍNEZ</h2>
+                    <span class="timing">20min</span>
+                </div>
+
+                <div class="subsection">
+                    <h3>COTIZACIÓN $30M (15min)</h3>
+                    <div class="alert">
+                        <strong>Cotización presentada:</strong> ~$30 millones (muy alto)
+                    </div>
+                    <ul class="checklist">
+                        <li><input type="checkbox"> ¿Qué incluye exactamente?</li>
+                        <li><input type="checkbox"> ¿Dónde se puede optimizar?</li>
+                        <li><input type="checkbox"> Revisar documento detallado</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <h3>ALTERNATIVAS (5min)</h3>
+                    <ul class="checklist">
+                        <li><input type="checkbox"> ¿Versión reducida/económica?</li>
+                        <li><input type="checkbox"> ¿Dividir en etapas?</li>
+                        <li><input type="checkbox"> ¿Otros proveedores?</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- CALENDARIOS -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>CALENDARIOS & TIMELINE</h2>
+                    <span class="timing">15min</span>
+                </div>
+
+                <div class="subsection">
+                    <h3>NOVIEMBRE-DICIEMBRE</h3>
+                    <ul class="checklist">
+                        <li><input type="checkbox"> Calendario conjunto obra</li>
+                        <li><input type="checkbox"> Coordinar con operación locales</li>
+                        <li><input type="checkbox"> Puntos críticos de timing</li>
+                        <li><input type="checkbox"> Entregas parciales</li>
+                    </ul>
+                    <div class="decision-box">
+                        <strong>Decisión:</strong> Calendario definitivo
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CIERRE -->
+        <div class="cierre-section">
+            <h2>✅ CIERRE & ACCIONES</h2>
+
+            <div class="actions-grid">
+                <div class="action-item">
+                    <input type="checkbox"> PM: Sofi confirmado
+                </div>
+                <div class="action-item">
+                    <input type="checkbox"> Co-PM: _____ (Diego/Mati)
+                </div>
+                <div class="action-item">
+                    <input type="checkbox"> Documentación: Google Drive
+                </div>
+                <div class="action-item">
+                    <input type="checkbox"> Obreros Manu: SÍ/NO
+                </div>
+                <div class="action-item">
+                    <input type="checkbox"> Calendario obra: ___ a ___
+                </div>
+                <div class="action-item">
+                    <input type="checkbox"> Frente: alternativas económicas
+                </div>
+                <div class="action-item">
+                    <input type="checkbox"> Sofi: docs anteriores a Drive
+                </div>
+                <div class="action-item">
+                    <input type="checkbox"> Sofi: calendario definitivo
+                </div>
+                <div class="action-item">
+                    <input type="checkbox"> Sofi: replantear cotización frente
+                </div>
+                <div class="action-item">
+                    <input type="checkbox"> Nico: definir co-PM
+                </div>
+                <div class="action-item">
+                    <input type="checkbox"> Nico: comunicar rol a Angie/Agus
+                </div>
+                <div class="action-item">
+                    <input type="checkbox"> Follow-up obra: ___ (fecha)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach((checkbox, index) => {
+            const savedState = localStorage.getItem(`checkbox-arq-${index}`);
+            if (savedState === 'true') checkbox.checked = true;
+            checkbox.addEventListener('change', function() {
+                localStorage.setItem(`checkbox-arq-${index}`, this.checked);
+            });
+        });
+    </script>
+</body>
+</html>

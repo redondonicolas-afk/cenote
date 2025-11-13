@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis Ventas Martínez 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+        }
+
+        .alert {
+            background: #ff6b6b;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .card h3 {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card .value {
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        .card.warning {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .card.success {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 1px;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:hover {
+            background: #f8f9ff;
+        }
+
+        .highlight-row {
+            background: #fff3cd;
+            font-weight: bold;
+        }
+
+        .negative {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        .positive {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .chart-container {
+            background: #f8f9ff;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .bar-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .bar-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .bar-label {
+            min-width: 80px;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .bar-container {
+            flex: 1;
+            background: #e0e0e0;
+            border-radius: 10px;
+            height: 35px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: bold;
+            transition: width 1s ease;
+        }
+
+        .bar-value {
+            min-width: 100px;
+            text-align: right;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .insights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .insight-box {
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid;
+        }
+
+        .insight-box.good {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        .insight-box.warning {
+            background: #fff3cd;
+            border-color: #ffc107;
+        }
+
+        .insight-box.bad {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+
+        .insight-box h4 {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .insight-box ul {
+            list-style-position: inside;
+            line-height: 1.8;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Análisis Ventas Martínez 2025</h1>
+        <p class="subtitle">Enero - Octubre 2025 | Datos Reales del Sistema</p>
+
+        <div class="alert">
+            ⚠️ GAP CRÍTICO: Facturación real es 32% menor que proyección (-$38k USD/mes)
+        </div>
+
+        <div class="summary-cards">
+            <div class="card">
+                <h3>Facturación Total</h3>
+                <div class="value">$960M</div>
+                <small>ARS | 10 meses</small>
+            </div>
+            <div class="card success">
+                <h3>Total USD</h3>
+                <div class="value">$818k</div>
+                <small>Conversión promedio</small>
+            </div>
+            <div class="card warning">
+                <h3>Promedio Mensual</h3>
+                <div class="value">$81.810</div>
+                <small>USD/mes (vs $120k objetivo)</small>
+            </div>
+            <div class="card">
+                <h3>Total Cubiertos</h3>
+                <div class="value">31.268</div>
+                <small>~3.100/mes</small>
+            </div>
+            <div class="card">
+                <h3>Transacciones</h3>
+                <div class="value">18.302</div>
+                <small>~1.800/mes</small>
+            </div>
+            <div class="card success">
+                <h3>Ticket/Cubierto</h3>
+                <div class="value">$30.706</div>
+                <small>ARS promedio</small>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📅 Facturación Mensual USD</h2>
+            <div class="chart-container">
+                <div class="bar-chart">
+                    <div class="bar-item">
+                        <div class="bar-label">Enero</div>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: 78.2%">78%</div>
+                        </div>
+                        <div class="bar-value">$93.819</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-label">Febrero</div>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: 70.9%">71%</div>
+                        </div>
+                        <div class="bar-value">$85.049</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-label">Marzo</div>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: 83.4%">83%</div>
+                        </div>
+                        <div class="bar-value">$100.049</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-label">Abril</div>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: 71.3%">71%</div>
+                        </div>
+                        <div class="bar-value">$85.556</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-label">Mayo</div>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: 63.8%">64%</div>
+                        </div>
+                        <div class="bar-value">$76.500</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-label">Junio</div>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: 56.2%">56%</div>
+                        </div>
+                        <div class="bar-value">$67.444</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-label">Julio</div>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: 67.0%">67%</div>
+                        </div>
+                        <div class="bar-value">$80.438</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-label">Agosto</div>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: 66.7%">67%</div>
+                        </div>
+                        <div class="bar-value">$80.060</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-label">Septiembre</div>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: 56.3%">56%</div>
+                        </div>
+                        <div class="bar-value">$67.516</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-label">Octubre</div>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: 68.1%">68%</div>
+                        </div>
+                        <div class="bar-value">$81.671</div>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 20px; color: #666;">
+                    <strong>Objetivo mensual: $120.000 USD (100%)</strong>
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📊 Comparación: Real vs Proyección</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mes</th>
+                        <th>Real USD</th>
+                        <th>Proyección USD</th>
+                        <th>Gap USD</th>
+                        <th>% vs Objetivo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Enero</td>
+                        <td>$93.819</td>
+                        <td>$120.000</td>
+                        <td class="negative">-$26.181</td>
+                        <td>78.2%</td>
+                    </tr>
+                    <tr>
+                        <td>Febrero</td>
+                        <td>$85.049</td>
+                        <td>$120.000</td>
+                        <td class="negative">-$34.951</td>
+                        <td>70.9%</td>
+                    </tr>
+                    <tr>
+                        <td>Marzo</td>
+                        <td>$100.049</td>
+                        <td>$120.000</td>
+                        <td class="negative">-$19.951</td>
+                        <td>83.4%</td>
+                    </tr>
+                    <tr>
+                        <td>Abril</td>
+                        <td>$85.556</td>
+                        <td>$120.000</td>
+                        <td class="negative">-$34.444</td>
+                        <td>71.3%</td>
+                    </tr>
+                    <tr>
+                        <td>Mayo</td>
+                        <td>$76.500</td>
+                        <td>$120.000</td>
+                        <td class="negative">-$43.500</td>
+                        <td>63.8%</td>
+                    </tr>
+                    <tr>
+                        <td>Junio</td>
+                        <td>$67.444</td>
+                        <td>$120.000</td>
+                        <td class="negative">-$52.556</td>
+                        <td>56.2%</td>
+                    </tr>
+                    <tr>
+                        <td>Julio</td>
+                        <td>$80.438</td>
+                        <td>$120.000</td>
+                        <td class="negative">-$39.562</td>
+                        <td>67.0%</td>
+                    </tr>
+                    <tr>
+                        <td>Agosto</td>
+                        <td>$80.060</td>
+                        <td>$120.000</td>
+                        <td class="negative">-$39.940</td>
+                        <td>66.7%</td>
+                    </tr>
+                    <tr>
+                        <td>Septiembre</td>
+                        <td>$67.516</td>
+                        <td>$120.000</td>
+                        <td class="negative">-$52.484</td>
+                        <td>56.3%</td>
+                    </tr>
+                    <tr>
+                        <td>Octubre</td>
+                        <td>$81.671</td>
+                        <td>$120.000</td>
+                        <td class="negative">-$38.329</td>
+                        <td>68.1%</td>
+                    </tr>
+                    <tr class="highlight-row">
+                        <td><strong>PROMEDIO</strong></td>
+                        <td><strong>$81.810</strong></td>
+                        <td><strong>$120.000</strong></td>
+                        <td class="negative"><strong>-$38.190</strong></td>
+                        <td><strong>68.2%</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>💡 Insights Clave</h2>
+            <div class="insights">
+                <div class="insight-box good">
+                    <h4>✅ Puntos Positivos</h4>
+                    <ul>
+                        <li>Ticket/cubierto saludable: $30.7k ARS</li>
+                        <li>Volumen consistente: ~3.100 cubiertos/mes</li>
+                        <li>~1.800 transacciones/mes estables</li>
+                    </ul>
+                </div>
+                <div class="insight-box bad">
+                    <h4>⚠️ Puntos Críticos</h4>
+                    <ul>
+                        <li>Gap -32% vs proyección</li>
+                        <li>Falta $38k USD/mes para objetivo</li>
+                        <li>Meses bajos: Junio y Septiembre</li>
+                    </ul>
+                </div>
+                <div class="insight-box warning">
+                    <h4>🎯 Impacto Valuación</h4>
+                    <ul>
+                        <li>Valuación proyectada: $6.06M</li>
+                        <li>Valuación realista: $4.9M</li>
+                        <li>Diferencia: -19%</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🚀 Próximos Pasos Urgentes</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Acción</th>
+                        <th>Prioridad</th>
+                        <th>Impacto Esperado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Obtener data Núñez 2025</td>
+                        <td><span class="negative">ALTA</span></td>
+                        <td>Comparar performance entre locales</td>
+                    </tr>
+                    <tr>
+                        <td>Validar márgenes reales</td>
+                        <td><span class="negative">ALTA</span></td>
+                        <td>Confirmar si 15% se mantiene</td>
+                    </tr>
+                    <tr>
+                        <td>Implementar formato mediodía Mtz</td>
+                        <td><span class="negative">ALTA</span></td>
+                        <td>+$15-20k USD/mes potencial</td>
+                    </tr>
+                    <tr>
+                        <td>Actualizar documento maestro</td>
+                        <td><span class="negative">ALTA</span></td>
+                        <td>Pitch inversores con datos reales</td>
+                    </tr>
+                    <tr>
+                        <td>Potenciar delivery</td>
+                        <td>MEDIA</td>
+                        <td>+$8-10k USD/mes</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; padding: 20px; background: #f8f9ff; border-radius: 10px;">
+            <p style="font-size: 0.9em; color: #666;">
+                <strong>Análisis generado:</strong> 4 Noviembre 2025<br>
+                <strong>Fuente:</strong> Sistema de ventas Martínez (venta mz 2025.xls)<br>
+                <strong>Período:</strong> Enero - Octubre 2025 (10 meses completos)
+            </p>
+        </div>
+    </div>
+</body>
+</html>

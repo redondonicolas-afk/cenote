@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía Contabilidad Núñez - Octubre 2025</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            color: #1e3c72;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .card h2 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            border-bottom: 3px solid #2a5298;
+            padding-bottom: 10px;
+        }
+
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .metric:last-child {
+            border-bottom: none;
+        }
+
+        .metric-label {
+            font-weight: 600;
+            color: #555;
+        }
+
+        .metric-value {
+            font-weight: bold;
+            color: #1e3c72;
+        }
+
+        .metric-value.positive {
+            color: #27ae60;
+        }
+
+        .metric-value.negative {
+            color: #e74c3c;
+        }
+
+        .big-number {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .big-number-value {
+            font-size: 3em;
+            font-weight: bold;
+            color: #1e3c72;
+            margin-bottom: 10px;
+        }
+
+        .big-number-label {
+            font-size: 1.2em;
+            color: #666;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+
+        .chart-container h2 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .alert {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .alert.danger {
+            background: #f8d7da;
+            border-left-color: #dc3545;
+        }
+
+        .alert.success {
+            background: #d4edda;
+            border-left-color: #28a745;
+        }
+
+        .recommendations {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin-top: 20px;
+        }
+
+        .recommendations h2 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+        }
+
+        .recommendation-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 4px solid #2a5298;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        .recommendation-item h3 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .badge.urgent {
+            background: #dc3545;
+            color: white;
+        }
+
+        .badge.medium {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .badge.low {
+            background: #28a745;
+            color: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #1e3c72;
+            color: white;
+        }
+
+        tr:hover {
+            background: #f5f5f5;
+        }
+
+        .percentage-bar {
+            height: 20px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .percentage-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #2a5298 0%, #1e3c72 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .card, .chart-container {
+                box-shadow: none;
+                border: 1px solid #ddd;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 INFOGRAFÍA CONTABILIDAD NÚÑEZ</h1>
+            <div class="subtitle">Octubre 2025 - Análisis Completo</div>
+            <div class="subtitle" style="font-size: 0.9em; margin-top: 10px;">Fuente: Documento Martin (Google Sheets)</div>
+        </header>
+
+        <!-- Alertas Principales -->
+        <div class="alert danger">
+            <strong>⚠️ ALERTA CRÍTICA:</strong> Margen neto de solo 0.9% en octubre. Costos de insumos al 44% (muy elevado). Acción inmediata requerida.
+        </div>
+
+        <div class="alert success">
+            <strong>✅ PUNTO POSITIVO:</strong> Crecimiento interanual del 60.8% en facturación vs Octubre 2024.
+        </div>
+
+        <!-- Métricas Principales -->
+        <div class="grid">
+            <div class="card">
+                <div class="big-number">
+                    <div class="big-number-value">$51.3M</div>
+                    <div class="big-number-label">Facturación Octubre</div>
+                    <div style="color: #27ae60; font-size: 1.1em; margin-top: 10px;">+3.3% vs Sept</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="big-number">
+                    <div class="big-number-value">1.704</div>
+                    <div class="big-number-label">Cubiertos</div>
+                    <div style="color: #27ae60; font-size: 1.1em; margin-top: 10px;">+5.5% vs Sept</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="big-number">
+                    <div class="big-number-value">$30.128</div>
+                    <div class="big-number-label">Ticket Promedio</div>
+                    <div style="color: #666; font-size: 1.1em; margin-top: 10px;">~$27 USD</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="big-number">
+                    <div class="big-number-value" style="color: #e74c3c;">0.9%</div>
+                    <div class="big-number-label">Margen Neto</div>
+                    <div style="color: #e74c3c; font-size: 1.1em; margin-top: 10px;">⚠️ MUY BAJO</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Composición de Ingresos -->
+        <div class="chart-container">
+            <h2>💰 Composición de Ingresos - Octubre 2025</h2>
+            <canvas id="ingresosChart" height="80"></canvas>
+        </div>
+
+        <!-- Desglose de Ingresos por Canal -->
+        <div class="card">
+            <h2>📱 Canales de Ingreso</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Canal</th>
+                        <th>Monto (ARS)</th>
+                        <th>Monto (USD)</th>
+                        <th>% del Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>💳 Tarjeta</td>
+                        <td>$20.122.376</td>
+                        <td>$18.111</td>
+                        <td>39%</td>
+                    </tr>
+                    <tr>
+                        <td>📲 Mercado Pago</td>
+                        <td>$12.046.151</td>
+                        <td>$10.843</td>
+                        <td>23%</td>
+                    </tr>
+                    <tr>
+                        <td>🛵 PedidosYa</td>
+                        <td>$8.926.203</td>
+                        <td>$8.035</td>
+                        <td>17%</td>
+                    </tr>
+                    <tr>
+                        <td>💵 Efectivo</td>
+                        <td>$6.553.113</td>
+                        <td>$5.898</td>
+                        <td>13%</td>
+                    </tr>
+                    <tr>
+                        <td>📋 Cuenta Corriente</td>
+                        <td>$3.690.000</td>
+                        <td>$3.321</td>
+                        <td>7%</td>
+                    </tr>
+                    <tr>
+                        <td>🎉 Propinas</td>
+                        <td>$1.044.277</td>
+                        <td>$940</td>
+                        <td>2%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Estructura de Costos -->
+        <div class="chart-container">
+            <h2>📊 Estructura de Costos - Octubre 2025</h2>
+            <canvas id="costosChart" height="80"></canvas>
+        </div>
+
+        <!-- Desglose de Egresos -->
+        <div class="grid">
+            <div class="card">
+                <h2>🍽️ Insumos (44%)</h2>
+                <div class="metric">
+                    <span class="metric-label">Cocina</span>
+                    <span class="metric-value negative">-$15.3M (30%)</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Barra</span>
+                    <span class="metric-value negative">-$3.3M (6%)</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Operación</span>
+                    <span class="metric-value negative">-$4.1M (8%)</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label"><strong>TOTAL</strong></span>
+                    <span class="metric-value negative"><strong>-$22.7M</strong></span>
+                </div>
+                <div class="alert danger" style="margin-top: 15px; font-size: 0.9em;">
+                    ⚠️ 44% es muy elevado. Meta: 32-35%
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>👥 RRHH (24%)</h2>
+                <div class="metric">
+                    <span class="metric-label">Sueldos</span>
+                    <span class="metric-value negative">-$11.5M</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Liq. Diaria</span>
+                    <span class="metric-value negative">-$0.9M</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label"><strong>TOTAL</strong></span>
+                    <span class="metric-value negative"><strong>-$12.4M</strong></span>
+                </div>
+                <div class="alert" style="margin-top: 15px; font-size: 0.9em;">
+                    📊 24% de facturación. Meta: 18-20%
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>💳 Comisiones (10%)</h2>
+                <div class="metric">
+                    <span class="metric-label">PedidosYa (27%)</span>
+                    <span class="metric-value negative">-$2.4M</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Payway</span>
+                    <span class="metric-value negative">-$1.7M</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Visa Corp.</span>
+                    <span class="metric-value negative">-$1.8M</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">BBVA</span>
+                    <span class="metric-value negative">-$0.8M</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Mercado Pago</span>
+                    <span class="metric-value negative">-$0.5M</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label"><strong>TOTAL</strong></span>
+                    <span class="metric-value negative"><strong>-$5.3M</strong></span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🏢 Otros Gastos</h2>
+                <div class="metric">
+                    <span class="metric-label">Alquiler</span>
+                    <span class="metric-value negative">-$4.8M (9%)</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Mantenimiento</span>
+                    <span class="metric-value negative">-$0.6M (1%)</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Honorarios</span>
+                    <span class="metric-value negative">-$0.3M (0.5%)</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Retenciones</span>
+                    <span class="metric-value negative">-$0.8M (1.5%)</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Otros</span>
+                    <span class="metric-value negative">-$2.5M (5%)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparativo Mensual 2025 -->
+        <div class="chart-container">
+            <h2>📈 Evolución Facturación 2025</h2>
+            <canvas id="evolucionChart" height="80"></canvas>
+        </div>
+
+        <!-- Comparativo 2024 vs 2025 -->
+        <div class="card">
+            <h2>📊 Comparativo Octubre 2024 vs 2025</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Métrica</th>
+                        <th>Oct 2024</th>
+                        <th>Oct 2025</th>
+                        <th>Variación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Facturación (ARS)</td>
+                        <td>$31.929.192</td>
+                        <td>$51.337.843</td>
+                        <td style="color: #27ae60; font-weight: bold;">+60.8%</td>
+                    </tr>
+                    <tr>
+                        <td>Cubiertos</td>
+                        <td>1.201</td>
+                        <td>1.704</td>
+                        <td style="color: #27ae60; font-weight: bold;">+41.9%</td>
+                    </tr>
+                    <tr>
+                        <td>Ticket Promedio (ARS)</td>
+                        <td>$26.586</td>
+                        <td>$30.128</td>
+                        <td style="color: #27ae60; font-weight: bold;">+13.3%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- P&L Simplificado -->
+        <div class="card">
+            <h2>💼 P&L Simplificado - Octubre 2025</h2>
+            <div class="metric">
+                <span class="metric-label"><strong>INGRESOS TOTALES</strong></span>
+                <span class="metric-value positive"><strong>$52.381.119</strong></span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Facturación</span>
+                <span class="metric-value">$51.337.843</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Propinas</span>
+                <span class="metric-value">$1.044.277</span>
+            </div>
+            <hr style="margin: 20px 0;">
+            <div class="metric">
+                <span class="metric-label"><strong>EGRESOS TOTALES</strong></span>
+                <span class="metric-value negative"><strong>-$51.929.475</strong></span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Insumos</span>
+                <span class="metric-value negative">-$22.700.172 (44%)</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">RRHH</span>
+                <span class="metric-value negative">-$12.362.803 (24%)</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Comisiones</span>
+                <span class="metric-value negative">-$5.323.924 (10%)</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Alquiler</span>
+                <span class="metric-value negative">-$4.772.274 (9%)</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Otros Gastos</span>
+                <span class="metric-value negative">-$6.770.302 (13%)</span>
+            </div>
+            <hr style="margin: 20px 0; border: 2px solid #1e3c72;">
+            <div class="metric" style="font-size: 1.2em;">
+                <span class="metric-label"><strong>RESULTADO NETO</strong></span>
+                <span class="metric-value positive"><strong>$451.644 (0.9%)</strong></span>
+            </div>
+            <div class="percentage-bar" style="margin-top: 15px;">
+                <div class="percentage-fill" style="width: 0.9%; background: #e74c3c;">0.9%</div>
+            </div>
+        </div>
+
+        <!-- Recomendaciones -->
+        <div class="recommendations">
+            <h2>💡 RECOMENDACIONES URGENTES</h2>
+
+            <div class="recommendation-item">
+                <span class="badge urgent">URGENTE</span>
+                <h3>1. Reducir Costos de Insumos del 44% al 35%</h3>
+                <p><strong>Impacto:</strong> Ahorro de ~$4.6M ARS/mes ($4.142 USD)</p>
+                <p><strong>Acciones:</strong></p>
+                <ul>
+                    <li>Renegociar proveedores principales (cocina, barra)</li>
+                    <li>Implementar control estricto de porciones</li>
+                    <li>Reducir mermas y desperdicios con mejor planificación</li>
+                    <li>Revisar recetas y optimizar ingredientes</li>
+                </ul>
+            </div>
+
+            <div class="recommendation-item">
+                <span class="badge urgent">URGENTE</span>
+                <h3>2. Optimizar Comisiones de Delivery (PedidosYa 27%)</h3>
+                <p><strong>Impacto:</strong> Ahorro de ~$1.2M ARS/mes ($1.080 USD)</p>
+                <p><strong>Acciones:</strong></p>
+                <ul>
+                    <li>Negociar comisión con PedidosYa (de 27% a 20%)</li>
+                    <li>Potenciar canal Mercado Pago (menor comisión)</li>
+                    <li>Evaluar canal propio de delivery</li>
+                    <li>Incentivar retiro en local</li>
+                </ul>
+            </div>
+
+            <div class="recommendation-item">
+                <span class="badge medium">MEDIO PLAZO</span>
+                <h3>3. Optimizar Estructura de Personal (de 24% a 20%)</h3>
+                <p><strong>Impacto:</strong> Ahorro de ~$2M ARS/mes ($1.800 USD)</p>
+                <p><strong>Acciones:</strong></p>
+                <ul>
+                    <li>Evaluar productividad por turno/día</li>
+                    <li>Ajustar staff según demanda real</li>
+                    <li>Maximizar eficiencia operativa</li>
+                </ul>
+            </div>
+
+            <div class="recommendation-item">
+                <span class="badge medium">MEDIO PLAZO</span>
+                <h3>4. Aumentar Facturación sin Aumentar Costos Fijos</h3>
+                <p><strong>Impacto:</strong> Meta $65M ARS/mes (+$13.7M vs Oct)</p>
+                <p><strong>Acciones:</strong></p>
+                <ul>
+                    <li>Implementar formato mediodía completo (todos los días)</li>
+                    <li>Potenciar días de semana (lunes-jueves)</li>
+                    <li>Promociones estratégicas en horarios valle</li>
+                    <li>Marketing digital focalizado</li>
+                </ul>
+            </div>
+
+            <div class="recommendation-item">
+                <span class="badge low">ESTRATÉGICO</span>
+                <h3>5. Implementar Sistema de Costeo por Plato</h3>
+                <p><strong>Impacto:</strong> Visibilidad completa de rentabilidad</p>
+                <p><strong>Acciones:</strong></p>
+                <ul>
+                    <li>Calcular costo real de cada plato del menú</li>
+                    <li>Identificar productos más y menos rentables</li>
+                    <li>Ajustar precios o eliminar productos con margen negativo</li>
+                    <li>Potenciar venta de platos de alto margen</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Metas Noviembre -->
+        <div class="card" style="margin-top: 20px;">
+            <h2>🎯 METAS NOVIEMBRE 2025</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Métrica</th>
+                        <th>Oct 2025 (Real)</th>
+                        <th>Nov 2025 (Meta)</th>
+                        <th>Variación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Facturación</td>
+                        <td>$51.3M</td>
+                        <td>$60.0M</td>
+                        <td style="color: #27ae60; font-weight: bold;">+17%</td>
+                    </tr>
+                    <tr>
+                        <td>Cubiertos</td>
+                        <td>1.704</td>
+                        <td>2.000</td>
+                        <td style="color: #27ae60; font-weight: bold;">+17%</td>
+                    </tr>
+                    <tr>
+                        <td>Costo Insumos</td>
+                        <td>44%</td>
+                        <td>35%</td>
+                        <td style="color: #27ae60; font-weight: bold;">-9pp</td>
+                    </tr>
+                    <tr>
+                        <td>Margen Neto</td>
+                        <td>0.9%</td>
+                        <td>8%</td>
+                        <td style="color: #27ae60; font-weight: bold;">+7pp</td>
+                    </tr>
+                    <tr>
+                        <td>Resultado Neto</td>
+                        <td>$451k</td>
+                        <td>$4.8M</td>
+                        <td style="color: #27ae60; font-weight: bold;">+963%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Footer -->
+        <div style="text-align: center; color: white; margin-top: 40px; padding: 20px;">
+            <p>📊 Infografía generada el 12 de Noviembre de 2025</p>
+            <p>Fuente: Documento Martin (Google Sheets - 18 hojas)</p>
+            <p>Análisis realizado por: Claude Code + Nico</p>
+        </div>
+    </div>
+
+    <script>
+        // Composición de Ingresos
+        const ingresosCtx = document.getElementById('ingresosChart').getContext('2d');
+        new Chart(ingresosCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Tarjeta (39%)', 'Mercado Pago (23%)', 'PedidosYa (17%)', 'Efectivo (13%)', 'Cta. Cte. (7%)', 'Propinas (2%)'],
+                datasets: [{
+                    data: [20122376, 12046151, 8926203, 6553113, 3690000, 1044277],
+                    backgroundColor: [
+                        '#1e3c72',
+                        '#2a5298',
+                        '#3d6ab8',
+                        '#5182d8',
+                        '#699af8',
+                        '#87b2ff'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    },
+                    title: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        // Estructura de Costos
+        const costosCtx = document.getElementById('costosChart').getContext('2d');
+        new Chart(costosCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Insumos', 'RRHH', 'Comisiones', 'Alquiler', 'Otros'],
+                datasets: [{
+                    label: 'Monto (Millones ARS)',
+                    data: [22.7, 12.4, 5.3, 4.8, 6.8],
+                    backgroundColor: [
+                        '#e74c3c',
+                        '#e67e22',
+                        '#f39c12',
+                        '#3498db',
+                        '#95a5a6'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Millones ARS'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Evolución Mensual 2025
+        const evolucionCtx = document.getElementById('evolucionChart').getContext('2d');
+        new Chart(evolucionCtx, {
+            type: 'line',
+            data: {
+                labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct'],
+                datasets: [{
+                    label: 'Facturación (Millones ARS)',
+                    data: [34.0, 30.2, 37.9, 38.5, 47.0, 45.5, 58.5, 56.8, 49.7, 51.3],
+                    borderColor: '#1e3c72',
+                    backgroundColor: 'rgba(30, 60, 114, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Millones ARS'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

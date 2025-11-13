@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reunión CENOTE - 5 Nov 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e0e0;
+            padding: 15px;
+            line-height: 1.4;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+            color: #00d4ff;
+        }
+
+        .meta {
+            font-size: 0.9em;
+            color: #888;
+        }
+
+        .sections-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            height: fit-content;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section h2 {
+            color: #00d4ff;
+            font-size: 1.3em;
+        }
+
+        .timing {
+            background: rgba(0, 212, 255, 0.2);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            color: #00d4ff;
+            font-size: 0.85em;
+        }
+
+        .owner {
+            background: rgba(255, 107, 107, 0.2);
+            padding: 3px 8px;
+            border-radius: 4px;
+            color: #ff6b6b;
+            font-size: 0.8em;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        .subsection {
+            margin: 10px 0;
+            padding-left: 12px;
+            border-left: 2px solid #00d4ff;
+        }
+
+        .subsection h3 {
+            color: #4ecdc4;
+            margin-bottom: 8px;
+            font-size: 1em;
+        }
+
+        .checklist {
+            list-style: none;
+            margin: 8px 0;
+            font-size: 0.9em;
+        }
+
+        .checklist li {
+            margin: 6px 0;
+            padding: 6px 8px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+        }
+
+        .checklist input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+            cursor: pointer;
+            accent-color: #00d4ff;
+        }
+
+        .alert {
+            background: rgba(255, 107, 107, 0.2);
+            border-left: 3px solid #ff6b6b;
+            padding: 8px;
+            margin: 8px 0;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        .alert strong {
+            color: #ff6b6b;
+        }
+
+        .decision-box {
+            background: rgba(78, 205, 196, 0.15);
+            border: 2px solid #4ecdc4;
+            padding: 8px;
+            margin: 8px 0;
+            border-radius: 4px;
+            font-size: 0.85em;
+        }
+
+        .decision-box strong {
+            color: #4ecdc4;
+        }
+
+        .cierre-section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .cierre-section h2 {
+            color: #00d4ff;
+            margin-bottom: 12px;
+            font-size: 1.3em;
+        }
+
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .action-item {
+            padding: 6px 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            font-size: 0.85em;
+        }
+
+        .action-item input[type="checkbox"] {
+            margin-right: 8px;
+            width: 14px;
+            height: 14px;
+            accent-color: #4ecdc4;
+        }
+
+        .next-meeting {
+            margin-top: 15px;
+            padding: 12px;
+            background: rgba(0, 212, 255, 0.2);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .next-meeting strong {
+            color: #00d4ff;
+            font-size: 1.1em;
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📅 REUNIÓN CENOTE - 5 NOV 2025 - 13:00HS</h1>
+            <div class="meta">
+                Nico + Diego + Mati + Angie + Agus + Sacha | 2 horas
+            </div>
+        </header>
+
+        <div class="sections-grid">
+            <!-- FINANZAS -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>💰 FINANZAS</h2>
+                    <span class="timing">30min</span>
+                </div>
+                <div class="owner">Angie</div>
+
+                <div class="subsection">
+                    <h3>PAGOS PRINCIPIO DE MES - CRÍTICO</h3>
+                    <ul class="checklist">
+                        <li><input type="checkbox"> Martínez: $ necesaria</li>
+                        <li><input type="checkbox"> Núñez: $ necesaria</li>
+                        <li><input type="checkbox"> Oficina: $ necesaria</li>
+                        <li><input type="checkbox"> Timeline de pagos</li>
+                    </ul>
+                    <div class="decision-box">
+                        <strong>Decisión:</strong> Aprobación pagos + timeline
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>SISTEMA CAJA FÍSICA</h3>
+                    <div class="alert">
+                        <strong>Propuesta:</strong> Solo Angie llave | Arqueo lunes + viernes | Angie responsable
+                    </div>
+                    <div class="decision-box">
+                        <strong>Decisión:</strong> Aprobar protocolo
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>GOOGLE DRIVE</h3>
+                    <ul class="checklist">
+                        <li><input type="checkbox"> Diseños merch subidos</li>
+                        <li><input type="checkbox"> Propuesta MKT en Drive</li>
+                        <li><input type="checkbox"> Docs obra organizados</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- OPERACIONES -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>⚙️ OPERACIONES</h2>
+                    <span class="timing">40min</span>
+                </div>
+                <div class="owner">Diego + Mati</div>
+
+                <div class="subsection">
+                    <h3>REPORTE FIN DE SEMANA</h3>
+                    <ul class="checklist">
+                        <li><input type="checkbox"> Qué pasó (ambos locales)</li>
+                        <li><input type="checkbox"> Quejas/problemas</li>
+                        <li><input type="checkbox"> Personal novedades</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <h3>PROCESOS COCINA + COSTOS</h3>
+                    <div class="alert">
+                        <strong>PRIORITARIO</strong> para PedidosYa
+                    </div>
+                    <ul class="checklist">
+                        <li><input type="checkbox"> Procesos cocina actuales</li>
+                        <li><input type="checkbox"> <strong>Guacamole</strong> (costo + tiempo)</li>
+                        <li><input type="checkbox"> <strong>Totopos/Nachos</strong></li>
+                        <li><input type="checkbox"> <strong>Fiesta Mexicana</strong> (x10)</li>
+                    </ul>
+                    <div class="decision-box">
+                        <strong>Decisión:</strong> Fecha entrega (Hoy o Viernes)
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>SISTEMA CALIDAD</h3>
+                    <ul class="checklist">
+                        <li><input type="checkbox"> Organizar con Mati + Diego</li>
+                        <li><input type="checkbox"> Referencia: Núñez = Martínez</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- GASTRONOMÍA -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>🍽️ GASTRONOMÍA</h2>
+                    <span class="timing">25min</span>
+                </div>
+                <div class="owner">Sacha + Diego/Mati</div>
+
+                <div class="subsection">
+                    <h3>CALIDAD & COMUNICACIÓN - CRÍTICO</h3>
+                    <div class="alert">
+                        <strong>Tema Nico:</strong> Experiencia ensalada + comunicación básica
+                    </div>
+                    <ul class="checklist">
+                        <li><input type="checkbox"> Visual de los platos (presentación)</li>
+                        <li><input type="checkbox"> Calidad productos (caso ensalada Nico)</li>
+                        <li><input type="checkbox"> Imprimir recetas/procesos</li>
+                        <li><input type="checkbox"> Comunicación básica que no entienden</li>
+                    </ul>
+                    <div class="decision-box">
+                        <strong>Decisión:</strong> Plan de acción inmediato para mejorar
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>RESUMEN PRIMER MES MATI</h3>
+                    <ul class="checklist">
+                        <li><input type="checkbox"> Diego presenta resumen</li>
+                        <li><input type="checkbox"> Logros / Aprendizajes</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <h3>REUNIÓN PEDIDOSYA</h3>
+                    <ul class="checklist">
+                        <li><input type="checkbox"> Diego coordina próxima semana</li>
+                        <li><input type="checkbox"> Presentar nuevos productos</li>
+                        <li><input type="checkbox"> Pre-requisito: costos listos</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- MERCHANDISING -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>🎨 MERCHANDISING</h2>
+                    <span class="timing">15min</span>
+                </div>
+                <div class="owner">Angie + Agus</div>
+
+                <div class="subsection">
+                    <h3>SISTEMA PROVEEDORES</h3>
+                    <div class="alert">
+                        <strong>Nueva dinámica:</strong> Nico reenvía → Angie seguimiento → Solo Angie/Diego autorizan marca
+                    </div>
+                    <ul class="checklist">
+                        <li><input type="checkbox"> Confirman entendimiento</li>
+                        <li><input type="checkbox"> Equipo aporta proveedores</li>
+                        <li><input type="checkbox"> Centralizar con Angie</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <h3>LISTADO MERCH + DISEÑOS</h3>
+                    <ul class="checklist">
+                        <li><input type="checkbox"> Diseños Art Comunicaciones en Drive</li>
+                        <li><input type="checkbox"> Proveedores merch contactados</li>
+                        <li><input type="checkbox"> Rodrigo: frente + merch</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- OBRA COCINA -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>🏗️ OBRA COCINA</h2>
+                    <span class="timing">10min</span>
+                </div>
+                <div class="owner">Diego/Mati + Angie</div>
+
+                <div class="alert">
+                    <strong>Nico NO lidera</strong> próxima obra
+                </div>
+
+                <div class="subsection">
+                    <h3>Estructura Nov-Dic</h3>
+                    <ul class="checklist">
+                        <li><input type="checkbox"> Sofi + Diego/Mati PMs</li>
+                        <li><input type="checkbox"> Angie + Agus: admin/pagos</li>
+                        <li><input type="checkbox"> TODO documentado Drive</li>
+                    </ul>
+                    <div class="decision-box">
+                        <strong>Decisión:</strong> ¿Quién lidera? (Diego o Mati)
+                    </div>
+                </div>
+            </div>
+
+            <!-- VARIOS -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>📌 VARIOS</h2>
+                    <span class="timing">10min</span>
+                </div>
+
+                <ul class="checklist">
+                    <li><input type="checkbox"> Calendarios Nov-Dic conjuntos</li>
+                    <li><input type="checkbox"> Si no listo hoy → viernes</li>
+                    <li><input type="checkbox"> WhatsApp: Nico aprende comunidades</li>
+                    <li><input type="checkbox"> Luchadores: Nico arma</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CIERRE -->
+        <div class="cierre-section">
+            <h2>✅ CIERRE & ACCIONES</h2>
+
+            <div class="actions-grid">
+                <div class="action-item">
+                    <input type="checkbox"> Pagos aprobados: $______
+                </div>
+                <div class="action-item">
+                    <input type="checkbox"> Protocolo caja: APROBADO
+                </div>
+                <div class="action-item">
+                    <input type="checkbox"> Costos productos: _____
+                </div>
+                <div class="action-item">
+                    <input type="checkbox"> Líder obra: _____ (D/M)
+                </div>
+                <div class="action-item">
+                    <input type="checkbox"> Reunión PedidosYa: _____
+                </div>
+                <div class="action-item">
+                    <input type="checkbox"> Sistema calidad: Viernes
+                </div>
+                <div class="action-item">
+                    <input type="checkbox"> Angie: ejecutar pagos
+                </div>
+                <div class="action-item">
+                    <input type="checkbox"> Diego/Mati: costos finales
+                </div>
+                <div class="action-item">
+                    <input type="checkbox"> Diego: agendar PedidosYa
+                </div>
+                <div class="action-item">
+                    <input type="checkbox"> Angie: verificar Drive
+                </div>
+            </div>
+
+            <div class="next-meeting">
+                <strong>PRÓXIMA: Viernes 8 Nov - 13:00hs (Review)</strong>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach((checkbox, index) => {
+            const savedState = localStorage.getItem(`checkbox-cenote-${index}`);
+            if (savedState === 'true') checkbox.checked = true;
+            checkbox.addEventListener('change', function() {
+                localStorage.setItem(`checkbox-cenote-${index}`, this.checked);
+            });
+        });
+    </script>
+</body>
+</html>

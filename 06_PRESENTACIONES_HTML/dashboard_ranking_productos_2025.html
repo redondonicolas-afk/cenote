@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Ranking Productos 2025 - Martínez vs Núñez</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 25px;
+            padding: 50px;
+            box-shadow: 0 30px 90px rgba(0,0,0,0.5);
+        }
+
+        h1 {
+            text-align: center;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            font-weight: 900;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 50px;
+            font-size: 1.3em;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card h3 {
+            font-size: 1em;
+            opacity: 0.9;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .stat-card .value {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .stat-card .subvalue {
+            font-size: 0.95em;
+            opacity: 0.8;
+        }
+
+        .stat-card.martinez {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .stat-card.nunez {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section h2 {
+            color: #667eea;
+            border-bottom: 4px solid #667eea;
+            padding-bottom: 15px;
+            margin-bottom: 35px;
+            font-size: 2.2em;
+            font-weight: 700;
+        }
+
+        .chart-container {
+            background: #f8f9ff;
+            padding: 35px;
+            border-radius: 20px;
+            margin-bottom: 35px;
+            position: relative;
+            height: 500px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .chart-container.tall {
+            height: 700px;
+        }
+
+        .chart-container.wide {
+            height: 600px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .insight-box {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 35px;
+            border-radius: 20px;
+            margin: 40px 0;
+            border-left: 6px solid #fdcb6e;
+            box-shadow: 0 10px 30px rgba(253, 203, 110, 0.3);
+        }
+
+        .insight-box h3 {
+            color: #2d3436;
+            margin-bottom: 20px;
+            font-size: 2em;
+            font-weight: 700;
+        }
+
+        .insight-box ul {
+            list-style-position: inside;
+            line-height: 2.2;
+            font-size: 1.15em;
+        }
+
+        .insight-box strong {
+            color: #d63031;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 18px;
+            text-align: left;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+        }
+
+        td {
+            padding: 18px;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f9ff;
+        }
+
+        tr:hover {
+            background: #e8ecff;
+        }
+
+        .top-product {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            border-left: 5px solid #4facfe;
+        }
+
+        .top-product h4 {
+            color: #2d3436;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+
+        .top-product .stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.95em;
+            color: #636e72;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Dashboard Ranking Productos 2025</h1>
+        <p class="subtitle">Análisis Completo de Ventas | Martínez vs Núñez | Año 2025</p>
+
+        <!-- STATS CARDS -->
+        <div class="stats-grid">
+            <div class="stat-card martinez">
+                <h3>Martínez - Facturación</h3>
+                <div class="value">$943M</div>
+                <div class="subvalue">ARS Total Año 2025</div>
+            </div>
+            <div class="stat-card nunez">
+                <h3>Núñez - Facturación</h3>
+                <div class="value">$455M</div>
+                <div class="subvalue">ARS Total Año 2025</div>
+            </div>
+            <div class="stat-card martinez">
+                <h3>Martínez - Unidades</h3>
+                <div class="value">89.590</div>
+                <div class="subvalue">Productos Vendidos</div>
+            </div>
+            <div class="stat-card nunez">
+                <h3>Núñez - Unidades</h3>
+                <div class="value">43.379</div>
+                <div class="subvalue">Productos Vendidos</div>
+            </div>
+            <div class="stat-card martinez">
+                <h3>Ticket Promedio MZ</h3>
+                <div class="value">$10.527</div>
+                <div class="subvalue">ARS por unidad</div>
+            </div>
+            <div class="stat-card nunez">
+                <h3>Ticket Promedio NU</h3>
+                <div class="value">$10.494</div>
+                <div class="subvalue">ARS por unidad</div>
+            </div>
+        </div>
+
+        <!-- COMPARATIVO FACTURACIÓN -->
+        <div class="section">
+            <h2>📊 Comparativo Facturación Total</h2>
+            <div class="chart-container">
+                <canvas id="chartFacturacionTotal"></canvas>
+            </div>
+        </div>
+
+        <!-- TOP 10 PRODUCTOS -->
+        <div class="section">
+            <h2>🏆 Top 10 Productos por Facturación</h2>
+            <div class="grid-2">
+                <div class="chart-container tall">
+                    <canvas id="chartTopMZ"></canvas>
+                </div>
+                <div class="chart-container tall">
+                    <canvas id="chartTopNU"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- INSIGHTS TOP PRODUCTOS -->
+        <div class="insight-box">
+            <h3>💎 Insights Top Productos</h3>
+            <ul>
+                <li><strong>BOTANA es el rey absoluto:</strong> 19% facturación MZ, 16.4% facturación NU</li>
+                <li><strong>Tacos Agave #2 en ambos locales:</strong> Producto estrella consistente</li>
+                <li><strong>Mix Fajitas #3:</strong> Alto ticket promedio, excelente rentabilidad</li>
+                <li><strong>Top 3 productos = 30% facturación total</strong> en ambos locales</li>
+                <li><strong>Margarita Frozen:</strong> Top bebida en ambos ($23.7M MZ, $11.3M NU)</li>
+            </ul>
+        </div>
+
+        <!-- ANÁLISIS POR CATEGORÍA -->
+        <div class="section">
+            <h2>🍽️ Distribución por Categoría</h2>
+            <div class="grid-2">
+                <div class="chart-container">
+                    <canvas id="chartCatMZ"></canvas>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chartCatNU"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMPARATIVO CATEGORÍAS -->
+        <div class="section">
+            <h2>📈 Comparativo por Categoría</h2>
+            <div class="chart-container wide">
+                <canvas id="chartComparativoCat"></canvas>
+            </div>
+        </div>
+
+        <!-- INSIGHTS CATEGORÍAS -->
+        <div class="insight-box">
+            <h3>🔍 Insights por Categoría</h3>
+            <ul>
+                <li><strong>Comida domina en Núñez (58.8%)</strong> vs Martínez (54.6%) - NU más food-focused</li>
+                <li><strong>Bebidas más fuertes en Martínez (20.3%)</strong> vs Núñez (17.6%)</li>
+                <li><strong>Tacos similares:</strong> ~20% en ambos locales (producto core)</li>
+                <li><strong>Postres oportunidad de crecimiento:</strong> Solo 2% en ambos locales</li>
+                <li><strong>Precio promedio casi idéntico:</strong> $10.527 MZ vs $10.494 NU</li>
+            </ul>
+        </div>
+
+        <!-- TOP 20 MARTÍNEZ -->
+        <div class="section">
+            <h2>🏢 Top 20 Productos Martínez</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Producto</th>
+                        <th>Facturación ARS</th>
+                        <th>% Total</th>
+                        <th>Unidades</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>Botana</td><td>$179.685.160</td><td>19.05%</td><td>4.501</td></tr>
+                    <tr><td>2</td><td>Tacos Agave</td><td>$55.566.712</td><td>5.89%</td><td>3.249</td></tr>
+                    <tr><td>3</td><td>Mix Fajitas</td><td>$48.793.590</td><td>5.17%</td><td>1.060</td></tr>
+                    <tr><td>4</td><td>Tacos Clásicos</td><td>$41.936.903</td><td>4.45%</td><td>2.968</td></tr>
+                    <tr><td>5</td><td>Mini Burritos x3</td><td>$38.797.080</td><td>4.11%</td><td>2.468</td></tr>
+                    <tr><td>6</td><td>Taco Res</td><td>$26.882.123</td><td>2.85%</td><td>5.695</td></tr>
+                    <tr><td>7</td><td>Margarita FROZEN</td><td>$23.678.808</td><td>2.51%</td><td>4.816</td></tr>
+                    <tr><td>8</td><td>Nachos Tex Mex</td><td>$22.026.363</td><td>2.34%</td><td>1.339</td></tr>
+                    <tr><td>9</td><td>Guacamole strips</td><td>$19.782.475</td><td>2.10%</td><td>1.676</td></tr>
+                    <tr><td>10</td><td>Botana G</td><td>$19.719.826</td><td>2.09%</td><td>427</td></tr>
+                    <tr><td>11</td><td>Limonada</td><td>$19.188.202</td><td>2.03%</td><td>4.507</td></tr>
+                    <tr><td>12</td><td>Burro XL Carnitas</td><td>$18.550.905</td><td>1.97%</td><td>974</td></tr>
+                    <tr><td>13</td><td>Quesadilla Pollo</td><td>$15.571.280</td><td>1.65%</td><td>1.056</td></tr>
+                    <tr><td>14</td><td>MEXICAN Bulldog</td><td>$15.556.818</td><td>1.65%</td><td>889</td></tr>
+                    <tr><td>15</td><td>Taco Pollo</td><td>$15.446.039</td><td>1.64%</td><td>3.238</td></tr>
+                    <tr><td>16</td><td>Taco Pastor</td><td>$14.744.235</td><td>1.56%</td><td>2.628</td></tr>
+                    <tr><td>17</td><td>Flautas</td><td>$12.433.004</td><td>1.32%</td><td>1.580</td></tr>
+                    <tr><td>18</td><td>Agua sin gas</td><td>$12.365.069</td><td>1.31%</td><td>4.524</td></tr>
+                    <tr><td>19</td><td>Fajitas Res</td><td>$12.348.585</td><td>1.31%</td><td>256</td></tr>
+                    <tr><td>20</td><td>Taco Gobernador</td><td>$11.362.427</td><td>1.20%</td><td>2.021</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- TOP 20 NÚÑEZ -->
+        <div class="section">
+            <h2>🏢 Top 20 Productos Núñez</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Producto</th>
+                        <th>Facturación ARS</th>
+                        <th>% Total</th>
+                        <th>Unidades</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>Botana</td><td>$74.548.603</td><td>16.38%</td><td>1.948</td></tr>
+                    <tr><td>2</td><td>Tacos Agave</td><td>$22.919.436</td><td>5.03%</td><td>1.382</td></tr>
+                    <tr><td>3</td><td>Mix Fajitas</td><td>$17.937.010</td><td>3.94%</td><td>419</td></tr>
+                    <tr><td>4</td><td>Mini Burritos x3</td><td>$17.637.068</td><td>3.87%</td><td>1.123</td></tr>
+                    <tr><td>5</td><td>Tacos Clásicos</td><td>$15.473.797</td><td>3.40%</td><td>1.090</td></tr>
+                    <tr><td>6</td><td>Menú Tacos</td><td>$14.129.216</td><td>3.10%</td><td>872</td></tr>
+                    <tr><td>7</td><td>Botana G</td><td>$13.483.648</td><td>2.96%</td><td>296</td></tr>
+                    <tr><td>8</td><td>Burro XL Carnitas</td><td>$11.429.717</td><td>2.51%</td><td>596</td></tr>
+                    <tr><td>9</td><td>Margarita FROZEN</td><td>$11.270.221</td><td>2.48%</td><td>2.545</td></tr>
+                    <tr><td>10</td><td>Nachos Tex Mex</td><td>$10.910.340</td><td>2.40%</td><td>678</td></tr>
+                    <tr><td>11</td><td>Menú E1</td><td>$10.763.905</td><td>2.36%</td><td>651</td></tr>
+                    <tr><td>12</td><td>Taco Res</td><td>$10.393.542</td><td>2.28%</td><td>2.308</td></tr>
+                    <tr><td>13</td><td>Guacamole strips</td><td>$7.969.818</td><td>1.75%</td><td>694</td></tr>
+                    <tr><td>14</td><td>Quesadilla Pollo</td><td>$7.233.549</td><td>1.59%</td><td>494</td></tr>
+                    <tr><td>15</td><td>Taco Pastor</td><td>$6.993.932</td><td>1.54%</td><td>1.298</td></tr>
+                    <tr><td>16</td><td>MEXICAN Bulldog</td><td>$6.819.284</td><td>1.50%</td><td>410</td></tr>
+                    <tr><td>17</td><td>Burro Carnita menú</td><td>$6.280.003</td><td>1.38%</td><td>384</td></tr>
+                    <tr><td>18</td><td>Menú Quesa</td><td>$6.120.699</td><td>1.34%</td><td>376</td></tr>
+                    <tr><td>19</td><td>Limonada</td><td>$6.065.735</td><td>1.33%</td><td>1.459</td></tr>
+                    <tr><td>20</td><td>Taco Pollo</td><td>$5.665.572</td><td>1.24%</td><td>1.267</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ANÁLISIS UNIDADES VENDIDAS -->
+        <div class="section">
+            <h2>📦 Top 10 por Unidades Vendidas</h2>
+            <div class="grid-2">
+                <div class="chart-container">
+                    <canvas id="chartUnidadesMZ"></canvas>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chartUnidadesNU"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- INSIGHTS FINALES -->
+        <div class="insight-box">
+            <h3>🚀 Conclusiones y Recomendaciones</h3>
+            <ul>
+                <li><strong>Martínez factura 2.1x Núñez</strong> con productos similares - diferencia en volumen</li>
+                <li><strong>Top 5 productos = 40% facturación:</strong> Foco en excelencia de estos</li>
+                <li><strong>Botana es crítico:</strong> 1 de cada 5 pesos viene de este producto</li>
+                <li><strong>Menús funcionan mejor en Núñez:</strong> Oportunidad para Martínez</li>
+                <li><strong>Precio promedio idéntico:</strong> Pricing consistency entre locales ✅</li>
+                <li><strong>Oportunidad Postres:</strong> Solo 2% - potencial de crecimiento alto</li>
+                <li><strong>Bebidas premium:</strong> Margarita y Bulldog son top performers</li>
+                <li><strong>Tacos individuales muy fuertes:</strong> Base sólida del negocio</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 60px; padding: 30px; background: #f8f9ff; border-radius: 20px;">
+            <p style="font-size: 1em; color: #666; line-height: 2;">
+                <strong>Análisis generado:</strong> 4 Noviembre 2025<br>
+                <strong>Fuentes:</strong> Ranking MZ 25.csv + Ranking NU 25.csv<br>
+                <strong>Total productos analizados:</strong> 400 SKUs (194 MZ + 206 NU)<br>
+                <strong>Total unidades vendidas:</strong> 132.969 unidades en 2025
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Chart 1: Comparativo Facturación Total
+        new Chart(document.getElementById('chartFacturacionTotal'), {
+            type: 'bar',
+            data: {
+                labels: ['Facturación Total ARS'],
+                datasets: [{
+                    label: 'Martínez',
+                    data: [943082694],
+                    backgroundColor: 'rgba(240, 147, 251, 0.8)',
+                    borderColor: '#f093fb',
+                    borderWidth: 3
+                }, {
+                    label: 'Núñez',
+                    data: [455228850],
+                    backgroundColor: 'rgba(79, 172, 254, 0.8)',
+                    borderColor: '#4facfe',
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: true, position: 'top', labels: { font: { size: 16, weight: 'bold' } } },
+                    title: { display: true, text: 'Facturación Total 2025 (ARS)', font: { size: 20, weight: 'bold' } }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { callback: function(value) { return '$' + (value/1000000).toFixed(0) + 'M'; } }
+                    }
+                }
+            }
+        });
+
+        // Chart 2 y 3: Top 10 Productos
+        new Chart(document.getElementById('chartTopMZ'), {
+            type: 'bar',
+            data: {
+                labels: ['Botana', 'Tacos Agave', 'Mix Fajitas', 'Tacos Clásicos', 'Mini Burritos x3',
+                         'Taco Res', 'Margarita FROZEN', 'Nachos Tex Mex', 'Guacamole', 'Botana G'],
+                datasets: [{
+                    label: 'Facturación (millones ARS)',
+                    data: [179.7, 55.6, 48.8, 41.9, 38.8, 26.9, 23.7, 22.0, 19.8, 19.7],
+                    backgroundColor: 'rgba(240, 147, 251, 0.8)',
+                    borderColor: '#f093fb',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'Top 10 Martínez', font: { size: 18, weight: 'bold' } }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('chartTopNU'), {
+            type: 'bar',
+            data: {
+                labels: ['Botana', 'Tacos Agave', 'Mix Fajitas', 'Mini Burritos x3', 'Tacos Clásicos',
+                         'Menú Tacos', 'Botana G', 'Burro XL', 'Margarita FROZEN', 'Nachos Tex Mex'],
+                datasets: [{
+                    label: 'Facturación (millones ARS)',
+                    data: [74.5, 22.9, 17.9, 17.6, 15.5, 14.1, 13.5, 11.4, 11.3, 10.9],
+                    backgroundColor: 'rgba(79, 172, 254, 0.8)',
+                    borderColor: '#4facfe',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'Top 10 Núñez', font: { size: 18, weight: 'bold' } }
+                }
+            }
+        });
+
+        // Charts 4 y 5: Distribución por Categoría
+        new Chart(document.getElementById('chartCatMZ'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Comida (54.6%)', 'Bebidas (20.3%)', 'Tacos (20.1%)', 'Postres (2.1%)', 'Otros (2.9%)'],
+                datasets: [{
+                    data: [54.6, 20.3, 20.1, 2.1, 2.9],
+                    backgroundColor: ['#667eea', '#764ba2', '#f093fb', '#4facfe', '#e8ecff'],
+                    borderWidth: 3,
+                    borderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { font: { size: 13 } } },
+                    title: { display: true, text: 'Martínez - Mix por Categoría', font: { size: 18, weight: 'bold' } }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('chartCatNU'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Comida (58.8%)', 'Tacos (19.8%)', 'Bebidas (17.6%)', 'Postres (2.2%)', 'Otros (1.6%)'],
+                datasets: [{
+                    data: [58.8, 19.8, 17.6, 2.2, 1.6],
+                    backgroundColor: ['#4facfe', '#00f2fe', '#667eea', '#764ba2', '#e8ecff'],
+                    borderWidth: 3,
+                    borderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { font: { size: 13 } } },
+                    title: { display: true, text: 'Núñez - Mix por Categoría', font: { size: 18, weight: 'bold' } }
+                }
+            }
+        });
+
+        // Chart 6: Comparativo por Categoría
+        new Chart(document.getElementById('chartComparativoCat'), {
+            type: 'bar',
+            data: {
+                labels: ['Comida', 'Bebidas', 'Tacos', 'Postres'],
+                datasets: [{
+                    label: 'Martínez (millones ARS)',
+                    data: [515.3, 191.3, 189.5, 19.7],
+                    backgroundColor: 'rgba(240, 147, 251, 0.8)',
+                    borderColor: '#f093fb',
+                    borderWidth: 2
+                }, {
+                    label: 'Núñez (millones ARS)',
+                    data: [267.7, 79.9, 90.0, 10.0],
+                    backgroundColor: 'rgba(79, 172, 254, 0.8)',
+                    borderColor: '#4facfe',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: true, position: 'top', labels: { font: { size: 15, weight: 'bold' } } },
+                    title: { display: true, text: 'Comparativo Facturación por Categoría', font: { size: 20, weight: 'bold' } }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { callback: function(value) { return '$' + value + 'M'; } }
+                    }
+                }
+            }
+        });
+
+        // Charts 7 y 8: Top por Unidades
+        new Chart(document.getElementById('chartUnidadesMZ'), {
+            type: 'bar',
+            data: {
+                labels: ['Taco Res', 'Margarita', 'Agua s/gas', 'Limonada', 'Botana', 'Tacos Agave', 'Taco Pollo', 'Tacos Clásicos', 'Taco Pastor', 'Mini Burritos'],
+                datasets: [{
+                    label: 'Unidades',
+                    data: [5695, 4816, 4524, 4507, 4501, 3249, 3238, 2968, 2628, 2468],
+                    backgroundColor: 'rgba(240, 147, 251, 0.8)',
+                    borderColor: '#f093fb',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'Martínez - Top 10 Unidades', font: { size: 18, weight: 'bold' } }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('chartUnidadesNU'), {
+            type: 'bar',
+            data: {
+                labels: ['Margarita', 'Taco Res', 'Botana', 'Limonada', 'Agua s/gas', 'Tacos Agave', 'Taco Pastor', 'Taco Pollo', 'Mini Burritos', 'Tacos Clásicos'],
+                datasets: [{
+                    label: 'Unidades',
+                    data: [2545, 2308, 1948, 1459, 1619, 1382, 1298, 1267, 1123, 1090],
+                    backgroundColor: 'rgba(79, 172, 254, 0.8)',
+                    borderColor: '#4facfe',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'Núñez - Top 10 Unidades', font: { size: 18, weight: 'bold' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

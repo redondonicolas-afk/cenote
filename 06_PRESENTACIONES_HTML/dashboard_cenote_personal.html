@@ -1760,14 +1760,93 @@
                         <i>📅</i> Seguimiento de Reuniones
                     </h2>
 
+                    <!-- REUNIONES 5 NOVIEMBRE 2025 -->
+                    <div class="table-container" style="margin-bottom: 30px;">
+                        <h3 class="table-title">
+                            <i>🎯</i> Reuniones 5 Noviembre 2025 - Sistema de Seguimiento
+                        </h3>
+
+                        <!-- REUNIÓN ARQUITECTOS -->
+                        <div style="background: rgba(255, 165, 0, 0.1); padding: 20px; border-radius: 10px; margin-bottom: 20px; border-left: 5px solid #ffa500;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                <h4 style="color: #ffa500; margin: 0;">🏗️ REUNIÓN ARQUITECTOS - 10:00HS</h4>
+                                <a href="reunion_arquitectos_5nov.html" target="_blank" style="padding: 8px 15px; background: #ffa500; color: white; text-decoration: none; border-radius: 5px; font-weight: 600;">📺 Abrir Proyección</a>
+                            </div>
+                            <p style="margin-bottom: 10px;"><strong>Participantes:</strong> Nico + Sofi + Javo | <strong>Duración:</strong> 1.5 horas</p>
+                            <p style="margin-bottom: 15px; color: #666;"><strong>Temas:</strong> Proyecto cocina, equipo obra, costos, frente local, calendario</p>
+
+                            <div style="background: white; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                                <h5 style="color: #333; margin-bottom: 10px;">✅ Decisiones tomadas:</h5>
+                                <textarea id="arqDecisiones" rows="4" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd; resize: vertical;" placeholder="Después de la reunión: ¿Qué decidimos? ¿PM definido? ¿Calendario acordado? ¿Frente local?"></textarea>
+
+                                <h5 style="color: #333; margin-top: 15px; margin-bottom: 10px;">🎯 Action Items:</h5>
+                                <div id="arqActionItems" style="margin-bottom: 10px;"></div>
+                                <button onclick="addActionItemArq()" style="padding: 6px 12px; background: #ffa500; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 0.9rem;">+ Agregar tarea</button>
+
+                                <h5 style="color: #333; margin-top: 15px; margin-bottom: 10px;">📝 Notas adicionales:</h5>
+                                <textarea id="arqNotas" rows="3" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd; resize: vertical;" placeholder="Cualquier cosa importante que surgió..."></textarea>
+
+                                <button onclick="saveArqSeguimiento()" style="margin-top: 15px; padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: 600;">💾 Guardar Seguimiento</button>
+                            </div>
+                        </div>
+
+                        <!-- REUNIÓN CENOTE -->
+                        <div style="background: rgba(0, 212, 255, 0.1); padding: 20px; border-radius: 10px; margin-bottom: 20px; border-left: 5px solid #00d4ff;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                <h4 style="color: #00d4ff; margin: 0;">📅 REUNIÓN CENOTE - 13:00HS</h4>
+                                <a href="reunion_cenote_5nov.html" target="_blank" style="padding: 8px 15px; background: #00d4ff; color: white; text-decoration: none; border-radius: 5px; font-weight: 600;">📺 Abrir Proyección</a>
+                            </div>
+                            <p style="margin-bottom: 10px;"><strong>Participantes:</strong> Nico + Diego + Mati + Angie + Agus + Sacha | <strong>Duración:</strong> 2 horas</p>
+                            <p style="margin-bottom: 15px; color: #666;"><strong>Temas:</strong> Finanzas, Operaciones, Gastronomía, Merchandising, Obra Cocina, Varios</p>
+
+                            <div style="background: white; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                                <h5 style="color: #333; margin-bottom: 10px;">✅ Decisiones tomadas:</h5>
+                                <textarea id="cenoteDecisiones" rows="4" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd; resize: vertical;" placeholder="Después de la reunión: ¿Pagos aprobados? ¿Costos productos? ¿Líder obra? ¿Reunión PedidosYa agendada?"></textarea>
+
+                                <h5 style="color: #333; margin-top: 15px; margin-bottom: 10px;">🎯 Action Items:</h5>
+                                <div id="cenoteActionItems" style="margin-bottom: 10px;"></div>
+                                <button onclick="addActionItemCenote()" style="padding: 6px 12px; background: #00d4ff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 0.9rem;">+ Agregar tarea</button>
+
+                                <h5 style="color: #333; margin-top: 15px; margin-bottom: 10px;">📝 Notas adicionales:</h5>
+                                <textarea id="cenoteNotas" rows="3" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd; resize: vertical;" placeholder="Cualquier cosa importante que surgió..."></textarea>
+
+                                <button onclick="saveCenoteSeguimiento()" style="margin-top: 15px; padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: 600;">💾 Guardar Seguimiento</button>
+                            </div>
+                        </div>
+
+                        <!-- REUNIÓN MERCHANDISING -->
+                        <div style="background: rgba(216, 130, 222, 0.1); padding: 20px; border-radius: 10px; margin-bottom: 20px; border-left: 5px solid #d882de;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                <h4 style="color: #d882de; margin: 0;">🎨 REUNIÓN MERCHANDISING RODRIGO - POR AGENDAR</h4>
+                                <a href="reunion_merchandising_rodrigo.html" target="_blank" style="padding: 8px 15px; background: #d882de; color: white; text-decoration: none; border-radius: 5px; font-weight: 600;">📺 Abrir Proyección</a>
+                            </div>
+                            <p style="margin-bottom: 10px;"><strong>Participantes:</strong> Nico + Rodrigo + Angie/Diego | <strong>Duración:</strong> 1.5 horas</p>
+                            <p style="margin-bottom: 15px; color: #666;"><strong>Temas:</strong> Frente local, catálogo merch, sistema proveedores, timelines</p>
+
+                            <div style="background: white; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                                <h5 style="color: #333; margin-bottom: 10px;">✅ Decisiones tomadas:</h5>
+                                <textarea id="merchDecisiones" rows="4" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd; resize: vertical;" placeholder="Después de la reunión: ¿Frente aprobado? ¿Merch seleccionado? ¿Precios acordados? ¿Timelines?"></textarea>
+
+                                <h5 style="color: #333; margin-top: 15px; margin-bottom: 10px;">🎯 Action Items:</h5>
+                                <div id="merchActionItems" style="margin-bottom: 10px;"></div>
+                                <button onclick="addActionItemMerch()" style="padding: 6px 12px; background: #d882de; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 0.9rem;">+ Agregar tarea</button>
+
+                                <h5 style="color: #333; margin-top: 15px; margin-bottom: 10px;">📝 Notas adicionales:</h5>
+                                <textarea id="merchNotas" rows="3" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd; resize: vertical;" placeholder="Cualquier cosa importante que surgió..."></textarea>
+
+                                <button onclick="saveMerchSeguimiento()" style="margin-top: 15px; padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: 600;">💾 Guardar Seguimiento</button>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="cards-grid">
                         <div class="card">
                             <div class="card-header">
                                 <div class="card-icon">📅</div>
                                 <div class="card-title">Próxima Reunión</div>
                             </div>
-                            <div class="metric-value">Lunes 13hs</div>
-                            <div class="metric-label">Planning Session Semanal</div>
+                            <div class="metric-value">Viernes 8 Nov</div>
+                            <div class="metric-label">Review - 13:00hs</div>
                             <div class="metric-change positive">Equipo completo</div>
                         </div>
 
@@ -1776,19 +1855,19 @@
                                 <div class="card-icon">✅</div>
                                 <div class="card-title">Action Items</div>
                             </div>
-                            <div class="metric-value">5</div>
-                            <div class="metric-label">Pendientes esta semana</div>
-                            <div class="metric-change negative">2 retrasados</div>
+                            <div class="metric-value" id="totalActionItems">0</div>
+                            <div class="metric-label">Pendientes 5 Nov</div>
+                            <div class="metric-change negative" id="actionItemsStatus">Por completar</div>
                         </div>
 
                         <div class="card">
                             <div class="card-header">
                                 <div class="card-icon">🎯</div>
-                                <div class="card-title">Efectividad</div>
+                                <div class="card-title">Reuniones Hoy</div>
                             </div>
-                            <div class="metric-value">85%</div>
-                            <div class="metric-label">Decisiones implementadas</div>
-                            <div class="metric-change positive">Mejorando</div>
+                            <div class="metric-value">3</div>
+                            <div class="metric-label">Arquitectos + CENOTE + Merch</div>
+                            <div class="metric-change positive">Preparadas</div>
                         </div>
                     </div>
 
@@ -2081,6 +2160,254 @@
             firstAction.querySelector('input[type="date"]').value = '';
         }
 
+        // ====== FUNCIONES REUNIONES 5 NOVIEMBRE ======
+
+        // ARQUITECTOS
+        function addActionItemArq() {
+            const container = document.getElementById('arqActionItems');
+            const newItem = document.createElement('div');
+            newItem.style.cssText = 'display: flex; gap: 10px; margin-bottom: 10px; align-items: center;';
+            newItem.innerHTML = `
+                <input type="checkbox" style="width: 18px; height: 18px;">
+                <input type="text" placeholder="Descripción tarea..." style="flex: 1; padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                <select style="padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                    <option>Nico</option>
+                    <option>Sofi</option>
+                    <option>Javo</option>
+                    <option>Diego</option>
+                    <option>Mati</option>
+                    <option>Angie</option>
+                </select>
+                <input type="date" style="padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                <button onclick="this.parentElement.remove()" style="padding: 6px 10px; background: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer;">×</button>
+            `;
+            container.appendChild(newItem);
+        }
+
+        function saveArqSeguimiento() {
+            const decisiones = document.getElementById('arqDecisiones').value;
+            const notas = document.getElementById('arqNotas').value;
+
+            // Get action items
+            const actionItems = [];
+            const actionRows = document.querySelectorAll('#arqActionItems > div');
+            actionRows.forEach(row => {
+                const inputs = row.querySelectorAll('input, select');
+                const checkbox = inputs[0];
+                const task = inputs[1].value;
+                const assignee = inputs[2].value;
+                const deadline = inputs[3].value;
+
+                if (task) {
+                    actionItems.push({
+                        completed: checkbox.checked,
+                        task: task,
+                        assignee: assignee,
+                        deadline: deadline
+                    });
+                }
+            });
+
+            // Save to localStorage
+            localStorage.setItem('arqDecisiones', decisiones);
+            localStorage.setItem('arqNotas', notas);
+            localStorage.setItem('arqActionItems', JSON.stringify(actionItems));
+
+            alert('✅ Seguimiento Arquitectos guardado!\n\nDecisiones: ' + (decisiones ? 'Sí' : 'No') + '\nAction items: ' + actionItems.length);
+            updateTotalActionItems();
+        }
+
+        // CENOTE
+        function addActionItemCenote() {
+            const container = document.getElementById('cenoteActionItems');
+            const newItem = document.createElement('div');
+            newItem.style.cssText = 'display: flex; gap: 10px; margin-bottom: 10px; align-items: center;';
+            newItem.innerHTML = `
+                <input type="checkbox" style="width: 18px; height: 18px;">
+                <input type="text" placeholder="Descripción tarea..." style="flex: 1; padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                <select style="padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                    <option>Nico</option>
+                    <option>Diego</option>
+                    <option>Mati</option>
+                    <option>Angie</option>
+                    <option>Agus</option>
+                    <option>Sacha</option>
+                </select>
+                <input type="date" style="padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                <button onclick="this.parentElement.remove()" style="padding: 6px 10px; background: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer;">×</button>
+            `;
+            container.appendChild(newItem);
+        }
+
+        function saveCenoteSeguimiento() {
+            const decisiones = document.getElementById('cenoteDecisiones').value;
+            const notas = document.getElementById('cenoteNotas').value;
+
+            // Get action items
+            const actionItems = [];
+            const actionRows = document.querySelectorAll('#cenoteActionItems > div');
+            actionRows.forEach(row => {
+                const inputs = row.querySelectorAll('input, select');
+                const checkbox = inputs[0];
+                const task = inputs[1].value;
+                const assignee = inputs[2].value;
+                const deadline = inputs[3].value;
+
+                if (task) {
+                    actionItems.push({
+                        completed: checkbox.checked,
+                        task: task,
+                        assignee: assignee,
+                        deadline: deadline
+                    });
+                }
+            });
+
+            // Save to localStorage
+            localStorage.setItem('cenoteDecisiones', decisiones);
+            localStorage.setItem('cenoteNotas', notas);
+            localStorage.setItem('cenoteActionItems', JSON.stringify(actionItems));
+
+            alert('✅ Seguimiento CENOTE guardado!\n\nDecisiones: ' + (decisiones ? 'Sí' : 'No') + '\nAction items: ' + actionItems.length);
+            updateTotalActionItems();
+        }
+
+        // MERCHANDISING
+        function addActionItemMerch() {
+            const container = document.getElementById('merchActionItems');
+            const newItem = document.createElement('div');
+            newItem.style.cssText = 'display: flex; gap: 10px; margin-bottom: 10px; align-items: center;';
+            newItem.innerHTML = `
+                <input type="checkbox" style="width: 18px; height: 18px;">
+                <input type="text" placeholder="Descripción tarea..." style="flex: 1; padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                <select style="padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                    <option>Nico</option>
+                    <option>Rodrigo</option>
+                    <option>Angie</option>
+                    <option>Diego</option>
+                </select>
+                <input type="date" style="padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                <button onclick="this.parentElement.remove()" style="padding: 6px 10px; background: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer;">×</button>
+            `;
+            container.appendChild(newItem);
+        }
+
+        function saveMerchSeguimiento() {
+            const decisiones = document.getElementById('merchDecisiones').value;
+            const notas = document.getElementById('merchNotas').value;
+
+            // Get action items
+            const actionItems = [];
+            const actionRows = document.querySelectorAll('#merchActionItems > div');
+            actionRows.forEach(row => {
+                const inputs = row.querySelectorAll('input, select');
+                const checkbox = inputs[0];
+                const task = inputs[1].value;
+                const assignee = inputs[2].value;
+                const deadline = inputs[3].value;
+
+                if (task) {
+                    actionItems.push({
+                        completed: checkbox.checked,
+                        task: task,
+                        assignee: assignee,
+                        deadline: deadline
+                    });
+                }
+            });
+
+            // Save to localStorage
+            localStorage.setItem('merchDecisiones', decisiones);
+            localStorage.setItem('merchNotas', notas);
+            localStorage.setItem('merchActionItems', JSON.stringify(actionItems));
+
+            alert('✅ Seguimiento Merchandising guardado!\n\nDecisiones: ' + (decisiones ? 'Sí' : 'No') + '\nAction items: ' + actionItems.length);
+            updateTotalActionItems();
+        }
+
+        // Update total action items counter
+        function updateTotalActionItems() {
+            const arqItems = JSON.parse(localStorage.getItem('arqActionItems') || '[]');
+            const cenoteItems = JSON.parse(localStorage.getItem('cenoteActionItems') || '[]');
+            const merchItems = JSON.parse(localStorage.getItem('merchActionItems') || '[]');
+
+            const total = arqItems.length + cenoteItems.length + merchItems.length;
+            const completed = arqItems.filter(i => i.completed).length +
+                            cenoteItems.filter(i => i.completed).length +
+                            merchItems.filter(i => i.completed).length;
+
+            document.getElementById('totalActionItems').textContent = total;
+            document.getElementById('actionItemsStatus').textContent = completed + ' completados';
+
+            if (completed === total && total > 0) {
+                document.getElementById('actionItemsStatus').className = 'metric-change positive';
+            } else {
+                document.getElementById('actionItemsStatus').className = 'metric-change negative';
+            }
+        }
+
+        // Load saved data on page load
+        function loadReuniones5Nov() {
+            // Load Arquitectos
+            const arqDecisiones = localStorage.getItem('arqDecisiones');
+            const arqNotas = localStorage.getItem('arqNotas');
+            const arqItems = JSON.parse(localStorage.getItem('arqActionItems') || '[]');
+
+            if (arqDecisiones) document.getElementById('arqDecisiones').value = arqDecisiones;
+            if (arqNotas) document.getElementById('arqNotas').value = arqNotas;
+
+            arqItems.forEach(item => {
+                addActionItemArq();
+                const container = document.getElementById('arqActionItems');
+                const lastItem = container.lastElementChild;
+                const inputs = lastItem.querySelectorAll('input, select');
+                inputs[0].checked = item.completed;
+                inputs[1].value = item.task;
+                inputs[2].value = item.assignee;
+                inputs[3].value = item.deadline;
+            });
+
+            // Load CENOTE
+            const cenoteDecisiones = localStorage.getItem('cenoteDecisiones');
+            const cenoteNotas = localStorage.getItem('cenoteNotas');
+            const cenoteItems = JSON.parse(localStorage.getItem('cenoteActionItems') || '[]');
+
+            if (cenoteDecisiones) document.getElementById('cenoteDecisiones').value = cenoteDecisiones;
+            if (cenoteNotas) document.getElementById('cenoteNotas').value = cenoteNotas;
+
+            cenoteItems.forEach(item => {
+                addActionItemCenote();
+                const container = document.getElementById('cenoteActionItems');
+                const lastItem = container.lastElementChild;
+                const inputs = lastItem.querySelectorAll('input, select');
+                inputs[0].checked = item.completed;
+                inputs[1].value = item.task;
+                inputs[2].value = item.assignee;
+                inputs[3].value = item.deadline;
+            });
+
+            // Load Merchandising
+            const merchDecisiones = localStorage.getItem('merchDecisiones');
+            const merchNotas = localStorage.getItem('merchNotas');
+            const merchItems = JSON.parse(localStorage.getItem('merchActionItems') || '[]');
+
+            if (merchDecisiones) document.getElementById('merchDecisiones').value = merchDecisiones;
+            if (merchNotas) document.getElementById('merchNotas').value = merchNotas;
+
+            merchItems.forEach(item => {
+                addActionItemMerch();
+                const container = document.getElementById('merchActionItems');
+                const lastItem = container.lastElementChild;
+                const inputs = lastItem.querySelectorAll('input, select');
+                inputs[0].checked = item.completed;
+                inputs[1].value = item.task;
+                inputs[2].value = item.assignee;
+                inputs[3].value = item.deadline;
+            });
+
+            updateTotalActionItems();
+        }
+
         // Initialize
         updateDolarBlue();
         setInterval(updateDolarBlue, 300000); // Update every 5 minutes
@@ -2150,6 +2477,9 @@
             });
 
             console.log('✅ LocalStorage inicializado - Tus datos se guardan automáticamente');
+
+            // Load reuniones 5 Nov data
+            loadReuniones5Nov();
         });
 
         // BONUS: Función para LIMPIAR todo (útil para testing)

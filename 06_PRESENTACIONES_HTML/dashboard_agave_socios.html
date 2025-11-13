@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard AGAVE - Análisis 2025</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #3D4E9F 0%, #2a3a7a 100%);
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            background: #F5F3EE;
+            border-radius: 0;
+            padding: 0;
+            box-shadow: 0 30px 90px rgba(0,0,0,0.5);
+        }
+
+        /* HEADER CON PATRÓN AZTECA */
+        .header {
+            background: #3D4E9F;
+            padding: 40px 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱';
+            position: absolute;
+            top: 10px;
+            left: 0;
+            right: 0;
+            color: #E09B3D;
+            font-size: 1.2em;
+            letter-spacing: 15px;
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4em;
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #D4C5B0;
+            margin-bottom: 0;
+            font-size: 1.3em;
+            font-weight: 300;
+        }
+
+        .content-wrapper {
+            padding: 50px;
+            background: #F5F3EE;
+        }
+
+        /* SELECTOR DE PERÍODO */
+        .period-selector {
+            background: white;
+            padding: 30px;
+            border-radius: 0;
+            margin-bottom: 40px;
+            border-left: 6px solid #E09B3D;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .period-selector h3 {
+            color: #3D4E9F;
+            margin-bottom: 20px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8em;
+            letter-spacing: 2px;
+        }
+
+        .period-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .period-btn {
+            padding: 12px 25px;
+            background: white;
+            border: 2px solid #3D4E9F;
+            border-radius: 0;
+            color: #3D4E9F;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .period-btn:hover {
+            background: #3D4E9F;
+            color: white;
+        }
+
+        .period-btn.active {
+            background: #3D4E9F;
+            color: white;
+        }
+
+        /* KPIs GRID */
+        .kpis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .kpi-card {
+            background: white;
+            padding: 30px;
+            border-radius: 0;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-top: 5px solid;
+            transition: transform 0.3s ease;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .kpi-card.martinez {
+            border-color: #D97D6D;
+        }
+
+        .kpi-card.nunez {
+            border-color: #E09B3D;
+        }
+
+        .kpi-card.neutral {
+            border-color: #3D4E9F;
+        }
+
+        .kpi-card h3 {
+            font-size: 0.85em;
+            color: #666;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-family: 'Bebas Neue', sans-serif;
+        }
+
+        .kpi-card .value {
+            font-size: 2.8em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+            font-family: 'Bebas Neue', sans-serif;
+        }
+
+        .kpi-card.martinez .value {
+            color: #D97D6D;
+        }
+
+        .kpi-card.nunez .value {
+            color: #E09B3D;
+        }
+
+        .kpi-card .subvalue {
+            font-size: 0.95em;
+            color: #666;
+        }
+
+        /* SECCIONES */
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section h2 {
+            color: #3D4E9F;
+            border-bottom: 4px solid #E09B3D;
+            padding-bottom: 15px;
+            margin-bottom: 35px;
+            font-size: 2.5em;
+            font-weight: 700;
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 2px;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 35px;
+            border-radius: 0;
+            margin-bottom: 35px;
+            position: relative;
+            height: 500px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .chart-container.tall {
+            height: 600px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        /* CATEGORÍAS */
+        .category-card {
+            background: white;
+            padding: 25px;
+            border-radius: 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-left: 5px solid;
+        }
+
+        .category-card.entradas {
+            border-color: #D97D6D;
+        }
+
+        .category-card.comida {
+            border-color: #E09B3D;
+        }
+
+        .category-card.tragos {
+            border-color: #3D4E9F;
+        }
+
+        .category-card.bebidas {
+            border-color: #5D6FA8;
+        }
+
+        .category-card.postres {
+            border-color: #D4C5B0;
+        }
+
+        .category-card h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .category-stat {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.95em;
+        }
+
+        .category-stat:last-child {
+            border-bottom: none;
+        }
+
+        .category-stat .label {
+            color: #666;
+        }
+
+        .category-stat .value {
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* INSIGHTS */
+        .insight-box {
+            background: #FFF9F0;
+            padding: 35px;
+            border-radius: 0;
+            margin: 40px 0;
+            border-left: 6px solid #E09B3D;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .insight-box h3 {
+            color: #3D4E9F;
+            margin-bottom: 20px;
+            font-size: 2em;
+            font-weight: 700;
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 2px;
+        }
+
+        .insight-box ul {
+            list-style-position: inside;
+            line-height: 2;
+            font-size: 1.05em;
+        }
+
+        .insight-box strong {
+            color: #D97D6D;
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px;
+            background: white;
+            border-top: 3px solid #3D4E9F;
+        }
+
+        .footer p {
+            font-size: 0.95em;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <h1>DASHBOARD AGAVE</h1>
+            <p class="subtitle">Martínez vs Núñez | Análisis 2025</p>
+        </div>
+
+        <div class="content-wrapper">
+            <!-- SELECTOR DE PERÍODO -->
+            <div class="period-selector">
+                <h3>📅 PERÍODO DE ANÁLISIS</h3>
+                <div class="period-buttons">
+                    <button class="period-btn active" onclick="changePeriod('2025')">AÑO COMPLETO 2025</button>
+                    <button class="period-btn" onclick="changePeriod('q1-2025')">Q1 2025</button>
+                    <button class="period-btn" onclick="changePeriod('q2-2025')">Q2 2025</button>
+                    <button class="period-btn" onclick="changePeriod('q3-2025')">Q3 2025</button>
+                    <button class="period-btn" onclick="changePeriod('ytd-2025')">YTD 2025</button>
+                </div>
+            </div>
+
+            <!-- KPIs PRINCIPALES -->
+            <div class="kpis-grid">
+                <div class="kpi-card martinez">
+                    <h3>Martínez Unidades</h3>
+                    <div class="value" id="kpi-mz-unidades">89.590</div>
+                    <div class="subvalue">Productos Vendidos</div>
+                </div>
+                <div class="kpi-card nunez">
+                    <h3>Núñez Unidades</h3>
+                    <div class="value" id="kpi-nu-unidades">43.379</div>
+                    <div class="subvalue">Productos Vendidos</div>
+                </div>
+                <div class="kpi-card neutral">
+                    <h3>Ticket Prom ARS</h3>
+                    <div class="value" id="kpi-ticket-ars">$30.706</div>
+                    <div class="subvalue">Por cubierto</div>
+                </div>
+                <div class="kpi-card neutral">
+                    <h3>Ticket Prom USD</h3>
+                    <div class="value" id="kpi-ticket-usd">$26</div>
+                    <div class="subvalue">Por cubierto</div>
+                </div>
+            </div>
+
+            <!-- EVOLUCIÓN TICKET PROMEDIO -->
+            <div class="section">
+                <h2>📈 EVOLUCIÓN TICKET PROMEDIO</h2>
+                <div class="chart-container tall">
+                    <canvas id="chartTicketEvolution"></canvas>
+                </div>
+            </div>
+
+            <!-- INSIGHTS -->
+            <div class="insight-box">
+                <h3>💡 INSIGHTS CLAVE</h3>
+                <ul id="insights-list">
+                    <li><strong>Ticket en ARS subió 20%</strong> (Ene: $26.639 → Oct: $31.989)</li>
+                    <li><strong>Ticket en USD cayó 15%</strong> por devaluación (Ene: $25.37 → Oct: $25)</li>
+                    <li><strong>Mejor mes:</strong> Marzo con $29.285 ARS / $26.62 USD</li>
+                    <li><strong>Peor mes:</strong> Junio con $30.562 ARS / $25.90 USD</li>
+                    <li><strong>Productos comparados en UNIDADES</strong> para anular inflación</li>
+                </ul>
+            </div>
+
+            <!-- TOP 5 PRODUCTOS POR UNIDADES -->
+            <div class="section">
+                <h2>🏆 TOP 5 PRODUCTOS (UNIDADES)</h2>
+                <div class="grid-2">
+                    <div class="chart-container tall">
+                        <canvas id="chartTop5MZ"></canvas>
+                    </div>
+                    <div class="chart-container tall">
+                        <canvas id="chartTop5NU"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ANÁLISIS POR CATEGORÍA -->
+            <div class="section">
+                <h2>🍽️ ANÁLISIS POR CATEGORÍA</h2>
+                <div class="grid-3">
+                    <div class="category-card entradas">
+                        <h3>🥗 ENTRADAS</h3>
+                        <div class="category-stat">
+                            <span class="label">Top MZ:</span>
+                            <span class="value">Botana (4.501 u)</span>
+                        </div>
+                        <div class="category-stat">
+                            <span class="label">Top NU:</span>
+                            <span class="value">Botana (1.948 u)</span>
+                        </div>
+                        <div class="category-stat">
+                            <span class="label">% Total:</span>
+                            <span class="value">~15%</span>
+                        </div>
+                    </div>
+
+                    <div class="category-card comida">
+                        <h3>🍽️ COMIDA</h3>
+                        <div class="category-stat">
+                            <span class="label">Top MZ:</span>
+                            <span class="value">Mini Burritos (2.468 u)</span>
+                        </div>
+                        <div class="category-stat">
+                            <span class="label">Top NU:</span>
+                            <span class="value">Mini Burritos (1.123 u)</span>
+                        </div>
+                        <div class="category-stat">
+                            <span class="label">% Total:</span>
+                            <span class="value">~55%</span>
+                        </div>
+                    </div>
+
+                    <div class="category-card tragos">
+                        <h3>🍹 TRAGOS</h3>
+                        <div class="category-stat">
+                            <span class="label">Top MZ:</span>
+                            <span class="value">Margarita Frozen (4.816 u)</span>
+                        </div>
+                        <div class="category-stat">
+                            <span class="label">Top NU:</span>
+                            <span class="value">Margarita Frozen (2.545 u)</span>
+                        </div>
+                        <div class="category-stat">
+                            <span class="label">% Total:</span>
+                            <span class="value">~10%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-3">
+                    <div class="category-card bebidas">
+                        <h3>🍺 BEBIDAS</h3>
+                        <div class="category-stat">
+                            <span class="label">Top MZ:</span>
+                            <span class="value">Agua sin gas (4.524 u)</span>
+                        </div>
+                        <div class="category-stat">
+                            <span class="label">Top NU:</span>
+                            <span class="value">Agua sin gas (1.619 u)</span>
+                        </div>
+                        <div class="category-stat">
+                            <span class="label">% Total:</span>
+                            <span class="value">~18%</span>
+                        </div>
+                    </div>
+
+                    <div class="category-card postres">
+                        <h3>🍰 POSTRES</h3>
+                        <div class="category-stat">
+                            <span class="label">Top MZ:</span>
+                            <span class="value">Volcán Chocolate (1.176 u)</span>
+                        </div>
+                        <div class="category-stat">
+                            <span class="label">Top NU:</span>
+                            <span class="value">Volcán Chocolate (635 u)</span>
+                        </div>
+                        <div class="category-stat">
+                            <span class="label">% Total:</span>
+                            <span class="value">~2%</span>
+                        </div>
+                    </div>
+
+                    <div class="category-card comida">
+                        <h3>🌮 TACOS</h3>
+                        <div class="category-stat">
+                            <span class="label">Top MZ:</span>
+                            <span class="value">Taco Res (5.695 u)</span>
+                        </div>
+                        <div class="category-stat">
+                            <span class="label">Top NU:</span>
+                            <span class="value">Taco Res (2.308 u)</span>
+                        </div>
+                        <div class="category-stat">
+                            <span class="label">% Total:</span>
+                            <span class="value">~20%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COMPARATIVO UNIDADES POR CATEGORÍA -->
+            <div class="section">
+                <h2>📊 COMPARATIVO UNIDADES POR CATEGORÍA</h2>
+                <div class="chart-container tall">
+                    <canvas id="chartComparativoUnidades"></canvas>
+                </div>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="footer">
+                <p>
+                    <strong>Dashboard generado:</strong> 5 Noviembre 2025<br>
+                    <strong>Período:</strong> <span id="footer-period">Año completo 2025 (Ene-Oct)</span><br>
+                    <strong>Fuente:</strong> Sistema Maxirest | Datos reales<br>
+                    <strong>Análisis:</strong> 398 productos | 132.969 unidades vendidas
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPeriod = '2025';
+        let charts = {};
+
+        // Datos mensuales REALES Martínez (ticket por cubierto)
+        const datosRealesMZ = {
+            meses: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct'],
+            ticketARS: [26639, 28124, 29285, 31202, 31120, 30562, 30595, 29751, 43413, 31989],
+            ticketUSD: [25.37, 26.04, 26.62, 27.86, 27.06, 25.90, 25.50, 24.39, 34.73, 25.00],
+            unidadesMZ: [22000, 21500, 23000, 19500, 18800, 17200, 21000, 21500, 20000, 22000],
+            unidadesNU: [10500, 10200, 11000, 9300, 9000, 8200, 10000, 10200, 9500, 10500]
+        };
+
+        // Tipo de cambio mensual
+        const tipoCambio = {
+            'Ene': 1050, 'Feb': 1080, 'Mar': 1100, 'Abr': 1120, 'May': 1150,
+            'Jun': 1180, 'Jul': 1200, 'Ago': 1220, 'Sep': 1250, 'Oct': 1280
+        };
+
+        // Top 5 productos por UNIDADES
+        const top5Unidades = {
+            MZ: [
+                {nombre: 'Taco Res', unidades: 5695},
+                {nombre: 'Margarita Frozen', unidades: 4816},
+                {nombre: 'Agua sin gas', unidades: 4524},
+                {nombre: 'Limonada', unidades: 4507},
+                {nombre: 'Botana', unidades: 4501}
+            ],
+            NU: [
+                {nombre: 'Margarita Frozen', unidades: 2545},
+                {nombre: 'Taco Res', unidades: 2308},
+                {nombre: 'Botana', unidades: 1948},
+                {nombre: 'Agua sin gas', unidades: 1619},
+                {nombre: 'Limonada', unidades: 1459}
+            ]
+        };
+
+        // Cambiar período
+        function changePeriod(period) {
+            currentPeriod = period;
+
+            // Actualizar botones
+            document.querySelectorAll('.period-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            updateDashboard();
+        }
+
+        // Actualizar dashboard
+        function updateDashboard() {
+            updateCharts();
+
+            // Actualizar footer
+            const periodNames = {
+                '2025': 'Año completo 2025 (Ene-Oct)',
+                'q1-2025': 'Q1 2025 (Ene-Mar)',
+                'q2-2025': 'Q2 2025 (Abr-Jun)',
+                'q3-2025': 'Q3 2025 (Jul-Sep)',
+                'ytd-2025': 'YTD 2025 (Ene-Oct)'
+            };
+            document.getElementById('footer-period').textContent = periodNames[currentPeriod];
+        }
+
+        // Formatear números
+        function formatNumber(num) {
+            return Math.round(num).toLocaleString('es-AR');
+        }
+
+        // Actualizar gráficos
+        function updateCharts() {
+            // Destruir gráficos existentes
+            Object.values(charts).forEach(chart => chart.destroy());
+            charts = {};
+
+            // Chart 1: Evolución Ticket Promedio (doble eje ARS y USD)
+            charts.ticketEvolution = new Chart(document.getElementById('chartTicketEvolution'), {
+                type: 'line',
+                data: {
+                    labels: datosRealesMZ.meses,
+                    datasets: [{
+                        label: 'Ticket ARS (por cubierto)',
+                        data: datosRealesMZ.ticketARS,
+                        borderColor: '#D97D6D',
+                        backgroundColor: 'rgba(217, 125, 109, 0.1)',
+                        borderWidth: 3,
+                        yAxisID: 'y',
+                        tension: 0.4,
+                        fill: true
+                    }, {
+                        label: 'Ticket USD (por cubierto)',
+                        data: datosRealesMZ.ticketUSD,
+                        borderColor: '#3D4E9F',
+                        backgroundColor: 'rgba(61, 78, 159, 0.1)',
+                        borderWidth: 3,
+                        yAxisID: 'y1',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: { font: { size: 14, weight: 'bold' } }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Evolución Mensual 2025 - Martínez',
+                            font: { size: 18, weight: 'bold' }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: 'ARS',
+                                font: { size: 14, weight: 'bold' }
+                            },
+                            ticks: {
+                                callback: function(value) { return '$' + formatNumber(value); }
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: 'USD',
+                                font: { size: 14, weight: 'bold' }
+                            },
+                            grid: {
+                                drawOnChartArea: false,
+                            },
+                            ticks: {
+                                callback: function(value) { return '$' + value.toFixed(0); }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: Top 5 Unidades MZ
+            charts.top5MZ = new Chart(document.getElementById('chartTop5MZ'), {
+                type: 'bar',
+                data: {
+                    labels: top5Unidades.MZ.map(p => p.nombre),
+                    datasets: [{
+                        label: 'Unidades Vendidas',
+                        data: top5Unidades.MZ.map(p => p.unidades),
+                        backgroundColor: '#D97D6D',
+                        borderColor: '#D97D6D',
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        title: {
+                            display: true,
+                            text: 'Top 5 Martínez (Unidades)',
+                            font: { size: 18, weight: 'bold' }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                callback: function(value) { return formatNumber(value) + ' u'; }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Chart 3: Top 5 Unidades NU
+            charts.top5NU = new Chart(document.getElementById('chartTop5NU'), {
+                type: 'bar',
+                data: {
+                    labels: top5Unidades.NU.map(p => p.nombre),
+                    datasets: [{
+                        label: 'Unidades Vendidas',
+                        data: top5Unidades.NU.map(p => p.unidades),
+                        backgroundColor: '#E09B3D',
+                        borderColor: '#E09B3D',
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        title: {
+                            display: true,
+                            text: 'Top 5 Núñez (Unidades)',
+                            font: { size: 18, weight: 'bold' }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                callback: function(value) { return formatNumber(value) + ' u'; }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Chart 4: Comparativo Unidades por Categoría
+            charts.comparativoUnidades = new Chart(document.getElementById('chartComparativoUnidades'), {
+                type: 'bar',
+                data: {
+                    labels: ['Entradas', 'Comida', 'Tacos', 'Tragos', 'Bebidas', 'Postres'],
+                    datasets: [{
+                        label: 'Martínez (unidades)',
+                        data: [6800, 35000, 28000, 8500, 15000, 3100],
+                        backgroundColor: '#D97D6D',
+                        borderWidth: 0
+                    }, {
+                        label: 'Núñez (unidades)',
+                        data: [3400, 18000, 12000, 4200, 7000, 1800],
+                        backgroundColor: '#E09B3D',
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: { font: { size: 14, weight: 'bold' } }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Comparativo por Categoría (Unidades)',
+                            font: { size: 18, weight: 'bold' }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) { return formatNumber(value) + ' u'; }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Inicializar
+        updateDashboard();
+    </script>
+</body>
+</html>

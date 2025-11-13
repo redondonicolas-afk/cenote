@@ -1,0 +1,207 @@
+id,rubro,nomrub,subrubro,nomsub,codigo,nombre,unidades,precio,venta
+0000001,0,,0,,0,Art. Inexistente,415,0,"6718410,02"
+ 1    1,1,Bebidas s/a,0,,1,Agua sin gas,1619,0,"4167152,22"
+ 1    2,1,Bebidas s/a,0,,2,Agua con gas,514,0,"1363450,32"
+ 1    3,1,Bebidas s/a,0,,3,Pepsi,1,0,3050
+ 1    4,1,Bebidas s/a,0,,4,Pepsi light,1,0,"0,34"
+ 1    5,1,Bebidas s/a,0,,5,7up,2,0,"3350,34"
+ 1    8,1,Bebidas s/a,0,,8,Paso Tonica,1,0,"0,34"
+ 1    9,1,Bebidas s/a,0,,9,Paso DLT pomelo,2,0,4690
+ 1   10,1,Bebidas s/a,0,,10,Corona,1070,0,"4684432,83"
+ 1   13,1,Bebidas s/a,0,,13,Michelada,303,0,"1694508,44"
+ 1   27,1,Bebidas s/a,0,,27,Margarita FROZEN,2545,0,"11270220,7"
+ 1   28,1,Bebidas s/a,0,,28,Caipiroska,181,0,"1314942,08"
+ 1   29,1,Bebidas s/a,0,,29,Caipiroska maracuya,272,0,"2186303,72"
+ 1   30,1,Bebidas s/a,0,,30,Caipirinha,156,0,"1084610,03"
+ 1   31,1,Bebidas s/a,0,,31,Caipirinha maracuya,66,0,"563662,91"
+ 1   32,1,Bebidas s/a,0,,32,Daiquiri,236,0,"1746139,66"
+ 1   33,1,Bebidas s/a,0,,33,Mojito,187,0,"1379354,25"
+ 1   34,1,Bebidas s/a,0,,34,Mojito maracuya,1,0,8000
+ 1   35,1,Bebidas s/a,0,,35,Cuba libre,21,0,"81149,6"
+ 1   37,1,Bebidas s/a,0,,37,Fernet cola,275,0,"727190,74"
+ 1   38,1,Bebidas s/a,0,,38,Fernet amigos,1,0,4675
+ 1   39,1,Bebidas s/a,0,,39,MEXICAN Bulldog,410,0,"6819284,41"
+ 1   40,1,Bebidas s/a,0,,40,Medio Mexican,29,0,254000
+ 1   41,1,Bebidas s/a,0,,41,TEXAS Bulldog,72,0,"1379697,65"
+ 1   42,1,Bebidas s/a,0,,42,Medio texas,6,0,60400
+ 1   44,1,Bebidas s/a,0,,44,Gin tonic,306,0,"1748518,88"
+ 1   45,1,Bebidas s/a,0,,45,Negroni,25,0,"160003,95"
+ 1   46,1,Bebidas s/a,0,,46,Aperol Spritz,252,0,"1606379,9"
+ 1   47,1,Bebidas s/a,0,,47,Campari,64,0,"410013,65"
+ 1   48,1,Bebidas s/a,0,,48,Pisco sour,70,0,"545831,65"
+ 1   49,1,Bebidas s/a,0,,49,Old Fashioned,14,0,"124120,99"
+ 1   50,1,Bebidas s/a,0,,50,Cynar julep,124,0,"924534,8"
+ 1   53,1,Bebidas s/a,0,,53,Skyy,5,0,"7529,08"
+ 1   54,1,Bebidas s/a,0,,54,Ron Barcelo,1,0,3450
+ 1   55,1,Bebidas s/a,0,,55,Cuervo silver,4,0,40240
+ 1   56,1,Bebidas s/a,0,,56,Patron silver,10,0,"54287,6"
+ 1   57,1,Bebidas s/a,0,,57,DF,102,0,228650
+ 1   61,1,Bebidas s/a,0,,61,Johnnie Red,2,0,10380
+ 1   62,1,Bebidas s/a,0,,62,Johnnie Black,4,0,36000
+ 1   63,1,Bebidas s/a,0,,63,Jim Beam,2,0,10000
+ 1   64,1,Bebidas s/a,0,,64,Jack Daniels,2,0,14600
+ 1   65,1,Bebidas s/a,0,,65,Tanqueray,5,0,17640
+ 1   66,1,Bebidas s/a,0,,66,Beefeater gin,12,0,"37460,82"
+ 1   68,1,Bebidas s/a,0,,68,Fernet,4,0,"6846,16"
+ 1   69,1,Bebidas s/a,0,,69,Jagermeister,7,0,"4,9"
+ 1   71,1,Bebidas s/a,0,,71,Patron cafe,1,0,15250
+ 1   74,1,Bebidas s/a,0,,74,Cuervo gold,13,0,128350
+ 1   75,1,Bebidas s/a,0,,75,Patron reposado,5,0,120000
+ 1   76,1,Bebidas s/a,0,,76,Cuervo tradicional,1,0,11680
+ 1   79,1,Bebidas s/a,0,,79,Paloma,53,0,541072
+ 1   80,1,Bebidas s/a,0,,80,Margarita Agave,262,0,"2801164,19"
+ 1   81,1,Bebidas s/a,0,,81,Mojito Picante,23,0,"265067,28"
+ 1   82,1,Bebidas s/a,0,,82,Oaxacan Old Fashioned,15,0,210260
+ 1  119,1,Bebidas s/a,0,,119,Copa vino,34,0,"178384,69"
+ 1  125,1,Bebidas s/a,0,,125,Baileys,1,0,"0,63"
+ 1  136,1,Bebidas s/a,0,,136,Licuado,225,0,"1059790,72"
+ 1  137,1,Bebidas s/a,0,,137,Limonada,1459,0,"6065735,42"
+ 1  138,1,Bebidas s/a,0,,138,J. Naranja,72,0,348051
+ 1  139,1,Bebidas s/a,0,,139,Jugo Pomelo,7,0,35750
+ 1  206,1,Bebidas s/a,0,,206,Negroni Agave,30,0,"258300,98"
+ 1  207,1,Bebidas s/a,0,,207,Capiroska Picante,25,0,"243138,63"
+ 1  212,1,Bebidas s/a,0,,212,"Limonada Jarra 1,5",141,0,"1061951,07"
+ 1  231,1,Bebidas s/a,0,,231,MARGA XL,17,0,211300
+ 1  232,1,Bebidas s/a,0,,232,DAIQUIRI XL,8,0,115700
+ 1  277,1,Bebidas s/a,0,,277,Luna malbec,16,0,"217753,85"
+ 1  278,1,Bebidas s/a,0,,278,Luna chardonnay,4,0,54300
+ 1  279,1,Bebidas s/a,0,,279,Cordero cabernet,7,0,97400
+ 1  280,1,Bebidas s/a,0,,280,Santa Julia chenin dulce,1,0,13900
+ 1  281,1,Bebidas s/a,0,,281,Lagarde malbec,3,0,69600
+ 1  282,1,Bebidas s/a,0,,282,Pispi blend,2,0,"34505,45"
+ 1  283,1,Bebidas s/a,0,,283,La Linda extra brut,2,0,37660
+ 1  284,1,Bebidas s/a,0,,284,Nicasia malbec,27,0,"354007,46"
+ 1  285,1,Bebidas s/a,0,,285,Mezcal Montelobos,1,0,22000
+ 1  287,1,Bebidas s/a,0,,287,Baileys Frozen,8,0,105465
+ 1  291,1,Bebidas s/a,0,,291,Marga,199,0,"1134110,9"
+ 1  310,1,Bebidas s/a,0,,310,Sombrero Negro silver,2,0,10000
+ 1  311,1,Bebidas s/a,0,,311,Corralejo bco,5,0,48500
+ 1  312,1,Bebidas s/a,0,,312,Corralejo repos,3,0,34500
+ 1  322,1,Bebidas s/a,0,,322,BOT Corralejo bco,1,0,128050
+ 1  345,1,Bebidas s/a,0,,345,Amarula,1,0,"0,72"
+ 1  358,1,Bebidas s/a,0,,358,Patron añejo,1,0,25000
+ 1  362,1,Bebidas s/a,0,,362,Mezcal DF,8,0,79200
+ 1  368,1,Bebidas s/a,0,,368,ADTonica,9,0,25460
+ 1  377,1,Bebidas s/a,0,,377,Mint Julep,10,0,97200
+ 1  378,1,Bebidas s/a,0,,378,Bloody Mary,44,0,"442902,18"
+ 1  379,1,Bebidas s/a,0,,379,Brandy Crusta,12,0,120800
+ 1  380,1,Bebidas s/a,0,,380,Don Julio blanco,14,0,271600
+ 1  383,1,Bebidas s/a,0,,383,Bucket Corona,41,0,847680
+ 1  405,1,Bebidas s/a,0,,405,Sombrero Negro gold,11,0,50600
+ 1  418,1,Bebidas s/a,0,,418,Mexic BEER,905,0,"3052640,78"
+ 1  419,1,Bebidas s/a,0,,419,Scotch BEER,345,0,"1233421,72"
+ 1  500,1,Bebidas s/a,0,,500,IPA BEER,698,0,"2447335,88"
+ 1  501,1,Bebidas s/a,0,,501,Mexic (Lata),23,0,"105638,73"
+ 1  502,1,Bebidas s/a,0,,502,Scotch Ness (Lata),9,0,"44279,46"
+ 1  503,1,Bebidas s/a,0,,503,Honey (Lata),22,0,"106378,01"
+ 1  504,1,Bebidas s/a,0,,504,Ipa (Lata),30,0,"140387,8"
+ 1  505,1,Bebidas s/a,0,,505,Golden (Lata),10,0,"47545,55"
+ 1  506,1,Bebidas s/a,0,,506,Red Ipa (Lata),15,0,"67865,48"
+ 1  507,1,Bebidas s/a,0,,507,Chala Lager (Lata),8,0,"37168,31"
+ 1  509,1,Bebidas s/a,0,,509,Coca,1035,0,"3138299,43"
+ 1  510,1,Bebidas s/a,0,,510,Coca Zero,1076,0,"3214171,97"
+ 1  511,1,Bebidas s/a,0,,511,Sprite,260,0,"805255,02"
+ 1  512,1,Bebidas s/a,0,,512,Sprite Zero,124,0,"372756,96"
+ 1  513,1,Bebidas s/a,0,,513,Schw Tonica,20,0,65000
+ 1  514,1,Bebidas s/a,0,,514,Schw Pom Zero,23,0,"74752,8"
+ 1  515,1,Bebidas s/a,0,,515,Fanta Zero,56,0,"171011,4"
+ 2   94,2,Comida,0,,94,Ronda Salsas,17,0,"33181,96"
+ 2  156,2,Comida,0,,156,Mini Burritos x3,1123,0,"17637068,4"
+ 2  157,2,Comida,0,,157,Quesadillas,450,0,"4970893,49"
+ 2  158,2,Comida,0,,158,Quesadilla Pollo,494,0,"7233549,25"
+ 2  159,2,Comida,0,,159,Quesadilla Res,207,0,"2805190,77"
+ 2  160,2,Comida,0,,160,Media Quesa Pollo,8,0,60200
+ 2  161,2,Comida,0,,161,Media Quesa,5,0,"23650,31"
+ 2  162,2,Comida,0,,162,Media Quesa Res,7,0,"37251,5"
+ 2  163,2,Comida,0,,163,Kid Burrito,45,0,"609890,23"
+ 2  164,2,Comida,0,,164,Quesadilla Veggie,153,0,"2043051,31"
+ 2  165,2,Comida,0,,165,Media Quesa Veggie,2,0,"1,46"
+ 2  166,2,Comida,0,,166,Nachos Tex Mex,678,0,"10910339,6"
+ 2  167,2,Comida,0,,167,Nachos Agave,255,0,"3498970,32"
+ 2  176,2,Comida,0,,176,Mix Fajitas,419,0,"17937010,1"
+ 2  177,2,Comida,0,,177,Medio Mix Fajitas,102,0,"2154791,71"
+ 2  178,2,Comida,0,,178,Fajitas Res,106,0,"4315983,13"
+ 2  179,2,Comida,0,,179,Medio Fajitas Res,22,0,"353155,57"
+ 2  180,2,Comida,0,,180,Fajitas de Pollo,29,0,"1365878,11"
+ 2  181,2,Comida,0,,181,Medio Fajitas Pollo,10,0,"182904,62"
+ 2  182,2,Comida,0,,182,Fajitas Veggie,23,0,884600
+ 2  183,2,Comida,0,,183,Medio Fajitas Veggie,9,0,"138176,81"
+ 2  184,2,Comida,0,,184,Botana,1948,0,"74548603,1"
+ 2  185,2,Comida,0,,185,Media Botana,49,0,"931533,81"
+ 2  186,2,Comida,0,,186,Ensalada Caesar SIN pollo,4,0,"21238,35"
+ 2  187,2,Comida,0,,187,Ensalada Caesar c pollo,49,0,"636192,18"
+ 2  188,2,Comida,0,,188,Ensalada Agave,148,0,"2090120,96"
+ 2  193,2,Comida,0,,193,Papas Fritas,418,0,"2795374,85"
+ 2  195,2,Comida,0,,195,------------------------------,194,0,"1957679,01"
+ 2  197,2,Comida,0,,197,Cubiertos,162,0,3702951
+ 2  198,2,Comida,0,,198,Flautas,758,0,"5561210,25"
+ 2  199,2,Comida,0,,199,PROM Flauta,4,0,15750
+ 2  200,2,Comida,0,,200,Kids Quesadilla,61,0,"814330,92"
+ 2  201,2,Comida,0,,201,Kids Flauta,50,0,"682948,88"
+ 2  202,2,Comida,0,,202,Adic Queso fundido,18,0,"72300,44"
+ 2  208,2,Comida,0,,208,Huevos Rancheros,101,0,"821009,83"
+ 2  210,2,Comida,0,,210,Wrap Pollo,83,0,"1323369,09"
+ 2  211,2,Comida,0,,211,Wrap Veggie,54,0,"859591,17"
+ 2  216,2,Comida,0,,216,Choclo,231,0,"1266813,8"
+ 2  217,2,Comida,0,,217,Chilly Poppers,161,0,"1158670,5"
+ 2  219,2,Comida,0,,219,Guacamole strips,694,0,"7969818,31"
+ 2  224,2,Comida,0,,224,Ensalada Tijuana,41,0,"584734,85"
+ 2  288,2,Comida,0,,288,Guacamole 300gr,9,0,105100
+ 2  519,2,Comida,0,,519,Nachos C,22,0,"519001,39"
+ 2  520,2,Comida,0,,520,Nachos G,31,0,"624009,45"
+ 2  523,2,Comida,0,,523,Fajitas C,24,0,"1425107,05"
+ 2  524,2,Comida,0,,524,Fajitas G,31,0,"1679883,07"
+ 2  525,2,Comida,0,,525,Botana C,84,0,"3979646,4"
+ 2  526,2,Comida,0,,526,Botana G,296,0,"13483648,2"
+ 2  550,2,Comida,0,,550,Burro XL Carnitas,596,0,"11429717,4"
+ 2  551,2,Comida,0,,551,Burro XL Pollo,178,0,"3437771,05"
+ 2  552,2,Comida,0,,552,Burro XL Veggie,118,0,"2145221,61"
+ 2  553,2,Comida,0,,553,Burro XL Cerdo,201,0,"3877398,45"
+ 2  600,2,Comida,0,,600,Quesa Hongos,133,0,"1561957,32"
+ 2  601,2,Comida,0,,601,Quesa Cerdo,17,0,274000
+ 2  602,2,Comida,0,,602,Quesa Lango,60,0,"897503,67"
+ 2 1000,2,Comida,0,,1000,Menu Quesa,376,0,"6120698,65"
+ 2 1001,2,Comida,0,,1001,Menu Ensalada,59,0,"941603,2"
+ 2 1002,2,Comida,0,,1002,Menu Burro XL,67,0,"919564,95"
+ 2 1004,2,Comida,0,,1004,Menu Ranch,1,0,"3,9"
+ 2 1007,2,Comida,0,,1007,Botana menu 5,14,0,1349000
+ 2 1008,2,Comida,0,,1008,Botana menu 7,1,0,115000
+ 2 1009,2,Comida,0,,1009,Menu E1,651,0,"10763904,8"
+ 2 1010,2,Comida,0,,1010,Menu E2,29,0,494000
+ 2 1011,2,Comida,0,,1011,Menu E3,202,0,3342000
+ 2 1012,2,Comida,0,,1012,Burro Carnita menu,384,0,"6280003,2"
+ 2 1013,2,Comida,0,,1013,Burro Pollo menu,172,0,"2840001,76"
+ 2 1014,2,Comida,0,,1014,Burro Veggie menu,64,0,"1030401,6"
+ 2 1015,2,Comida,0,,1015,Burro Cerdo menu,186,0,"3033601,6"
+ 3  105,3,Postres,0,,105,Te,16,0,"32400,22"
+ 3  126,3,Postres,0,,126,Helado,10,0,"33342,5"
+ 3  127,3,Postres,0,,127,Medio helado,92,0,"112563,31"
+ 3  128,3,Postres,0,,128,Key lime pie,277,0,"1735173,94"
+ 3  129,3,Postres,0,,129,Copa oreo,43,0,"253238,24"
+ 3  130,3,Postres,0,,130,Sundae,2,0,13400
+ 3  131,3,Postres,0,,131,Tacos sundae,51,0,"255097,64"
+ 3  132,3,Postres,0,,132,Volcan chocolate,635,0,"4487223,17"
+ 3  134,3,Postres,0,,134,Volcan picante,73,0,"529763,87"
+ 3  135,3,Postres,0,,135,Volcan dulce de leche,195,0,"1244172,48"
+ 3  357,3,Postres,0,,357,Cafe Lavazza,329,0,"973981,33"
+ 3  527,3,Postres,0,,527,Taco Oreo,76,0,"365054,7"
+ 4  103,4,Merchandising,0,,103,Botellita Picante ahumado,2,0,26600
+ 5   73,5,Mercaderia,0,,73,PAQ Tortillas Maiz,4,0,43150
+ 5  226,5,Mercaderia,0,,226,PAQ Tortillas Trigo CH,1,0,8200
+ 7   83,7,UPGRADE Tequila,0,,83,AD Cuervo bco,26,0,"129660,51"
+ 7   84,7,UPGRADE Tequila,0,,84,AD Cuervo dor,1,0,5500
+ 7   85,7,UPGRADE Tequila,0,,85,AD Cuervo Tradic,18,0,"116450,48"
+ 7  228,7,UPGRADE Tequila,0,,228,AD Corralejo reposado,3,0,20910
+ 7  234,7,UPGRADE Tequila,0,,234,AD Sombrero silver,4,0,"1386,36"
+ 8  168,8,Tacos,0,,168,Taco Res,2308,0,"10393542,5"
+ 8  169,8,Tacos,0,,169,Taco Pollo,1267,0,"5665572,31"
+ 8  170,8,Tacos,0,,170,Taco Cerdo,607,0,"3285079,63"
+ 8  171,8,Tacos,0,,171,Taco Veggie,413,0,1908882
+ 8  172,8,Tacos,0,,172,Taco Langostino,757,0,"3880820,23"
+ 8  174,8,Tacos,0,,174,Taco Pastor,1298,0,"6993932,04"
+ 8  175,8,Tacos,0,,175,Taco Gobernador,931,0,"4864411,87"
+ 8  190,8,Tacos,0,,190,Tacos Clasicos,1090,0,"15473797,4"
+ 8  192,8,Tacos,0,,192,Tacos Agave,1382,0,"22919436,4"
+ 8  413,8,Tacos,0,,413,Taco Pescado,110,0,"514808,5"
+ 8 1003,8,Tacos,0,,1003,Menu Tacos,872,0,"14129216,3"
+10   95,10,Salsas,0,,95,Guacamole,204,0,"510134,38"

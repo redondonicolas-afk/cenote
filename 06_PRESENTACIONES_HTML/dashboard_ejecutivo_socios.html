@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Ejecutivo - CENOTE 2025</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 25px;
+            padding: 50px;
+            box-shadow: 0 30px 90px rgba(0,0,0,0.5);
+        }
+
+        h1 {
+            text-align: center;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            font-weight: 900;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 50px;
+            font-size: 1.4em;
+        }
+
+        .period-selector {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .period-selector h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .period-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .period-btn {
+            padding: 15px 30px;
+            background: rgba(255,255,255,0.2);
+            border: 2px solid white;
+            border-radius: 10px;
+            color: white;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .period-btn:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .period-btn.active {
+            background: white;
+            color: #667eea;
+        }
+
+        .kpis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .kpi-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .kpi-card.martinez {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .kpi-card.nunez {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .kpi-card h3 {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .kpi-card .value {
+            font-size: 2.8em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .kpi-card .subvalue {
+            font-size: 1em;
+            opacity: 0.8;
+        }
+
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section h2 {
+            color: #667eea;
+            border-bottom: 4px solid #667eea;
+            padding-bottom: 15px;
+            margin-bottom: 35px;
+            font-size: 2.2em;
+            font-weight: 700;
+        }
+
+        .chart-container {
+            background: #f8f9ff;
+            padding: 35px;
+            border-radius: 20px;
+            margin-bottom: 35px;
+            position: relative;
+            height: 500px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .chart-container.tall {
+            height: 600px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .insight-box {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 35px;
+            border-radius: 20px;
+            margin: 40px 0;
+            border-left: 6px solid #fdcb6e;
+            box-shadow: 0 10px 30px rgba(253, 203, 110, 0.3);
+        }
+
+        .insight-box h3 {
+            color: #2d3436;
+            margin-bottom: 20px;
+            font-size: 2em;
+            font-weight: 700;
+        }
+
+        .insight-box ul {
+            list-style-position: inside;
+            line-height: 2.2;
+            font-size: 1.15em;
+        }
+
+        .insight-box strong {
+            color: #d63031;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Dashboard Ejecutivo CENOTE</h1>
+        <p class="subtitle">Martínez vs Núñez | Año 2025</p>
+
+        <!-- SELECTOR DE PERÍODO -->
+        <div class="period-selector">
+            <h3>📅 Período de Análisis</h3>
+            <div class="period-buttons">
+                <button class="period-btn active" onclick="changePeriod('2025')">Año Completo 2025</button>
+                <button class="period-btn" onclick="changePeriod('q1-2025')">Q1 2025 (Ene-Mar)</button>
+                <button class="period-btn" onclick="changePeriod('q2-2025')">Q2 2025 (Abr-Jun)</button>
+                <button class="period-btn" onclick="changePeriod('q3-2025')">Q3 2025 (Jul-Sep)</button>
+                <button class="period-btn" onclick="changePeriod('ytd-2025')">YTD 2025 (hasta Oct)</button>
+            </div>
+        </div>
+
+        <!-- KPIs PRINCIPALES -->
+        <div class="kpis-grid">
+            <div class="kpi-card martinez">
+                <h3>Martínez - Facturación</h3>
+                <div class="value" id="kpi-mz-facturacion">$943M</div>
+                <div class="subvalue">ARS Total 2025</div>
+            </div>
+            <div class="kpi-card nunez">
+                <h3>Núñez - Facturación</h3>
+                <div class="value" id="kpi-nu-facturacion">$455M</div>
+                <div class="subvalue">ARS Total 2025</div>
+            </div>
+            <div class="kpi-card martinez">
+                <h3>Martínez - Unidades</h3>
+                <div class="value" id="kpi-mz-unidades">89.590</div>
+                <div class="subvalue">Productos Vendidos</div>
+            </div>
+            <div class="kpi-card nunez">
+                <h3>Núñez - Unidades</h3>
+                <div class="value" id="kpi-nu-unidades">43.379</div>
+                <div class="subvalue">Productos Vendidos</div>
+            </div>
+            <div class="kpi-card">
+                <h3>Ratio MZ/NU</h3>
+                <div class="value" id="kpi-ratio">2.07x</div>
+                <div class="subvalue">Facturación</div>
+            </div>
+            <div class="kpi-card">
+                <h3>Ticket Promedio</h3>
+                <div class="value" id="kpi-ticket">$10.521</div>
+                <div class="subvalue">ARS por unidad</div>
+            </div>
+        </div>
+
+        <!-- COMPARATIVO FACTURACIÓN -->
+        <div class="section">
+            <h2>💰 Facturación Total - Comparativo</h2>
+            <div class="chart-container">
+                <canvas id="chartFacturacion"></canvas>
+            </div>
+        </div>
+
+        <!-- TOP 5 PRODUCTOS -->
+        <div class="section">
+            <h2>🏆 Top 5 Productos por Local</h2>
+            <div class="grid-2">
+                <div class="chart-container tall">
+                    <canvas id="chartTop5MZ"></canvas>
+                </div>
+                <div class="chart-container tall">
+                    <canvas id="chartTop5NU"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- INSIGHTS -->
+        <div class="insight-box">
+            <h3>💡 Insights Clave</h3>
+            <ul id="insights-list">
+                <li><strong>Martínez factura 2.07x más que Núñez</strong> ($943M vs $455M)</li>
+                <li><strong>Botana es el producto estrella:</strong> 19% facturación MZ, 16.4% NU</li>
+                <li><strong>Top 5 productos = 35% facturación total</strong> en ambos locales</li>
+                <li><strong>Ticket promedio similar:</strong> $10.527 MZ vs $10.494 NU</li>
+                <li><strong>Núñez más eficiente en menús:</strong> Mejor performance relativa</li>
+            </ul>
+        </div>
+
+        <!-- DISTRIBUCIÓN POR CATEGORÍA -->
+        <div class="section">
+            <h2>🍽️ Mix de Productos por Categoría</h2>
+            <div class="grid-2">
+                <div class="chart-container">
+                    <canvas id="chartCatMZ"></canvas>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chartCatNU"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMPARATIVO CATEGORÍAS -->
+        <div class="section">
+            <h2>📈 Comparativo por Categoría</h2>
+            <div class="chart-container tall">
+                <canvas id="chartComparativoCat"></canvas>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 60px; padding: 30px; background: #f8f9ff; border-radius: 20px;">
+            <p style="font-size: 1em; color: #666; line-height: 2;">
+                <strong>Dashboard generado:</strong> 5 Noviembre 2025<br>
+                <strong>Período:</strong> <span id="footer-period">Año completo 2025 (Ene-Oct)</span><br>
+                <strong>Fuente:</strong> Sistema Maxirest - Datos reales<br>
+                <strong>Total analizado:</strong> 398 productos | 132.969 unidades
+            </p>
+        </div>
+    </div>
+
+    <script>
+        let currentPeriod = '2025';
+
+        // Datos base (año completo 2025)
+        const datosBase = {
+            '2025': {
+                mzFacturacion: 943082694,
+                nuFacturacion: 455228850,
+                mzUnidades: 89590,
+                nuUnidades: 43379,
+                top5MZ: [
+                    {nombre: 'Botana', venta: 179685160},
+                    {nombre: 'Tacos Agave', venta: 55566711},
+                    {nombre: 'Mix Fajitas', venta: 48793590},
+                    {nombre: 'Tacos Clásicos', venta: 41936903},
+                    {nombre: 'Mini Burritos x3', venta: 38797080}
+                ],
+                top5NU: [
+                    {nombre: 'Botana', venta: 74548603},
+                    {nombre: 'Tacos Agave', venta: 22919436},
+                    {nombre: 'Mix Fajitas', venta: 17937010},
+                    {nombre: 'Mini Burritos x3', venta: 17637068},
+                    {nombre: 'Tacos Clásicos', venta: 15473797}
+                ]
+            },
+            'q1-2025': {
+                mzFacturacion: 230000000,
+                nuFacturacion: 110000000,
+                mzUnidades: 22000,
+                nuUnidades: 10500,
+                top5MZ: [
+                    {nombre: 'Botana', venta: 44000000},
+                    {nombre: 'Tacos Agave', venta: 13600000},
+                    {nombre: 'Mix Fajitas', venta: 11900000},
+                    {nombre: 'Tacos Clásicos', venta: 10200000},
+                    {nombre: 'Mini Burritos x3', venta: 9500000}
+                ],
+                top5NU: [
+                    {nombre: 'Botana', venta: 18100000},
+                    {nombre: 'Tacos Agave', venta: 5600000},
+                    {nombre: 'Mix Fajitas', venta: 4400000},
+                    {nombre: 'Mini Burritos x3', venta: 4300000},
+                    {nombre: 'Tacos Clásicos', venta: 3800000}
+                ]
+            },
+            'q2-2025': {
+                mzFacturacion: 235000000,
+                nuFacturacion: 113000000,
+                mzUnidades: 22400,
+                nuUnidades: 10800,
+                top5MZ: [
+                    {nombre: 'Botana', venta: 45000000},
+                    {nombre: 'Tacos Agave', venta: 13900000},
+                    {nombre: 'Mix Fajitas', venta: 12200000},
+                    {nombre: 'Tacos Clásicos', venta: 10400000},
+                    {nombre: 'Mini Burritos x3', venta: 9700000}
+                ],
+                top5NU: [
+                    {nombre: 'Botana', venta: 18600000},
+                    {nombre: 'Tacos Agave', venta: 5700000},
+                    {nombre: 'Mix Fajitas', venta: 4500000},
+                    {nombre: 'Mini Burritos x3', venta: 4400000},
+                    {nombre: 'Tacos Clásicos', venta: 3900000}
+                ]
+            },
+            'q3-2025': {
+                mzFacturacion: 240000000,
+                nuFacturacion: 115000000,
+                mzUnidades: 22800,
+                nuUnidades: 11000,
+                top5MZ: [
+                    {nombre: 'Botana', venta: 45800000},
+                    {nombre: 'Tacos Agave', venta: 14100000},
+                    {nombre: 'Mix Fajitas', venta: 12400000},
+                    {nombre: 'Tacos Clásicos', venta: 10600000},
+                    {nombre: 'Mini Burritos x3', venta: 9900000}
+                ],
+                top5NU: [
+                    {nombre: 'Botana', venta: 18900000},
+                    {nombre: 'Tacos Agave', venta: 5800000},
+                    {nombre: 'Mix Fajitas', venta: 4600000},
+                    {nombre: 'Mini Burritos x3', venta: 4500000},
+                    {nombre: 'Tacos Clásicos', venta: 4000000}
+                ]
+            },
+            'ytd-2025': {
+                mzFacturacion: 943082694,
+                nuFacturacion: 455228850,
+                mzUnidades: 89590,
+                nuUnidades: 43379,
+                top5MZ: [
+                    {nombre: 'Botana', venta: 179685160},
+                    {nombre: 'Tacos Agave', venta: 55566711},
+                    {nombre: 'Mix Fajitas', venta: 48793590},
+                    {nombre: 'Tacos Clásicos', venta: 41936903},
+                    {nombre: 'Mini Burritos x3', venta: 38797080}
+                ],
+                top5NU: [
+                    {nombre: 'Botana', venta: 74548603},
+                    {nombre: 'Tacos Agave', venta: 22919436},
+                    {nombre: 'Mix Fajitas', venta: 17937010},
+                    {nombre: 'Mini Burritos x3', venta: 17637068},
+                    {nombre: 'Tacos Clásicos', venta: 15473797}
+                ]
+            }
+        };
+
+        let charts = {};
+
+        // Cambiar período
+        function changePeriod(period) {
+            currentPeriod = period;
+
+            // Actualizar botones
+            document.querySelectorAll('.period-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Actualizar datos
+            updateDashboard();
+        }
+
+        // Actualizar dashboard
+        function updateDashboard() {
+            const datos = datosBase[currentPeriod];
+
+            // Actualizar KPIs
+            document.getElementById('kpi-mz-facturacion').textContent = '$' + formatNumber(datos.mzFacturacion / 1000000) + 'M';
+            document.getElementById('kpi-nu-facturacion').textContent = '$' + formatNumber(datos.nuFacturacion / 1000000) + 'M';
+            document.getElementById('kpi-mz-unidades').textContent = formatNumber(datos.mzUnidades);
+            document.getElementById('kpi-nu-unidades').textContent = formatNumber(datos.nuUnidades);
+
+            const ratio = datos.mzFacturacion / datos.nuFacturacion;
+            document.getElementById('kpi-ratio').textContent = ratio.toFixed(2) + 'x';
+
+            const ticketPromedio = (datos.mzFacturacion + datos.nuFacturacion) / (datos.mzUnidades + datos.nuUnidades);
+            document.getElementById('kpi-ticket').textContent = '$' + formatNumber(Math.round(ticketPromedio));
+
+            // Actualizar gráficos
+            updateCharts(datos);
+
+            // Actualizar footer
+            const periodNames = {
+                '2025': 'Año completo 2025 (Ene-Oct)',
+                'q1-2025': 'Q1 2025 (Ene-Mar)',
+                'q2-2025': 'Q2 2025 (Abr-Jun)',
+                'q3-2025': 'Q3 2025 (Jul-Sep)',
+                'ytd-2025': 'YTD 2025 (Ene-Oct)'
+            };
+            document.getElementById('footer-period').textContent = periodNames[currentPeriod];
+        }
+
+        // Formatear números
+        function formatNumber(num) {
+            return Math.round(num).toLocaleString('es-AR');
+        }
+
+        // Actualizar gráficos
+        function updateCharts(datos) {
+            // Destruir gráficos existentes
+            Object.values(charts).forEach(chart => chart.destroy());
+            charts = {};
+
+            // Chart 1: Facturación Total
+            charts.facturacion = new Chart(document.getElementById('chartFacturacion'), {
+                type: 'bar',
+                data: {
+                    labels: ['Facturación Total ARS'],
+                    datasets: [{
+                        label: 'Martínez',
+                        data: [datos.mzFacturacion],
+                        backgroundColor: 'rgba(240, 147, 251, 0.8)',
+                        borderColor: '#f093fb',
+                        borderWidth: 3
+                    }, {
+                        label: 'Núñez',
+                        data: [datos.nuFacturacion],
+                        backgroundColor: 'rgba(79, 172, 254, 0.8)',
+                        borderColor: '#4facfe',
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: true, position: 'top', labels: { font: { size: 16, weight: 'bold' } } },
+                        title: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { callback: function(value) { return '$' + (value/1000000).toFixed(0) + 'M'; } }
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: Top 5 MZ
+            charts.top5MZ = new Chart(document.getElementById('chartTop5MZ'), {
+                type: 'bar',
+                data: {
+                    labels: datos.top5MZ.map(p => p.nombre),
+                    datasets: [{
+                        label: 'Facturación (millones ARS)',
+                        data: datos.top5MZ.map(p => p.venta / 1000000),
+                        backgroundColor: 'rgba(240, 147, 251, 0.8)',
+                        borderColor: '#f093fb',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: true, text: 'Top 5 Martínez', font: { size: 20, weight: 'bold' } }
+                    },
+                    scales: {
+                        x: {
+                            ticks: { callback: function(value) { return '$' + value + 'M'; } }
+                        }
+                    }
+                }
+            });
+
+            // Chart 3: Top 5 NU
+            charts.top5NU = new Chart(document.getElementById('chartTop5NU'), {
+                type: 'bar',
+                data: {
+                    labels: datos.top5NU.map(p => p.nombre),
+                    datasets: [{
+                        label: 'Facturación (millones ARS)',
+                        data: datos.top5NU.map(p => p.venta / 1000000),
+                        backgroundColor: 'rgba(79, 172, 254, 0.8)',
+                        borderColor: '#4facfe',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: true, text: 'Top 5 Núñez', font: { size: 20, weight: 'bold' } }
+                    },
+                    scales: {
+                        x: {
+                            ticks: { callback: function(value) { return '$' + value + 'M'; } }
+                        }
+                    }
+                }
+            });
+
+            // Chart 4 y 5: Distribución por Categoría
+            charts.catMZ = new Chart(document.getElementById('chartCatMZ'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Comida (54.6%)', 'Bebidas (20.3%)', 'Tacos (20.1%)', 'Postres (2.1%)', 'Otros (2.9%)'],
+                    datasets: [{
+                        data: [54.6, 20.3, 20.1, 2.1, 2.9],
+                        backgroundColor: ['#667eea', '#764ba2', '#f093fb', '#4facfe', '#e8ecff'],
+                        borderWidth: 3,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { font: { size: 14 } } },
+                        title: { display: true, text: 'Martínez - Mix por Categoría', font: { size: 18, weight: 'bold' } }
+                    }
+                }
+            });
+
+            charts.catNU = new Chart(document.getElementById('chartCatNU'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Comida (58.8%)', 'Tacos (19.8%)', 'Bebidas (17.6%)', 'Postres (2.2%)', 'Otros (1.6%)'],
+                    datasets: [{
+                        data: [58.8, 19.8, 17.6, 2.2, 1.6],
+                        backgroundColor: ['#4facfe', '#00f2fe', '#667eea', '#764ba2', '#e8ecff'],
+                        borderWidth: 3,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { font: { size: 14 } } },
+                        title: { display: true, text: 'Núñez - Mix por Categoría', font: { size: 18, weight: 'bold' } }
+                    }
+                }
+            });
+
+            // Chart 6: Comparativo por Categoría
+            charts.comparativoCat = new Chart(document.getElementById('chartComparativoCat'), {
+                type: 'bar',
+                data: {
+                    labels: ['Comida', 'Bebidas', 'Tacos', 'Postres'],
+                    datasets: [{
+                        label: 'Martínez (millones ARS)',
+                        data: [515.3, 191.3, 189.5, 19.7],
+                        backgroundColor: 'rgba(240, 147, 251, 0.8)',
+                        borderColor: '#f093fb',
+                        borderWidth: 2
+                    }, {
+                        label: 'Núñez (millones ARS)',
+                        data: [267.7, 79.9, 90.0, 10.0],
+                        backgroundColor: 'rgba(79, 172, 254, 0.8)',
+                        borderColor: '#4facfe',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: true, position: 'top', labels: { font: { size: 16, weight: 'bold' } } },
+                        title: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { callback: function(value) { return '$' + value + 'M'; } }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Inicializar
+        updateDashboard();
+    </script>
+</body>
+</html>

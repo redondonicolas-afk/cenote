@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reunión Merchandising - Rodrigo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #e0e0e0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #f093fb;
+        }
+
+        .meta {
+            font-size: 1.1em;
+            color: #888;
+            margin-top: 10px;
+        }
+
+        .context {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 2px solid #4facfe;
+        }
+
+        .context h2 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .context-content {
+            color: white;
+            font-size: 1.05em;
+        }
+
+        .context ul {
+            margin-left: 25px;
+            margin-top: 10px;
+        }
+
+        .context li {
+            margin-bottom: 8px;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section h2 {
+            color: #f093fb;
+            font-size: 1.8em;
+        }
+
+        .timing {
+            background: rgba(240, 147, 251, 0.2);
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            color: #f093fb;
+        }
+
+        .subsection {
+            margin: 20px 0;
+            padding-left: 20px;
+            border-left: 3px solid #f093fb;
+        }
+
+        .subsection h3 {
+            color: #4facfe;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .checklist {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .checklist li {
+            margin: 12px 0;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .checklist li:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(5px);
+        }
+
+        .checklist input[type="checkbox"] {
+            width: 24px;
+            height: 24px;
+            margin-right: 15px;
+            cursor: pointer;
+            accent-color: #f093fb;
+        }
+
+        .info-box {
+            background: rgba(79, 172, 254, 0.15);
+            border: 2px solid #4facfe;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .info-box strong {
+            color: #4facfe;
+        }
+
+        .alert {
+            background: rgba(255, 193, 7, 0.2);
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .alert strong {
+            color: #ffc107;
+        }
+
+        .flow-diagram {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-family: monospace;
+            font-size: 0.95em;
+            text-align: center;
+            border: 2px dashed #4facfe;
+        }
+
+        .actions {
+            background: rgba(240, 147, 251, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .actions h3 {
+            color: #f093fb;
+            margin-bottom: 15px;
+        }
+
+        .action-item {
+            padding: 10px;
+            margin: 8px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+        }
+
+        .action-item input[type="checkbox"] {
+            margin-right: 12px;
+            width: 20px;
+            height: 20px;
+            accent-color: #4facfe;
+        }
+
+        .materials {
+            background: rgba(255, 193, 7, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .materials h3 {
+            color: #ffc107;
+            margin-bottom: 15px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+            .section {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 REUNIÓN MERCHANDISING</h1>
+            <div class="meta">
+                <strong>Con Rodrigo - Fecha a Coordinar</strong><br>
+                Participantes: Nico + Rodrigo<br>
+                Duración: 1 hora
+            </div>
+        </header>
+
+        <div class="context">
+            <h2>🎯 CONTEXTO</h2>
+            <div class="context-content">
+                <strong>QUIÉN ES RODRIGO:</strong>
+                <ul>
+                    <li>Proveedor de confianza</li>
+                    <li>Hizo todo el frente Núñez con herrero amigo</li>
+                    <li>Experiencia: armado locales (guitarra Hard Rock Cafe)</li>
+                    <li>Buena onda con Nico</li>
+                </ul>
+                <strong style="display: block; margin-top: 15px;">QUÉ NECESITAMOS:</strong>
+                <ul>
+                    <li>Cambios frente local Martínez</li>
+                    <li>Cotización merch Agave</li>
+                    <li>Establecer como proveedor principal merch</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- APERTURA -->
+        <div class="section">
+            <div class="section-header">
+                <h2>1️⃣ APERTURA & CONTEXTO</h2>
+                <span class="timing">5 min</span>
+            </div>
+
+            <div class="subsection">
+                <h3>Nico:</h3>
+                <ul class="checklist">
+                    <li><input type="checkbox"> Agradecimiento por trabajo Núñez</li>
+                    <li><input type="checkbox"> Contarle visión CENOTE: scaling a 5 locales</li>
+                    <li><input type="checkbox"> Rodrigo como proveedor estratégico merch</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- FRENTE MARTÍNEZ -->
+        <div class="section">
+            <div class="section-header">
+                <h2>2️⃣ FRENTE LOCAL MARTÍNEZ - REDISEÑO</h2>
+                <span class="timing">30 min</span>
+            </div>
+
+            <div class="subsection">
+                <h3>A. UBICACIÓN & CONTEXTO</h3>
+                <div class="info-box">
+                    <strong>Local:</strong> Av. Libertador 14186, Martínez, Buenos Aires<br>
+                    <strong>Tipo:</strong> Local esquina<br>
+                    <strong>Referencia:</strong> Casa matriz CENOTE<br>
+                    <strong>Objetivo:</strong> Maximizar visibilidad desde ambas calles
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>B. CAMBIOS CARTELES CORPÓREOS</h3>
+
+                <div class="info-box">
+                    <strong>Estado actual:</strong><br>
+                    Carteles con "AGAVE" + "Taquería"<br>
+                    Ubicación: Nico tiene foto + dibujo
+                </div>
+
+                <div class="alert">
+                    <strong>Cambios requeridos:</strong>
+                </div>
+
+                <ul class="checklist">
+                    <li><input type="checkbox"> ❌ <strong>SACAR "Taquería"</strong> de ambos carteles principales</li>
+                    <li><input type="checkbox"> ✅ <strong>"Taquería"</strong> relocar al fondo del local</li>
+                    <li><input type="checkbox"> ✅ Nueva ubicación: Patio tequilero/margaritero (zona cocina)</li>
+                </ul>
+
+                <div class="info-box" style="margin-top: 15px;">
+                    <strong>Mejores prácticas carteles esquina:</strong><br>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>✅ Banderolas (perpendiculares fachada) = visibilidad todos ángulos</li>
+                        <li>✅ Ideal para esquinas</li>
+                        <li>Considerar: ancho calle, zona de paso, horas luz solar, orientación</li>
+                        <li>Evitar: zonas tapadas por árboles, sin visibilidad</li>
+                    </ul>
+                </div>
+
+                <div class="materials">
+                    <strong>Materiales a mostrar:</strong>
+                    <ul class="checklist">
+                        <li><input type="checkbox"> Nico muestra foto actual</li>
+                        <li><input type="checkbox"> Nico muestra dibujo de cómo lo imagina</li>
+                        <li><input type="checkbox"> Rodrigo aporta expertise orientación/visibilidad</li>
+                    </ul>
+                </div>
+
+                <div class="actions">
+                    <h3>Decisiones esperadas:</h3>
+                    <div class="action-item">
+                        <input type="checkbox"> Diseño final carteles definido
+                    </div>
+                    <div class="action-item">
+                        <input type="checkbox"> Cotización cambios: $______
+                    </div>
+                    <div class="action-item">
+                        <input type="checkbox"> Timeline ejecución: ______ a ______
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>C. OTROS TEMAS FRENTE</h3>
+                <ul class="checklist">
+                    <li><input type="checkbox"> ¿Hay otros elementos del frente a mejorar?</li>
+                    <li><input type="checkbox"> ¿Iluminación? (tema luces pendiente con otro proveedor)</li>
+                    <li><input type="checkbox"> ¿Herrería?</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- LISTADO MERCH -->
+        <div class="section">
+            <div class="section-header">
+                <h2>3️⃣ LISTADO MERCH AGAVE</h2>
+                <span class="timing">20 min</span>
+            </div>
+
+            <div class="subsection">
+                <h3>A. CONTEXTO DISEÑOS</h3>
+                <div class="info-box">
+                    <strong>Diseños existentes:</strong><br>
+                    Hechos por: Art Comunicaciones (agencia MKT)<br>
+                    Ubicación: Google Drive oficina CENOTE<br>
+                    Responsables Drive: Diego + Angie
+                </div>
+
+                <div class="alert">
+                    <strong>⚠️ Pendiente chequear:</strong> Confirmar que todo esté en Drive
+                </div>
+
+                <div class="materials">
+                    <h3>Acción pre-reunión:</h3>
+                    <ul class="checklist">
+                        <li><input type="checkbox"> Nico debe conseguir diseños de Angie/Diego</li>
+                        <li><input type="checkbox"> Traer a reunión con Rodrigo</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>B. PRODUCTOS MERCH AGAVE</h3>
+                <div class="info-box">
+                    <strong>Categorías (Nico debe definir antes de reunión):</strong>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Remeras</li>
+                        <li>Gorras</li>
+                        <li>Vasos/Merch bar</li>
+                        <li>Bolsas</li>
+                        <li>Delantales staff</li>
+                        <li>Otros</li>
+                    </ul>
+                </div>
+
+                <ul class="checklist">
+                    <li><input type="checkbox"> Para cada producto: mostrar diseño</li>
+                    <li><input type="checkbox"> Rodrigo cotiza</li>
+                    <li><input type="checkbox"> Cantidades mínimas</li>
+                    <li><input type="checkbox"> Timeline producción</li>
+                </ul>
+            </div>
+
+            <div class="subsection">
+                <h3>C. PROCESO PEDIDO</h3>
+                <ul class="checklist">
+                    <li><input type="checkbox"> ¿Cómo se hace el pedido?</li>
+                    <li><input type="checkbox"> ¿Tiempos de entrega?</li>
+                    <li><input type="checkbox"> ¿Formas de pago?</li>
+                    <li><input type="checkbox"> ¿Mínimos por producto?</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SISTEMA PROVEEDORES -->
+        <div class="section">
+            <div class="section-header">
+                <h2>4️⃣ SISTEMA PROVEEDORES - NUEVA DINÁMICA</h2>
+                <span class="timing">15 min</span>
+            </div>
+
+            <div class="subsection">
+                <h3>A. CÓMO VA A FUNCIONAR</h3>
+                <div class="alert">
+                    <strong>Nico comunica a Rodrigo:</strong>
+                </div>
+
+                <ol style="margin-left: 25px; margin-top: 15px; color: #e0e0e0;">
+                    <li style="margin-bottom: 8px;"><strong>Contacto inicial:</strong> Nico conecta proveedores</li>
+                    <li style="margin-bottom: 8px;"><strong>Seguimiento:</strong> Angie (oficina CENOTE) hace todo el seguimiento</li>
+                    <li style="margin-bottom: 8px;"><strong>Autorización marca:</strong> Solo Angie o Diego autorizan uso documentos marca</li>
+                    <li style="margin-bottom: 8px;"><strong>Gestión:</strong> Agus (experta proveedores) apoya a Angie</li>
+                    <li style="margin-bottom: 8px;"><strong>Nadie más</strong> puede usar marca sin autorización</li>
+                </ol>
+
+                <div class="flow-diagram">
+                    Rodrigo → Nico (intro) → Angie (seguimiento) → Angie/Diego (aprobar) → Producción
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>B. LO QUE SIGNIFICA PARA RODRIGO</h3>
+                <ul class="checklist">
+                    <li><input type="checkbox"> Contacto principal: <strong>Angie</strong> (no Nico)</li>
+                    <li><input type="checkbox"> Nico re-envía info, luego Angie continúa</li>
+                    <li><input type="checkbox"> Sistema profesional y escalable</li>
+                    <li><input type="checkbox"> CENOTE creciendo: más oportunidades futuras</li>
+                </ul>
+            </div>
+
+            <div class="subsection">
+                <h3>C. OTROS PROVEEDORES</h3>
+                <div class="info-box">
+                    <strong>Nico informa:</strong><br>
+                    Equipo CENOTE aportará más proveedores merch<br>
+                    Sacha, Mati, oficina tienen contactos<br>
+                    Rodrigo = proveedor principal pero no exclusivo<br>
+                    Sistema centralizado con Angie
+                </div>
+            </div>
+        </div>
+
+        <!-- CIERRE -->
+        <div class="section">
+            <div class="section-header">
+                <h2>✅ PRÓXIMOS PASOS & CIERRE</h2>
+                <span class="timing">10 min</span>
+            </div>
+
+            <div class="actions">
+                <h3>RESUMEN DECISIONES:</h3>
+                <div class="action-item">
+                    <input type="checkbox"> Diseño carteles frente Martínez: DEFINIDO/PENDIENTE
+                </div>
+                <div class="action-item">
+                    <input type="checkbox"> Cotización carteles: $______
+                </div>
+                <div class="action-item">
+                    <input type="checkbox"> Timeline carteles: ______ a ______
+                </div>
+                <div class="action-item">
+                    <input type="checkbox"> Listado merch cotizado: SÍ/NO
+                </div>
+                <div class="action-item">
+                    <input type="checkbox"> Contacto futuro: Angie (confirmar datos contacto)
+                </div>
+            </div>
+
+            <div class="actions" style="margin-top: 20px;">
+                <h3>ACCIONES POST-REUNIÓN - RODRIGO:</h3>
+                <div class="action-item">
+                    <input type="checkbox"> Cotización formal carteles frente
+                </div>
+                <div class="action-item">
+                    <input type="checkbox"> Cotización merch (si se vieron diseños)
+                </div>
+                <div class="action-item">
+                    <input type="checkbox"> Timeline de producción
+                </div>
+                <div class="action-item">
+                    <input type="checkbox"> Enviar todo a: Angie (email/WhatsApp)
+                </div>
+            </div>
+
+            <div class="actions" style="margin-top: 20px;">
+                <h3>ACCIONES POST-REUNIÓN - NICO:</h3>
+                <div class="action-item">
+                    <input type="checkbox"> Re-enviar info Rodrigo a Angie
+                </div>
+                <div class="action-item">
+                    <input type="checkbox"> Angie toma ownership seguimiento
+                </div>
+                <div class="action-item">
+                    <input type="checkbox"> [Pre-reunión] Conseguir diseños merch de Drive
+                </div>
+            </div>
+
+            <div class="actions" style="margin-top: 20px;">
+                <h3>ACCIONES POST-REUNIÓN - ANGIE:</h3>
+                <div class="action-item">
+                    <input type="checkbox"> Seguimiento con Rodrigo
+                </div>
+                <div class="action-item">
+                    <input type="checkbox"> Coordinar producción
+                </div>
+                <div class="action-item">
+                    <input type="checkbox"> Autorizar uso marca según necesidad
+                </div>
+            </div>
+
+            <div style="margin-top: 30px; padding: 20px; background: rgba(240, 147, 251, 0.2); border-radius: 10px; text-align: center;">
+                <strong style="color: #f093fb; font-size: 1.2em;">PRÓXIMA INTERACCIÓN: Rodrigo → Angie (seguimiento)</strong><br>
+                <span style="color: #888; font-size: 0.9em;">Nico solo si es necesario escalar algo</span>
+            </div>
+        </div>
+
+        <!-- MATERIALES NECESARIOS -->
+        <div class="materials">
+            <h3>📸 MATERIALES NECESARIOS PARA REUNIÓN</h3>
+            <strong style="display: block; margin-bottom: 10px;">PARA LLEVAR:</strong>
+            <ul class="checklist">
+                <li><input type="checkbox"> Foto frente actual Martínez</li>
+                <li><input type="checkbox"> Dibujo/boceto que hizo Nico</li>
+                <li><input type="checkbox"> Diseños merch Art Comunicaciones (si están en Drive)</li>
+                <li><input type="checkbox"> Datos contacto Angie (email + WhatsApp)</li>
+            </ul>
+
+            <strong style="display: block; margin: 15px 0 10px 0;">PARA PEDIR A RODRIGO:</strong>
+            <ul class="checklist">
+                <li><input type="checkbox"> Portfolio trabajos anteriores (si no lo tiene)</li>
+                <li><input type="checkbox"> Referencias de clientes</li>
+                <li><input type="checkbox"> Catálogo productos merch que puede hacer</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            Preparado por: Claude + Nico | 4 Noviembre 2025 | CENOTE
+        </div>
+    </div>
+
+    <script>
+        // Auto-save checkbox states to localStorage
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+        checkboxes.forEach((checkbox, index) => {
+            const savedState = localStorage.getItem(`checkbox-merch-${index}`);
+            if (savedState === 'true') {
+                checkbox.checked = true;
+            }
+
+            checkbox.addEventListener('change', function() {
+                localStorage.setItem(`checkbox-merch-${index}`, this.checked);
+            });
+        });
+    </script>
+</body>
+</html>

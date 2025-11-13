@@ -1,0 +1,2367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Negocios CENOTE - Inversores</title>
+    <style>
+        @media print {
+            body { margin: 0; }
+            .page-break { page-break-before: always; }
+            @page { margin: 2cm; }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: white;
+        }
+
+        .cover {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .cover h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .cover h2 {
+            font-size: 2em;
+            margin-bottom: 30px;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .cover .tagline {
+            font-size: 1.3em;
+            margin-top: 40px;
+            opacity: 0.8;
+            font-style: italic;
+            max-width: 800px;
+        }
+
+        .cover .confidential {
+            margin-top: 60px;
+            font-size: 0.9em;
+            opacity: 0.7;
+        }
+
+        .section {
+            padding: 60px 80px;
+            min-height: 100vh;
+        }
+
+        .section.short {
+            min-height: auto;
+            padding: 40px 80px;
+        }
+
+        h1.section-title {
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 40px;
+            border-bottom: 4px solid #667eea;
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: #764ba2;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            font-size: 1.4em;
+            color: #555;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+
+        .highlight-box {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 5px;
+        }
+
+        .highlight-box.success {
+            border-left-color: #27ae60;
+            background: #eafaf1;
+        }
+
+        .highlight-box.warning {
+            border-left-color: #e74c3c;
+            background: #fadbd8;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .stat-card .number {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .stat-card .label {
+            font-size: 1em;
+            color: #666;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 1em;
+        }
+
+        table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        table tr:hover {
+            background: #f0f0f0;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 30px 0;
+            margin: 40px 0;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 50px;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: #667eea;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 5px;
+            width: 17px;
+            height: 17px;
+            border-radius: 50%;
+            background: #667eea;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #667eea;
+        }
+
+        .timeline-item h3 {
+            margin-top: 0;
+            color: #667eea;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 30px 0;
+        }
+
+        .checkmark {
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .cross {
+            color: #e74c3c;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .investment-ask {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px;
+            border-radius: 20px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .investment-ask h2 {
+            color: white;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .investment-ask .amount {
+            font-size: 4em;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+
+        .investment-ask .details {
+            font-size: 1.3em;
+            margin: 15px 0;
+            opacity: 0.95;
+        }
+
+        .page-number {
+            text-align: center;
+            color: #999;
+            font-size: 0.9em;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- PORTADA -->
+<div class="cover">
+    <h1>CENOTE</h1>
+    <h2>Plan de Negocios</h2>
+    <p style="font-size: 1.5em; margin: 20px 0;">Inversión en Franquiciadora Gastronómica Premium</p>
+    <p style="font-size: 1.5em; margin: 20px 0;">Marca AGAVE</p>
+    <div class="tagline">
+        "Transformando la experiencia gastronómica mexicana en Argentina"
+    </div>
+    <div class="confidential">
+        Documento confidencial para inversores | Noviembre 2025
+    </div>
+</div>
+
+<!-- RESUMEN EJECUTIVO -->
+<div class="section page-break">
+    <h1 class="section-title">Resumen Ejecutivo</h1>
+
+    <p style="font-size: 1.2em; line-height: 1.8; margin-bottom: 30px;">
+        <strong>CENOTE</strong> es la empresa madre que explota la marca <strong>AGAVE</strong>,
+        cadena de restaurantes mexicanos premium con 15 años de trayectoria en Argentina.
+        Actualmente opera 2 locales rentables (Martínez y Núñez) con facturación anual de
+        US$ 2.52M y busca inversión para expandir 3 locales adicionales en CABA.
+    </p>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="number">15</div>
+            <div class="label">Años de Experiencia</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">2</div>
+            <div class="label">Locales Operativos</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">$2.52M</div>
+            <div class="label">Facturación Anual USD</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">15%</div>
+            <div class="label">Margen EBITDA</div>
+        </div>
+    </div>
+
+    <h2>Ventajas Competitivas</h2>
+
+    <div class="two-column">
+        <div>
+            <ul>
+                <li><span class="checkmark">✓</span> <strong>Modelo validado</strong>: 2 locales rentables operando con 15% margen</li>
+                <li><span class="checkmark">✓</span> <strong>Equipo experimentado</strong>: 15 años construyendo marca y procesos</li>
+                <li><span class="checkmark">✓</span> <strong>Timing perfecto</strong>: Mercado premium en crecimiento, pre-saturación</li>
+            </ul>
+        </div>
+        <div>
+            <ul>
+                <li><span class="checkmark">✓</span> <strong>Inversión escalonada</strong>: Validación progresiva de performance</li>
+                <li><span class="checkmark">✓</span> <strong>Visión ecosystem</strong>: Potencial valuación US$ 100M+ largo plazo</li>
+                <li><span class="checkmark">✓</span> <strong>Procesos sólidos</strong>: Tecnología + operaciones optimizadas</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="highlight-box success">
+        <h3>Oportunidad Única</h3>
+        <p style="font-size: 1.15em;">
+            Invertir en una franquiciadora gastronómica consolidada con modelo probado,
+            equipo experimentado y plan de expansión claro en uno de los segmentos de
+            mayor crecimiento en CABA.
+        </p>
+    </div>
+</div>
+
+<!-- HISTORIA Y TRAYECTORIA -->
+<div class="section page-break">
+    <h1 class="section-title">Historia y Trayectoria</h1>
+
+    <p style="font-size: 1.1em; margin-bottom: 30px;">
+        CENOTE nace de 15 años de experiencia en el rubro gastronómico, evolucionando
+        desde una franquicia fallida hasta convertirse en una operación gastronómica
+        sólida basada en procesos y calidad.
+    </p>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <h3>2008 - Los Inicios</h3>
+            <p>Taco Box Nordelta: Primera experiencia (franquicia fallida) que enseñó todo lo que NO hacer en gastronomía</p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>2011 - Nacimiento de AGAVE</h3>
+            <p>Agave Nordelta: Primeros pasos refinados, aplicando aprendizajes</p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>2014-2015 - Diversificación</h3>
+            <p>Venta Agave Nordelta + incursión en fábrica de panificados</p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>2018 - Vuelta Estratégica</h3>
+            <p>Regreso a gastronomía con equipo consolidado: Diego (COO) + Sacha (Chef) + base operativa Martínez</p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>2020 - Resiliencia</h3>
+            <p>Navegación exitosa de pandemia, reacomodo general y fortalecimiento del modelo</p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>2023 - Validación Modelo CABA</h3>
+            <p>Apertura Agave Núñez: Validación del modelo en Capital Federal</p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>2024 - Creación CENOTE</h3>
+            <p>Constitución de empresa madre, oficinas operativas sobre Martínez</p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>2025 - Búsqueda de Inversión</h3>
+            <p>Lanzamiento del proyecto de expansión + formato mediodía implementado desde Núñez</p>
+        </div>
+    </div>
+
+    <div class="highlight-box">
+        <h3>Lecciones Aprendidas en 15 Años</h3>
+        <p><strong>La experiencia fallida inicial fue el mejor aprendizaje:</strong></p>
+        <ul>
+            <li>No hacer parches: construir procesos sólidos desde el inicio</li>
+            <li>Orientación al cliente: diseñar desde la experiencia hacia atrás</li>
+            <li>Escalabilidad: crecer sin perder agilidad mediante procesos + tecnología</li>
+            <li>Eficiencia: usar tecnología para optimizar operaciones</li>
+        </ul>
+    </div>
+</div>
+
+<!-- EQUIPO DIRECTIVO -->
+<div class="section page-break">
+    <h1 class="section-title">Equipo Directivo</h1>
+
+    <h2>Dream Team con 15 Años de Experiencia</h2>
+
+    <div style="margin: 40px 0;">
+        <div style="margin-bottom: 40px; padding: 25px; background: #f8f9fa; border-radius: 10px;">
+            <h3 style="color: #667eea; margin-top: 0;">Nico - CEO (37% equity)</h3>
+            <ul>
+                <li>Liderazgo estratégico y visión de marca</li>
+                <li>15 años experiencia en sector gastronómico</li>
+                <li>Relaciones con inversores y expansión</li>
+                <li>Track record: construcción marca AGAVE desde cero</li>
+            </ul>
+        </div>
+
+        <div style="margin-bottom: 40px; padding: 25px; background: #f8f9fa; border-radius: 10px;">
+            <h3 style="color: #667eea; margin-top: 0;">Diego - COO (10% equity)</h3>
+            <ul>
+                <li>Excelencia operativa y escalamiento</li>
+                <li>Gestión diaria de operaciones multi-local</li>
+                <li>Implementación de estándares de servicio</li>
+                <li>Eficiencia operativa y control de costos</li>
+            </ul>
+        </div>
+
+        <div style="margin-bottom: 40px; padding: 25px; background: #f8f9fa; border-radius: 10px;">
+            <h3 style="color: #667eea; margin-top: 0;">Sacha - Chef Ejecutivo (10% equity)</h3>
+            <ul>
+                <li>Innovación gastronómica y calidad culinaria</li>
+                <li>Desarrollo de menús y estándares</li>
+                <li>Capacitación gastronómica de equipos</li>
+                <li>Control de calidad en todos los locales</li>
+            </ul>
+        </div>
+
+        <div style="padding: 25px; background: #f8f9fa; border-radius: 10px;">
+            <h3 style="color: #667eea; margin-top: 0;">Equipo Gerencial (10% equity)</h3>
+            <ul>
+                <li><strong>Angie (CFO/Administración)</strong>: Finanzas, contabilidad, reportes, análisis de rentabilidad</li>
+                <li><strong>Agus (Gerente Compras/Logística)</strong>: Proveedores, inventarios, costos, cadena de suministro</li>
+                <li><strong>Mati (Gerente Operaciones)</strong>: Supervisión locales, training staff, protocolos de servicio</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="highlight-box">
+        <h3>Control Operativo</h3>
+        <p style="font-size: 1.15em;">
+            <strong>67% equipo fundador/operativo</strong> vs <strong>33% inversor estratégico</strong>
+        </p>
+        <p>Esta estructura garantiza alineación de incentivos y control operativo por parte del equipo que conoce el negocio.</p>
+    </div>
+
+    <h2>Expansión del Equipo</h2>
+    <p>A medida que se expande a 5 locales, se incorporarán:</p>
+    <ul>
+        <li><strong>Gerente de Zona CABA</strong>: Supervisión diaria de 4 locales Capital Federal</li>
+        <li><strong>Gerente General Martínez</strong>: Dedicación exclusiva casa matriz + operaciones Cenote</li>
+        <li><strong>Controller Financiero</strong>: Apoyo análisis financiero 5 locales</li>
+        <li><strong>Coordinador RRHH</strong>: Recruiting, capacitación, ~55 empleados totales</li>
+    </ul>
+</div>
+
+<!-- MERCADO -->
+<div class="section page-break">
+    <h1 class="section-title">Análisis de Mercado</h1>
+
+    <h2>Mercado Objetivo</h2>
+
+    <div class="two-column">
+        <div>
+            <h3>Segmento</h3>
+            <p><strong>Casual dining premium - Comida mexicana auténtica</strong></p>
+
+            <h3>Perfil Cliente</h3>
+            <ul>
+                <li>NSE ABC1 (poder adquisitivo medio-alto)</li>
+                <li>Edad 25-55 años</li>
+                <li>Valoran calidad sobre precio</li>
+                <li>Buscan experiencia gastronómica auténtica</li>
+                <li>Frecuentadores zona norte CABA</li>
+            </ul>
+        </div>
+        <div>
+            <h3>Tamaño de Mercado</h3>
+            <ul>
+                <li><strong>CABA</strong>: 3.1M habitantes</li>
+                <li><strong>Zona norte premium</strong>: ~800k habitantes potenciales</li>
+                <li><strong>Gasto promedio mensual</strong>: US$ 100-200/persona en restaurantes</li>
+                <li><strong>Market share objetivo</strong>: 2-3% segmento mexicano premium</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2>Competencia</h2>
+
+    <table>
+        <tr>
+            <th>Tipo de Competidor</th>
+            <th>Ejemplos</th>
+            <th>Ventaja AGAVE</th>
+        </tr>
+        <tr>
+            <td>Cadenas establecidas</td>
+            <td>El Club de la Milanesa (sección mexicana)</td>
+            <td>Especialización 100% mexicana, autenticidad</td>
+        </tr>
+        <tr>
+            <td>Restaurantes independientes</td>
+            <td>Locales mexicanos independientes</td>
+            <td>Procesos estandarizados, consistencia, escalabilidad</td>
+        </tr>
+        <tr>
+            <td>Fast casual</td>
+            <td>Taco Bell, etc.</td>
+            <td>Experiencia premium, calidad superior, no fast food</td>
+        </tr>
+    </table>
+
+    <h2>Ventajas Competitivas AGAVE</h2>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="number">15</div>
+            <div class="label">Años Brand Equity</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">11</div>
+            <div class="label">Staff por local vs 15-18 competencia</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">38%</div>
+            <div class="label">COGS vs 40-45% industria</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">Prime</div>
+            <div class="label">Ubicaciones Estratégicas</div>
+        </div>
+    </div>
+
+    <div class="highlight-box success">
+        <h3>Moat Tecnológico</h3>
+        <p>Implementación de <strong>Odoo ERP</strong> para gestión integrada de 5 locales,
+        permitiendo escalamiento eficiente con control centralizado en tiempo real.</p>
+    </div>
+
+    <h2>Tendencias de Mercado</h2>
+
+    <div class="two-column">
+        <div>
+            <h3>Drivers de Crecimiento</h3>
+            <ul>
+                <li><span class="checkmark">✓</span> Aumento consumo out-of-home post-pandemia</li>
+                <li><span class="checkmark">✓</span> Crecimiento delivery y omnicanalidad</li>
+                <li><span class="checkmark">✓</span> Premiumización segmento gastronómico</li>
+            </ul>
+        </div>
+        <div>
+            <h3>Oportunidades</h3>
+            <ul>
+                <li><span class="checkmark">✓</span> Búsqueda experiencias auténticas</li>
+                <li><span class="checkmark">✓</span> Digitalización y fidelización clientes</li>
+                <li><span class="checkmark">✓</span> Expansión comida mexicana en Argentina</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- MODELO DE NEGOCIO -->
+<div class="section page-break">
+    <h1 class="section-title">Modelo de Negocio</h1>
+
+    <h2>Propuesta de Valor</h2>
+
+    <div class="two-column">
+        <div class="highlight-box">
+            <h3>Para Clientes</h3>
+            <ul>
+                <li>Comida mexicana auténtica y calidad premium</li>
+                <li>Experiencia gastronómica completa</li>
+                <li>Ambiente acogedor y servicio excelente</li>
+                <li>Opciones mediodía + noche adaptadas</li>
+                <li>Precios justificados por calidad</li>
+            </ul>
+        </div>
+        <div class="highlight-box success">
+            <h3>Para Inversores</h3>
+            <ul>
+                <li>Modelo probado: 2 locales rentables</li>
+                <li>Equipo 15 años experiencia</li>
+                <li>Expansión planificada y escalonada</li>
+                <li>ROI atractivo: 16.5% anual en USD</li>
+                <li>Múltiples vías de salida 5-7 años</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2>Flujos de Ingresos</h2>
+
+    <h3>Por Local Operativo</h3>
+    <table>
+        <tr>
+            <th>Canal</th>
+            <th>% Facturación</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Salón</td>
+            <td>55%</td>
+            <td>Cubiertos mediodía + noche</td>
+        </tr>
+        <tr>
+            <td>Delivery</td>
+            <td>25%</td>
+            <td>PedidosYa + Rappi</td>
+        </tr>
+        <tr>
+            <td>Takeaway</td>
+            <td>15%</td>
+            <td>Retiro en local</td>
+        </tr>
+        <tr>
+            <td>Eventos/Catering</td>
+            <td>5%</td>
+            <td>Servicios especiales</td>
+        </tr>
+    </table>
+
+    <h3>Modelo CENOTE (Empresa Madre)</h3>
+    <table>
+        <tr>
+            <th>Concepto</th>
+            <th>Monto</th>
+        </tr>
+        <tr>
+            <td>Regalías (2% facturación)</td>
+            <td>Variable por local</td>
+        </tr>
+        <tr>
+            <td>Fee Marketing</td>
+            <td>US$ 500/mes por local</td>
+        </tr>
+        <tr>
+            <td>Fee Contabilidad</td>
+            <td>US$ 500/mes por local</td>
+        </tr>
+        <tr>
+            <td><strong>Total por local</strong></td>
+            <td><strong>~US$ 3k/mes</strong></td>
+        </tr>
+        <tr>
+            <td><strong>Total 5 locales</strong></td>
+            <td><strong>US$ 15k/mes = US$ 180k/año</strong></td>
+        </tr>
+    </table>
+
+    <h2>Estructura de Costos</h2>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="number">38%</div>
+            <div class="label">COGS (Food Cost)</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">30%</div>
+            <div class="label">Labor Cost</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">7-8%</div>
+            <div class="label">Rent</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">15%</div>
+            <div class="label">EBITDA Margin</div>
+        </div>
+    </div>
+
+    <div class="highlight-box success">
+        <h3>Eficiencias Clave vs Industria</h3>
+        <ul>
+            <li><span class="checkmark">✓</span> <strong>COGS 38%</strong> vs 40-45% industria (control proveedores)</li>
+            <li><span class="checkmark">✓</span> <strong>Labor 30%</strong> vs 35%+ competencia (procesos optimizados)</li>
+            <li><span class="checkmark">✓</span> <strong>Rent <8%</strong> (ubicaciones negociadas estratégicamente)</li>
+        </ul>
+    </div>
+
+    <h2>Unidades Económicas</h2>
+
+    <h3>Modelo Objetivo por Local CABA</h3>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="number">$105k</div>
+            <div class="label">Facturación Mensual USD</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">$15.75k</div>
+            <div class="label">Ganancia Mensual USD</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">18-24</div>
+            <div class="label">Meses Punto Equilibrio</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">75%</div>
+            <div class="label">ROI Anual Post-Payback</div>
+        </div>
+    </div>
+
+    <h3>Detalle Operativo Diario</h3>
+    <table>
+        <tr>
+            <th>Día</th>
+            <th>Cubiertos Mediodía</th>
+            <th>Cubiertos Noche</th>
+            <th>Total</th>
+            <th>Facturación</th>
+        </tr>
+        <tr>
+            <td>Lunes</td>
+            <td>45</td>
+            <td>35</td>
+            <td>80</td>
+            <td>$1,330</td>
+        </tr>
+        <tr>
+            <td>Martes</td>
+            <td>50</td>
+            <td>40</td>
+            <td>90</td>
+            <td>$1,500</td>
+        </tr>
+        <tr>
+            <td>Miércoles</td>
+            <td>55</td>
+            <td>45</td>
+            <td>100</td>
+            <td>$1,670</td>
+        </tr>
+        <tr>
+            <td>Jueves</td>
+            <td>60</td>
+            <td>50</td>
+            <td>110</td>
+            <td>$1,840</td>
+        </tr>
+        <tr>
+            <td>Viernes</td>
+            <td>70</td>
+            <td>80</td>
+            <td>150</td>
+            <td>$2,580</td>
+        </tr>
+        <tr>
+            <td>Sábado</td>
+            <td>80</td>
+            <td>90</td>
+            <td>170</td>
+            <td>$2,920</td>
+        </tr>
+        <tr>
+            <td>Domingo</td>
+            <td>65</td>
+            <td>55</td>
+            <td>120</td>
+            <td>$2,010</td>
+        </tr>
+        <tr style="background: #667eea; color: white; font-weight: bold;">
+            <td>TOTAL SEMANAL</td>
+            <td colspan="2">1,020 cubiertos</td>
+            <td>820</td>
+            <td>$13,850</td>
+        </tr>
+        <tr style="background: #764ba2; color: white; font-weight: bold;">
+            <td>TOTAL MENSUAL</td>
+            <td colspan="2">~4,284 cubiertos</td>
+            <td>3,444</td>
+            <td>$58,268 (55% facturación)</td>
+        </tr>
+    </table>
+
+    <p style="font-style: italic; color: #666; margin-top: 10px;">
+        Ticket promedio mediodía: US$ 14 | Ticket promedio noche: US$ 20
+    </p>
+</div>
+
+<!-- PLAN DE EXPANSIÓN -->
+<div class="section page-break">
+    <h1 class="section-title">Plan de Expansión - 60 Meses</h1>
+
+    <h2>Estado Actual (M17 - Octubre 2025)</h2>
+
+    <div class="highlight-box">
+        <p style="font-size: 1.1em;">
+            <strong>M0 (Mayo 2024)</strong>: Inicio del plan con apertura Núñez<br>
+            <strong>M17 (Octubre 2025)</strong>: HOY - 28.33% del plan completado<br>
+            <strong>M60 (Mayo 2029)</strong>: Madurez completa del plan
+        </p>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="number">2</div>
+            <div class="label">Locales Operativos HOY</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">$2.52M</div>
+            <div class="label">Revenue Anual Actual USD</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">$378k</div>
+            <div class="label">EBITDA Anual Actual USD</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">28.33%</div>
+            <div class="label">Plan Completado</div>
+        </div>
+    </div>
+
+    <h2>Timeline de Expansión</h2>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <h3>M17 (Oct 2025) - HOY</h3>
+            <p><strong>2 locales operativos</strong> | Martínez + Núñez generando US$ 210k/mes</p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>M29 (Oct 2026) - Apertura Local #3</h3>
+            <p><strong>3 locales operativos</strong> | 2do local CABA | Revenue: US$ 3.15M/año</p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>M37 (Jun 2027) - Apertura Local #4</h3>
+            <p><strong>4 locales operativos</strong> | 3er local CABA | Revenue: US$ 4.32M/año</p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>M47 (Abr 2028) - Apertura Local #5</h3>
+            <p><strong>5 locales operativos</strong> | 4to local CABA | Revenue: US$ 5.22M/año</p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>M53 (Oct 2028) - Operación Plena</h3>
+            <p><strong>5 locales en rendimiento óptimo</strong> | EBITDA: US$ 864k/año</p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>M60 (Mayo 2029) - Valuación Completa</h3>
+            <p><strong>Valuación empresa: US$ 6.05M</strong> | Exit strategies disponibles</p>
+        </div>
+    </div>
+
+    <h2>Fases de Ejecución</h2>
+
+    <table>
+        <tr>
+            <th>Fase</th>
+            <th>Período</th>
+            <th>Objetivos Clave</th>
+        </tr>
+        <tr>
+            <td><strong>FASE 1</strong></td>
+            <td>M17-M29</td>
+            <td>Setup Local #3: Búsqueda ubicación, construcción, contratación equipo (+25 personas), soft opening</td>
+        </tr>
+        <tr>
+            <td><strong>FASE 2</strong></td>
+            <td>M29-M37</td>
+            <td>Operación 3 locales + Setup Local #4: Consolidación, replicación procesos, optimización multi-local</td>
+        </tr>
+        <tr>
+            <td><strong>FASE 3</strong></td>
+            <td>M37-M47</td>
+            <td>Operación 4 locales + Setup Local #5: Equipo CENOTE completo, implementación full Odoo ERP</td>
+        </tr>
+        <tr>
+            <td><strong>FASE 4</strong></td>
+            <td>M47-M53</td>
+            <td>Curva aprendizaje 5 locales: Optimización continua, alcance equilibrio, preparación pleno rendimiento</td>
+        </tr>
+        <tr>
+            <td><strong>FASE 5</strong></td>
+            <td>M53-M60</td>
+            <td>Operación plena + valuación: 5 locales óptimos, EBITDA consolidado, preparación exit</td>
+        </tr>
+    </table>
+
+    <h2>Curva de Aprendizaje Acelerada</h2>
+
+    <div class="two-column">
+        <div class="highlight-box">
+            <h3>Núñez (Modelo Validado)</h3>
+            <ul>
+                <li>17 meses operando (M0-M17)</li>
+                <li>Modelo validado y en equilibrio</li>
+                <li>Aprendizajes aplicables a nuevos locales</li>
+                <li>Formato mediodía desarrollado</li>
+            </ul>
+        </div>
+        <div class="highlight-box success">
+            <h3>Nuevos Locales (Acelerados)</h3>
+            <ul>
+                <li>3 meses hasta equilibrio operativo</li>
+                <li>6 meses hasta pleno rendimiento</li>
+                <li>9 meses total desde apertura</li>
+                <li>Aceleración por experiencia acumulada</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2>Evolución de Personal</h2>
+
+    <table>
+        <tr>
+            <th>Mes</th>
+            <th>Locales</th>
+            <th>Empleados Locales</th>
+            <th>Team CENOTE</th>
+            <th>Total</th>
+        </tr>
+        <tr>
+            <td>M17 (HOY)</td>
+            <td>2</td>
+            <td>22</td>
+            <td>6</td>
+            <td>28</td>
+        </tr>
+        <tr>
+            <td>M29</td>
+            <td>3</td>
+            <td>33</td>
+            <td>8</td>
+            <td>41</td>
+        </tr>
+        <tr>
+            <td>M37</td>
+            <td>4</td>
+            <td>44</td>
+            <td>10</td>
+            <td>54</td>
+        </tr>
+        <tr>
+            <td>M47</td>
+            <td>5</td>
+            <td>55</td>
+            <td>12</td>
+            <td>67</td>
+        </tr>
+        <tr>
+            <td>M53-M60</td>
+            <td>5</td>
+            <td>55</td>
+            <td>15</td>
+            <td>70</td>
+        </tr>
+    </table>
+</div>
+
+<!-- PROYECCIONES FINANCIERAS -->
+<div class="section page-break">
+    <h1 class="section-title">Proyecciones Financieras</h1>
+
+    <h2>Situación Actual (M17 - Octubre 2025)</h2>
+
+    <table>
+        <tr>
+            <th>Local</th>
+            <th>Facturación Mensual</th>
+            <th>Facturación Anual</th>
+            <th>EBITDA (15%)</th>
+        </tr>
+        <tr>
+            <td>Martínez (Casa Matriz)</td>
+            <td>US$ 120k</td>
+            <td>US$ 1.44M</td>
+            <td>US$ 216k/año</td>
+        </tr>
+        <tr>
+            <td>Núñez (1er CABA)</td>
+            <td>US$ 90k</td>
+            <td>US$ 1.08M</td>
+            <td>US$ 162k/año</td>
+        </tr>
+        <tr style="background: #667eea; color: white; font-weight: bold;">
+            <td>CONSOLIDADO</td>
+            <td>US$ 210k</td>
+            <td>US$ 2.52M</td>
+            <td>US$ 378k/año</td>
+        </tr>
+    </table>
+
+    <h2>Proyección Año 5 (M60 - Mayo 2029)</h2>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="number">5</div>
+            <div class="label">Locales Operativos</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">$5.76M</div>
+            <div class="label">Revenue Anual USD</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">$864k</div>
+            <div class="label">EBITDA Anual USD</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">15%</div>
+            <div class="label">EBITDA Margin</div>
+        </div>
+    </table>
+
+    <h3>Breakdown Revenue Año 5</h3>
+    <table>
+        <tr>
+            <th>Local</th>
+            <th>Facturación Mensual</th>
+            <th>Facturación Anual</th>
+        </tr>
+        <tr>
+            <td>Martínez (Flagship)</td>
+            <td>US$ 120k</td>
+            <td>US$ 1.44M</td>
+        </tr>
+        <tr>
+            <td>4 Locales CABA</td>
+            <td>US$ 90k × 4</td>
+            <td>US$ 4.32M</td>
+        </tr>
+        <tr style="background: #667eea; color: white; font-weight: bold;">
+            <td>TOTAL</td>
+            <td>US$ 480k</td>
+            <td>US$ 5.76M</td>
+        </tr>
+    </table>
+
+    <h2>Estructura de Costos Año 5</h2>
+
+    <table>
+        <tr>
+            <th>Concepto</th>
+            <th>% Revenue</th>
+            <th>Monto Anual USD</th>
+        </tr>
+        <tr>
+            <td>COGS (Food Cost)</td>
+            <td>38%</td>
+            <td>US$ 2.19M</td>
+        </tr>
+        <tr>
+            <td>Labor Cost</td>
+            <td>30%</td>
+            <td>US$ 1.73M</td>
+        </tr>
+        <tr>
+            <td>Rent</td>
+            <td>8%</td>
+            <td>US$ 0.46M</td>
+        </tr>
+        <tr>
+            <td>Marketing</td>
+            <td>4%</td>
+            <td>US$ 0.23M</td>
+        </tr>
+        <tr>
+            <td>G&A + Otros</td>
+            <td>5%</td>
+            <td>US$ 0.29M</td>
+        </tr>
+        <tr style="background: #f8f9fa; font-weight: bold;">
+            <td>Total OpEx</td>
+            <td>85%</td>
+            <td>US$ 4.90M</td>
+        </tr>
+        <tr style="background: #667eea; color: white; font-weight: bold;">
+            <td>EBITDA</td>
+            <td>15%</td>
+            <td>US$ 864k</td>
+        </tr>
+    </table>
+
+    <h2>Proyección Detallada 5 Años</h2>
+
+    <table>
+        <tr>
+            <th>Año</th>
+            <th>Locales</th>
+            <th>Revenue Anual</th>
+            <th>EBITDA (15%)</th>
+            <th>EBITDA Mensual</th>
+        </tr>
+        <tr>
+            <td>0 (2025)</td>
+            <td>2</td>
+            <td>US$ 2.52M</td>
+            <td>US$ 378k</td>
+            <td>US$ 31.5k</td>
+        </tr>
+        <tr>
+            <td>1 (2026)</td>
+            <td>2-3</td>
+            <td>US$ 3.15M</td>
+            <td>US$ 473k</td>
+            <td>US$ 39.4k</td>
+        </tr>
+        <tr>
+            <td>2 (2027)</td>
+            <td>3-4</td>
+            <td>US$ 4.32M</td>
+            <td>US$ 648k</td>
+            <td>US$ 54k</td>
+        </tr>
+        <tr>
+            <td>3 (2028)</td>
+            <td>4-5</td>
+            <td>US$ 5.22M</td>
+            <td>US$ 783k</td>
+            <td>US$ 65.3k</td>
+        </tr>
+        <tr>
+            <td>4 (2029)</td>
+            <td>5</td>
+            <td>US$ 5.76M</td>
+            <td>US$ 864k</td>
+            <td>US$ 72k</td>
+        </tr>
+        <tr style="background: #667eea; color: white; font-weight: bold;">
+            <td>5 (2030)</td>
+            <td>5</td>
+            <td>US$ 5.76M</td>
+            <td>US$ 864k</td>
+            <td>US$ 72k</td>
+        </tr>
+    </table>
+
+    <h2>Flujo de Caja Proyectado</h2>
+
+    <table>
+        <tr>
+            <th>Año</th>
+            <th>EBITDA</th>
+            <th>Capex/Inversiones</th>
+            <th>Free Cash Flow</th>
+            <th>Acumulado</th>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>US$ 378k</td>
+            <td>-US$ 500k</td>
+            <td>-US$ 122k</td>
+            <td>-US$ 122k</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>US$ 473k</td>
+            <td>-US$ 250k</td>
+            <td>US$ 223k</td>
+            <td>US$ 101k</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>US$ 648k</td>
+            <td>-US$ 250k</td>
+            <td>US$ 398k</td>
+            <td>US$ 499k</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>US$ 783k</td>
+            <td>US$ 0</td>
+            <td>US$ 783k</td>
+            <td>US$ 1.28M</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>US$ 864k</td>
+            <td>US$ 0</td>
+            <td>US$ 864k</td>
+            <td>US$ 2.14M</td>
+        </tr>
+        <tr style="background: #667eea; color: white; font-weight: bold;">
+            <td>5</td>
+            <td>US$ 864k</td>
+            <td>US$ 0</td>
+            <td>US$ 864k</td>
+            <td>US$ 3.01M</td>
+        </tr>
+    </table>
+
+    <div class="highlight-box success">
+        <h3>Generación de Valor</h3>
+        <p style="font-size: 1.15em;">
+            En 5 años, la empresa habrá generado <strong>US$ 3.01M en free cash flow acumulado</strong>,
+            más la valuación de equity de <strong>US$ 6.05M</strong>.
+        </p>
+    </div>
+</div>
+
+<!-- VALUACIÓN Y RETORNO -->
+<div class="section page-break">
+    <h1 class="section-title">Valuación y Retorno de Inversión</h1>
+
+    <h2>Metodología de Valuación</h2>
+
+    <div class="highlight-box">
+        <h3>Enfoque: EBITDA Multiple</h3>
+        <p style="font-size: 1.2em; margin: 20px 0;">
+            <strong>EBITDA año 5</strong>: US$ 864k<br>
+            <strong>Múltiplo aplicado</strong>: 7x EBITDA<br>
+            <strong style="color: #667eea; font-size: 1.3em;">VALUACIÓN TOTAL: US$ 6.05M</strong>
+        </p>
+    </div>
+
+    <h2>Justificación Múltiplo 7x</h2>
+
+    <div class="two-column">
+        <div>
+            <h3>Factores Positivos</h3>
+            <ul>
+                <li><span class="checkmark">✓</span> Brand equity 15 años</li>
+                <li><span class="checkmark">✓</span> Market position premium</li>
+                <li><span class="checkmark">✓</span> Modelo probado: 2 locales rentables</li>
+                <li><span class="checkmark">✓</span> Ubicaciones prime estratégicas</li>
+                <li><span class="checkmark">✓</span> Management experimentado scaling</li>
+            </ul>
+        </div>
+        <div>
+            <h3>Factores de Descuento</h3>
+            <ul>
+                <li><span class="cross">✗</span> Limitación geográfica: CABA norte</li>
+                <li><span class="cross">✗</span> Riesgo Argentina: Volatilidad económica</li>
+                <li><span class="cross">✗</span> Dependencia founders: Key person risk</li>
+                <li><span class="cross">✗</span> Competencia: Modelo replicable</li>
+                <li><span class="cross">✗</span> Limitación escala: 5 locales finito</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2>Benchmarking Múltiplo</h2>
+
+    <table>
+        <tr>
+            <th>Tipo de Negocio</th>
+            <th>Múltiplo EBITDA Argentina</th>
+        </tr>
+        <tr>
+            <td>Cafeterías chains</td>
+            <td>4-6x EBITDA</td>
+        </tr>
+        <tr>
+            <td>Fast casual brands</td>
+            <td>5-7x EBITDA</td>
+        </tr>
+        <tr>
+            <td>Premium dining</td>
+            <td>6-9x EBITDA</td>
+        </tr>
+        <tr>
+            <td>Established franchises</td>
+            <td>7-10x EBITDA</td>
+        </tr>
+        <tr style="background: #667eea; color: white; font-weight: bold;">
+            <td>AGAVE Positioning</td>
+            <td>7x = Conservative Premium</td>
+        </tr>
+    </table>
+
+    <h2>Evolución Valuación Empresa</h2>
+
+    <table>
+        <tr>
+            <th>Mes</th>
+            <th>Período</th>
+            <th>Locales</th>
+            <th>Valuación</th>
+        </tr>
+        <tr>
+            <td>M0</td>
+            <td>Mayo 2024</td>
+            <td>2</td>
+            <td>US$ 3.03M</td>
+        </tr>
+        <tr style="background: #fff3cd;">
+            <td>M17</td>
+            <td>Oct 2025 - HOY</td>
+            <td>2</td>
+            <td>US$ 3.20M</td>
+        </tr>
+        <tr>
+            <td>M29</td>
+            <td>Oct 2026</td>
+            <td>3</td>
+            <td>US$ 3.80M</td>
+        </tr>
+        <tr>
+            <td>M40</td>
+            <td>Sep 2027</td>
+            <td>4</td>
+            <td>US$ 4.90M</td>
+        </tr>
+        <tr>
+            <td>M53</td>
+            <td>Oct 2028</td>
+            <td>5</td>
+            <td>US$ 6.05M</td>
+        </tr>
+        <tr style="background: #667eea; color: white; font-weight: bold;">
+            <td>M60</td>
+            <td>Mayo 2029</td>
+            <td>5</td>
+            <td>US$ 6.05M</td>
+        </tr>
+    </table>
+
+    <h2>Retorno para el Inversor (33% Equity)</h2>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="number">$1M</div>
+            <div class="label">Inversión Inicial</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">$2M</div>
+            <div class="label">Valor M60 (33% de $6.05M)</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">100%</div>
+            <div class="label">ROI Total en 43 meses</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">16.5%</div>
+            <div class="label">ROI Anualizado</div>
+        </div>
+    </div>
+
+    <h3>Evolución Valor Equity Inversor</h3>
+    <table>
+        <tr>
+            <th>Mes</th>
+            <th>Período</th>
+            <th>Valuación Empresa</th>
+            <th>Equity Inversor (33%)</th>
+            <th>ROI Acumulado</th>
+        </tr>
+        <tr style="background: #fff3cd;">
+            <td>M17</td>
+            <td>Oct 2025 - HOY</td>
+            <td>US$ 3.20M</td>
+            <td>US$ 1.00M</td>
+            <td>0% (Inversión inicial)</td>
+        </tr>
+        <tr>
+            <td>M29</td>
+            <td>Oct 2026</td>
+            <td>US$ 3.80M</td>
+            <td>US$ 1.25M</td>
+            <td>+25%</td>
+        </tr>
+        <tr>
+            <td>M40</td>
+            <td>Sep 2027</td>
+            <td>US$ 4.90M</td>
+            <td>US$ 1.62M</td>
+            <td>+62%</td>
+        </tr>
+        <tr>
+            <td>M53</td>
+            <td>Oct 2028</td>
+            <td>US$ 6.05M</td>
+            <td>US$ 2.00M</td>
+            <td>+100%</td>
+        </tr>
+        <tr style="background: #667eea; color: white; font-weight: bold;">
+            <td>M60</td>
+            <td>Mayo 2029</td>
+            <td>US$ 6.05M</td>
+            <td>US$ 2.00M</td>
+            <td>+100% (ROI completo)</td>
+        </tr>
+    </table>
+
+    <div class="highlight-box success">
+        <h3>Distribuciones Estimadas</h3>
+        <p style="font-size: 1.15em;">
+            A partir de año 3, distribución estimada de <strong>US$ 150k anuales</strong>
+            para el inversor (40% de utilidades distribuibles).
+        </p>
+    </div>
+
+    <h2>Análisis de Sensibilidad</h2>
+
+    <h3>Escenarios Múltiplo</h3>
+    <table>
+        <tr>
+            <th>Múltiplo</th>
+            <th>Valuación</th>
+            <th>Equity Inversor</th>
+            <th>ROI Total</th>
+            <th>ROI Anual</th>
+        </tr>
+        <tr>
+            <td>6x</td>
+            <td>US$ 5.18M</td>
+            <td>US$ 1.71M</td>
+            <td>71%</td>
+            <td>11.4%</td>
+        </tr>
+        <tr style="background: #667eea; color: white; font-weight: bold;">
+            <td>7x (BASE)</td>
+            <td>US$ 6.05M</td>
+            <td>US$ 2.00M</td>
+            <td>100%</td>
+            <td>16.5%</td>
+        </tr>
+        <tr>
+            <td>8x</td>
+            <td>US$ 6.91M</td>
+            <td>US$ 2.28M</td>
+            <td>128%</td>
+            <td>18.0%</td>
+        </tr>
+    </table>
+
+    <h3>Escenarios EBITDA Margin</h3>
+    <table>
+        <tr>
+            <th>EBITDA %</th>
+            <th>EBITDA $</th>
+            <th>Valuación (7x)</th>
+            <th>Equity Inversor</th>
+            <th>ROI Total</th>
+        </tr>
+        <tr>
+            <td>13%</td>
+            <td>US$ 749k</td>
+            <td>US$ 5.24M</td>
+            <td>US$ 1.73M</td>
+            <td>73%</td>
+        </tr>
+        <tr style="background: #667eea; color: white; font-weight: bold;">
+            <td>15% (BASE)</td>
+            <td>US$ 864k</td>
+            <td>US$ 6.05M</td>
+            <td>US$ 2.00M</td>
+            <td>100%</td>
+        </tr>
+        <tr>
+            <td>17%</td>
+            <td>US$ 979k</td>
+            <td>US$ 6.85M</td>
+            <td>US$ 2.26M</td>
+            <td>127%</td>
+        </tr>
+    </table>
+
+    <h2>Validación Asset-Based</h2>
+
+    <table>
+        <tr>
+            <th>Activo</th>
+            <th>Valor</th>
+        </tr>
+        <tr>
+            <td>5 locales × US$ 300k buildout promedio</td>
+            <td>US$ 1.5M</td>
+        </tr>
+        <tr>
+            <td>Equipment, furniture, systems</td>
+            <td>US$ 0.5M</td>
+        </tr>
+        <tr>
+            <td>Working capital</td>
+            <td>US$ 0.3M</td>
+        </tr>
+        <tr>
+            <td>Brand value, recipes, processes</td>
+            <td>US$ 1.0M</td>
+        </tr>
+        <tr style="background: #f8f9fa; font-weight: bold;">
+            <td>Total Asset Base</td>
+            <td>US$ 3.3M</td>
+        </tr>
+        <tr style="background: #667eea; color: white; font-weight: bold;">
+            <td>Valuación / Asset Base</td>
+            <td>1.8x (razonable para operating business)</td>
+        </tr>
+    </table>
+</div>
+
+<!-- RIESGOS -->
+<div class="section page-break">
+    <h1 class="section-title">Análisis de Riesgos</h1>
+
+    <h2>Riesgos Principales y Mitigaciones</h2>
+
+    <div style="margin: 30px 0;">
+        <div class="highlight-box warning" style="margin-bottom: 30px;">
+            <h3>1. Volatilidad Macroeconómica Argentina</h3>
+            <p><strong>Impacto</strong>: Alto | <strong>Probabilidad</strong>: Media-Alta</p>
+            <h4>Mitigaciones:</h4>
+            <ul>
+                <li><span class="checkmark">✓</span> Pricing en USD y ajuste inflacionario continuo</li>
+                <li><span class="checkmark">✓</span> Diversificación ingresos (salón + delivery + takeaway)</li>
+                <li><span class="checkmark">✓</span> Control estricto costos y margen</li>
+                <li><span class="checkmark">✓</span> Capacidad pass-through de costos</li>
+            </ul>
+        </div>
+
+        <div class="highlight-box warning" style="margin-bottom: 30px;">
+            <h3>2. Aumento Competencia Segmento Mexicano</h3>
+            <p><strong>Impacto</strong>: Medio | <strong>Probabilidad</strong>: Media</p>
+            <h4>Mitigaciones:</h4>
+            <ul>
+                <li><span class="checkmark">✓</span> Brand equity construido 15 años (barrera entrada)</li>
+                <li><span class="checkmark">✓</span> Diferenciación por calidad y experiencia</li>
+                <li><span class="checkmark">✓</span> Customer loyalty programs</li>
+                <li><span class="checkmark">✓</span> Ubicaciones prime ya aseguradas</li>
+            </ul>
+        </div>
+
+        <div class="highlight-box warning" style="margin-bottom: 30px;">
+            <h3>3. Riesgo de Ejecución en Scaling</h3>
+            <p><strong>Impacto</strong>: Alto | <strong>Probabilidad</strong>: Media</p>
+            <h4>Mitigaciones:</h4>
+            <ul>
+                <li><span class="checkmark">✓</span> Equipo experimentado con track record</li>
+                <li><span class="checkmark">✓</span> Modelo validado en 2 locales</li>
+                <li><span class="checkmark">✓</span> Expansión escalonada con validación</li>
+                <li><span class="checkmark">✓</span> Procesos documentados y replicables</li>
+                <li><span class="checkmark">✓</span> Tecnología (Odoo ERP) para control</li>
+            </ul>
+        </div>
+
+        <div class="highlight-box warning" style="margin-bottom: 30px;">
+            <h3>4. Key Person Dependency</h3>
+            <p><strong>Impacto</strong>: Alto | <strong>Probabilidad</strong>: Baja</p>
+            <h4>Mitigaciones:</h4>
+            <ul>
+                <li><span class="checkmark">✓</span> Equipo directivo de 3 personas (Nico, Diego, Sacha)</li>
+                <li><span class="checkmark">✓</span> Cross-training y documentación procesos</li>
+                <li><span class="checkmark">✓</span> Management depth con 6 personas clave</li>
+                <li><span class="checkmark">✓</span> Incentivos equity para retención</li>
+            </ul>
+        </div>
+
+        <div class="highlight-box warning">
+            <h3>5. Disponibilidad Ubicaciones Prime</h3>
+            <p><strong>Impacto</strong>: Medio | <strong>Probabilidad</strong>: Media</p>
+            <h4>Mitigaciones:</h4>
+            <ul>
+                <li><span class="checkmark">✓</span> Pipeline de ubicaciones pre-identificadas</li>
+                <li><span class="checkmark">✓</span> Red de brokers inmobiliarios</li>
+                <li><span class="checkmark">✓</span> Flexibilidad en timing de aperturas</li>
+                <li><span class="checkmark">✓</span> Capacidad adaptación a diferentes formatos</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2>Escenario Downside</h2>
+
+    <div class="highlight-box">
+        <h3>Supuestos Conservadores</h3>
+        <ul>
+            <li>Solo se abren 4 locales (en vez de 5)</li>
+            <li>Revenue promedio: US$ 80k/mes (en vez de US$ 90k)</li>
+            <li>EBITDA margin: 12% (en vez de 15%)</li>
+        </ul>
+    </div>
+
+    <table>
+        <tr>
+            <th>Métrica</th>
+            <th>Caso Base</th>
+            <th>Escenario Downside</th>
+        </tr>
+        <tr>
+            <td>Locales año 5</td>
+            <td>5</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>Revenue año 5</td>
+            <td>US$ 5.76M</td>
+            <td>US$ 4.32M</td>
+        </tr>
+        <tr>
+            <td>EBITDA margin</td>
+            <td>15%</td>
+            <td>12%</td>
+        </tr>
+        <tr>
+            <td>EBITDA año 5</td>
+            <td>US$ 864k</td>
+            <td>US$ 518k</td>
+        </tr>
+        <tr>
+            <td>Múltiplo</td>
+            <td>7x</td>
+            <td>6x</td>
+        </tr>
+        <tr>
+            <td>Valuación</td>
+            <td>US$ 6.05M</td>
+            <td>US$ 3.11M</td>
+        </tr>
+        <tr style="background: #667eea; color: white; font-weight: bold;">
+            <td>Equity inversor (33%)</td>
+            <td>US$ 2.00M</td>
+            <td>US$ 1.03M</td>
+        </tr>
+        <tr style="background: #fff3cd; font-weight: bold;">
+            <td>ROI inversor</td>
+            <td>100% (16.5% anual)</td>
+            <td>3% (0.7% anual)</td>
+        </tr>
+    </table>
+
+    <div class="highlight-box success">
+        <h3>Downside Protection</h3>
+        <p style="font-size: 1.15em;">
+            Incluso en escenario conservador, el inversor <strong>recupera su capital</strong>
+            con mínima ganancia, demostrando protección adecuada del downside.
+        </p>
+    </div>
+</div>
+
+<!-- ESTRATEGIAS DE SALIDA -->
+<div class="section page-break">
+    <h1 class="section-title">Estrategias de Salida</h1>
+
+    <h2>Timeline de Salida: 5-7 Años</h2>
+
+    <p style="font-size: 1.1em; margin-bottom: 40px;">
+        A partir del año 5-6, con la empresa operando establemente 5 locales y generando
+        US$ 864k EBITDA anual, se habilitan múltiples opciones de salida para el inversor.
+    </p>
+
+    <div style="margin: 40px 0;">
+        <div class="highlight-box" style="margin-bottom: 30px;">
+            <h3>1. Strategic Sale (US$ 80-120M)</h3>
+            <p><strong>Potenciales compradores:</strong></p>
+            <ul>
+                <li><strong>Rappi / Uber Eats</strong>: Integración vertical con plataforma delivery</li>
+                <li><strong>MercadoLibre</strong>: Expansión a food services</li>
+                <li><strong>Grupos gastronómicos LatAm</strong>: Consolidación regional</li>
+                <li><strong>Private equity funds</strong>: Especialistas en F&B</li>
+            </ul>
+            <p><strong>Valuación esperada</strong>: 10-15x EBITDA por strategic premium</p>
+        </div>
+
+        <div class="highlight-box" style="margin-bottom: 30px;">
+            <h3>2. IPO (US$ 150-250M)</h3>
+            <p><strong>Requerimientos:</strong></p>
+            <ul>
+                <li>Expansión a 15-20 locales</li>
+                <li>Revenue >US$ 15M anual</li>
+                <li>EBITDA >US$ 2M anual</li>
+                <li>Story de crecimiento + tech platform (Luchadores)</li>
+            </ul>
+            <p><strong>Valuación esperada</strong>: 15-20x EBITDA (food-tech multiple)</p>
+        </div>
+
+        <div class="highlight-box" style="margin-bottom: 30px;">
+            <h3>3. Private Equity (US$ 100-150M)</h3>
+            <p><strong>Perfil:</strong></p>
+            <ul>
+                <li>Fondos especializados en F&B</li>
+                <li>Capital para expansión regional (LatAm)</li>
+            </ul>
+            <p><strong>Valuación esperada</strong>: 12-15x EBITDA</p>
+        </div>
+
+        <div class="highlight-box">
+            <h3>4. Secondary Sale / Buyback</h3>
+            <p><strong>Opción:</strong> Team fundador recompra equity inversor</p>
+            <p><strong>Financiamiento:</strong> Deuda bancaria o reinversión cashflow</p>
+            <p><strong>Valuación:</strong> Según términos pre-acordados</p>
+        </div>
+    </div>
+
+    <h2>Casos de Éxito Comparables</h2>
+
+    <h3>Argentina</h3>
+    <table>
+        <tr>
+            <th>Empresa</th>
+            <th>Sector</th>
+            <th>Exit</th>
+            <th>Valuación</th>
+        </tr>
+        <tr>
+            <td>Freddo</td>
+            <td>Helados</td>
+            <td>Venta a Savencia (2009)</td>
+            <td>US$ 100M+ (~12x EBITDA)</td>
+        </tr>
+        <tr>
+            <td>Mostaza</td>
+            <td>Burgers</td>
+            <td>PE investment (2010)</td>
+            <td>US$ 150M+ (estimado)</td>
+        </tr>
+        <tr>
+            <td>Buenos Aires Verde</td>
+            <td>Fast casual</td>
+            <td>En crecimiento</td>
+            <td>1 → 15 locales en 10 años</td>
+        </tr>
+    </table>
+
+    <h3>Internacional</h3>
+    <table>
+        <tr>
+            <th>Empresa</th>
+            <th>País</th>
+            <th>Exit</th>
+            <th>Valuación</th>
+        </tr>
+        <tr>
+            <td>Chipotle</td>
+            <td>US</td>
+            <td>IPO 2006</td>
+            <td>US$ 1B → Hoy US$ 60B (35x EBITDA)</td>
+        </tr>
+        <tr>
+            <td>Qdoba</td>
+            <td>US</td>
+            <td>Venta a Apollo (2018)</td>
+            <td>US$ 305M (~10x EBITDA)</td>
+        </tr>
+    </table>
+
+    <div class="highlight-box success">
+        <h3>Aprendizajes Aplicables</h3>
+        <ul>
+            <li><span class="checkmark">✓</span> <strong>Ejecución consistente</strong> > crecimiento agresivo</li>
+            <li><span class="checkmark">✓</span> <strong>Brand building</strong> toma 10-15 años</li>
+            <li><span class="checkmark">✓</span> <strong>Unit economics</strong> sólidos antes de escalar</li>
+            <li><span class="checkmark">✓</span> <strong>Management team</strong> crítico en valuación</li>
+            <li><span class="checkmark">✓</span> <strong>Timing de exit</strong> impacta 2-3x múltiplo final</li>
+        </ul>
+    </div>
+</div>
+
+<!-- VISIÓN LARGO PLAZO -->
+<div class="section page-break">
+    <h1 class="section-title">Visión a Largo Plazo: Ecosystem CENOTE</h1>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <h3>AÑO 1-2: AGAVE CONSOLIDATION</h3>
+            <ul>
+                <li>5 locales tradicionales operando</li>
+                <li>US$ 5.76M revenue anual</li>
+                <li>Brand consolidation CABA norte</li>
+            </ul>
+        </div>
+
+        <div class="timeline-item">
+            <h3>AÑO 2-3: LUCHADORES PLATFORM</h3>
+            <ul>
+                <li>Desarrollo app con integración Agave</li>
+                <li>Loyalty program integrado</li>
+                <li>Modelo negocio: 8% comisión GMV</li>
+                <li>Suscripciones: US$ 250-280/mes por usuario</li>
+            </ul>
+        </div>
+
+        <div class="timeline-item">
+            <h3>AÑO 3-4: MICRO-LOCALES NETWORK</h3>
+            <ul>
+                <li>20 puntos estratégicos CABA</li>
+                <li>Footprint mínimo: 10-15m² cada uno</li>
+                <li>Inversión: US$ 25k por unidad vs US$ 250k restaurant</li>
+                <li>Modelo suscripción: "Tu burrito te espera"</li>
+            </ul>
+        </div>
+
+        <div class="timeline-item">
+            <h3>AÑO 4-5: INTEGRACIÓN VERTICAL</h3>
+            <ul>
+                <li>Centro producción centralizado: 50k tortillas/día</li>
+                <li>Control total cadena valor</li>
+                <li>Private label para otros restaurants</li>
+                <li>B2B revenue stream adicional</li>
+            </ul>
+        </div>
+
+        <div class="timeline-item">
+            <h3>AÑO 5+: ECOSYSTEM COMPLETO</h3>
+            <ul>
+                <li>Expansión nacional: Córdoba, Rosario, Mendoza</li>
+                <li>International: Chile, Uruguay</li>
+                <li>Platform evolution: Multi-brand</li>
+                <li>Exit strategy: IPO / Strategic sale (US$ 100-250M)</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2>Modelo Suscripción "Luchadores"</h2>
+
+    <div class="highlight-box">
+        <h3>Value Proposition</h3>
+        <p style="font-size: 1.3em; text-align: center; font-style: italic; margin: 20px 0;">
+            "Pedí por la mañana, retirá en tu horario, tu burrito perfect temp te está esperando"
+        </p>
+    </div>
+
+    <h3>User Experience</h3>
+    <ol style="font-size: 1.1em;">
+        <li><strong>Morning ordering (7-9am)</strong>: App Luchadores</li>
+        <li><strong>Personalización</strong>: Ingredientes, spice level, extras</li>
+        <li><strong>Time slot selection</strong>: 12-2pm pickup window</li>
+        <li><strong>Location choice</strong>: Cerca de oficina/ruta</li>
+        <li><strong>Pickup</strong>: Scan QR, grab & go (30 segundos)</li>
+    </ol>
+
+    <h3>Pricing Strategy</h3>
+    <table>
+        <tr>
+            <th>Plan</th>
+            <th>Cantidad</th>
+            <th>Precio Total</th>
+            <th>Precio Unitario</th>
+        </tr>
+        <tr>
+            <td>Basic</td>
+            <td>10 burritos</td>
+            <td>US$ 250</td>
+            <td>US$ 25/burrito</td>
+        </tr>
+        <tr>
+            <td>Premium</td>
+            <td>20 burritos</td>
+            <td>US$ 480</td>
+            <td>US$ 24/burrito</td>
+        </tr>
+        <tr>
+            <td>Corporate</td>
+            <td>50+ burritos</td>
+            <td>Variable</td>
+            <td>US$ 22/burrito</td>
+        </tr>
+    </table>
+
+    <h3>Unit Economics Micro-Locales</h3>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="number">$25k</div>
+            <div class="label">Inversión por Unidad</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">$158k</div>
+            <div class="label">Revenue Mensual</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">$820k</div>
+            <div class="label">Profit Anual</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">3,280%</div>
+            <div class="label">ROI</div>
+        </div>
+    </div>
+
+    <div class="highlight-box success">
+        <h3>Potencial Network 20 Micro-Locales</h3>
+        <p style="font-size: 1.2em;">
+            <strong>Inversión total</strong>: US$ 500k (20 × US$ 25k)<br>
+            <strong>Profit anual adicional</strong>: US$ 16.4M (20 × US$ 820k)<br>
+            <strong>Valuación incremental</strong>: US$ 100M+ con múltiplos tech
+        </p>
+    </div>
+
+    <h2>Ventajas Competitivas del Ecosystem</h2>
+
+    <div class="two-column">
+        <div>
+            <h3>Moats Construidos</h3>
+            <ul>
+                <li><strong>Location Network</strong>: Real estate prime asegurado</li>
+                <li><strong>Technology Platform</strong>: ML algorithms propietarios</li>
+                <li><strong>Vertical Integration</strong>: Control calidad total</li>
+                <li><strong>Brand Equity</strong>: Agave + Luchadores</li>
+            </ul>
+        </div>
+        <div>
+            <h3>Network Effects</h3>
+            <ul>
+                <li>Más usuarios → Más datos</li>
+                <li>Más locales → Más conveniencia</li>
+                <li>Más transacciones → Mejor pricing</li>
+                <li>Más insights → Mejor producto</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- LA INVERSIÓN -->
+<div class="section page-break">
+    <h1 class="section-title">La Inversión</h1>
+
+    <div class="investment-ask">
+        <h2>Oportunidad de Inversión</h2>
+        <div class="amount">US$ 1,000,000</div>
+        <div class="details">Por 33% de participación accionaria</div>
+        <div class="details">ROI Objetivo: 16.5% anual en USD</div>
+        <div class="details">Retorno total: 100% en 43 meses</div>
+    </div>
+
+    <h2>Estructura de la Inversión</h2>
+
+    <table>
+        <tr>
+            <th>Concepto</th>
+            <th>Detalle</th>
+        </tr>
+        <tr>
+            <td>Monto total</td>
+            <td>US$ 1,000,000</td>
+        </tr>
+        <tr>
+            <td>Equity ofrecido</td>
+            <td>33%</td>
+        </tr>
+        <tr>
+            <td>Forma</td>
+            <td>Aporte de capital</td>
+        </tr>
+        <tr>
+            <td>Vehículo</td>
+            <td>Sociedad Anónima (en constitución)</td>
+        </tr>
+    </table>
+
+    <h3>Desembolso Escalonado</h3>
+    <table>
+        <tr>
+            <th>Período</th>
+            <th>Monto</th>
+            <th>%</th>
+            <th>Uso de Fondos</th>
+        </tr>
+        <tr>
+            <td>M17 (Oct 2025)</td>
+            <td>US$ 500,000</td>
+            <td>50%</td>
+            <td>Consolidación CENOTE + Setup Local #3</td>
+        </tr>
+        <tr>
+            <td>M29 (Oct 2026)</td>
+            <td>US$ 250,000</td>
+            <td>25%</td>
+            <td>Apertura Local #3</td>
+        </tr>
+        <tr>
+            <td>M37 (Jun 2027)</td>
+            <td>US$ 250,000</td>
+            <td>25%</td>
+            <td>Apertura Local #4</td>
+        </tr>
+    </table>
+
+    <h2>Uso de Fondos</h2>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="number">$500k</div>
+            <div class="label">Locales #3 y #4 (US$ 250k c/u)</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">$200k</div>
+            <div class="label">Consolidación CENOTE (equipo, tecnología)</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">$150k</div>
+            <div class="label">Working Capital Expansión</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">$150k</div>
+            <div class="label">Contingencias y Reserva</div>
+        </div>
+    </div>
+
+    <h2>Gobernanza</h2>
+
+    <h3>Directorio</h3>
+    <ul>
+        <li><strong>5 miembros totales</strong></li>
+        <li>2 designados por inversor</li>
+        <li>3 designados por founders</li>
+    </ul>
+
+    <h3>Decisiones Estratégicas (requieren mayoría)</h3>
+    <ul>
+        <li>Apertura nuevos locales</li>
+        <li>Adquisiciones >US$ 100k</li>
+        <li>Cambios estructura capital</li>
+        <li>Contratación deuda >US$ 200k</li>
+        <li>Venta empresa / activos principales</li>
+    </ul>
+
+    <h3>Decisiones Operativas (management team)</h3>
+    <ul>
+        <li>Operación diaria locales</li>
+        <li>Contrataciones personal</li>
+        <li>Estrategia marketing</li>
+        <li>Gestión proveedores</li>
+    </ul>
+
+    <h2>Derechos del Inversor</h2>
+
+    <div class="two-column">
+        <div class="highlight-box">
+            <h3>Información</h3>
+            <ul>
+                <li>Estados financieros mensuales</li>
+                <li>Dashboard ejecutivo tiempo real (Odoo)</li>
+                <li>Reuniones board trimestrales</li>
+                <li>Acceso métricas operativas</li>
+            </ul>
+        </div>
+        <div class="highlight-box">
+            <h3>Protección</h3>
+            <ul>
+                <li>Anti-dilución (weighted average)</li>
+                <li>Drag-along rights (>75% equity)</li>
+                <li>Tag-along rights (100% equity)</li>
+                <li>Right of first refusal venta acciones</li>
+            </ul>
+        </div>
+    </div>
+
+    <h3>Liquidez</h3>
+    <ul>
+        <li>Distribución dividendos según disponibilidad (40% utilidades desde año 3)</li>
+        <li>Put option año 5 (según valuación pre-acordada)</li>
+        <li>Participación en exit strategy</li>
+    </ul>
+
+    <h2>Política de Dividendos</h2>
+
+    <table>
+        <tr>
+            <th>Concepto</th>
+            <th>Detalle</th>
+        </tr>
+        <tr>
+            <td>Inicio distribuciones</td>
+            <td>A partir de año 3 (M37)</td>
+        </tr>
+        <tr>
+            <td>% distribuible</td>
+            <td>40% utilidades netas</td>
+        </tr>
+        <tr>
+            <td>Distribución</td>
+            <td>Proporcional a equity (33% inversor)</td>
+        </tr>
+        <tr>
+            <td>Frecuencia</td>
+            <td>Anual, sujeto a aprobación directorio</td>
+        </tr>
+        <tr>
+            <td>Reinversión</td>
+            <td>60% para growth initiatives y contingencias</td>
+        </tr>
+    </table>
+
+    <div class="highlight-box success">
+        <h3>Estimación Distribuciones Anuales</h3>
+        <p style="font-size: 1.2em;">
+            Desde año 4: <strong>~US$ 150,000 anuales</strong> para el inversor<br>
+            (40% de EBITDA × 33% equity ≈ US$ 115-150k según año)
+        </p>
+    </div>
+</div>
+
+<!-- PRÓXIMOS PASOS -->
+<div class="section page-break">
+    <h1 class="section-title">Próximos Pasos</h1>
+
+    <h2>Proceso de Inversión</h2>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <h3>FASE 1: Presentación y Validación (2-4 semanas)</h3>
+            <ul>
+                <li>Presentación completa (este documento)</li>
+                <li>Q&A sesión con equipo directivo</li>
+                <li>Visita locales operativos (Martínez + Núñez)</li>
+                <li>Validación concepto y fit inversor</li>
+            </ul>
+        </div>
+
+        <div class="timeline-item">
+            <h3>FASE 2: Due Diligence (4-6 semanas)</h3>
+            <ul>
+                <li>Estados financieros auditados Martínez + Núñez</li>
+                <li>Validación operativa y métricas</li>
+                <li>Legal due diligence (contratos, permisos, etc.)</li>
+                <li>Tax structure y optimización</li>
+                <li>Referencias y background checks</li>
+            </ul>
+        </div>
+
+        <div class="timeline-item">
+            <h3>FASE 3: Negociación Términos (2-3 semanas)</h3>
+            <ul>
+                <li>Estructura definitiva equity</li>
+                <li>Governance y derechos</li>
+                <li>Cronograma desembolsos</li>
+                <li>Exit strategy y liquidez</li>
+                <li>Shareholders agreement</li>
+            </ul>
+        </div>
+
+        <div class="timeline-item">
+            <h3>FASE 4: Cierre Transacción (2-4 semanas)</h3>
+            <ul>
+                <li>Firma shareholders agreement</li>
+                <li>Constitución sociedad (si aplica)</li>
+                <li>Liberación primer tramo (US$ 500k)</li>
+                <li>Setup governance structure</li>
+                <li>Kick-off ejecutivo</li>
+            </ul>
+        </div>
+
+        <div class="timeline-item">
+            <h3>FASE 5: Ejecución Inmediata (desde M17)</h3>
+            <ul>
+                <li>Inicio búsqueda Local #3</li>
+                <li>Fortalecimiento equipo CENOTE</li>
+                <li>Implementación full Odoo ERP</li>
+                <li>Dashboard ejecutivo para inversor</li>
+                <li>Reportes mensuales comenzando</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2>Documentación Disponible</h2>
+
+    <div class="two-column">
+        <div>
+            <h3>Para Due Diligence</h3>
+            <ul>
+                <li>Estados financieros Martínez 2022-2025</li>
+                <li>Estados financieros Núñez 2023-2025</li>
+                <li>Proyecciones financieras detalladas 5 años</li>
+                <li>Cap table y estructura accionaria propuesta</li>
+                <li>Contratos de alquiler locales actuales</li>
+                <li>Permisos y habilitaciones</li>
+                <li>Contratos proveedores principales</li>
+            </ul>
+        </div>
+        <div>
+            <h3>Para Análisis Estratégico</h3>
+            <ul>
+                <li>Análisis competencia y mercado</li>
+                <li>Customer data y métricas satisfacción</li>
+                <li>Employee data y estructura organizacional</li>
+                <li>Technology stack y roadmap Odoo</li>
+                <li>Marketing plan y strategy</li>
+                <li>Pipeline ubicaciones futuras</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2>Contacto</h2>
+
+    <div class="highlight-box">
+        <p style="font-size: 1.1em;">
+            Para agendar reunión o solicitar información adicional:
+        </p>
+        <p style="margin-top: 20px;">
+            <strong>Nicolás - CEO</strong><br>
+            Estrategia general y relaciones inversores<br>
+            [Contacto a completar]
+        </p>
+        <p style="margin-top: 20px;">
+            <strong>Angie - CFO</strong><br>
+            Información financiera y due diligence<br>
+            [Contacto a completar]
+        </p>
+    </div>
+</div>
+
+<!-- RESUMEN FINAL -->
+<div class="section page-break">
+    <h1 class="section-title">Resumen Final</h1>
+
+    <h2>Por Qué Invertir en CENOTE</h2>
+
+    <div class="stats-grid" style="margin: 40px 0;">
+        <div class="stat-card">
+            <div class="number">15</div>
+            <div class="label">Años Brand Equity</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">2</div>
+            <div class="label">Locales Rentables Probados</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">16.5%</div>
+            <div class="label">ROI Anual USD</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">5-7</div>
+            <div class="label">Años Exit Strategy</div>
+        </div>
+    </div>
+
+    <h2>La Oportunidad</h2>
+
+    <div class="highlight-box success" style="margin: 40px 0;">
+        <p style="font-size: 1.3em; line-height: 1.8;">
+            Invertir <strong>US$ 1M por 33%</strong> en una franquiciadora gastronómica consolidada
+            con <strong>modelo probado, equipo experimentado y plan de expansión claro</strong> en uno de
+            los segmentos de mayor crecimiento en Argentina.
+        </p>
+        <p style="font-size: 1.3em; line-height: 1.8; margin-top: 20px;">
+            <strong>Retorno esperado</strong>: 100% en 43 meses (16.5% anual) + distribuciones estimadas
+            de US$ 150k anuales desde año 4 + múltiples estrategias de salida con upside significativo.
+        </p>
+    </div>
+
+    <h2>Factores Clave de Éxito</h2>
+
+    <div class="two-column">
+        <div>
+            <ul>
+                <li><span class="checkmark">✓</span> <strong>Modelo validado</strong> con 2 locales rentables</li>
+                <li><span class="checkmark">✓</span> <strong>Equipo</strong> con 15 años experiencia</li>
+                <li><span class="checkmark">✓</span> <strong>Timing perfecto</strong>: pre-saturación mercado</li>
+                <li><span class="checkmark">✓</span> <strong>Inversión escalonada</strong>: validación progresiva</li>
+                <li><span class="checkmark">✓</span> <strong>Procesos sólidos</strong>: replicables y escalables</li>
+            </ul>
+        </div>
+        <div>
+            <ul>
+                <li><span class="checkmark">✓</span> <strong>Tecnología</strong>: Odoo ERP para control</li>
+                <li><span class="checkmark">✓</span> <strong>Eficiencias operativas</strong> vs industria</li>
+                <li><span class="checkmark">✓</span> <strong>Brand equity</strong> construido 15 años</li>
+                <li><span class="checkmark">✓</span> <strong>Visión ecosystem</strong>: upside US$ 100M+</li>
+                <li><span class="checkmark">✓</span> <strong>Downside protection</strong> adecuado</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2>El Momento es Ahora</h2>
+
+    <div class="highlight-box">
+        <ul style="font-size: 1.1em;">
+            <li><strong>Modelo validado</strong>: Núñez operando exitosamente 17 meses (M0-M17)</li>
+            <li><strong>Equipo consolidado</strong>: Dream team Nico + Diego + Sacha funcionando</li>
+            <li><strong>Procesos definidos</strong>: 15 años de experiencia sistematizada</li>
+            <li><strong>Tecnología lista</strong>: Odoo implementado para escalar</li>
+            <li><strong>Mercado maduro</strong>: CABA premium receptivo</li>
+            <li><strong>Timing económico</strong>: Post-pandemia, consumo recuperándose</li>
+            <li><strong>Diferenciación clara</strong>: Formato mediodía + experiencia premium única</li>
+        </ul>
+    </div>
+
+    <div style="margin: 60px 0; text-align: center;">
+        <p style="font-size: 1.5em; font-weight: 300; color: #667eea; font-style: italic;">
+            "CENOTE: Transformando la experiencia gastronómica mexicana en Argentina"
+        </p>
+    </div>
+</div>
+
+<!-- DISCLAIMER Y CIERRE -->
+<div class="section page-break">
+    <h1 class="section-title">Disclaimer</h1>
+
+    <div style="padding: 40px; background: #f8f9fa; border-radius: 10px; margin: 40px 0;">
+        <p style="margin-bottom: 20px;">
+            Este documento contiene información confidencial de CENOTE y está destinado exclusivamente
+            para el inversor receptor identificado. Cualquier distribución, reproducción o uso no
+            autorizado de este documento está estrictamente prohibido.
+        </p>
+
+        <p style="margin-bottom: 20px;">
+            La información financiera proyectada constituye estimaciones basadas en supuestos razonables
+            y la experiencia del management team, pero no garantiza resultados futuros. Los resultados
+            reales pueden diferir materialmente de las proyecciones presentadas.
+        </p>
+
+        <p style="margin-bottom: 20px;">
+            La inversión en este proyecto conlleva riesgos inherentes al negocio gastronómico, incluyendo
+            pero no limitado a: volatilidad macroeconómica de Argentina, cambios en preferencias de
+            consumidores, competencia, disponibilidad de ubicaciones, y riesgos de ejecución.
+        </p>
+
+        <p style="margin-bottom: 20px;">
+            Se recomienda enfáticamente al inversor realizar su propia due diligence independiente y
+            consultar con asesores financieros, legales y fiscales profesionales antes de tomar cualquier
+            decisión de inversión.
+        </p>
+
+        <p>
+            Este documento no constituye una oferta pública de valores ni una solicitud de compra de
+            acciones. Cualquier inversión estará sujeta a la firma de acuerdos definitivos y el
+            cumplimiento de todos los requisitos legales y regulatorios aplicables.
+        </p>
+    </div>
+
+    <div style="text-align: center; margin-top: 80px;">
+        <p style="font-size: 1.1em; color: #666; margin-bottom: 10px;">
+            <strong>PLAN DE NEGOCIOS CENOTE</strong>
+        </p>
+        <p style="color: #999;">
+            Versión 1.0 - Noviembre 2025<br>
+            Documento confidencial para inversores
+        </p>
+    </div>
+</div>
+
+<script>
+    // Funcionalidad para imprimir a PDF
+    window.onload = function() {
+        // Agregar botón de impresión
+        const printButton = document.createElement('button');
+        printButton.innerHTML = '🖨️ Exportar a PDF';
+        printButton.style.cssText = `
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            font-weight: 600;
+        `;
+        printButton.onclick = () => window.print();
+        document.body.appendChild(printButton);
+    };
+</script>
+
+</body>
+</html>
