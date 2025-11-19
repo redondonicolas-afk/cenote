@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Ejecutivo - Martínez Octubre 2025</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .kpi-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .kpi-label {
+            font-size: 0.85rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .kpi-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2a5298;
+            margin-bottom: 5px;
+        }
+
+        .kpi-subtitle {
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .chart-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .chart-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .chart-title {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 600;
+            border-left: 4px solid #2a5298;
+            padding-left: 12px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 350px;
+        }
+
+        .chart-container.tall {
+            height: 450px;
+        }
+
+        .status-good {
+            color: #10b981;
+        }
+
+        .status-warning {
+            color: #f59e0b;
+        }
+
+        @media (max-width: 1200px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .kpi-value {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Dashboard Ejecutivo - Martínez</h1>
+            <div class="subtitle">Octubre 2025 | Casa Matriz CENOTE | TC: $1,450/USD</div>
+        </header>
+
+        <!-- KPIs Principales -->
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-label">Facturación</div>
+                <div class="kpi-value">$102.4M</div>
+                <div class="kpi-subtitle">USD 70.6k</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Margen Neto</div>
+                <div class="kpi-value status-warning">13.2%</div>
+                <div class="kpi-subtitle">$13.5M resultado</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Cubiertos</div>
+                <div class="kpi-value">3,208</div>
+                <div class="kpi-subtitle">103 por día</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Ticket Promedio</div>
+                <div class="kpi-value">$31,923</div>
+                <div class="kpi-subtitle">USD 22.0</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Egresos Totales</div>
+                <div class="kpi-value">$89.1M</div>
+                <div class="kpi-subtitle">87% de facturación</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Top Proveedor</div>
+                <div class="kpi-value">$10.5M</div>
+                <div class="kpi-subtitle">Campo Magro</div>
+            </div>
+        </div>
+
+        <!-- Gráficos -->
+        <div class="charts-grid">
+            <!-- Facturación Diaria -->
+            <div class="chart-card full-width">
+                <div class="chart-title">📈 Facturación Diaria - Octubre 2025</div>
+                <div class="chart-container tall">
+                    <canvas id="chartFacturacionDiaria"></canvas>
+                </div>
+            </div>
+
+            <!-- Cubiertos por Día -->
+            <div class="chart-card full-width">
+                <div class="chart-title">👥 Cubiertos por Día</div>
+                <div class="chart-container">
+                    <canvas id="chartCubiertosDiarios"></canvas>
+                </div>
+            </div>
+
+            <!-- Desglose de Egresos -->
+            <div class="chart-card">
+                <div class="chart-title">💸 Desglose de Egresos</div>
+                <div class="chart-container">
+                    <canvas id="chartEgresos"></canvas>
+                </div>
+            </div>
+
+            <!-- Canales de Pago -->
+            <div class="chart-card">
+                <div class="chart-title">💳 Canales de Pago</div>
+                <div class="chart-container">
+                    <canvas id="chartCanales"></canvas>
+                </div>
+            </div>
+
+            <!-- Top 10 Proveedores -->
+            <div class="chart-card full-width">
+                <div class="chart-title">🏪 Top 10 Proveedores</div>
+                <div class="chart-container">
+                    <canvas id="chartProveedores"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Datos del JSON generado
+        const datos = {
+  "dolar_octubre_2025": 1450,
+  "facturacion_diaria": {
+    "fechas": ["01/10 (Mié)", "02/10 (Jue)", "03/10 (Vie)", "04/10 (Sáb)", "05/10 (Dom)", "06/10 (Lun)", "07/10 (Mar)", "08/10 (Mié)", "09/10 (Jue)", "10/10 (Vie)", "11/10 (Sáb)", "12/10 (Dom)", "13/10 (Lun)", "14/10 (Mar)", "15/10 (Mié)", "16/10 (Jue)", "17/10 (Vie)", "18/10 (Sáb)", "19/10 (Dom)", "20/10 (Lun)", "21/10 (Mar)", "22/10 (Mié)", "23/10 (Jue)", "24/10 (Vie)", "25/10 (Sáb)", "26/10 (Dom)", "27/10 (Lun)", "28/10 (Mar)", "29/10 (Mié)", "30/10 (Jue)", "31/10 (Vie)"],
+    "valores": [1767902.0, 2309582.0, 5494879.0, 6888561.0, 2584916.0, 1417483.0, 2793471.0, 1737486.9, 3650362.0, 5373183.0, 4752888.0, 4147179.0, 1382390.0, 2029255.0, 1694510.0, 2946752.0, 5336193.0, 5705714.0, 6357291.0, 1355364.0, 1392614.0, 1613525.0, 3112869.0, 5120396.0, 6246343.0, 2357460.0, 1384520.0, 1698370.0, 1301093.0, 2552903.0, 5903640.0],
+    "cubiertos": [57, 59, 117, 221, 92, 43, 125, 54, 125, 159, 155, 131, 39, 84, 54, 86, 166, 203, 223, 39, 34, 41, 91, 137, 202, 75, 39, 72, 35, 66, 184]
+  },
+  "resumen": {
+    "facturacion_ars": 102409094.9,
+    "facturacion_usd": 70626.962,
+    "resultado_ars": 13485355.6,
+    "resultado_usd": 9300.24524137931,
+    "egresos_ars": 89145239.3,
+    "margen_porcentaje": 13.168123019901817,
+    "total_cubiertos": 3208,
+    "ticket_promedio": 31923.03456982544
+  },
+  "desglose_egresos": {
+    "rrhh": 17146155.0,
+    "insumos": 42196542.09,
+    "comisiones": 6116285,
+    "otros": 23686257.209999993
+  },
+  "top_proveedores": [
+    {"proveedor": "Campo Magro", "categoria": "Cocina", "importe": 10485833.704},
+    {"proveedor": "Mayoristanet", "categoria": "Cocina", "importe": 5154743.386299999},
+    {"proveedor": "Land Fruit", "categoria": "Cocina", "importe": 3161783.7373},
+    {"proveedor": "Cajas", "categoria": "Cocina", "importe": 2198167.0},
+    {"proveedor": "Danor", "categoria": "Cocina", "importe": 2087484.0431},
+    {"proveedor": "Sol de Maiz", "categoria": "Cocina", "importe": 1935930.304},
+    {"proveedor": "Enecoiz Emanuel", "categoria": "Cocina", "importe": 1490894.696},
+    {"proveedor": "Aceite Victor", "categoria": "Cocina", "importe": 1448640.0},
+    {"proveedor": "Wine Co", "categoria": "Barra", "importe": 1429034.1665999999},
+    {"proveedor": "Amada Cocina", "categoria": "Cocina", "importe": 1368970.5241}
+  ],
+  "canales_pago": {
+    "efectivo": 19583690.0,
+    "tarjeta": 46125382.9,
+    "mercado_pago": 21611059.0,
+    "pedidosya": 14736071.0,
+    "cuenta_corriente": 352892.0
+  }
+};
+
+        // Configuración común
+        Chart.defaults.font.family = "'Segoe UI', sans-serif";
+        Chart.defaults.font.size = 12;
+
+        // 1. Facturación Diaria
+        new Chart(document.getElementById('chartFacturacionDiaria'), {
+            type: 'bar',
+            data: {
+                labels: datos.facturacion_diaria.fechas,
+                datasets: [{
+                    label: 'Facturación ARS',
+                    data: datos.facturacion_diaria.valores,
+                    backgroundColor: datos.facturacion_diaria.fechas.map((fecha, idx) => {
+                        const dia = fecha.split('(')[1].replace(')', '');
+                        return (dia === 'Vie' || dia === 'Sáb' || dia === 'Dom') ? '#10b981' : '#2a5298';
+                    }),
+                    borderWidth: 0,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const valor = context.parsed.y;
+                                const usd = valor / datos.dolar_octubre_2025;
+                                return '$' + valor.toLocaleString('es-AR') + ' ARS (USD $' + usd.toFixed(0) + ')';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + (value / 1000000).toFixed(1) + 'M';
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // 2. Cubiertos por Día
+        new Chart(document.getElementById('chartCubiertosDiarios'), {
+            type: 'line',
+            data: {
+                labels: datos.facturacion_diaria.fechas,
+                datasets: [{
+                    label: 'Cubiertos',
+                    data: datos.facturacion_diaria.cubiertos,
+                    borderColor: '#f59e0b',
+                    backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                    tension: 0.4,
+                    fill: true,
+                    borderWidth: 3,
+                    pointBackgroundColor: '#f59e0b',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 4,
+                    pointHoverRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.parsed.y + ' cubiertos';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 50
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // 3. Desglose de Egresos
+        new Chart(document.getElementById('chartEgresos'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Insumos', 'Otros', 'RRHH', 'Comisiones'],
+                datasets: [{
+                    data: [
+                        datos.desglose_egresos.insumos,
+                        datos.desglose_egresos.otros,
+                        datos.desglose_egresos.rrhh,
+                        datos.desglose_egresos.comisiones
+                    ],
+                    backgroundColor: [
+                        '#ef4444',
+                        '#94a3b8',
+                        '#3b82f6',
+                        '#f59e0b'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 15,
+                            usePointStyle: true
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const pct = ((context.parsed / total) * 100).toFixed(1);
+                                return context.label + ': $' + (context.parsed / 1000000).toFixed(1) + 'M (' + pct + '%)';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 4. Canales de Pago
+        new Chart(document.getElementById('chartCanales'), {
+            type: 'pie',
+            data: {
+                labels: ['Tarjeta', 'Mercado Pago', 'Efectivo', 'PedidosYa', 'Cta. Cte.'],
+                datasets: [{
+                    data: [
+                        datos.canales_pago.tarjeta,
+                        datos.canales_pago.mercado_pago,
+                        datos.canales_pago.efectivo,
+                        datos.canales_pago.pedidosya,
+                        datos.canales_pago.cuenta_corriente
+                    ],
+                    backgroundColor: [
+                        '#3b82f6',
+                        '#10b981',
+                        '#f59e0b',
+                        '#ef4444',
+                        '#94a3b8'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 15,
+                            usePointStyle: true
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const pct = ((context.parsed / total) * 100).toFixed(1);
+                                return context.label + ': $' + (context.parsed / 1000000).toFixed(1) + 'M (' + pct + '%)';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 5. Top 10 Proveedores
+        new Chart(document.getElementById('chartProveedores'), {
+            type: 'bar',
+            data: {
+                labels: datos.top_proveedores.map(p => p.proveedor),
+                datasets: [{
+                    label: 'Gasto (ARS)',
+                    data: datos.top_proveedores.map(p => p.importe),
+                    backgroundColor: '#2a5298',
+                    borderWidth: 0,
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return '$' + (context.parsed.x / 1000000).toFixed(2) + 'M';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + (value / 1000000).toFixed(0) + 'M';
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

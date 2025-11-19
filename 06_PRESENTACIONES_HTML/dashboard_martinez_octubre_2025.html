@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Ejecutivo - Martínez Octubre 2025</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.2rem;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .kpi-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .kpi-label {
+            font-size: 0.9rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .kpi-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .kpi-subtitle {
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .chart-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .chart-title {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 350px;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .status-good {
+            color: #10b981;
+        }
+
+        .status-warning {
+            color: #f59e0b;
+        }
+
+        .status-bad {
+            color: #ef4444;
+        }
+
+        @media (max-width: 768px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .kpi-value {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Dashboard Ejecutivo - Martínez</h1>
+            <div class="subtitle">Octubre 2025 | Casa Matriz CENOTE</div>
+        </header>
+
+        <!-- KPIs Principales -->
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-label">Facturación</div>
+                <div class="kpi-value">$102.4M</div>
+                <div class="kpi-subtitle">~$92k USD</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Margen Neto</div>
+                <div class="kpi-value status-warning">13.2%</div>
+                <div class="kpi-subtitle">$13.5M resultado</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Cubiertos</div>
+                <div class="kpi-value">3,208</div>
+                <div class="kpi-subtitle">~103 por día</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Ticket Promedio</div>
+                <div class="kpi-value">$31,923</div>
+                <div class="kpi-subtitle">~$28.7 USD</div>
+            </div>
+        </div>
+
+        <!-- Gráficos -->
+        <div class="charts-grid">
+            <!-- Top Proveedores -->
+            <div class="chart-card">
+                <div class="chart-title">🏪 Top 10 Proveedores</div>
+                <div class="chart-container">
+                    <canvas id="chartProveedores"></canvas>
+                </div>
+            </div>
+
+            <!-- Canales de Pago -->
+            <div class="chart-card">
+                <div class="chart-title">💳 Canales de Pago</div>
+                <div class="chart-container">
+                    <canvas id="chartCanales"></canvas>
+                </div>
+            </div>
+
+            <!-- Distribución de Costos -->
+            <div class="chart-card">
+                <div class="chart-title">📦 Distribución de Costos</div>
+                <div class="chart-container">
+                    <canvas id="chartCostos"></canvas>
+                </div>
+            </div>
+
+            <!-- Facturación Diaria -->
+            <div class="chart-card">
+                <div class="chart-title">📈 Facturación Diaria</div>
+                <div class="chart-container">
+                    <canvas id="chartDiaria"></canvas>
+                </div>
+            </div>
+
+            <!-- Resumen Financiero -->
+            <div class="chart-card full-width">
+                <div class="chart-title">💰 Resumen Financiero</div>
+                <div class="chart-container">
+                    <canvas id="chartResumen"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Datos procesados del Excel
+        const datos = {
+            "resumen": {
+                "total": 13485355.6,
+                "ingresos_total": 102630594.9,
+                "facturacion": 102409094.9,
+                "egresos_total": -89145239.3
+            },
+            "top_proveedores": [
+                {"proveedor": "Campo Magro", "categoria": "Cocina", "importe": 10485833.75},
+                {"proveedor": "Mayoristanet", "categoria": "Cocina", "importe": 5154742.51},
+                {"proveedor": "Land Fruit", "categoria": "Cocina", "importe": 3161783.67},
+                {"proveedor": "Danor", "categoria": "Cocina", "importe": 2726408.16},
+                {"proveedor": "Sol de Maiz", "categoria": "Cocina", "importe": 2421711.44},
+                {"proveedor": "Aguanort", "categoria": "Barra", "importe": 1987834.78},
+                {"proveedor": "Productos Rivi", "categoria": "Cocina", "importe": 1897621.42},
+                {"proveedor": "DBA", "categoria": "Barra", "importe": 1724254.65},
+                {"proveedor": "Emporio Sasem", "categoria": "Cocina", "importe": 1540914.72},
+                {"proveedor": "Wine Co", "categoria": "Barra", "importe": 1410566.69}
+            ],
+            "canales_pago": {
+                "efectivo": 19583690.0,
+                "tarjeta": 46125382.9,
+                "mercado_pago": 21611059.0,
+                "pedidosya": 14736071.0,
+                "cuenta_corriente": 352892.0
+            },
+            "gastos_por_categoria": [
+                {"categoria": "Cocina", "monto": 33432318.78},
+                {"categoria": "Barra", "monto": 5907452.73},
+                {"categoria": "Operación", "monto": 2320169.71}
+            ],
+            "metricas": {
+                "margen_neto": 13.17,
+                "costo_porcentaje": 87.06,
+                "ticket_promedio": 31923.24,
+                "facturacion_diaria_promedio": 2625874.24,
+                "cubiertos_por_dia": 82.26
+            }
+        };
+
+        // Configuración común de gráficos
+        const chartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        font: {
+                            size: 12,
+                            family: "'Segoe UI', sans-serif"
+                        }
+                    }
+                }
+            }
+        };
+
+        // 1. Top Proveedores
+        new Chart(document.getElementById('chartProveedores'), {
+            type: 'bar',
+            data: {
+                labels: datos.top_proveedores.map(p => p.proveedor),
+                datasets: [{
+                    label: 'Gasto (ARS)',
+                    data: datos.top_proveedores.map(p => p.importe),
+                    backgroundColor: [
+                        '#667eea', '#764ba2', '#f093fb', '#4facfe',
+                        '#43e97b', '#fa709a', '#fee140', '#30cfd0',
+                        '#a8edea', '#fed6e3'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                ...chartOptions,
+                indexAxis: 'y',
+                plugins: {
+                    ...chartOptions.plugins,
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return '$' + context.parsed.x.toLocaleString('es-AR');
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + (value / 1000000).toFixed(1) + 'M';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 2. Canales de Pago
+        new Chart(document.getElementById('chartCanales'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Tarjeta', 'Mercado Pago', 'Efectivo', 'PedidosYa', 'Cta. Cte.'],
+                datasets: [{
+                    data: [
+                        datos.canales_pago.tarjeta,
+                        datos.canales_pago.mercado_pago,
+                        datos.canales_pago.efectivo,
+                        datos.canales_pago.pedidosya,
+                        datos.canales_pago.cuenta_corriente
+                    ],
+                    backgroundColor: [
+                        '#667eea',
+                        '#43e97b',
+                        '#f093fb',
+                        '#fee140',
+                        '#fa709a'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                ...chartOptions,
+                plugins: {
+                    ...chartOptions.plugins,
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const pct = ((context.parsed / total) * 100).toFixed(1);
+                                return context.label + ': $' + context.parsed.toLocaleString('es-AR') + ' (' + pct + '%)';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 3. Distribución de Costos
+        new Chart(document.getElementById('chartCostos'), {
+            type: 'pie',
+            data: {
+                labels: datos.gastos_por_categoria.map(c => c.categoria),
+                datasets: [{
+                    data: datos.gastos_por_categoria.map(c => c.monto),
+                    backgroundColor: [
+                        '#667eea',
+                        '#43e97b',
+                        '#f093fb'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                ...chartOptions,
+                plugins: {
+                    ...chartOptions.plugins,
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const pct = ((context.parsed / total) * 100).toFixed(1);
+                                return context.label + ': $' + context.parsed.toLocaleString('es-AR') + ' (' + pct + '%)';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 4. Facturación Diaria (Ejemplo con datos agregados por semana)
+        new Chart(document.getElementById('chartDiaria'), {
+            type: 'line',
+            data: {
+                labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'],
+                datasets: [{
+                    label: 'Facturación Semanal',
+                    data: [25600000, 27300000, 24800000, 24700000],
+                    borderColor: '#667eea',
+                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                    tension: 0.4,
+                    fill: true,
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                ...chartOptions,
+                scales: {
+                    y: {
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + (value / 1000000).toFixed(0) + 'M';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 5. Resumen Financiero
+        new Chart(document.getElementById('chartResumen'), {
+            type: 'bar',
+            data: {
+                labels: ['Ingresos', 'Egresos', 'Resultado Neto'],
+                datasets: [{
+                    data: [
+                        datos.resumen.ingresos_total,
+                        Math.abs(datos.resumen.egresos_total),
+                        datos.resumen.total
+                    ],
+                    backgroundColor: [
+                        '#10b981',
+                        '#ef4444',
+                        '#667eea'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                ...chartOptions,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return '$' + context.parsed.y.toLocaleString('es-AR');
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + (value / 1000000).toFixed(0) + 'M';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

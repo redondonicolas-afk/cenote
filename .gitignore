@@ -1,0 +1,40 @@
+# Archivos temporales de análisis
+*.json
+!package.json
+!package-lock.json
+
+# Scripts temporales de análisis
+analizar_*.py
+analizar_*.ps1
+analisis_*.ps1
+leer_*.py
+leer_*.ps1
+procesar_*.py
+generar_dashboard_*.py
+generar_dashboard_*.ps1
+verificar_*.py
+extraer_*.py
+check_*.py
+
+# Archivos temporales
+nul
+productos_*_temp.json
+datos_*.json
+
+# Datos confidenciales de ventas (CSV)
+07_DATOS_VENTAS_RAW/**/*.csv
+07_DATOS_VENTAS_RAW/**/*.xlsx
+07_DATOS_VENTAS_RAW/**/*.xls
+
+# Configuración local de Claude
+.claude/settings.local.json
+
+# Node modules
+node_modules/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

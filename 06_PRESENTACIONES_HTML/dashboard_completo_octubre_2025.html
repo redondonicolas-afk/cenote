@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Completo CENOTE - Octubre 2025</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+        }
+
+        /* HEADER FIJO */
+        .header-fixed {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .header-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* TABS NAVIGATION */
+        .tabs-nav {
+            background: white;
+            border-bottom: 2px solid #e5e7eb;
+            position: sticky;
+            top: 80px;
+            z-index: 999;
+        }
+
+        .tabs-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 0;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 15px 20px;
+            background: white;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .tab-button:hover {
+            background: #f9fafb;
+            color: #2a5298;
+        }
+
+        .tab-button.active {
+            color: #2a5298;
+            border-bottom-color: #2a5298;
+            background: #f0f4ff;
+        }
+
+        /* CONTENT */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* KPIs */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .kpi-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            text-align: center;
+            border-left: 4px solid #2a5298;
+        }
+
+        .kpi-label {
+            font-size: 0.85rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .kpi-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2a5298;
+            margin-bottom: 5px;
+        }
+
+        .kpi-subtitle {
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        /* SECTIONS */
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #1e3c72;
+            margin-bottom: 8px;
+            border-bottom: 3px solid #2a5298;
+            padding-bottom: 10px;
+        }
+
+        .section-subtitle {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        /* CHARTS */
+        .chart-container {
+            position: relative;
+            height: 350px;
+            margin: 15px 0;
+        }
+
+        .chart-container.tall {
+            height: 450px;
+        }
+
+        /* GRID LAYOUTS */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        /* TABLES */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            margin: 15px 0;
+        }
+
+        th {
+            background: #1e3c72;
+            color: white;
+            padding: 12px 10px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        tr:hover {
+            background: #f9fafb;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* BADGES */
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .badge-warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge-danger {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .badge-info {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        /* ANALYSIS BOX */
+        .analysis-box {
+            background: #f8fafc;
+            border-left: 4px solid #10b981;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .analysis-box h4 {
+            color: #1e3c72;
+            margin-bottom: 12px;
+        }
+
+        .analysis-box ul {
+            margin-left: 20px;
+        }
+
+        .analysis-box li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        /* HIGHLIGHT NUMBERS */
+        .highlight-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2a5298;
+            margin: 10px 0;
+        }
+
+        .highlight-green {
+            color: #10b981;
+        }
+
+        .highlight-red {
+            color: #ef4444;
+        }
+
+        .highlight-orange {
+            color: #f59e0b;
+        }
+
+        /* COMPARATIVO CARDS */
+        .compare-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .compare-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e3c72;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .vs-badge {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            display: inline-block;
+            margin: 10px 0;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .tabs-container {
+                flex-direction: column;
+            }
+
+            .tab-button {
+                border-bottom: 1px solid #e5e7eb;
+            }
+
+            .kpi-value {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER FIJO -->
+    <div class="header-fixed">
+        <div class="header-content">
+            <div class="header-title">
+                <h1>📊 Dashboard Ejecutivo CENOTE</h1>
+                <div class="header-subtitle">Octubre 2025 | Análisis Completo Martínez & Núñez | TC: $1,450/USD</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TABS NAVIGATION -->
+    <div class="tabs-nav">
+        <div class="tabs-container">
+            <button class="tab-button active" onclick="showTab('martinez')">🏢 Martínez</button>
+            <button class="tab-button" onclick="showTab('nunez')">🏪 Núñez</button>
+            <button class="tab-button" onclick="showTab('comparativo')">⚖️ Comparativo</button>
+            <button class="tab-button" onclick="showTab('proyecciones')">🚀 Proyecciones & ROI</button>
+        </div>
+    </div>
+
+    <!-- CONTENIDO -->
+    <div class="container">
+
+        <!-- TAB 1: MARTÍNEZ -->
+        <div id="tab-martinez" class="tab-content active">
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-label">Facturación</div>
+                    <div class="kpi-value">$102.4M</div>
+                    <div class="kpi-subtitle">USD 70.6k</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Cubiertos</div>
+                    <div class="kpi-value">3,208</div>
+                    <div class="kpi-subtitle">103 por día</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Ticket Promedio</div>
+                    <div class="kpi-value">$31,923</div>
+                    <div class="kpi-subtitle">USD 22.0</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Turnos Operativos</div>
+                    <div class="kpi-value class="highlight-orange">36</div>
+                    <div class="kpi-subtitle">$2.8M por turno</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Margen Neto</div>
+                    <div class="kpi-value" style="color: #f59e0b;">13.2%</div>
+                    <div class="kpi-subtitle">$13.5M resultado</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">📈 Facturación Diaria</h2>
+                <div class="chart-container tall">
+                    <canvas id="chartMartinezDiaria"></canvas>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">🌙 Análisis por Turno</h2>
+                <p class="section-subtitle">Distribución: ~8 mediodías (Sáb/Dom) + ~28 noches</p>
+                <div class="grid-2">
+                    <div>
+                        <div class="chart-container">
+                            <canvas id="chartMartinezTurnos"></canvas>
+                        </div>
+                    </div>
+                    <div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Turno</th>
+                                    <th class="text-right">Facturación</th>
+                                    <th class="text-right">Cubs/turno</th>
+                                    <th class="text-right">$/turno</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Noche</strong></td>
+                                    <td class="text-right">$88M</td>
+                                    <td class="text-right">~100</td>
+                                    <td class="text-right">$3.1M</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Mediodía</strong></td>
+                                    <td class="text-right">$14.4M</td>
+                                    <td class="text-right">~70</td>
+                                    <td class="text-right">$1.8M</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="analysis-box">
+                            <h4>💡 Insights Clave</h4>
+                            <ul>
+                                <li><strong>Noche domina:</strong> 86% de facturación</li>
+                                <li><strong>Mediodía eficiente:</strong> ~70 cubs/turno = EN OBJETIVO</li>
+                                <li><strong>Oportunidad:</strong> Abrir 20 mediodías L-V adicionales</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">🏪 Top 10 Proveedores</h2>
+                <div class="chart-container">
+                    <canvas id="chartMartinezProveedores"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: NÚÑEZ -->
+        <div id="tab-nunez" class="tab-content">
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-label">Facturación</div>
+                    <div class="kpi-value">$51.3M</div>
+                    <div class="kpi-subtitle">USD 35.4k</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Cubiertos</div>
+                    <div class="kpi-value">1,704</div>
+                    <div class="kpi-subtitle">55 por día</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Ticket Promedio</div>
+                    <div class="kpi-value">$30,128</div>
+                    <div class="kpi-subtitle">USD 20.8</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Turnos Operativos</div>
+                    <div class="kpi-value" style="color: #10b981;">53</div>
+                    <div class="kpi-subtitle">$969k por turno</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Margen Neto</div>
+                    <div class="kpi-value" style="color: #10b981;">26.4%</div>
+                    <div class="kpi-subtitle">$13.6M resultado</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">📈 Facturación Diaria</h2>
+                <div class="chart-container tall">
+                    <canvas id="chartNunezDiaria"></canvas>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">🌙 Análisis por Turno</h2>
+                <p class="section-subtitle">Distribución: 22 mediodías (L-V) + 31 noches (todos los días)</p>
+                <div class="grid-2">
+                    <div>
+                        <div class="chart-container">
+                            <canvas id="chartNunezTurnos"></canvas>
+                        </div>
+                    </div>
+                    <div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Turno</th>
+                                    <th class="text-right">Facturación</th>
+                                    <th class="text-right">Cubs/turno</th>
+                                    <th class="text-right">$/turno</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Noche</strong></td>
+                                    <td class="text-right">$40.4M</td>
+                                    <td class="text-right" style="color: #ef4444;">38</td>
+                                    <td class="text-right">$1.3M</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Mediodía</strong></td>
+                                    <td class="text-right">$10.9M</td>
+                                    <td class="text-right" style="color: #ef4444;">24</td>
+                                    <td class="text-right">$497k</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="analysis-box">
+                            <h4>⚠️ Problema Identificado</h4>
+                            <ul>
+                                <li><strong>Cubs/turno muy bajos:</strong> 24 mediodía vs objetivo 70</li>
+                                <li><strong>Noche 73% bajo:</strong> 38 cubs vs objetivo 140</li>
+                                <li><strong>Oportunidad ENORME:</strong> Llenar mesas existentes</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">🏪 Top 10 Proveedores</h2>
+                <div class="chart-container">
+                    <canvas id="chartNunezProveedores"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: COMPARATIVO -->
+        <div id="tab-comparativo" class="tab-content">
+            <div class="section">
+                <h2 class="section-title">⚖️ Martínez vs Núñez - Octubre 2025</h2>
+
+                <div class="grid-3">
+                    <div class="compare-card">
+                        <div class="compare-header">Facturación Total</div>
+                        <div style="text-align: center;">
+                            <div class="highlight-number">$102.4M</div>
+                            <div style="color: #666;">Martínez</div>
+                            <div class="vs-badge">vs</div>
+                            <div class="highlight-number">$51.3M</div>
+                            <div style="color: #666;">Núñez</div>
+                            <div style="margin-top: 15px; color: #10b981; font-weight: 600;">
+                                Martínez 2x Núñez
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="compare-card">
+                        <div class="compare-header">Turnos Operativos</div>
+                        <div style="text-align: center;">
+                            <div class="highlight-number highlight-orange">36</div>
+                            <div style="color: #666;">Martínez</div>
+                            <div class="vs-badge">vs</div>
+                            <div class="highlight-number highlight-green">53</div>
+                            <div style="color: #666;">Núñez</div>
+                            <div style="margin-top: 15px; color: #f59e0b; font-weight: 600;">
+                                Núñez +47% turnos
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="compare-card">
+                        <div class="compare-header">$ por Turno</div>
+                        <div style="text-align: center;">
+                            <div class="highlight-number highlight-green">$2.8M</div>
+                            <div style="color: #666;">Martínez</div>
+                            <div class="vs-badge">vs</div>
+                            <div class="highlight-number highlight-red">$969k</div>
+                            <div style="color: #666;">Núñez</div>
+                            <div style="margin-top: 15px; color: #10b981; font-weight: 600;">
+                                Martínez 2.9x más eficiente
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="analysis-box" style="margin-top: 30px;">
+                    <h4>🎯 Conclusiones del Comparativo</h4>
+                    <ul>
+                        <li><strong>Martínez = Eficiencia por turno:</strong> Factura $2.8M por turno vs $969k de Núñez</li>
+                        <li><strong>Núñez = Más turnos operativos:</strong> 53 vs 36 (47% más) pero subutilizados</li>
+                        <li><strong>Cubiertos por turno:</strong> Martínez ~89 vs Núñez ~32 (178% diferencia)</li>
+                        <li><strong>Margen neto:</strong> Núñez 26.4% vs Martínez 13.2% - Núñez más rentable %</li>
+                        <li><strong>Estrategias diferentes:</strong> Martínez debe abrir más / Núñez debe llenar más</li>
+                    </ul>
+                </div>
+
+                <div class="section" style="margin-top: 30px;">
+                    <h2 class="section-title">📊 Comparativo Visual</h2>
+                    <div class="chart-container tall">
+                        <canvas id="chartComparativo"></canvas>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">📅 Cubiertos por Turno - Detalle</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Métrica</th>
+                                <th class="text-right">Martínez</th>
+                                <th class="text-right">Núñez</th>
+                                <th class="text-right">Objetivo</th>
+                                <th class="text-right">Gap MZ</th>
+                                <th class="text-right">Gap NU</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Mediodía (cubs/turno)</strong></td>
+                                <td class="text-right">~70</td>
+                                <td class="text-right" style="color: #ef4444;">24</td>
+                                <td class="text-right">70</td>
+                                <td class="text-right">✅ 0%</td>
+                                <td class="text-right" style="color: #ef4444;">-66%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Noche (cubs/turno)</strong></td>
+                                <td class="text-right">~100</td>
+                                <td class="text-right" style="color: #ef4444;">38</td>
+                                <td class="text-right">140</td>
+                                <td class="text-right" style="color: #f59e0b;">-29%</td>
+                                <td class="text-right" style="color: #ef4444;">-73%</td>
+                            </tr>
+                            <tr style="background: #f8fafc; font-weight: 600;">
+                                <td><strong>PROMEDIO</strong></td>
+                                <td class="text-right">89</td>
+                                <td class="text-right">32</td>
+                                <td class="text-right">105</td>
+                                <td class="text-right">-15%</td>
+                                <td class="text-right">-70%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: PROYECCIONES & ROI -->
+        <div id="tab-proyecciones" class="tab-content">
+            <div class="section">
+                <h2 class="section-title">🚀 Proyecciones & Oportunidades de Crecimiento</h2>
+                <p class="section-subtitle">Análisis de potencial de facturación alcanzando objetivos operativos</p>
+
+                <div class="analysis-box">
+                    <h4>🎯 Objetivos Operativos CENOTE</h4>
+                    <ul>
+                        <li><strong>Mediodía:</strong> 70 cubiertos/turno (todos los días)</li>
+                        <li><strong>Noche:</strong> 140 cubiertos/turno (todos los días)</li>
+                        <li><strong>Total:</strong> 210 cubiertos/día en 2 turnos</li>
+                        <li><strong>Ticket promedio target:</strong> $31,000 (promedio actual ambos locales)</li>
+                    </ul>
+                </div>
+
+                <div class="grid-2" style="margin: 30px 0;">
+                    <div class="section">
+                        <h3 class="section-title" style="font-size: 1.3rem;">🏢 MARTÍNEZ - Estrategia de Expansión</h3>
+
+                        <h4 style="margin: 20px 0 10px 0;">📊 Situación Actual (Octubre 2025)</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Día</th>
+                                    <th class="text-right">Mediodía</th>
+                                    <th class="text-right">Noche</th>
+                                    <th class="text-right">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Lunes a Viernes</td>
+                                    <td class="text-right" style="color: #ef4444;">❌</td>
+                                    <td class="text-right">✅</td>
+                                    <td class="text-right">~20 turnos</td>
+                                </tr>
+                                <tr>
+                                    <td>Sábado</td>
+                                    <td class="text-right">✅</td>
+                                    <td class="text-right">✅</td>
+                                    <td class="text-right">~8 turnos</td>
+                                </tr>
+                                <tr>
+                                    <td>Domingo</td>
+                                    <td class="text-right">✅</td>
+                                    <td class="text-right">✅</td>
+                                    <td class="text-right">~8 turnos</td>
+                                </tr>
+                                <tr style="background: #f8fafc; font-weight: 600;">
+                                    <td><strong>TOTAL MENSUAL</strong></td>
+                                    <td class="text-right" colspan="2"><strong>36 turnos</strong></td>
+                                    <td class="text-right"><strong>$102.4M</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4 style="margin: 30px 0 10px 0; color: #10b981;">💡 Proyección: Abrir Mediodía L-V</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Concepto</th>
+                                    <th class="text-right">Valor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Turnos adicionales L-V mediodía</td>
+                                    <td class="text-right">+20 turnos/mes</td>
+                                </tr>
+                                <tr>
+                                    <td>Cubiertos por turno (objetivo)</td>
+                                    <td class="text-right">70</td>
+                                </tr>
+                                <tr>
+                                    <td>Ticket promedio</td>
+                                    <td class="text-right">$31,000</td>
+                                </tr>
+                                <tr style="background: #d1fae5;">
+                                    <td><strong>Facturación adicional</strong></td>
+                                    <td class="text-right"><strong>+$43.4M/mes</strong></td>
+                                </tr>
+                                <tr style="background: #d1fae5;">
+                                    <td><strong>Nueva facturación total</strong></td>
+                                    <td class="text-right"><strong>$145.8M/mes</strong></td>
+                                </tr>
+                                <tr style="background: #d1fae5;">
+                                    <td><strong>Incremento</strong></td>
+                                    <td class="text-right"><strong>+42%</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="analysis-box">
+                            <h4>💰 Costo Operativo Estimado por Turno Mediodía</h4>
+                            <ul>
+                                <li><strong>RRHH incremental:</strong> 2 mozos + 1 cocina = ~$150k/turno</li>
+                                <li><strong>Insumos (40%):</strong> ~$870k/turno</li>
+                                <li><strong>Otros variables:</strong> ~$100k/turno</li>
+                                <li><strong>TOTAL COSTO:</strong> ~$1.12M/turno</li>
+                                <li style="color: #10b981;"><strong>MARGEN POR TURNO:</strong> $2.17M - $1.12M = $1.05M (48%)</li>
+                            </ul>
+                        </div>
+
+                        <div style="text-align: center; padding: 20px; background: #d1fae5; border-radius: 12px; margin-top: 20px;">
+                            <div style="font-size: 0.9rem; color: #065f46; margin-bottom: 5px;">POTENCIAL GANANCIA INCREMENTAL</div>
+                            <div class="highlight-number highlight-green">+$21M/mes</div>
+                            <div style="color: #065f46; font-size: 0.9rem;">20 turnos x $1.05M margen</div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h3 class="section-title" style="font-size: 1.3rem;">🏪 NÚÑEZ - Estrategia de Ocupación</h3>
+
+                        <h4 style="margin: 20px 0 10px 0;">📊 Situación Actual (Octubre 2025)</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Turno</th>
+                                    <th class="text-right">Actual</th>
+                                    <th class="text-right">Objetivo</th>
+                                    <th class="text-right">Gap</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Mediodía (22 turnos)</td>
+                                    <td class="text-right" style="color: #ef4444;">24 cubs</td>
+                                    <td class="text-right">70 cubs</td>
+                                    <td class="text-right" style="color: #ef4444;">-66%</td>
+                                </tr>
+                                <tr>
+                                    <td>Noche (31 turnos)</td>
+                                    <td class="text-right" style="color: #ef4444;">38 cubs</td>
+                                    <td class="text-right">140 cubs</td>
+                                    <td class="text-right" style="color: #ef4444;">-73%</td>
+                                </tr>
+                                <tr style="background: #f8fafc; font-weight: 600;">
+                                    <td><strong>TOTAL (53 turnos)</strong></td>
+                                    <td class="text-right"><strong>1,704 cubs</strong></td>
+                                    <td class="text-right"><strong>5,580 cubs</strong></td>
+                                    <td class="text-right"><strong>-69%</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4 style="margin: 30px 0 10px 0; color: #10b981;">💡 Proyección: Alcanzar Objetivos</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Concepto</th>
+                                    <th class="text-right">Actual</th>
+                                    <th class="text-right">Proyectado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Turnos operativos</td>
+                                    <td class="text-right">53</td>
+                                    <td class="text-right">53</td>
+                                </tr>
+                                <tr>
+                                    <td>Cubiertos totales</td>
+                                    <td class="text-right">1,704</td>
+                                    <td class="text-right">5,580</td>
+                                </tr>
+                                <tr>
+                                    <td>Ticket promedio</td>
+                                    <td class="text-right">$30,128</td>
+                                    <td class="text-right">$31,000</td>
+                                </tr>
+                                <tr style="background: #d1fae5;">
+                                    <td><strong>Facturación</strong></td>
+                                    <td class="text-right">$51.3M</td>
+                                    <td class="text-right"><strong>$173M/mes</strong></td>
+                                </tr>
+                                <tr style="background: #d1fae5;">
+                                    <td><strong>Incremento</strong></td>
+                                    <td class="text-right" colspan="2"><strong>+$121.7M (+237%)</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="analysis-box">
+                            <h4>📈 Estrategia de Llenado</h4>
+                            <ul>
+                                <li><strong>Apps de delivery:</strong> Alta en todas las plataformas</li>
+                                <li><strong>Precios dinámicos:</strong> Turnos bajos → descuentos agresivos</li>
+                                <li><strong>Producto específico:</strong> Menú delivery optimizado (otra bolsa)</li>
+                                <li><strong>Marketing local:</strong> Captación barrio/oficinas cercanas</li>
+                                <li><strong>Anticipar demanda:</strong> Stock preparado según histórico</li>
+                            </ul>
+                        </div>
+
+                        <div style="text-align: center; padding: 20px; background: #d1fae5; border-radius: 12px; margin-top: 20px;">
+                            <div style="font-size: 0.9rem; color: #065f46; margin-bottom: 5px;">POTENCIAL GANANCIA INCREMENTAL</div>
+                            <div class="highlight-number highlight-green">+$32M/mes</div>
+                            <div style="color: #065f46; font-size: 0.9rem;">Con margen 26.4% actual</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section" style="margin-top: 30px;">
+                    <h2 class="section-title">🎯 Resumen Ejecutivo - Potencial Total CENOTE</h2>
+
+                    <div class="grid-3">
+                        <div style="text-align: center; padding: 30px; background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                            <div style="color: #666; margin-bottom: 10px;">Facturación Actual</div>
+                            <div class="highlight-number">$153.7M</div>
+                            <div style="color: #999; font-size: 0.9rem;">Martínez $102.4M + Núñez $51.3M</div>
+                        </div>
+
+                        <div style="text-align: center; padding: 30px; background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                            <div style="color: #666; margin-bottom: 10px;">Facturación Proyectada</div>
+                            <div class="highlight-number highlight-green">$318.8M</div>
+                            <div style="color: #999; font-size: 0.9rem;">Martínez $145.8M + Núñez $173M</div>
+                        </div>
+
+                        <div style="text-align: center; padding: 30px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);">
+                            <div style="opacity: 0.9; margin-bottom: 10px;">POTENCIAL INCREMENTAL</div>
+                            <div class="highlight-number" style="color: white;">+$165M/mes</div>
+                            <div style="opacity: 0.9; font-size: 0.9rem;">+107% vs actual</div>
+                        </div>
+                    </div>
+
+                    <div class="analysis-box" style="margin-top: 30px;">
+                        <h4>🎯 Plan de Acción Recomendado</h4>
+                        <ul>
+                            <li><strong>Martínez - Corto Plazo (3 meses):</strong> Abrir mediodía L-V. ROI: +$21M/mes ganancia. Inversión: Personal + operación ~$3M/mes</li>
+                            <li><strong>Núñez - Inmediato:</strong> Activar estrategia delivery agresiva. Sin inversión CAPEX. Objetivo: +50 cubs/día en 3 meses</li>
+                            <li><strong>Ambos - Eficiencia Insumos:</strong> Negociación proveedores top 10. Target: -3pp en costos = +$4.6M/mes adicionales</li>
+                            <li><strong>Tech - 6 meses:</strong> Sistema de anticipación de demanda. Reduce desperdicio y optimiza stock</li>
+                            <li><strong>KPI Principal:</strong> Cubiertos por turno operativo. Track semanal. Target: 105 promedio (70+140)/2</li>
+                        </ul>
+                    </div>
+
+                    <div class="analysis-box" style="border-left-color: #f59e0b;">
+                        <h4>⚠️ 2 Patas del Negocio - Recordatorio Estratégico</h4>
+                        <ul>
+                            <li><strong>Pata 1 - Eficiencia Operativa:</strong> Maximizar turnos rentables. Martínez debe abrir más. Núñez ya está optimizado en turnos.</li>
+                            <li><strong>Pata 2 - Eficiencia Comercial + Insumos:</strong> Llenar cada turno abierto. Núñez necesita 3x más cubiertos. Ambos optimizar costos insumos.</li>
+                            <li><strong>Balance:</strong> No sirve abrir turnos vacíos (costo sin ingreso). No sirve tener demanda sin capacidad (venta perdida).</li>
+                            <li><strong>Meta final:</strong> Cada local operando 60 turnos/mes (2 turnos x 30 días) con 70+140 cubs objetivo. = $390M/mes ambos locales.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">📊 Visualización del Potencial</h2>
+                    <div class="chart-container tall">
+                        <canvas id="chartProyecciones"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // NAVEGACIÓN TABS
+        function showTab(tabName) {
+            // Ocultar todos los tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Mostrar tab seleccionado
+            document.getElementById('tab-' + tabName).classList.add('active');
+            event.target.classList.add('active');
+
+            // Scroll to top
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        // DATOS
+        const datosMartinez = {
+            facturacion_diaria: [1767902, 2309582, 5494879, 6888561, 2584916, 1417483, 2793471, 1737487, 3650362, 5373183, 4752888, 4147179, 1382390, 2029255, 1694510, 2946752, 5336193, 5705714, 6357291, 1355364, 1392614, 1613525, 3112869, 5120396, 6246343, 2357460, 1384520, 1698370, 1301093, 2552903, 5903640],
+            labels: ["01/10", "02/10", "03/10", "04/10", "05/10", "06/10", "07/10", "08/10", "09/10", "10/10", "11/10", "12/10", "13/10", "14/10", "15/10", "16/10", "17/10", "18/10", "19/10", "20/10", "21/10", "22/10", "23/10", "24/10", "25/10", "26/10", "27/10", "28/10", "29/10", "30/10", "31/10"],
+            proveedores: {
+                nombres: ["Campo Magro", "Mayoristanet", "Land Fruit", "Cajas", "Danor", "Sol de Maiz", "Enecoiz", "Aceite Victor", "Wine Co", "Amada Cocina"],
+                montos: [10485834, 5154743, 3161784, 2198167, 2087484, 1935930, 1490895, 1448640, 1429034, 1368971]
+            }
+        };
+
+        const datosNunez = {
+            facturacion_diaria: [1751820, 1772008, 4068100, 2838174, 612798, 644722, 1359292, 1504176, 2711807, 2311415, 1183870, 422599, 835852, 1664332, 1794909, 1781863, 2585572, 2087351, 563000, 1052380, 1395744, 1333240, 1481760, 2895487, 2445347, 339002, 1066940, 1289904, 1441034, 1473625, 2629719],
+            labels: ["01/10", "02/10", "03/10", "04/10", "05/10", "06/10", "07/10", "08/10", "09/10", "10/10", "11/10", "12/10", "13/10", "14/10", "15/10", "16/10", "17/10", "18/10", "19/10", "20/10", "21/10", "22/10", "23/10", "24/10", "25/10", "26/10", "27/10", "28/10", "29/10", "30/10", "31/10"],
+            proveedores: {
+                nombres: ["Campo Magro", "Mayoristanet", "Innovación Gráfica", "Land Fruit", "Danor", "Fina", "Bonprix", "Sol de Maiz", "Aceite Victor", "Enecoiz"],
+                montos: [3226031, 2360357, 2211356, 2002802, 1718814, 1460590, 1292226, 1106246, 901376, 726334]
+            }
+        };
+
+        // CONFIG COMÚN
+        Chart.defaults.font.family = "'Segoe UI', sans-serif";
+        Chart.defaults.font.size = 11;
+
+        // CHART 1: Martínez Diaria
+        new Chart(document.getElementById('chartMartinezDiaria'), {
+            type: 'bar',
+            data: {
+                labels: datosMartinez.labels,
+                datasets: [{
+                    label: 'Facturación',
+                    data: datosMartinez.facturacion_diaria,
+                    backgroundColor: '#2a5298',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {legend: {display: false}},
+                scales: {
+                    y: {beginAtZero: true, ticks: {callback: v => '$' + (v/1000000).toFixed(1) + 'M'}},
+                    x: {grid: {display: false}}
+                }
+            }
+        });
+
+        // CHART 2: Martínez Turnos
+        new Chart(document.getElementById('chartMartinezTurnos'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Noche (86%)', 'Mediodía (14%)'],
+                datasets: [{
+                    data: [88000000, 14400000],
+                    backgroundColor: ['#1e3c72', '#f59e0b']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {position: 'bottom'},
+                    tooltip: {
+                        callbacks: {
+                            label: c => c.label + ': $' + (c.parsed/1000000).toFixed(1) + 'M'
+                        }
+                    }
+                }
+            }
+        });
+
+        // CHART 3: Martínez Proveedores
+        new Chart(document.getElementById('chartMartinezProveedores'), {
+            type: 'bar',
+            data: {
+                labels: datosMartinez.proveedores.nombres,
+                datasets: [{
+                    data: datosMartinez.proveedores.montos,
+                    backgroundColor: '#2a5298',
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {legend: {display: false}},
+                scales: {
+                    x: {ticks: {callback: v => '$' + (v/1000000).toFixed(1) + 'M'}},
+                    y: {grid: {display: false}}
+                }
+            }
+        });
+
+        // CHART 4: Núñez Diaria
+        new Chart(document.getElementById('chartNunezDiaria'), {
+            type: 'bar',
+            data: {
+                labels: datosNunez.labels,
+                datasets: [{
+                    label: 'Facturación',
+                    data: datosNunez.facturacion_diaria,
+                    backgroundColor: '#10b981',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {legend: {display: false}},
+                scales: {
+                    y: {beginAtZero: true, ticks: {callback: v => '$' + (v/1000000).toFixed(1) + 'M'}},
+                    x: {grid: {display: false}}
+                }
+            }
+        });
+
+        // CHART 5: Núñez Turnos
+        new Chart(document.getElementById('chartNunezTurnos'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Noche (79%)', 'Mediodía (21%)'],
+                datasets: [{
+                    data: [40408387, 10929456],
+                    backgroundColor: ['#1e3c72', '#f59e0b']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {position: 'bottom'},
+                    tooltip: {
+                        callbacks: {
+                            label: c => c.label + ': $' + (c.parsed/1000000).toFixed(1) + 'M'
+                        }
+                    }
+                }
+            }
+        });
+
+        // CHART 6: Núñez Proveedores
+        new Chart(document.getElementById('chartNunezProveedores'), {
+            type: 'bar',
+            data: {
+                labels: datosNunez.proveedores.nombres,
+                datasets: [{
+                    data: datosNunez.proveedores.montos,
+                    backgroundColor: '#10b981',
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {legend: {display: false}},
+                scales: {
+                    x: {ticks: {callback: v => '$' + (v/1000000).toFixed(1) + 'M'}},
+                    y: {grid: {display: false}}
+                }
+            }
+        });
+
+        // CHART 7: Comparativo
+        new Chart(document.getElementById('chartComparativo'), {
+            type: 'bar',
+            data: {
+                labels: ['Facturación Total', 'Turnos Operativos', 'Cubiertos', '$/Turno (miles)', 'Margen %'],
+                datasets: [
+                    {
+                        label: 'Martínez',
+                        data: [102.4, 36, 3208, 2844, 13.2],
+                        backgroundColor: '#2a5298'
+                    },
+                    {
+                        label: 'Núñez',
+                        data: [51.3, 53, 1704, 969, 26.4],
+                        backgroundColor: '#10b981'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {position: 'top'},
+                    tooltip: {
+                        callbacks: {
+                            label: c => c.dataset.label + ': ' + c.parsed.y.toLocaleString()
+                        }
+                    }
+                },
+                scales: {
+                    y: {beginAtZero: true}
+                }
+            }
+        });
+
+        // CHART 8: Proyecciones
+        new Chart(document.getElementById('chartProyecciones'), {
+            type: 'bar',
+            data: {
+                labels: ['Martínez', 'Núñez', 'TOTAL CENOTE'],
+                datasets: [
+                    {
+                        label: 'Actual',
+                        data: [102.4, 51.3, 153.7],
+                        backgroundColor: '#94a3b8'
+                    },
+                    {
+                        label: 'Proyectado',
+                        data: [145.8, 173, 318.8],
+                        backgroundColor: '#10b981'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {position: 'top'},
+                    tooltip: {
+                        callbacks: {
+                            label: c => c.dataset.label + ': $' + c.parsed.y.toFixed(1) + 'M'
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {callback: v => '$' + v + 'M'}
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

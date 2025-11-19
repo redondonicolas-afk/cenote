@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Ejecutivo - AGAVE NÚÑEZ - Octubre 2025</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .alert-critical {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+            color: #721c24;
+            padding: 20px;
+            margin: 20px 40px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 40px;
+            background: #f8f9fa;
+        }
+
+        .kpi-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s ease;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+
+        .kpi-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .kpi-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .kpi-subtitle {
+            font-size: 0.85em;
+            color: #999;
+        }
+
+        .section {
+            padding: 40px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            margin-bottom: 30px;
+            color: #333;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin-bottom: 40px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .analysis-box {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            margin-bottom: 20px;
+        }
+
+        .analysis-box h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .analysis-box ul {
+            list-style-position: inside;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        tbody tr:hover {
+            background: #e9ecef;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+
+        .badge-success {
+            background: #d1f2eb;
+            color: #0f5132;
+        }
+
+        .badge-warning {
+            background: #fff3cd;
+            color: #664d03;
+        }
+
+        .badge-danger {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .badge-info {
+            background: #cfe2ff;
+            color: #084298;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .highlight-row {
+            background: #e7f3ff !important;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 AGAVE NÚÑEZ</h1>
+            <div class="subtitle">Dashboard Ejecutivo - Octubre 2025</div>
+        </div>
+
+        <div class="alert-critical">
+            ⚠️ ALERTA CRÍTICA: Margen neto de 0.88% - Local operando casi en break-even. Requiere intervención urgente en estructura de costos.
+        </div>
+
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-label">Facturación Total</div>
+                <div class="kpi-value">$51.3M</div>
+                <div class="kpi-subtitle">USD $35,405</div>
+            </div>
+
+            <div class="kpi-card" style="border-left-color: #dc3545;">
+                <div class="kpi-label">Resultado Neto</div>
+                <div class="kpi-value" style="color: #dc3545;">$453k</div>
+                <div class="kpi-subtitle" style="color: #dc3545; font-weight: bold;">⚠️ Margen: 0.88% CRÍTICO</div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-label">Cubiertos Totales</div>
+                <div class="kpi-value">1,704</div>
+                <div class="kpi-subtitle">55 cubs/día promedio</div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-label">Ticket Promedio</div>
+                <div class="kpi-value">$30,128</div>
+                <div class="kpi-subtitle">USD $20.78</div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-label">Turnos Operativos</div>
+                <div class="kpi-value">53</div>
+                <div class="kpi-subtitle">Mediodía + Noche L-V, Solo Noche S-D</div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-label">Facturación/Turno</div>
+                <div class="kpi-value">$969k</div>
+                <div class="kpi-subtitle">32 cubs/turno promedio</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">📈 Facturación Diaria - Octubre 2025</h2>
+            <div class="chart-container">
+                <canvas id="chartFacturacionDiaria"></canvas>
+            </div>
+
+            <div class="analysis-box" style="border-left-color: #dc3545;">
+                <h3>💡 Análisis de Facturación Diaria</h3>
+                <ul>
+                    <li><strong>Pico máximo:</strong> Jueves 24/10 con $2.9M (97 cubiertos)</li>
+                    <li><strong>Día más bajo:</strong> Domingo 12/10 con $423k (7 cubiertos) - operación casi nula</li>
+                    <li><strong>Promedio Viernes:</strong> $2.8M (4 viernes en el mes)</li>
+                    <li><strong>Promedio fin de semana:</strong> Sábados $1.9M, Domingos $645k</li>
+                    <li><strong>Patrón identificado:</strong> Fuerte caída domingos (solo noche, baja afluencia)</li>
+                    <li><strong>Volatilidad:</strong> Alta variación entre días laborales ($1.3M-$2.9M)</li>
+                    <li><strong>⚠️ Problema estructural:</strong> A pesar de facturar $51M, margen es solo 0.9% - costos consumiendo casi toda la facturación</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section" style="background: #f8f9fa;">
+            <h2 class="section-title">🌓 Análisis por Turno</h2>
+
+            <div class="grid-2col">
+                <div>
+                    <div class="chart-container">
+                        <canvas id="chartTurnos"></canvas>
+                    </div>
+                </div>
+
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Turno</th>
+                                <th>Turnos Operativos</th>
+                                <th class="text-right">Facturación</th>
+                                <th class="text-right">$/Turno</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="badge badge-info">Noche</span></td>
+                                <td>31 turnos</td>
+                                <td class="text-right">$40.4M (78.7%)</td>
+                                <td class="text-right">$1.30M</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge badge-warning">Mediodía</span></td>
+                                <td>22 turnos</td>
+                                <td class="text-right">$10.9M (21.3%)</td>
+                                <td class="text-right">$497k</td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td><strong>TOTAL</strong></td>
+                                <td><strong>53 turnos</strong></td>
+                                <td class="text-right"><strong>$51.3M</strong></td>
+                                <td class="text-right"><strong>$969k</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="analysis-box" style="border-left-color: #dc3545;">
+                        <h3>🎯 Insights por Turno - CRÍTICOS</h3>
+                        <ul>
+                            <li><strong>Noche domina:</strong> 78.7% de facturación total</li>
+                            <li><strong>Cubiertos noche:</strong> 38 cubs/turno (vs objetivo 140)</li>
+                            <li><strong>Cubiertos mediodía:</strong> 24 cubs/turno (vs objetivo 70)</li>
+                            <li><strong>Ticket noche:</strong> $34,042 (+61% vs mediodía)</li>
+                            <li><strong>Ticket mediodía:</strong> $21,140</li>
+                            <li><strong>⚠️ Gap crítico:</strong> Turnos mediodía L-V facturan solo $497k (objetivo $2.2M)</li>
+                            <li><strong>⚠️ PROBLEMA:</strong> Costos fijos divididos por 53 turnos de bajo rendimiento = margen casi nulo</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); color: white; padding: 60px 40px;">
+            <h2 style="color: white; border-bottom-color: white;">⚠️ DIAGNÓSTICO CRÍTICO - Núñez Octubre 2025</h2>
+
+            <div class="analysis-box" style="background: rgba(255,255,255,0.15); border-left-color: white; margin-top: 30px;">
+                <h3 style="color: white;">🔴 Situación Actual</h3>
+                <ul style="color: white; font-size: 1.1em; line-height: 2;">
+                    <li><strong>Facturación:</strong> $51.3M ARS (USD $35.4k)</li>
+                    <li><strong>Ingresos totales:</strong> $52.4M (incluye facturación + propinas)</li>
+                    <li><strong>Egresos totales:</strong> $51.9M ← Consumiendo 99.1% de ingresos</li>
+                    <li><strong>Resultado neto:</strong> $453k (0.9% margen)</li>
+                    <li><strong>Comparación Martínez:</strong> $29M resultado (51% margen) con $56M facturación</li>
+                </ul>
+            </div>
+
+            <div class="grid-2col" style="margin-top: 30px;">
+                <div class="analysis-box" style="background: rgba(255,255,255,0.15); border-left-color: #ffc107;">
+                    <h3 style="color: #ffc107;">📊 Análisis Comparativo</h3>
+                    <ul style="color: white;">
+                        <li><strong>Martínez:</strong> $56M fact., $29M ganancia (51%)</li>
+                        <li><strong>Núñez:</strong> $51M fact., $453k ganancia (0.9%)</li>
+                        <li><strong>Gap:</strong> 57x menos margen que Martínez</li>
+                        <li><strong>Costos Núñez:</strong> 101% vs 49% Martínez</li>
+                        <li><strong>Turnos Núñez:</strong> 53 vs 36 Martínez (+47% más)</li>
+                        <li><strong>$/Turno Núñez:</strong> $969k vs $2.84M Martínez (-66%)</li>
+                    </ul>
+                </div>
+
+                <div class="analysis-box" style="background: rgba(255,255,255,0.15); border-left-color: white;">
+                    <h3 style="color: white;">🚨 Causas Identificadas</h3>
+                    <ul style="color: white;">
+                        <li><strong>Costos operativos excesivos:</strong> $51.9M sobre $51.3M facturación</li>
+                        <li><strong>Turnos de bajo rendimiento:</strong> 53 turnos con 32 cubs promedio</li>
+                        <li><strong>Proveedores caros:</strong> Top 10 = 33% facturación vs mejor eficiencia Martínez</li>
+                        <li><strong>RRHH sobredimensionado:</strong> Para nivel de cubiertos actual</li>
+                        <li><strong>Eficiencia comercial baja:</strong> No se llenan los 53 turnos abiertos</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="analysis-box" style="background: rgba(255,255,255,0.15); border-left-color: #28a745; margin-top: 30px;">
+                <h3 style="color: #28a745;">💡 Plan de Acción Urgente</h3>
+                <ul style="color: white; font-size: 1.1em; line-height: 2;">
+                    <li><strong>1. Reestructuración de costos INMEDIATA</strong> - Objetivo: reducir egresos de $51.9M a $40M (20% margen mínimo)</li>
+                    <li><strong>2. Renegociación proveedores</strong> - Usar volumen CENOTE (2 locales) para mejores precios</li>
+                    <li><strong>3. Optimización RRHH</strong> - Ajustar dotación a 32 cubs/turno reales, no a objetivos no alcanzados</li>
+                    <li><strong>4. Estrategia comercial agresiva</strong> - Llenar 53 turnos existentes o cerrar turnos no rentables</li>
+                    <li><strong>5. Pricing review</strong> - Analizar si ticket $30k es suficiente vs estructura de costos</li>
+                    <li><strong>6. Benchmark Martínez</strong> - Replicar eficiencias operativas de casa matriz</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const datosNunez = {
+            "mes": "2025-10",
+            "dolar": 1450,
+            "facturacion_diaria": {
+                        "fechas": [
+                                    "01/10 (Mié)",
+                                    "02/10 (Jue)",
+                                    "03/10 (Vie)",
+                                    "04/10 (Sáb)",
+                                    "05/10 (Dom)",
+                                    "06/10 (Lun)",
+                                    "07/10 (Mar)",
+                                    "08/10 (Mié)",
+                                    "09/10 (Jue)",
+                                    "10/10 (Vie)",
+                                    "11/10 (Sáb)",
+                                    "12/10 (Dom)",
+                                    "13/10 (Lun)",
+                                    "14/10 (Mar)",
+                                    "15/10 (Mié)",
+                                    "16/10 (Jue)",
+                                    "17/10 (Vie)",
+                                    "18/10 (Sáb)",
+                                    "19/10 (Dom)",
+                                    "20/10 (Lun)",
+                                    "21/10 (Mar)",
+                                    "22/10 (Mié)",
+                                    "23/10 (Jue)",
+                                    "24/10 (Vie)",
+                                    "25/10 (Sáb)",
+                                    "26/10 (Dom)",
+                                    "27/10 (Lun)",
+                                    "28/10 (Mar)",
+                                    "29/10 (Mié)",
+                                    "30/10 (Jue)",
+                                    "31/10 (Vie)"
+                        ],
+                        "valores": [
+                                    1751820.0,
+                                    1772008.01,
+                                    4068100.0,
+                                    2838173.89,
+                                    612798.0,
+                                    644722.4299999999,
+                                    1359292.0,
+                                    1504176.0,
+                                    2711806.8,
+                                    2311415.48,
+                                    1183870.0,
+                                    422599.0,
+                                    835852.46,
+                                    1664332.0,
+                                    1794909.49,
+                                    1781862.58,
+                                    2585572.35,
+                                    2087351.0,
+                                    563000.0,
+                                    1052380.0,
+                                    1395743.76,
+                                    1333240.0,
+                                    1481760.0,
+                                    2895487.0,
+                                    2445347.32,
+                                    339001.58,
+                                    1066940.0,
+                                    1289903.8,
+                                    1441033.6600000001,
+                                    1473625.0,
+                                    2629719.06
+                        ],
+                        "cubiertos": [
+                                    56,
+                                    67,
+                                    126,
+                                    93,
+                                    14,
+                                    17,
+                                    42,
+                                    70,
+                                    84,
+                                    59,
+                                    36,
+                                    7,
+                                    26,
+                                    45,
+                                    85,
+                                    55,
+                                    71,
+                                    69,
+                                    9,
+                                    31,
+                                    57,
+                                    41,
+                                    57,
+                                    97,
+                                    82,
+                                    14,
+                                    41,
+                                    48,
+                                    64,
+                                    61,
+                                    80
+                        ]
+            },
+            "metricas": {
+                        "facturacion_ars": 51337842.67,
+                        "facturacion_usd": 35405.40873793104,
+                        "resultado_neto_ars": 452644.2100000009,
+                        "resultado_neto_usd": 312.16842068965576,
+                        "margen_neto": 0.8816969830804946,
+                        "total_cubiertos": 1704,
+                        "ticket_promedio": 30127.841942488263,
+                        "total_turnos_operativos": 53
+            },
+            "turnos": [
+                        {
+                                    "turno": "Noche",
+                                    "facturacion_ars": 40408387.09,
+                                    "facturacion_usd": 27867.853165517245,
+                                    "cubiertos": 1187,
+                                    "ticket_promedio": 34042.44910699242,
+                                    "porcentaje": 78.71072290619104,
+                                    "turnos_operativos": 31,
+                                    "facturacion_por_turno": 1303496.3577419356,
+                                    "cubiertos_por_turno": 38.29032258064516
+                        },
+                        {
+                                    "turno": "Mediodía",
+                                    "facturacion_ars": 10929455.58,
+                                    "facturacion_usd": 7537.555572413793,
+                                    "cubiertos": 517,
+                                    "ticket_promedio": 21140.146189555126,
+                                    "porcentaje": 21.289277093808977,
+                                    "turnos_operativos": 22,
+                                    "facturacion_por_turno": 496793.4354545455,
+                                    "cubiertos_por_turno": 23.5
+                        }
+            ],
+            "dias_semana": [
+                        {
+                                    "dia": "Viernes",
+                                    "facturacion_ars": 14490293.89,
+                                    "facturacion_usd": 9993.306131034484,
+                                    "cubiertos": 433,
+                                    "ticket_promedio": 33464.8819630485,
+                                    "porcentaje": 28.22536580499439
+                        },
+                        {
+                                    "dia": "Jueves",
+                                    "facturacion_ars": 9221062.39,
+                                    "facturacion_usd": 6359.353372413793,
+                                    "cubiertos": 324,
+                                    "ticket_promedio": 28460.069104938273,
+                                    "porcentaje": 17.96153073527661
+                        },
+                        {
+                                    "dia": "Sábado",
+                                    "facturacion_ars": 8554742.21,
+                                    "facturacion_usd": 5899.822213793104,
+                                    "cubiertos": 280,
+                                    "ticket_promedio": 30552.650750000004,
+                                    "porcentaje": 16.66361842469685
+                        },
+                        {
+                                    "dia": "Miércoles",
+                                    "facturacion_ars": 7825179.15,
+                                    "facturacion_usd": 5396.67527586207,
+                                    "cubiertos": 316,
+                                    "ticket_promedio": 24763.225158227848,
+                                    "porcentaje": 15.242516520026573
+                        },
+                        {
+                                    "dia": "Martes",
+                                    "facturacion_ars": 5709271.5600000005,
+                                    "facturacion_usd": 3937.428662068966,
+                                    "cubiertos": 192,
+                                    "ticket_promedio": 29735.789375000004,
+                                    "porcentaje": 11.12098067053428
+                        },
+                        {
+                                    "dia": "Lunes",
+                                    "facturacion_ars": 3599894.8899999997,
+                                    "facturacion_usd": 2482.6861310344825,
+                                    "cubiertos": 115,
+                                    "ticket_promedio": 31303.433826086955,
+                                    "porcentaje": 7.012166274964354
+                        },
+                        {
+                                    "dia": "Domingo",
+                                    "facturacion_ars": 1937398.58,
+                                    "facturacion_usd": 1336.136951724138,
+                                    "cubiertos": 44,
+                                    "ticket_promedio": 44031.78590909091,
+                                    "porcentaje": 3.7738215695069446
+                        }
+            ],
+            "top_proveedores": [
+                        {
+                                    "proveedor": "Campo Magro",
+                                    "categoria": "Cocina",
+                                    "monto_ars": 3226031.253,
+                                    "monto_usd": 2224.84914,
+                                    "porcentaje": 6.283924460435454
+                        },
+                        {
+                                    "proveedor": "Mayoristanet",
+                                    "categoria": "Cocina",
+                                    "monto_ars": 2360357.0563000003,
+                                    "monto_usd": 1627.8324526206898,
+                                    "porcentaje": 4.597694280751903
+                        },
+                        {
+                                    "proveedor": "Innovación Gráfica",
+                                    "categoria": "Operación",
+                                    "monto_ars": 2211355.67,
+                                    "monto_usd": 1525.072875862069,
+                                    "porcentaje": 4.307457335546039
+                        },
+                        {
+                                    "proveedor": "Land Fruit",
+                                    "categoria": "Cocina",
+                                    "monto_ars": 2002801.5380000002,
+                                    "monto_usd": 1381.2424400000002,
+                                    "porcentaje": 3.9012187381421968
+                        },
+                        {
+                                    "proveedor": "Danor",
+                                    "categoria": "Cocina",
+                                    "monto_ars": 1718814.2774,
+                                    "monto_usd": 1185.3891568275862,
+                                    "porcentaje": 3.3480453949897147
+                        },
+                        {
+                                    "proveedor": "Fina",
+                                    "categoria": "Cocina",
+                                    "monto_ars": 1460590.274,
+                                    "monto_usd": 1007.3036372413793,
+                                    "porcentaje": 2.8450558068610015
+                        },
+                        {
+                                    "proveedor": "Bonprix",
+                                    "categoria": "Barra",
+                                    "monto_ars": 1292225.7518,
+                                    "monto_usd": 891.1901736551724,
+                                    "porcentaje": 2.5171017802723727
+                        },
+                        {
+                                    "proveedor": "Sol de Maiz",
+                                    "categoria": "Cocina",
+                                    "monto_ars": 1106245.888,
+                                    "monto_usd": 762.9281986206897,
+                                    "porcentaje": 2.1548351673266755
+                        },
+                        {
+                                    "proveedor": "Aceite Victor",
+                                    "categoria": "Cocina",
+                                    "monto_ars": 901376.0,
+                                    "monto_usd": 621.6386206896552,
+                                    "porcentaje": 1.7557730382128656
+                        },
+                        {
+                                    "proveedor": "Enecoiz Emanuel",
+                                    "categoria": "Cocina",
+                                    "monto_ars": 726334.3741,
+                                    "monto_usd": 500.920258,
+                                    "porcentaje": 1.4148128092738184
+                        }
+            ],
+            "canales_pago": [
+                        {
+                                    "canal": "Tarjeta",
+                                    "monto_ars": 20122376.47,
+                                    "monto_usd": 13877.501013793102,
+                                    "porcentaje": 39.19599154048364
+                        },
+                        {
+                                    "canal": "Mercado Pago",
+                                    "monto_ars": 12046150.58,
+                                    "monto_usd": 8307.690055172414,
+                                    "porcentaje": 23.46446588617433
+                        },
+                        {
+                                    "canal": "PedidosYa",
+                                    "monto_ars": 8926203.0,
+                                    "monto_usd": 6156.0020689655175,
+                                    "porcentaje": 17.387179779597854
+                        },
+                        {
+                                    "canal": "Efectivo",
+                                    "monto_ars": 6553112.620000001,
+                                    "monto_usd": 4519.388013793105,
+                                    "porcentaje": 12.764682501606957
+                        },
+                        {
+                                    "canal": "Cuenta Corriente",
+                                    "monto_ars": 3690000.0,
+                                    "monto_usd": 2544.8275862068967,
+                                    "porcentaje": 7.187680292137215
+                        }
+            ]
+};
+
+        // Gráfico Facturación Diaria
+        new Chart(document.getElementById('chartFacturacionDiaria'), {
+            type: 'bar',
+            data: {
+                labels: datosNunez.facturacion_diaria.fechas,
+                datasets: [{
+                    label: 'Facturación Diaria',
+                    data: datosNunez.facturacion_diaria.valores,
+                    backgroundColor: 'rgba(220, 53, 69, 0.7)',
+                    borderColor: 'rgba(220, 53, 69, 1)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const cubiertos = datosNunez.facturacion_diaria.cubiertos[context.dataIndex];
+                                return [
+                                    'Facturación: $' + context.parsed.y.toLocaleString('es-AR'),
+                                    'Cubiertos: ' + cubiertos,
+                                    'Ticket: $' + (context.parsed.y / cubiertos).toLocaleString('es-AR', {maximumFractionDigits: 0})
+                                ];
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + (value / 1000000).toFixed(1) + 'M';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Gráfico Turnos
+        new Chart(document.getElementById('chartTurnos'), {
+            type: 'doughnut',
+            data: {
+                labels: datosNunez.turnos.map(t => t.turno + ' (' + t.turnos_operativos + ' turnos)'),
+                datasets: [{
+                    data: datosNunez.turnos.map(t => t.facturacion_ars),
+                    backgroundColor: ['#dc3545', '#f59e0b'],
+                    borderWidth: 3,
+                    borderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const turno = datosNunez.turnos[context.dataIndex];
+                                return [
+                                    context.label,
+                                    'Facturación: $' + turno.facturacion_ars.toLocaleString('es-AR'),
+                                    'Cubiertos: ' + turno.cubiertos,
+                                    'Por turno: $' + (turno.facturacion_ars / turno.turnos_operativos).toLocaleString('es-AR', {maximumFractionDigits: 0})
+                                ];
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

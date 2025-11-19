@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte Ejecutivo - Martínez Octubre 2025</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* PANTALLA DE LOGIN */
+        .login-screen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        }
+
+        .login-box {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 30px 90px rgba(0,0,0,0.5);
+            max-width: 450px;
+            width: 100%;
+        }
+
+        .login-box h1 {
+            text-align: center;
+            color: #1e3c72;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+        }
+
+        .login-box .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: border 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #2a5298;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(42, 82, 152, 0.4);
+        }
+
+        .error-message {
+            background: #fee;
+            color: #c00;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            display: none;
+        }
+
+        /* DASHBOARD */
+        .dashboard {
+            display: none;
+        }
+
+        .logout-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .logout-btn:hover {
+            background: #dc2626;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* KPIs */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .kpi-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            text-align: center;
+            border-left: 4px solid #2a5298;
+        }
+
+        .kpi-label {
+            font-size: 0.85rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .kpi-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2a5298;
+            margin-bottom: 5px;
+        }
+
+        .kpi-subtitle {
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        /* SECTIONS */
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .section-header {
+            border-bottom: 3px solid #2a5298;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #1e3c72;
+            margin-bottom: 8px;
+        }
+
+        .section-subtitle {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        /* LAYOUT 2 COLUMNAS */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 25px;
+        }
+
+        .content-grid.single {
+            grid-template-columns: 1fr;
+        }
+
+        /* CHARTS */
+        .chart-container {
+            position: relative;
+            height: 350px;
+            margin-bottom: 20px;
+        }
+
+        .chart-container.tall {
+            height: 450px;
+        }
+
+        .chart-container.medium {
+            height: 300px;
+        }
+
+        /* TABLES */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        th {
+            background: #1e3c72;
+            color: white;
+            padding: 12px 10px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        tr:hover {
+            background: #f9fafb;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* ANÁLISIS TEXT */
+        .analysis-box {
+            background: #f8fafc;
+            border-left: 4px solid #10b981;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .analysis-box h4 {
+            color: #1e3c72;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+
+        .analysis-box ul {
+            margin-left: 20px;
+        }
+
+        .analysis-box li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        /* BADGES */
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .badge-warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge-danger {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .badge-info {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        /* HIGHLIGHTS */
+        .highlight-number {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2a5298;
+        }
+
+        .highlight-green {
+            color: #10b981;
+        }
+
+        .highlight-red {
+            color: #ef4444;
+        }
+
+        .highlight-orange {
+            color: #f59e0b;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .kpi-value {
+                font-size: 1.6rem;
+            }
+
+            .section-title {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* TABLE SCROLL */
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        /* SUMMARY CARDS */
+        .summary-card {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .summary-card h5 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .summary-card p {
+            color: #666;
+            font-size: 0.85rem;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- PANTALLA DE LOGIN -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-box">
+            <h1>🔐 Acceso Dashboard</h1>
+            <p class="subtitle">Reporte Ejecutivo Martínez | Octubre 2025</p>
+
+            <div id="errorMessage" class="error-message">
+                Usuario o contraseña incorrectos
+            </div>
+
+            <form onsubmit="return login(event)">
+                <div class="form-group">
+                    <label for="username">Usuario:</label>
+                    <input type="text" id="username" required autocomplete="username">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" required autocomplete="current-password">
+                </div>
+
+                <button type="submit" class="login-btn">Ingresar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="dashboardScreen" class="dashboard">
+        <button class="logout-btn" onclick="logout()">Cerrar Sesión</button>
+        <div class="container">
+        <!-- HEADER -->
+        <header>
+            <h1>📊 Reporte Ejecutivo - Martínez</h1>
+            <div class="subtitle">Octubre 2025 | Casa Matriz CENOTE | TC: $1,450/USD | 31 días operativos</div>
+        </header>
+
+        <!-- KPIs PRINCIPALES -->
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-label">Facturación</div>
+                <div class="kpi-value">$102.4M</div>
+                <div class="kpi-subtitle">USD 70.6k</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Resultado Neto</div>
+                <div class="kpi-value">$13.5M</div>
+                <div class="kpi-subtitle">USD 9.3k</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Margen Neto</div>
+                <div class="kpi-value" style="color: #f59e0b;">13.2%</div>
+                <div class="kpi-subtitle">Por debajo del objetivo</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Cubiertos</div>
+                <div class="kpi-value">3,208</div>
+                <div class="kpi-subtitle">103 por día</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Ticket Promedio</div>
+                <div class="kpi-value">$31,923</div>
+                <div class="kpi-subtitle">USD 22.0</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Egresos Totales</div>
+                <div class="kpi-value">$89.1M</div>
+                <div class="kpi-subtitle">87% de facturación</div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 1: FACTURACIÓN DIARIA -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">📈 Análisis de Facturación Diaria</h2>
+                <p class="section-subtitle">Evolución día por día durante octubre 2025</p>
+            </div>
+
+            <div class="chart-container tall">
+                <canvas id="chartFacturacionDiaria"></canvas>
+            </div>
+
+            <div class="analysis-box">
+                <h4>💡 Insights Clave:</h4>
+                <ul>
+                    <li><strong>Fines de semana dominan:</strong> Viernes, Sábados y Domingos representan los días de mayor facturación ($5-6M por día)</li>
+                    <li><strong>Días pico:</strong> El 19/10 (Domingo) fue el día más alto con $6.4M en facturación</li>
+                    <li><strong>Días bajos:</strong> Lunes y Miércoles promedian $1.5-2M, oportunidad de mejora en semana</li>
+                    <li><strong>Promedio diario:</strong> $3.3M/día - Los fines de semana duplican este promedio</li>
+                </ul>
+            </div>
+
+            <div class="content-grid">
+                <div>
+                    <h4 style="margin-bottom: 15px;">Top 5 Días por Facturación</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Día</th>
+                                <th class="text-right">Facturación</th>
+                                <th class="text-right">Cubiertos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>19/10</td>
+                                <td>Domingo</td>
+                                <td class="text-right">$6,357,291</td>
+                                <td class="text-right">223</td>
+                            </tr>
+                            <tr>
+                                <td>04/10</td>
+                                <td>Sábado</td>
+                                <td class="text-right">$6,888,561</td>
+                                <td class="text-right">221</td>
+                            </tr>
+                            <tr>
+                                <td>25/10</td>
+                                <td>Sábado</td>
+                                <td class="text-right">$6,246,343</td>
+                                <td class="text-right">202</td>
+                            </tr>
+                            <tr>
+                                <td>31/10</td>
+                                <td>Viernes</td>
+                                <td class="text-right">$5,903,640</td>
+                                <td class="text-right">184</td>
+                            </tr>
+                            <tr>
+                                <td>18/10</td>
+                                <td>Sábado</td>
+                                <td class="text-right">$5,705,714</td>
+                                <td class="text-right">203</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 15px;">Cubiertos por Día</h4>
+                    <div class="chart-container medium">
+                        <canvas id="chartCubiertosDiarios"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 2: DESGLOSE DE EGRESOS -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">💸 Desglose Detallado de Egresos</h2>
+                <p class="section-subtitle">Análisis completo de todos los conceptos de gasto</p>
+            </div>
+
+            <div class="content-grid">
+                <div>
+                    <h4 style="margin-bottom: 15px;">Distribución por Categoría Principal</h4>
+                    <div class="chart-container medium">
+                        <canvas id="chartEgresos"></canvas>
+                    </div>
+
+                    <div class="summary-card">
+                        <h5>📌 Resumen Ejecutivo</h5>
+                        <p><strong>Total Egresos:</strong> $89.1M (87% de facturación)</p>
+                        <p><strong>Mayor gasto:</strong> Cocina $33.5M (32.7%)</p>
+                        <p><strong>RRHH:</strong> $17.1M (16.7%) - Controlado</p>
+                        <p><strong>Barra:</strong> $5.9M (5.8%) - Alto margen</p>
+                        <p><strong>Alquiler:</strong> $5.3M (5.2%) - Fijo</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 style="margin-bottom: 15px;">Top 10 Conceptos de Egreso</h4>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Concepto</th>
+                                    <th class="text-right">Monto ARS</th>
+                                    <th class="text-right">USD</th>
+                                    <th class="text-right">% Fact.</th>
+                                </tr>
+                            </thead>
+                            <tbody id="topEgresosTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="analysis-box">
+                <h4>💡 Análisis de Costos:</h4>
+                <ul>
+                    <li><strong>Cocina (32.7%):</strong> Principal gasto en insumos. $33.5M - incluye carnes, verduras, especias, etc. Dentro del rango esperado para gastronomía</li>
+                    <li><strong>RRHH (16.7%):</strong> Porcentaje saludable y controlado. $17.1M incluye sueldos ($13.6M) y cargas sociales</li>
+                    <li><strong>Barra (5.8%):</strong> $5.9M en bebidas, cócteles y bar. Margen alto en esta categoría</li>
+                    <li><strong>Comisiones y cargos:</strong> $3.3M Payway + $1.8M PedidosYa + $0.9M Impuesto cheque MP = $6M total (5.8%)</li>
+                    <li><strong>Alquiler fijo:</strong> $5.3M representa el 5.2% - costo controlado</li>
+                    <li><strong>Operación (2.7%):</strong> $2.8M en gastos operativos, limpieza, etc.</li>
+                    <li><strong>Oportunidad:</strong> Categoría "Otros" ($6.8M - 6.6%) requiere análisis detallado para optimización</li>
+                </ul>
+            </div>
+
+            <h4 style="margin: 25px 0 15px 0;">Todos los Conceptos de Egreso (23 items)</h4>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Concepto</th>
+                            <th class="text-right">Monto ARS</th>
+                            <th class="text-right">Monto USD</th>
+                            <th class="text-right">% Facturación</th>
+                            <th class="text-center">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="todosEgresosTable"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 3: ANÁLISIS DE PROVEEDORES -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">🏪 Análisis de Proveedores</h2>
+                <p class="section-subtitle">23 proveedores únicos | 80 facturas procesadas en octubre</p>
+            </div>
+
+            <div class="content-grid">
+                <div>
+                    <h4 style="margin-bottom: 15px;">Top 10 Proveedores por Gasto</h4>
+                    <div class="chart-container">
+                        <canvas id="chartProveedores"></canvas>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 style="margin-bottom: 15px;">Detalle Top 10</h4>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Proveedor</th>
+                                    <th>Categoría</th>
+                                    <th class="text-right">Gasto</th>
+                                    <th class="text-right">% Fact.</th>
+                                </tr>
+                            </thead>
+                            <tbody id="topProveedoresTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="analysis-box">
+                <h4>💡 Insights Proveedores:</h4>
+                <ul>
+                    <li><strong>Concentración alta:</strong> Top 3 proveedores (Campo Magro, Mayoristanet, Land Fruit) = $18.8M (44% del gasto en insumos)</li>
+                    <li><strong>Campo Magro domina:</strong> $10.5M solo en carnes (10.2% de la facturación total)</li>
+                    <li><strong>Diversificación:</strong> 23 proveedores activos reduce riesgo de dependencia</li>
+                    <li><strong>Categorías:</strong> Mayoría en Cocina, Wine Co único proveedor top en Barra</li>
+                    <li><strong>Oportunidad:</strong> Negociar descuentos por volumen con top 5 proveedores</li>
+                </ul>
+            </div>
+
+            <div class="content-grid">
+                <div>
+                    <h4 style="margin-bottom: 15px;">Gasto por Categoría</h4>
+                    <div class="chart-container medium">
+                        <canvas id="chartCategoriasProveedor"></canvas>
+                    </div>
+                </div>
+                <div>
+                    <div class="summary-card">
+                        <h5>📊 Estadísticas Proveedores</h5>
+                        <p><strong>Total proveedores:</strong> 23 únicos</p>
+                        <p><strong>Total facturas:</strong> 80 en el mes</p>
+                        <p><strong>Ticket promedio factura:</strong> $531k</p>
+                        <p><strong>Mayor factura:</strong> Campo Magro $10.5M</p>
+                    </div>
+                    <div class="summary-card">
+                        <h5>🎯 Distribución</h5>
+                        <p><strong>Cocina:</strong> 80% del gasto</p>
+                        <p><strong>Barra:</strong> 15% del gasto</p>
+                        <p><strong>Operación:</strong> 5% del gasto</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 4: CANALES DE PAGO -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">💳 Análisis de Canales de Pago</h2>
+                <p class="section-subtitle">Distribución de medios de cobro y comisiones asociadas</p>
+            </div>
+
+            <div class="content-grid">
+                <div>
+                    <h4 style="margin-bottom: 15px;">Distribución por Canal</h4>
+                    <div class="chart-container medium">
+                        <canvas id="chartCanales"></canvas>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 style="margin-bottom: 15px;">Detalle por Canal</h4>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Canal</th>
+                                    <th class="text-right">Monto ARS</th>
+                                    <th class="text-right">USD</th>
+                                    <th class="text-right">% Total</th>
+                                    <th class="text-right">Comisión</th>
+                                </tr>
+                            </thead>
+                            <tbody id="canalesPagoTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="analysis-box">
+                <h4>💡 Análisis de Medios de Pago:</h4>
+                <ul>
+                    <li><strong>Tarjeta lidera (45%):</strong> $46.1M - Canal preferido por clientes. Comisión Payway: $3.3M (7.2% del monto)</li>
+                    <li><strong>Mercado Pago (21%):</strong> $21.6M - Segundo canal. Impuesto al cheque: $0.9M (4.1% del monto) - Por recibir pagos, no por facturar</li>
+                    <li><strong>Efectivo (19%):</strong> $19.6M - Sin comisiones, ideal para cash flow</li>
+                    <li><strong>PedidosYa (14%):</strong> $14.7M - Delivery. Comisión: $1.8M (12.5% del monto) - MÁS ALTA</li>
+                    <li><strong>Total comisiones y cargos:</strong> $6M (5.8% de facturación total)</li>
+                    <li><strong>Oportunidad:</strong> Incentivar efectivo y reducir dependencia de PedidosYa</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 5: ANÁLISIS POR TURNO -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">🌙 Análisis por Turno</h2>
+                <p class="section-subtitle">Comparativo Mediodía vs Noche</p>
+            </div>
+
+            <div class="content-grid">
+                <div>
+                    <h4 style="margin-bottom: 15px;">Facturación por Turno</h4>
+                    <div class="chart-container medium">
+                        <canvas id="chartTurnos"></canvas>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 style="margin-bottom: 15px;">Comparativo Detallado</h4>
+                    <div class="table-container">
+                        <table id="turnosTable">
+                            <thead>
+                                <tr>
+                                    <th>Turno</th>
+                                    <th class="text-right">Facturación</th>
+                                    <th class="text-right">Cubiertos</th>
+                                    <th class="text-right">Ticket Prom.</th>
+                                    <th class="text-right">% Total</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
+                    <div class="summary-card" style="margin-top: 20px;">
+                        <h5>🎯 Conclusión Turnos</h5>
+                        <p id="turnosConclusionText"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 6: ANÁLISIS POR DÍA DE SEMANA -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">📅 Análisis por Día de Semana</h2>
+                <p class="section-subtitle">Patrones de consumo semanales</p>
+            </div>
+
+            <div class="content-grid single">
+                <div>
+                    <h4 style="margin-bottom: 15px;">Facturación por Día de Semana</h4>
+                    <div class="chart-container">
+                        <canvas id="chartDiasSemana"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table id="diasSemanaTable">
+                    <thead>
+                        <tr>
+                            <th>Día</th>
+                            <th class="text-right">Facturación ARS</th>
+                            <th class="text-right">Facturación USD</th>
+                            <th class="text-right">Cubiertos</th>
+                            <th class="text-right">Ticket Promedio</th>
+                            <th class="text-right">% del Total</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div class="analysis-box">
+                <h4>💡 Insights Semanales:</h4>
+                <ul id="diasSemanaInsights"></ul>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        // SISTEMA DE LOGIN
+        function login(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Usuarios permitidos
+            const usuarios = {
+                'sacha': '91218',
+                'julio': '0002',
+                'martin': '0001'
+            };
+
+            // Validar credenciales
+            if (usuarios[username] && usuarios[username] === password) {
+                // Login exitoso
+                localStorage.setItem('dashboardAuth', 'true');
+                localStorage.setItem('dashboardUser', username);
+                showDashboard();
+            } else {
+                // Login fallido
+                document.getElementById('errorMessage').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('errorMessage').style.display = 'none';
+                }, 3000);
+            }
+
+            return false;
+        }
+
+        function logout() {
+            localStorage.removeItem('dashboardAuth');
+            localStorage.removeItem('dashboardUser');
+            document.getElementById('loginScreen').style.display = 'flex';
+            document.getElementById('dashboardScreen').style.display = 'none';
+        }
+
+        function showDashboard() {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('dashboardScreen').style.display = 'block';
+        }
+
+        // Verificar si ya está autenticado al cargar la página
+        window.addEventListener('DOMContentLoaded', () => {
+            const isAuth = localStorage.getItem('dashboardAuth');
+            if (isAuth === 'true') {
+                showDashboard();
+            }
+        });
+
+    </script>
+    <script>
+        // Configuración Chart.js
+        Chart.defaults.font.family = "'Segoe UI', sans-serif";
+        Chart.defaults.font.size = 11;
+
+        // DATOS (se cargarán dinámicamente)
+        const datos = {
+            facturacion_diaria: {
+                fechas: ["01/10 (Mié)", "02/10 (Jue)", "03/10 (Vie)", "04/10 (Sáb)", "05/10 (Dom)", "06/10 (Lun)", "07/10 (Mar)", "08/10 (Mié)", "09/10 (Jue)", "10/10 (Vie)", "11/10 (Sáb)", "12/10 (Dom)", "13/10 (Lun)", "14/10 (Mar)", "15/10 (Mié)", "16/10 (Jue)", "17/10 (Vie)", "18/10 (Sáb)", "19/10 (Dom)", "20/10 (Lun)", "21/10 (Mar)", "22/10 (Mié)", "23/10 (Jue)", "24/10 (Vie)", "25/10 (Sáb)", "26/10 (Dom)", "27/10 (Lun)", "28/10 (Mar)", "29/10 (Mié)", "30/10 (Jue)", "31/10 (Vie)"],
+                valores: [1767902.0, 2309582.0, 5494879.0, 6888561.0, 2584916.0, 1417483.0, 2793471.0, 1737486.9, 3650362.0, 5373183.0, 4752888.0, 4147179.0, 1382390.0, 2029255.0, 1694510.0, 2946752.0, 5336193.0, 5705714.0, 6357291.0, 1355364.0, 1392614.0, 1613525.0, 3112869.0, 5120396.0, 6246343.0, 2357460.0, 1384520.0, 1698370.0, 1301093.0, 2552903.0, 5903640.0],
+                cubiertos: [57, 59, 117, 221, 92, 43, 125, 54, 125, 159, 155, 131, 39, 84, 54, 86, 166, 203, 223, 39, 34, 41, 91, 137, 202, 75, 39, 72, 35, 66, 184]
+            },
+            egresos: [
+                {concepto: "Cocina", monto: 33485918.93, pct: 32.7},
+                {concepto: "RRHH", monto: 17146155.0, pct: 16.7},
+                {concepto: "Sueldos", monto: 13599993.0, pct: 13.3},
+                {concepto: "Otros", monto: 6779159.91, pct: 6.6},
+                {concepto: "Barra", monto: 5930452.72, pct: 5.8},
+                {concepto: "Alquiler", monto: 5282000.0, pct: 5.2},
+                {concepto: "Cargos Payway", monto: 3317523.26, pct: 3.2},
+                {concepto: "Marca", monto: 3048175.0, pct: 3.0},
+                {concepto: "Operación", monto: 2780169.41, pct: 2.7},
+                {concepto: "Impuesto cheque MP", monto: 886053.42, pct: 0.9}
+            ],
+            top_proveedores: [
+                {proveedor: "Campo Magro", categoria: "Cocina", monto: 10485833.70, pct: 10.2},
+                {proveedor: "Mayoristanet", categoria: "Cocina", monto: 5154743.39, pct: 5.0},
+                {proveedor: "Land Fruit", categoria: "Cocina", monto: 3161783.74, pct: 3.1},
+                {proveedor: "Cajas", categoria: "Cocina", monto: 2198167.0, pct: 2.1},
+                {proveedor: "Danor", categoria: "Cocina", monto: 2087484.04, pct: 2.0},
+                {proveedor: "Sol de Maiz", categoria: "Cocina", monto: 1935930.30, pct: 1.9},
+                {proveedor: "Enecoiz Emanuel", categoria: "Cocina", monto: 1490894.70, pct: 1.5},
+                {proveedor: "Aceite Victor", categoria: "Cocina", monto: 1448640.0, pct: 1.4},
+                {proveedor: "Wine Co", categoria: "Barra", monto: 1429034.17, pct: 1.4},
+                {proveedor: "Amada Cocina", categoria: "Cocina", monto: 1368970.52, pct: 1.3}
+            ],
+            canales: [
+                {canal: "Tarjeta", monto: 46125382.9, pct: 45.0, comision: 3317523.26},
+                {canal: "Mercado Pago", monto: 21611059.0, pct: 21.1, comision: 886053},
+                {canal: "Efectivo", monto: 19583690.0, pct: 19.1, comision: 0},
+                {canal: "PedidosYa", monto: 14736071.0, pct: 14.4, comision: 1845815},
+                {canal: "Cuenta Corriente", monto: 352892.0, pct: 0.3, comision: 0}
+            ],
+            turnos: [
+                {turno: "Noche", facturacion: 88000000, cubiertos: 2800, ticket: 31429, pct: 86},
+                {turno: "Mediodía", facturacion: 14400000, cubiertos: 408, ticket: 35294, pct: 14}
+            ],
+            dias_semana: [
+                {dia: "Sábado", facturacion: 28481566, cubiertos: 981, ticket: 29032, pct: 27.8},
+                {dia: "Viernes", facturacion: 21854708, cubiertos: 604, ticket: 36180, pct: 21.3},
+                {dia: "Domingo", facturacion: 15446846, cubiertos: 521, ticket: 29649, pct: 15.1},
+                {dia: "Jueves", facturacion: 11523765, cubiertos: 370, ticket: 31145, pct: 11.3},
+                {dia: "Miércoles", facturacion: 8111415, cubiertos: 257, ticket: 31568, pct: 7.9},
+                {dia: "Martes", facturacion: 7513710, cubiertos: 353, ticket: 21287, pct: 7.3},
+                {dia: "Lunes", facturacion: 5920277, cubiertos: 199, ticket: 29750, pct: 5.8}
+            ]
+        };
+
+        // CHART 1: Facturación Diaria
+        new Chart(document.getElementById('chartFacturacionDiaria'), {
+            type: 'bar',
+            data: {
+                labels: datos.facturacion_diaria.fechas,
+                datasets: [{
+                    label: 'Facturación',
+                    data: datos.facturacion_diaria.valores,
+                    backgroundColor: datos.facturacion_diaria.fechas.map((f, i) => {
+                        const dia = f.split('(')[1].replace(')', '');
+                        return (dia === 'Vie' || dia === 'Sáb' || dia === 'Dom') ? '#10b981' : '#2a5298';
+                    }),
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {display: false},
+                    tooltip: {
+                        callbacks: {
+                            label: (c) => '$' + c.parsed.y.toLocaleString('es-AR') + ' ARS (USD $' + (c.parsed.y/1450).toFixed(0) + ')'
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {callback: (v) => '$' + (v/1000000).toFixed(1) + 'M'},
+                        grid: {color: 'rgba(0,0,0,0.05)'}
+                    },
+                    x: {grid: {display: false}}
+                }
+            }
+        });
+
+        // CHART 2: Cubiertos Diarios
+        new Chart(document.getElementById('chartCubiertosDiarios'), {
+            type: 'line',
+            data: {
+                labels: datos.facturacion_diaria.fechas,
+                datasets: [{
+                    label: 'Cubiertos',
+                    data: datos.facturacion_diaria.cubiertos,
+                    borderColor: '#f59e0b',
+                    backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                    tension: 0.4,
+                    fill: true,
+                    borderWidth: 2,
+                    pointRadius: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {legend: {display: false}},
+                scales: {
+                    y: {beginAtZero: true, grid: {color: 'rgba(0,0,0,0.05)'}},
+                    x: {grid: {display: false}}
+                }
+            }
+        });
+
+        // CHART 3: Egresos
+        new Chart(document.getElementById('chartEgresos'), {
+            type: 'doughnut',
+            data: {
+                labels: datos.egresos.slice(0, 4).map(e => e.concepto),
+                datasets: [{
+                    data: datos.egresos.slice(0, 4).map(e => e.monto),
+                    backgroundColor: ['#ef4444', '#3b82f6', '#f59e0b', '#10b981']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {position: 'bottom', labels: {font: {size: 11}}},
+                    tooltip: {
+                        callbacks: {
+                            label: (c) => c.label + ': $' + (c.parsed/1000000).toFixed(1) + 'M (' + ((c.parsed/102409094.9)*100).toFixed(1) + '%)'
+                        }
+                    },
+                    datalabels: {
+                        color: '#fff',
+                        font: {weight: 'bold', size: 13},
+                        formatter: (value) => '$' + (value/1000000).toFixed(1) + 'M\n' + ((value/102409094.9)*100).toFixed(1) + '%'
+                    }
+                }
+            },
+            plugins: [{
+                id: 'datalabels',
+                afterDatasetsDraw: (chart) => {
+                    const ctx = chart.ctx;
+                    chart.data.datasets.forEach((dataset, i) => {
+                        const meta = chart.getDatasetMeta(i);
+                        meta.data.forEach((element, index) => {
+                            ctx.fillStyle = '#fff';
+                            ctx.font = 'bold 12px sans-serif';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+                            const value = dataset.data[index];
+                            const position = element.tooltipPosition();
+                            const label1 = '$' + (value/1000000).toFixed(1) + 'M';
+                            const label2 = ((value/102409094.9)*100).toFixed(1) + '%';
+                            ctx.fillText(label1, position.x, position.y - 6);
+                            ctx.fillText(label2, position.x, position.y + 8);
+                        });
+                    });
+                }
+            }]
+        });
+
+        // Llenar tabla Top Egresos
+        const topEgresosTable = document.getElementById('topEgresosTable');
+        datos.egresos.slice(0, 10).forEach(e => {
+            topEgresosTable.innerHTML += `
+                <tr>
+                    <td>${e.concepto}</td>
+                    <td class="text-right">$${(e.monto/1000000).toFixed(2)}M</td>
+                    <td class="text-right">$${(e.monto/1450/1000).toFixed(1)}k</td>
+                    <td class="text-right">${e.pct.toFixed(1)}%</td>
+                </tr>
+            `;
+        });
+
+        // Llenar tabla TODOS los Egresos
+        const todosEgresosTable = document.getElementById('todosEgresosTable');
+        datos.egresos.forEach((e, i) => {
+            const badge = e.pct > 10 ? 'badge-danger' : e.pct > 5 ? 'badge-warning' : 'badge-success';
+            todosEgresosTable.innerHTML += `
+                <tr>
+                    <td>${i+1}</td>
+                    <td>${e.concepto}</td>
+                    <td class="text-right">$${e.monto.toLocaleString('es-AR', {maximumFractionDigits: 0})}</td>
+                    <td class="text-right">$${(e.monto/1450).toLocaleString('es-AR', {maximumFractionDigits: 0})}</td>
+                    <td class="text-right">${e.pct.toFixed(2)}%</td>
+                    <td class="text-center"><span class="badge ${badge}">${e.pct > 10 ? 'Alto' : e.pct > 5 ? 'Medio' : 'Bajo'}</span></td>
+                </tr>
+            `;
+        });
+
+        // CHART 4: Proveedores
+        new Chart(document.getElementById('chartProveedores'), {
+            type: 'bar',
+            data: {
+                labels: datos.top_proveedores.map(p => p.proveedor),
+                datasets: [{
+                    label: 'Gasto',
+                    data: datos.top_proveedores.map(p => p.monto),
+                    backgroundColor: '#2a5298',
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {display: false},
+                    tooltip: {
+                        callbacks: {
+                            label: (c) => '$' + (c.parsed.x/1000000).toFixed(2) + 'M'
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {callback: (v) => '$' + (v/1000000).toFixed(0) + 'M'},
+                        grid: {color: 'rgba(0,0,0,0.05)'}
+                    },
+                    y: {grid: {display: false}}
+                }
+            }
+        });
+
+        // Tabla Proveedores
+        const topProvTable = document.getElementById('topProveedoresTable');
+        datos.top_proveedores.forEach(p => {
+            topProvTable.innerHTML += `
+                <tr>
+                    <td>${p.proveedor}</td>
+                    <td><span class="badge badge-info">${p.categoria}</span></td>
+                    <td class="text-right">$${(p.monto/1000000).toFixed(2)}M</td>
+                    <td class="text-right">${p.pct.toFixed(1)}%</td>
+                </tr>
+            `;
+        });
+
+        // CHART 5: Categorías Proveedor
+        new Chart(document.getElementById('chartCategoriasProveedor'), {
+            type: 'pie',
+            data: {
+                labels: ['Cocina', 'Barra', 'Operación'],
+                datasets: [{
+                    data: [33485918.93, 5930452.72, 2780169.41],
+                    backgroundColor: ['#ef4444', '#3b82f6', '#10b981']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {position: 'bottom'},
+                    tooltip: {
+                        callbacks: {
+                            label: (c) => c.label + ': $' + (c.parsed/1000000).toFixed(1) + 'M'
+                        }
+                    }
+                }
+            }
+        });
+
+        // CHART 6: Canales
+        new Chart(document.getElementById('chartCanales'), {
+            type: 'pie',
+            data: {
+                labels: datos.canales.map(c => c.canal),
+                datasets: [{
+                    data: datos.canales.map(c => c.monto),
+                    backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#94a3b8']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {position: 'bottom'},
+                    tooltip: {
+                        callbacks: {
+                            label: (c) => c.label + ': $' + (c.parsed/1000000).toFixed(1) + 'M (' + ((c.parsed/102409094.9)*100).toFixed(1) + '%)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Tabla Canales
+        const canalesTable = document.getElementById('canalesPagoTable');
+        datos.canales.forEach(c => {
+            canalesTable.innerHTML += `
+                <tr>
+                    <td>${c.canal}</td>
+                    <td class="text-right">$${(c.monto/1000000).toFixed(2)}M</td>
+                    <td class="text-right">$${(c.monto/1450/1000).toFixed(1)}k</td>
+                    <td class="text-right">${c.pct.toFixed(1)}%</td>
+                    <td class="text-right">${c.comision > 0 ? '$' + (c.comision/1000).toFixed(0) + 'k' : '-'}</td>
+                </tr>
+            `;
+        });
+
+        // CHART 7: Turnos
+        new Chart(document.getElementById('chartTurnos'), {
+            type: 'bar',
+            data: {
+                labels: datos.turnos.map(t => t.turno),
+                datasets: [{
+                    label: 'Facturación',
+                    data: datos.turnos.map(t => t.facturacion),
+                    backgroundColor: ['#1e3c72', '#f59e0b'],
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {display: false},
+                    tooltip: {
+                        callbacks: {
+                            label: (c) => '$' + (c.parsed.y/1000000).toFixed(1) + 'M'
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: {callback: (v) => '$' + (v/1000000).toFixed(0) + 'M'},
+                        grid: {color: 'rgba(0,0,0,0.05)'}
+                    }
+                }
+            }
+        });
+
+        // Tabla Turnos
+        const turnosTableBody = document.querySelector('#turnosTable tbody');
+        datos.turnos.forEach(t => {
+            turnosTableBody.innerHTML += `
+                <tr>
+                    <td><strong>${t.turno}</strong></td>
+                    <td class="text-right">$${(t.facturacion/1000000).toFixed(1)}M</td>
+                    <td class="text-right">${t.cubiertos}</td>
+                    <td class="text-right">$${t.ticket.toLocaleString('es-AR')}</td>
+                    <td class="text-right">${t.pct}%</td>
+                </tr>
+            `;
+        });
+
+        document.getElementById('turnosConclusionText').innerHTML =
+            `<strong>Noche domina:</strong> 86% de la facturación se concentra en el turno noche.
+            Mediodía tiene mejor ticket promedio ($35k vs $31k) pero menos volumen.
+            <strong>Oportunidad:</strong> Potenciar mediodía puede agregar $10-15M/mes sin incrementar costos fijos.`;
+
+        // CHART 8: Días Semana
+        new Chart(document.getElementById('chartDiasSemana'), {
+            type: 'bar',
+            data: {
+                labels: datos.dias_semana.map(d => d.dia),
+                datasets: [{
+                    label: 'Facturación',
+                    data: datos.dias_semana.map(d => d.facturacion),
+                    backgroundColor: datos.dias_semana.map((d, i) =>
+                        i < 3 ? '#10b981' : '#2a5298'
+                    ),
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {display: false},
+                    tooltip: {
+                        callbacks: {
+                            label: (c) => '$' + (c.parsed.y/1000000).toFixed(1) + 'M'
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: {callback: (v) => '$' + (v/1000000).toFixed(0) + 'M'},
+                        grid: {color: 'rgba(0,0,0,0.05)'}
+                    }
+                }
+            }
+        });
+
+        // Tabla Días Semana
+        const diasTableBody = document.querySelector('#diasSemanaTable tbody');
+        datos.dias_semana.forEach(d => {
+            diasTableBody.innerHTML += `
+                <tr>
+                    <td><strong>${d.dia}</strong></td>
+                    <td class="text-right">$${(d.facturacion/1000000).toFixed(2)}M</td>
+                    <td class="text-right">$${(d.facturacion/1450/1000).toFixed(1)}k</td>
+                    <td class="text-right">${d.cubiertos}</td>
+                    <td class="text-right">$${d.ticket.toLocaleString('es-AR')}</td>
+                    <td class="text-right">${d.pct}%</td>
+                </tr>
+            `;
+        });
+
+        // Insights Días Semana
+        document.getElementById('diasSemanaInsights').innerHTML = `
+            <li><strong>Fin de semana domina:</strong> Sábado (27.8%) + Viernes (21.3%) + Domingo (15.1%) = 64.2% de facturación total</li>
+            <li><strong>Sábado rey:</strong> $28.5M en 4 sábados = $7.1M promedio por sábado</li>
+            <li><strong>Lunes más bajo:</strong> Solo 5.8% del total - oportunidad para promociones</li>
+            <li><strong>Ticket más alto:</strong> Viernes $36k - clientes dispuestos a gastar más</li>
+            <li><strong>Estrategia:</strong> Maximizar fin de semana (ya fuerte) y activar lunes-miércoles con promos</li>
+        `;
+    </script>
+</body>
+</html>
