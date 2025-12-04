@@ -26,6 +26,10 @@ This is a business documentation repository for CENOTE, a restaurant franchise c
 - `VALUACION_5_ANOS_ESCENARIOS.md` - 5-year valuation scenarios analysis
 - `VALUACION_REALISTA_FINAL.md` - Final realistic valuation document
 - `ANALISIS_VENTAS_MARTINEZ_2025_REAL.md` - Real sales analysis for Martínez location 2025 (Jan-Oct)
+- `ANALISIS_CONTABILIDAD_OCTUBRE_NUNEZ.md` - Complete accounting analysis for Núñez October 2025
+- `CASH_FLOW_PROVEEDORES_NUNEZ.md` - Predictive cash flow model for Núñez suppliers
+- `RESUMEN_EJECUTIVO_MARTINEZ_OCTUBRE_2025.md` - Executive summary for Martínez October 2025
+- `COMPARATIVO_NUNEZ_VS_MARTINEZ_OCTUBRE_2025.md` - ⭐ Key comparative analysis identifying critical issues
 
 ### 📁 03_ESTRUCTURA_ORGANIZACIONAL/
 - `ESTRUCTURA_OFICINAS_CENOTE_OPERATIVA.md` - Operational office structure and protocols documentation
@@ -64,6 +68,11 @@ This is a business documentation repository for CENOTE, a restaurant franchise c
 - `comparativo_mz_nunez_2025.html` - Comparative analysis Martínez vs Núñez with interactive charts
 - `dashboard_ranking_productos_2025.html` - Product ranking dashboard with 8 interactive charts
 - `dashboard_ranking_productos_2025_interactivo.html` - Interactive product ranking (latest version with full data)
+- `infografia_contabilidad_octubre_nunez.html` - Interactive infographic for Núñez October 2025 accounting
+- `calculadora_cash_flow_proveedores_nunez.html` - ⭐ Interactive cash flow calculator for supplier planning
+- `dashboard_comparativo_nunez_martinez_octubre.html` - ⭐ Visual comparative dashboard October 2025
+- `dashboard_martinez_octubre_ejecutivo.html` - Executive dashboard for Martínez October analysis
+- `dashboard_martinez_sacha.html` - Custom dashboard for Sacha (partner view)
 
 ### 📁 07_DATOS_VENTAS_RAW/
 - `2025/` - Raw sales data for 2025
@@ -114,12 +123,24 @@ The analysis workflow follows: CSV data → Python/PowerShell processing → JSO
   - Processes CSV rankings into `productos_mz_temp.json` and `productos_nu_temp.json`
   - These JSONs are then injected into HTML dashboards by Node.js script
 
+- `leer_excel_martinez_oct.py` / `procesar_excel_martinez_oct.py` - Process October 2025 accounting data from Google Sheets
+  - Generates `datos_martinez_octubre_2025.json`
+
+- `analizar_proveedores_cash_flow.py` - Analyzes supplier payment patterns and generates cash flow predictions
+  - Creates predictive model for Núñez supplier payments (50% ratio)
+
+- `generar_dashboard_martinez_mejorado.py` / `generar_dashboard_nunez_corregido.py` - Generate location-specific HTML dashboards
+
 **PowerShell Scripts:**
 - `analizar_ventas_mz.ps1` - PowerShell version of sales analysis
 - `analisis_simple_mz.ps1` - Simplified analysis script
 - `analisis_nunez.ps1` - Núñez location-specific analysis
 - `analisis_ranking_completo.ps1` - Complete product ranking analysis
 - `generar_dashboard_completo.ps1` - Dashboard generation orchestration
+- `analizar_contabilidad_martin.ps1` - Process accounting data from Martin's Google Sheets
+- `analizar_cash_flow_simple.ps1` - Quick cash flow analysis
+- `analizar_proveedores_cash_flow.ps1` - Supplier cash flow pattern analysis
+- `leer_excel_martinez_oct.ps1` - Read October 2025 accounting Excel/Google Sheets data
 - Usage: Run directly in PowerShell terminal
 
 **Node.js Scripts:**
@@ -138,9 +159,17 @@ The analysis workflow follows: CSV data → Python/PowerShell processing → JSO
 **Opening HTML Dashboards:**
 To open generated HTML dashboards in browser (Windows):
 ```bash
+# Main executive dashboards
 start "" "C:\Users\PC acer\Desktop\Proyectos\CENOTE\06_PRESENTACIONES_HTML\dashboard_ejecutivo_socios.html"
 start "" "C:\Users\PC acer\Desktop\Proyectos\CENOTE\06_PRESENTACIONES_HTML\dashboard_agave_socios.html"
+
+# Product analysis
 start "" "C:\Users\PC acer\Desktop\Proyectos\CENOTE\06_PRESENTACIONES_HTML\dashboard_ranking_productos_2025_interactivo.html"
+
+# October 2025 accounting analysis
+start "" "C:\Users\PC acer\Desktop\Proyectos\CENOTE\06_PRESENTACIONES_HTML\dashboard_comparativo_nunez_martinez_octubre.html"
+start "" "C:\Users\PC acer\Desktop\Proyectos\CENOTE\06_PRESENTACIONES_HTML\calculadora_cash_flow_proveedores_nunez.html"
+start "" "C:\Users\PC acer\Desktop\Proyectos\CENOTE\06_PRESENTACIONES_HTML\infografia_contabilidad_octubre_nunez.html"
 ```
 
 ## Common Tasks
@@ -158,6 +187,10 @@ When working with this repository, you will typically be asked to:
 - Run sales analysis scripts on raw CSV data
 - Generate comparative reports between locations (Martínez vs Núñez)
 - Create product ranking dashboards
+- Process monthly accounting data from Google Sheets
+- Analyze supplier cash flow patterns and create predictive models
+- Generate interactive calculators for financial planning
+- Create comparative dashboards highlighting critical operational issues
 
 ## Key Files for Quick Reference
 
@@ -165,8 +198,11 @@ When working with this repository, you will typically be asked to:
 - **Time Tracking**: `01_DOCUMENTOS_MAESTROS/⏱️_REGISTRO_TIEMPO_TRABAJO_CLAUDE.md` - Track all work sessions with Nico
 - **System Templates**: `01_DOCUMENTOS_MAESTROS/` - Contains meeting frameworks, dashboards, and improvement templates
 - **Financial Analysis**: `02_ANALISIS_FINANCIERO/` - Detailed financial projections and valuation scenarios
+- **October 2025 Analysis**: `README_ANALISIS_OCTUBRE_2025.md` - Summary of October accounting analysis and generated files
+- **Comparative Analysis**: `02_ANALISIS_FINANCIERO/COMPARATIVO_NUNEZ_VS_MARTINEZ_OCTUBRE_2025.md` - Critical comparative analysis identifying operational issues
 - **Organizational Structure**: `03_ESTRUCTURA_ORGANIZACIONAL/` - Company structure, procedures, and departmental organization
 - **Presentations**: `05_PRESENTACIONES_SOCIOS/` and `06_PRESENTACIONES_HTML/` - Meeting agendas, investor materials, and interactive dashboards
+- **Raw Sales Data**: `07_DATOS_VENTAS_RAW/2025/` - CSV files with transaction and product ranking data
 
 ## Languages and Content
 
@@ -175,6 +211,32 @@ When working with this repository, you will typically be asked to:
 - **Format**: Markdown documentation with interactive HTML presentations
 
 ## Important Context
+
+### Recent Analysis - October 2025 Accounting
+**Critical findings from monthly accounting analysis:**
+
+**NÚÑEZ (Critical Issues - 🔴):**
+- Facturación: $51.3M ARS
+- Margen neto: 0.9% (CRITICAL - operating at near-loss)
+- Costos totales: 101% of revenue
+- Insumos: 44% (vs 35% ideal) → $4.6M/month overspend
+- RRHH: 24% (vs 18% ideal) → $3M/month overspend
+- Alquiler: $4.8M fixed (9%)
+- **Urgent action needed**: Restructure operations to achieve +$8.8M/month improvement
+
+**MARTÍNEZ (Model Operation - 🟢):**
+- Facturación: $102.4M ARS
+- Margen neto: 39.3% (EXCELLENT)
+- Costos totales: 61% of revenue (well controlled)
+- Insumos: 39% (acceptable)
+- RRHH: 15% (optimal)
+- No alquiler (owned property)
+- **Status**: Reference model for operational efficiency
+
+**Key Files:**
+- Comparative analysis: `02_ANALISIS_FINANCIERO/COMPARATIVO_NUNEZ_VS_MARTINEZ_OCTUBRE_2025.md`
+- Interactive dashboard: `06_PRESENTACIONES_HTML/dashboard_comparativo_nunez_martinez_octubre.html`
+- Cash flow calculator: `06_PRESENTACIONES_HTML/calculadora_cash_flow_proveedores_nunez.html`
 
 ### Timeline and Current Status
 - **M0 (Mayo 2024)**: Start of 60-month expansion plan with Núñez opening
@@ -216,6 +278,24 @@ When creating HTML presentations:
 - Always update `⏱️_REGISTRO_TIEMPO_TRABAJO_CLAUDE.md` when starting/ending work sessions
 - Track: start time, end time, tasks completed, files modified, decisions made
 - Default session duration: 2 hours if not specified
+
+### Working with Accounting Data
+When processing monthly accounting data from Google Sheets:
+1. **Source**: Martin's Google Sheets (typically 18+ sheets with detailed breakdowns)
+2. **Process**: Use `leer_excel_martinez_oct.py` or `.ps1` to extract data
+3. **Output**: Generate JSON files (e.g., `datos_martinez_octubre_2025.json`)
+4. **Analysis**: Create markdown summaries in `02_ANALISIS_FINANCIERO/`
+5. **Visualization**: Generate HTML dashboards in `06_PRESENTACIONES_HTML/`
+6. **Key metrics to track**:
+   - Facturación total (revenue)
+   - Margen neto (net margin %)
+   - Costos breakdown: Insumos, RRHH, Servicios, Alquiler
+   - Cubiertos (covers) and ticket promedio
+7. **Always compare**: Núñez vs Martínez to identify operational gaps
+8. **Critical thresholds**:
+   - Insumos should be ≤35% of revenue
+   - RRHH should be ≤18% of revenue
+   - Net margin target: ≥15% minimum, 30%+ excellent
 
 # important-instruction-reminders
 Do what has been asked; nothing more, nothing less.
