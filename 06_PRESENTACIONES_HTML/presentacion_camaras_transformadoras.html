@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reclamos Judiciales - Cámaras Transformadoras</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            margin: 20px auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            page-break-after: always;
+            position: relative;
+        }
+
+        .page:last-child {
+            page-break-after: auto;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .page {
+                margin: 0;
+                box-shadow: none;
+                page-break-after: always;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+
+        /* PAGE 1 - PORTADA */
+        .portada {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .portada h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .portada .subtitle {
+            font-size: 24px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .portada .highlight-box {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 30px 50px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .portada .highlight-box h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .portada .highlight-box p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .portada .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+            width: 100%;
+        }
+
+        .stat-box {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .stat-box .number {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-box .label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* GENERAL STYLES */
+        h1 {
+            color: #667eea;
+            font-size: 36px;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #764ba2;
+            font-size: 24px;
+            margin: 25px 0 15px 0;
+        }
+
+        h3 {
+            color: #667eea;
+            font-size: 18px;
+            margin: 15px 0 10px 0;
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            font-size: 16px;
+        }
+
+        .card p {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #555;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .highlight h3 {
+            color: white;
+            margin-top: 0;
+        }
+
+        ul {
+            margin-left: 20px;
+            line-height: 1.8;
+        }
+
+        ul li {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .icon {
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 13px;
+        }
+
+        table th {
+            background: #667eea;
+            color: white;
+            padding: 10px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .empresa-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .empresa-card {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .empresa-card h4 {
+            color: #667eea;
+            margin: 0 0 8px 0;
+            font-size: 16px;
+        }
+
+        .empresa-card .monto {
+            color: #28a745;
+            font-weight: 700;
+            font-size: 18px;
+            margin: 5px 0;
+        }
+
+        .empresa-card .info {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 30px;
+            left: 40px;
+            right: 40px;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 5px;
+        }
+
+        .tag.red {
+            background: #dc3545;
+        }
+
+        .tag.orange {
+            background: #fd7e14;
+        }
+
+        .numero-grande {
+            font-size: 48px;
+            font-weight: 700;
+            color: #667eea;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .cta-box {
+            background: #28a745;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .cta-box h3 {
+            color: white;
+            margin: 0 0 10px 0;
+        }
+
+        .cta-box p {
+            margin: 0;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PÁGINA 1: PORTADA -->
+    <div class="page portada">
+        <h1>RECLAMOS JUDICIALES<br>CÁMARAS TRANSFORMADORAS</h1>
+        <p class="subtitle">Recuperación de costos EDENOR / EDESUR para desarrolladores inmobiliarios</p>
+
+        <div class="highlight-box">
+            <h2>La oportunidad que el 95% desconoce</h2>
+            <p>Desarrolladores que construyeron cámaras transformadoras por exigencia de EDENOR/EDESUR pueden recuperar esos costos + indemnización</p>
+        </div>
+
+        <div class="stats">
+            <div class="stat-box">
+                <div class="number">USD 40-80k</div>
+                <div class="label">Recuperable por proyecto</div>
+            </div>
+            <div class="stat-box">
+                <div class="number">85%</div>
+                <div class="label">Tasa de éxito judicial</div>
+            </div>
+            <div class="stat-box">
+                <div class="number">0%</div>
+                <div class="label">Costo si no ganamos</div>
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 40px;">
+            <p style="font-size: 20px; margin: 0;"><strong>Base Legal:</strong> Resolución ENRE 445/01<br>
+            Las distribuidoras están obligadas a cubrir costos de infraestructura eléctrica</p>
+        </div>
+
+        <div class="footer">
+            Diciembre 2025 | Presentación confidencial
+        </div>
+    </div>
+
+    <!-- PÁGINA 2: EL NEGOCIO -->
+    <div class="page">
+        <h1>⚡ EL NEGOCIO</h1>
+
+        <div class="section">
+            <h2>🎯 El Problema</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Lo que sucede hoy</h3>
+                    <ul>
+                        <li>EDENOR/EDESUR exigen a desarrolladores construir cámaras transformadoras (~20m²)</li>
+                        <li>Costo promedio: <strong>USD 30-50k por proyecto</strong></li>
+                        <li>Si no lo hacen, no les dan energía eléctrica</li>
+                        <li>Desarrolladores creen que es su obligación</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Lo que casi nadie sabe</h3>
+                    <ul>
+                        <li><strong>Resolución ENRE 445/01:</strong> Las distribuidoras DEBEN pagar esos costos</li>
+                        <li>Se puede reclamar 100% del costo + indemnización</li>
+                        <li>Jurisprudencia favorable constante</li>
+                        <li><strong>El 95% de desarrolladores lo desconoce</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight">
+            <h3>💡 La Solución: Servicio Legal Especializado</h3>
+            <p><strong>Recuperación Total:</strong> Costos de construcción + Indemnización por servidumbre administrativa</p>
+            <p><strong>Modelo sin riesgo:</strong> Cobramos 25% solo si ganamos el juicio</p>
+        </div>
+
+        <div class="section">
+            <h2>📊 Tamaño del Mercado</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>CABA</h3>
+                    <p><strong>1,860</strong> empresas constructoras activas</p>
+                    <p><strong>661</strong> edificios permisados/año</p>
+                    <p><strong>+50,000</strong> viviendas en desarrollo</p>
+                </div>
+                <div class="card">
+                    <h3>GBA</h3>
+                    <p><strong>+90,000</strong> viviendas en desarrollo</p>
+                    <p>Zonas en expansión constante</p>
+                    <p>Mercado prácticamente virgen</p>
+                </div>
+            </div>
+
+            <div class="numero-grande">USD 14.7M/año</div>
+            <p style="text-align: center; color: #666; margin-top: -15px;">Mercado total anual en reclamos potenciales (245 casos × USD 60k promedio)</p>
+        </div>
+
+        <div class="section">
+            <h2>💰 Proyección Financiera 3 Años</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Año</th>
+                        <th>Casos Firmados</th>
+                        <th>Casos Ganados</th>
+                        <th>Revenue</th>
+                        <th>EBITDA</th>
+                        <th>Margen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1</strong></td>
+                        <td>96</td>
+                        <td>0</td>
+                        <td>USD 0</td>
+                        <td style="color: #dc3545;">-USD 120k</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2</strong></td>
+                        <td>120</td>
+                        <td>40</td>
+                        <td>USD 600k</td>
+                        <td style="color: #28a745;">USD 300k</td>
+                        <td>50%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3</strong></td>
+                        <td>120</td>
+                        <td>102</td>
+                        <td style="color: #667eea; font-weight: 700;">USD 1.53M</td>
+                        <td style="color: #28a745; font-weight: 700;">USD 930k</td>
+                        <td><strong>61%</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="footer">
+            Página 2 de 4
+        </div>
+    </div>
+
+    <!-- PÁGINA 3: TARGETS ZONA NORTE -->
+    <div class="page">
+        <h1>🎯 TARGETS ZONA NORTE</h1>
+
+        <div class="section">
+            <h2>🏆 TOP 10 Desarrolladores (Prioridad Alta)</h2>
+
+            <div class="empresa-list">
+                <div class="empresa-card">
+                    <h4>1. G&D Developers <span class="tag">URGENTE</span></h4>
+                    <div class="monto">USD 300-500k</div>
+                    <p class="info">+50 proyectos, +400,000m² | Palermo, Belgrano, Barrio Norte</p>
+                </div>
+
+                <div class="empresa-card">
+                    <h4>2. Landmark Developments</h4>
+                    <div class="monto">USD 100-150k</div>
+                    <p class="info">2 torres + hotel 5★ | Bajo Belgrano | Proyecto masivo</p>
+                </div>
+
+                <div class="empresa-card">
+                    <h4>3. Grupo Soldati</h4>
+                    <div class="monto">USD 60-80k</div>
+                    <p class="info">Aura Núñez USD 35M | 65% vendido | Premium</p>
+                </div>
+
+                <div class="empresa-card">
+                    <h4>4. EDFAN Constructora</h4>
+                    <div class="monto">USD 60-80k</div>
+                    <p class="info">Central Belgrano | Sótano + 14 pisos | Alta probabilidad</p>
+                </div>
+
+                <div class="empresa-card">
+                    <h4>5. CEK Group</h4>
+                    <div class="monto">USD 50-70k</div>
+                    <p class="info">Black Libertador | USD 2,600/m² | Super premium</p>
+                </div>
+
+                <div class="empresa-card">
+                    <h4>6. TGLT</h4>
+                    <div class="monto">USD 200-400k</div>
+                    <p class="info">Torres premium Retiro y Palermo | Muy activo</p>
+                </div>
+
+                <div class="empresa-card">
+                    <h4>7. Mindlin Developers</h4>
+                    <div class="monto">USD 150-250k</div>
+                    <p class="info">3 generaciones | Diseño moderno Palermo y Núñez</p>
+                </div>
+
+                <div class="empresa-card">
+                    <h4>8. Alto Grande</h4>
+                    <div class="monto">USD 400-600k</div>
+                    <p class="info">+30 años | +1,500 deptos entregados | Alto volumen</p>
+                </div>
+
+                <div class="empresa-card">
+                    <h4>9. Estudio Kohon</h4>
+                    <div class="monto">USD 100-200k</div>
+                    <p class="info">Boutique premium | Núñez y Palermo | Presupuesto alto</p>
+                </div>
+
+                <div class="empresa-card">
+                    <h4>10. Daimar Developers</h4>
+                    <div class="monto">USD 150-300k</div>
+                    <p class="info">Múltiples proyectos | Belgrano, Palermo, Núñez</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight">
+            <h3>💰 Potencial Total Tier 1</h3>
+            <div style="display: flex; justify-content: space-around; margin-top: 15px;">
+                <div style="text-align: center;">
+                    <div style="font-size: 32px; font-weight: 700;">USD 1.7M - 3.0M</div>
+                    <div style="font-size: 14px; opacity: 0.9;">Reclamos acumulados</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 32px; font-weight: 700;">30-50</div>
+                    <div style="font-size: 14px; opacity: 0.9;">Proyectos con cámara</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 32px; font-weight: 700;">USD 425-750k</div>
+                    <div style="font-size: 14px; opacity: 0.9;">Honorarios potenciales (25%)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📋 Además: Tier 2 y 3</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Tier 2: 8 Desarrolladores Medianos</h3>
+                    <p>Argencons, INARCH, Interwin, Arquitectonika, Raghsa, Korn, COSUD, Solimano Dal Pos</p>
+                    <p><strong>Potencial:</strong> USD 800k-1.2M adicionales</p>
+                </div>
+                <div class="card">
+                    <h3>Tier 3: 8 Proyectos Específicos</h3>
+                    <p>Orión Parque, Udaondo, Depampa, Dealcorta, otros en Núñez (ex Tiro Federal)</p>
+                    <p><strong>Potencial:</strong> USD 400-600k adicionales</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            Página 3 de 4
+        </div>
+    </div>
+
+    <!-- PÁGINA 4: PLAN DE ACCIÓN -->
+    <div class="page">
+        <h1>🚀 PLAN DE ACCIÓN</h1>
+
+        <div class="section">
+            <h2>📅 Primeros 90 Días</h2>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3>MES 1: Validación</h3>
+                    <ul>
+                        <li>✅ Revisar 10 sentencias judiciales</li>
+                        <li>✅ Contactar 20 desarrolladores</li>
+                        <li>✅ 5 reuniones agendadas</li>
+                        <li>✅ 2 auditorías aceptadas</li>
+                    </ul>
+                    <p style="margin-top: 10px; font-weight: 600; color: #667eea;">KPI: Validar demanda real</p>
+                </div>
+
+                <div class="card">
+                    <h3>MES 2: Setup Operativo</h3>
+                    <ul>
+                        <li>✅ Proceso estandarizado auditoría</li>
+                        <li>✅ Template contrato % éxito</li>
+                        <li>✅ Landing page profesional</li>
+                        <li>✅ 5 auditorías más realizadas</li>
+                    </ul>
+                    <p style="margin-top: 10px; font-weight: 600; color: #667eea;">KPI: Ops listo para escalar</p>
+                </div>
+
+                <div class="card">
+                    <h3>MES 3: Captación Activa</h3>
+                    <ul>
+                        <li>✅ Outbound: 300 contactos totales</li>
+                        <li>✅ 30 auditorías completadas</li>
+                        <li>✅ <strong>5-10 casos firmados</strong></li>
+                        <li>✅ Iniciar procesos judiciales</li>
+                    </ul>
+                    <p style="margin-top: 10px; font-weight: 600; color: #28a745;">KPI: Primeros casos en marcha</p>
+                </div>
+
+                <div class="card">
+                    <h3>MES 6-12: Escala</h3>
+                    <ul>
+                        <li>30-90 casos firmados acumulados</li>
+                        <li>Primera sentencia favorable</li>
+                        <li>Primer cobro (acuerdo/sentencia)</li>
+                        <li>Equipo 4-5 personas</li>
+                    </ul>
+                    <p style="margin-top: 10px; font-weight: 600; color: #28a745;">KPI: Revenue USD 100-150k</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎯 Estrategia de Captación</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Canales Digitales</h3>
+                    <ul>
+                        <li>LinkedIn outreach (C-level)</li>
+                        <li>Email personalizado</li>
+                        <li>Landing + SEO específico</li>
+                        <li>Google Ads keywords nicho</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Networking</h3>
+                    <ul>
+                        <li>Eventos CEDU / Cámara Construcción</li>
+                        <li>Alianzas con arquitectos (10% comisión)</li>
+                        <li>Estudios contables referidos</li>
+                        <li>Boca a boca (desarrolladores se conocen)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight">
+            <h3>✅ Ventajas Competitivas</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+                <div>✅ First mover - Casi nadie lo ofrece</div>
+                <div>✅ Base legal sólida (ENRE 445/01)</div>
+                <div>✅ Sin riesgo cliente - Fácil vender</div>
+                <div>✅ Alta rentabilidad (60% margen)</div>
+                <div>✅ Mercado recurrente - Siempre hay proyectos</div>
+                <div>✅ Escalable - Replicable a otras provincias</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>💼 Inversión Necesaria</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Capital Inicial</h3>
+                    <p><strong style="font-size: 24px; color: #667eea;">USD 150-200k</strong></p>
+                    <ul style="margin-top: 10px;">
+                        <li>Salarios equipo año 1: USD 100k</li>
+                        <li>Marketing: USD 30k</li>
+                        <li>Tecnología: USD 10k</li>
+                        <li>Gastos judiciales: USD 20k</li>
+                        <li>Buffer: USD 20k</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Equipo Año 1</h3>
+                    <ul>
+                        <li>2 Abogados socios (ya confirmados)</li>
+                        <li>1 Paralegal (apoyo admin)</li>
+                        <li>1 Business Developer (captación)</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>Costo mensual:</strong> USD 8-10k</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-box">
+            <h3>🎯 Próximo Paso Inmediato</h3>
+            <p><strong>Esta semana:</strong> Contactar Top 5 desarrolladores (Landmark, G&D, Soldati, EDFAN, CEK)</p>
+            <p><strong>Meta:</strong> 3-5 reuniones agendadas en 7 días</p>
+        </div>
+
+        <div class="footer">
+            Página 4 de 4 | Contacto: [Tu email] | [Tu teléfono]
+        </div>
+    </div>
+
+    <script>
+        // Agregar botón de impresión
+        window.onload = function() {
+            const printBtn = document.createElement('button');
+            printBtn.textContent = '🖨️ Imprimir / PDF';
+            printBtn.className = 'no-print';
+            printBtn.style.cssText = 'position: fixed; top: 20px; right: 20px; padding: 15px 30px; background: #667eea; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 9999;';
+            printBtn.onclick = () => window.print();
+            document.body.appendChild(printBtn);
+        };
+    </script>
+
+</body>
+</html>
