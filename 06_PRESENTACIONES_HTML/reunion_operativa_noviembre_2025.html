@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reunión Operativa CENOTE - Noviembre 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #2d3748;
+            overflow-x: hidden;
+        }
+
+        .slide {
+            min-height: 100vh;
+            padding: 60px 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slide-white {
+            background: white;
+        }
+
+        .slide-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .slide-cyan {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            color: white;
+        }
+
+        h1 {
+            font-size: 4em;
+            margin-bottom: 30px;
+            font-weight: 800;
+        }
+
+        h2 {
+            font-size: 3em;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 2em;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            font-size: 1.8em;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            line-height: 1.4;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .card-cyan h3 {
+            color: #06b6d4;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            padding-left: 40px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .slide-cyan li:before {
+            color: #fbbf24;
+        }
+
+        .highlight {
+            background: #fbbf24;
+            color: #1f2937;
+            padding: 5px 15px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .quote {
+            font-size: 2em;
+            font-style: italic;
+            text-align: center;
+            padding: 60px;
+            line-height: 1.6;
+            border-left: 8px solid #fbbf24;
+            margin: 40px 0;
+        }
+
+        .valores-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .valor-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid rgba(255,255,255,0.2);
+            text-align: center;
+        }
+
+        .valor-card h4 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #fbbf24;
+        }
+
+        .valor-card p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        .numero-grande {
+            font-size: 6em;
+            font-weight: 900;
+            color: #fbbf24;
+            margin-bottom: 20px;
+        }
+
+        .calendario {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-top: 40px;
+        }
+
+        .calendario h3 {
+            color: #667eea;
+            margin-bottom: 30px;
+        }
+
+        .mes {
+            margin-bottom: 30px;
+        }
+
+        .mes h4 {
+            color: #0891b2;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .tarea-item {
+            background: #f3f4f6;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .remuneraciones {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-top: 40px;
+        }
+
+        .remuneraciones h3 {
+            color: #667eea;
+            margin-bottom: 30px;
+        }
+
+        .persona {
+            background: #f3f4f6;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .persona h4 {
+            color: #0891b2;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        .persona p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #4b5563;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            font-size: 1.2em;
+            opacity: 0.8;
+        }
+
+        @media print {
+            .slide {
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- SLIDE 1: PORTADA -->
+<div class="slide slide-gradient">
+    <h1>Reunión Operativa CENOTE</h1>
+    <div class="subtitle">Noviembre 2025 - Profesionalización y Futuro</div>
+    <div class="subtitle" style="font-size: 1.4em; margin-top: 60px;">
+        Equipo completo: Nico, Agus, Angie, Diego, Mati<br>
+        + Encargadas Martínez y Núñez
+    </div>
+</div>
+
+<!-- SLIDE 2: VALORES CENOTE -->
+<div class="slide slide-cyan">
+    <h2>🌟 Valores CENOTE</h2>
+    <div class="subtitle">Quiénes somos y hacia dónde vamos</div>
+
+    <div class="valores-grid">
+        <div class="valor-card">
+            <h4>Operativos</h4>
+            <p>Somos gente que hace. Solo sabe lo difícil que es hacer algo, el que hace.</p>
+        </div>
+
+        <div class="valor-card">
+            <h4>Servicio al Cliente</h4>
+            <p>Todo parte de ahí. Estamos acá para darle servicio a un cliente.</p>
+        </div>
+
+        <div class="valor-card">
+            <h4>Eficiencia</h4>
+            <p>Eficientes en insumos y eficientes en la operativa. Control 100% de lo que hacemos.</p>
+        </div>
+
+        <div class="valor-card">
+            <h4>Vida Plena</h4>
+            <p>Si tenés ganas de irte 2 meses a un torneo de judo, se puede. En familia nos organizamos.</p>
+        </div>
+
+        <div class="valor-card">
+            <h4>Compromiso</h4>
+            <p>Queremos que los que están acá se queden trabajando 5 años. Podemos hacer todo lo que nos proponemos.</p>
+        </div>
+
+        <div class="valor-card">
+            <h4>Entorno Espectacular</h4>
+            <p>Venimos a trabajar en un lugar increíble, siempre con ganas de hacer más cosas.</p>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 3: LUCHADORES -->
+<div class="slide slide-white">
+    <h2>🤖 LUCHADORES - Gran Avance</h2>
+
+    <div class="grid-2">
+        <div class="card">
+            <h3>Acuerdo con NotChatBot</h3>
+            <ul>
+                <li>Propuesta aceptada ✅</li>
+                <li>Vamos a desarrollar el bot de Luchadores para AGAVE</li>
+                <li>Proyecto confirmado y en marcha</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>Hoy en la Reunión</h3>
+            <ul>
+                <li>Encargadas traen <span class="highlight">teléfonos de clientes</span> registrados</li>
+                <li>Vamos a analizar base de datos actual</li>
+                <li>Definir estrategia de migración a Luchadores</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="quote">
+        "Luchadores es el futuro de nuestra relación con los clientes"
+    </div>
+</div>
+
+<!-- SLIDE 4: SISTEMA FRANQUICIAS -->
+<div class="slide slide-white">
+    <h2>🏪 Sistema de Franquicias Descentralizado</h2>
+    <div class="subtitle">Modelo ZARA - Cada barrio su impronta</div>
+
+    <div class="grid-2">
+        <div class="card">
+            <h3>Lo que NO se centraliza</h3>
+            <ul>
+                <li>Presupuestos de plantas</li>
+                <li>Iluminación y ambientación</li>
+                <li>Descuentos y promociones</li>
+                <li>Horarios de apertura/cierre</li>
+                <li>Eventos del barrio</li>
+            </ul>
+        </div>
+
+        <div class="card card-cyan">
+            <h3>Lo que SÍ mantenemos</h3>
+            <ul>
+                <li>Identidad CENOTE/AGAVE</li>
+                <li>Estándares de calidad</li>
+                <li>Menú base</li>
+                <li>Valores del equipo</li>
+                <li>Sistema de control</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card" style="margin-top: 40px;">
+        <h3>🎯 El Objetivo</h3>
+        <p style="font-size: 1.4em; line-height: 1.8;">
+            Cada local tiene que <span class="highlight">conocer a su barrio</span>.
+            Ir a la verdulería, tener buena onda con los vecinos, ser parte de la comunidad.
+            <br><br>
+            <strong>No conocemos a nuestro barrio todavía.</strong> Eso tiene que cambiar.
+        </p>
+    </div>
+</div>
+
+<!-- SLIDE 5: CASOS DE ÉXITO -->
+<div class="slide slide-cyan">
+    <h2>🏆 Casos de Éxito - Núñez</h2>
+
+    <div class="card" style="margin-top: 40px;">
+        <h3>Alianza Cabify</h3>
+        <p style="font-size: 1.5em; line-height: 1.8; color: #1f2937;">
+            El equipo de Núñez logró establecer una alianza con Cabify.
+            <br><br>
+            <span class="highlight">Esto es lo que queremos replicar</span> en todos los locales.
+            <br><br>
+            Iniciativa local → Valor para el grupo.
+        </p>
+    </div>
+
+    <div class="card" style="margin-top: 40px;">
+        <h3>Sinergia entre Locales</h3>
+        <p style="font-size: 1.4em; line-height: 1.8; color: #1f2937;">
+            Todo lo que apliquemos en un local será <strong>replicado positivamente</strong> en los que lo necesiten.
+            <br><br>
+            Queremos sinergia entre las encargadas. Compartir aprendizajes, estrategias, contactos.
+        </p>
+    </div>
+</div>
+
+<!-- SLIDE 6: SISTEMA LAS VENTANAS -->
+<div class="slide slide-white">
+    <h2>📋 Sistema "LAS VENTANAS"</h2>
+    <div class="subtitle">100 tareas que alguien tiene que hacer</div>
+
+    <div class="grid-2">
+        <div class="card">
+            <h3>¿Qué es Las Ventanas?</h3>
+            <p style="font-size: 1.3em; line-height: 1.8;">
+                Un listado de tareas operativas que necesitan:
+            </p>
+            <ul>
+                <li>Ser enumeradas</li>
+                <li>Tener un responsable asignado</li>
+                <li>Fecha objetivo de completado</li>
+                <li>Seguimiento semanal</li>
+            </ul>
+        </div>
+
+        <div class="card card-cyan">
+            <h3>Ejemplos de Tareas</h3>
+            <ul>
+                <li>Impresión de individuales</li>
+                <li>Impresión de flyers</li>
+                <li>Seguimiento denuncias musicales</li>
+                <li>Tema socios y consumo</li>
+                <li>Relación con vecinos</li>
+                <li>Y muchas más...</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card" style="margin-top: 40px; background: #fef3c7; border-left: 8px solid #fbbf24;">
+        <h3 style="color: #92400e;">🎯 HOY en esta reunión</h3>
+        <p style="font-size: 1.4em; color: #92400e; line-height: 1.8;">
+            Vamos a elaborar el listado juntos.<br>
+            Cada uno aporta tareas de su área.<br>
+            Asignamos responsables y fechas.
+        </p>
+    </div>
+</div>
+
+<!-- SLIDE 7: COMUNICACIÓN FEEDBACK -->
+<div class="slide slide-gradient">
+    <h2>💬 Comunicación = Feedback Bidireccional</h2>
+
+    <div class="quote" style="border-left-color: white;">
+        "Esta reunión operativa NO puede ser solo Nico hablando"
+    </div>
+
+    <div class="card" style="margin-top: 40px;">
+        <h3>Lo que necesitamos</h3>
+        <ul style="color: #1f2937;">
+            <li><strong>Escuchar al equipo:</strong> Entender lo difícil de llevar la teoría a la práctica</li>
+            <li><strong>Feedback real:</strong> Solo sabe lo difícil que es hacer algo, el que hace</li>
+            <li><strong>Problemas operativos:</strong> ¿Qué está frenando la ejecución?</li>
+            <li><strong>Ideas del equipo:</strong> ¿Qué proponen para mejorar?</li>
+        </ul>
+    </div>
+
+    <div class="card" style="margin-top: 40px; background: #fbbf24;">
+        <h3 style="color: #1f2937;">Formato de la Reunión</h3>
+        <p style="font-size: 1.4em; color: #1f2937; line-height: 1.8;">
+            50% Nico presenta avances y visión<br>
+            50% El equipo comparte realidad operativa
+        </p>
+    </div>
+</div>
+
+<!-- SLIDE 8: CALENDARIO FIN DE AÑO -->
+<div class="slide slide-white">
+    <h2>📅 Calendario y Metas - Fin de Año</h2>
+    <div class="subtitle">¿Qué vamos a hacer de acá a Diciembre?</div>
+
+    <div class="calendario">
+        <div class="mes">
+            <h4>📌 Noviembre 2025</h4>
+            <div class="tarea-item"><strong>Luchadores:</strong> Kickoff proyecto con NotChatBot</div>
+            <div class="tarea-item"><strong>Las Ventanas:</strong> Definir 100 tareas + responsables</div>
+            <div class="tarea-item"><strong>Operaciones:</strong> Implementar sistema feedback semanal</div>
+            <div class="tarea-item"><strong>Fiscal:</strong> Inicio regularización situación AFIP</div>
+            <div class="tarea-item"><strong>RRHH:</strong> Renuncias Agus, Angie, Diego a Grupo Agave (30/11)</div>
+        </div>
+
+        <div class="mes">
+            <h4>📌 Diciembre 2025</h4>
+            <div class="tarea-item"><strong>Luchadores:</strong> Beta testing con base actual de clientes</div>
+            <div class="tarea-item"><strong>Las Ventanas:</strong> Ejecutar 50% de las 100 tareas</div>
+            <div class="tarea-item"><strong>Barrio:</strong> Eventos navideños en Martínez y Núñez</div>
+            <div class="tarea-item"><strong>Fiscal:</strong> Pago aguinaldos (New México paga a Mati)</div>
+            <div class="tarea-item"><strong>RRHH:</strong> Mati renuncia a New México (30/12)</div>
+            <div class="tarea-item"><strong>Cierre:</strong> Proyección 2026 completa</div>
+        </div>
+    </div>
+
+    <div class="card" style="margin-top: 40px; background: #06b6d4; color: white;">
+        <h3 style="color: white;">Metas por Área - Definir HOY</h3>
+        <p style="font-size: 1.3em; line-height: 1.8;">
+            Cada área define 3 metas concretas para Nov-Dic<br>
+            Con indicadores medibles y fecha de cumplimiento
+        </p>
+    </div>
+</div>
+
+<!-- SLIDE 9: POSICIONAMIENTO MATI -->
+<div class="slide slide-white">
+    <h2>👨‍💼 Posicionamiento de Mati</h2>
+    <div class="subtitle">Próximo mes y estructura 2026</div>
+
+    <div class="grid-2">
+        <div class="card">
+            <h3>Responsabilidades</h3>
+            <ul>
+                <li>Operations Manager CENOTE</li>
+                <li>Coordinación Martínez y Núñez</li>
+                <li>Implementación Las Ventanas</li>
+                <li>Control de calidad operativa</li>
+                <li>Optimización de procesos</li>
+            </ul>
+        </div>
+
+        <div class="card card-cyan">
+            <h3>Esquema de Facturación</h3>
+            <ul>
+                <li>Facturación desde CENOTE</li>
+                <li>Pago desde CENOTE</li>
+                <li>Esquema de plata hasta fin de año: New México + Oli</li>
+                <li>Post Diciembre: Nueva estructura para todos</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 10: ESTRUCTURA REMUNERACIONES -->
+<div class="slide slide-white">
+    <h2>💰 Estructura de Remuneraciones</h2>
+    <div class="subtitle">Esquema actual y transición</div>
+
+    <div class="remuneraciones">
+        <div class="persona">
+            <h4>Agus + Angie</h4>
+            <p>
+                <strong>Fijo:</strong> $1.200.000 c/u<br>
+                <strong>Renuncia Grupo Agave:</strong> Fin de noviembre o 1/12<br>
+                <strong>Aguinaldo:</strong> Pagado según corresponda
+            </p>
+        </div>
+
+        <div class="persona">
+            <h4>Diego</h4>
+            <p>
+                <strong>Fijo:</strong> $3.000.000<br>
+                <strong>Renuncia Grupo Agave:</strong> Fin de noviembre o 1/12<br>
+                <strong>Aguinaldo:</strong> Pagado según corresponda
+            </p>
+        </div>
+
+        <div class="persona">
+            <h4>Mati</h4>
+            <p>
+                <strong>Propuesta Nov-Dic:</strong> Adicional de 1/2 de su sueldo actual por mes<br>
+                <strong>Aguinaldo:</strong> Lo paga New México<br>
+                <strong>Renuncia New México:</strong> 30/12/2025<br>
+                <strong>Post Diciembre:</strong> Nueva estructura completa
+            </p>
+        </div>
+    </div>
+
+    <div class="card" style="margin-top: 40px; background: #fef3c7; border-left: 8px solid #fbbf24;">
+        <h3 style="color: #92400e;">🔄 Transición Societaria</h3>
+        <p style="font-size: 1.3em; color: #92400e; line-height: 1.8;">
+            Grupo Agave SRL → Se la lleva el hermano de Nico<br>
+            CENOTE estructura nueva para 2026
+        </p>
+    </div>
+</div>
+
+<!-- SLIDE 11: PROCESO DE PROFESIONALIZACIÓN -->
+<div class="slide slide-cyan">
+    <h2>🚀 Proceso de Profesionalización</h2>
+
+    <div class="quote" style="border-left-color: #fbbf24;">
+        "Estamos iniciando un proceso de profesionalización<br>y eso involucra TODAS las áreas"
+    </div>
+
+    <div class="grid-2" style="margin-top: 60px;">
+        <div class="valor-card">
+            <div class="numero-grande">100%</div>
+            <h4>Control Total</h4>
+            <p>Queremos tener el control del 100% de las cosas que hacemos</p>
+        </div>
+
+        <div class="valor-card">
+            <div class="numero-grande">5</div>
+            <h4>Años Juntos</h4>
+            <p>Queremos que los que están acá se queden trabajando 5 años</p>
+        </div>
+    </div>
+
+    <div class="card" style="margin-top: 60px;">
+        <h3>Áreas de Profesionalización</h3>
+        <ul style="color: #1f2937;">
+            <li>Operaciones: Sistemas y procesos claros</li>
+            <li>Fiscal: Normalización completa AFIP</li>
+            <li>RRHH: Estructura formal y desarrollo profesional</li>
+            <li>Tecnología: Luchadores + sistemas de gestión</li>
+            <li>Financiero: Control de costos y rentabilidad</li>
+            <li>Marketing: Estrategia por barrio</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SLIDE 12: CIERRE -->
+<div class="slide slide-gradient">
+    <h2>🎯 Agenda de Hoy</h2>
+
+    <div class="card" style="margin-top: 40px;">
+        <h3>Tareas de esta Reunión</h3>
+        <ul style="color: #1f2937;">
+            <li>Compartir calendarios de todos</li>
+            <li>Definir metas por área (Nov-Dic)</li>
+            <li>Elaborar listado "Las Ventanas" (100 tareas)</li>
+            <li>Asignar responsables a cada tarea</li>
+            <li>Analizar base de clientes para Luchadores</li>
+            <li>Feedback operativo: ¿Qué está funcionando? ¿Qué no?</li>
+            <li>Definir próximos pasos de cada área</li>
+        </ul>
+    </div>
+
+    <div class="quote" style="border-left-color: white; margin-top: 60px;">
+        "Podemos hacer todo lo que nos proponemos"
+    </div>
+
+    <div class="footer">
+        CENOTE - Noviembre 2025<br>
+        Equipo Completo - Vamos por más 🚀
+    </div>
+</div>
+
+</body>
+</html>

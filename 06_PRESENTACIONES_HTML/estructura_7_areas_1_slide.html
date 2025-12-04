@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estructura 7 Áreas CENOTE - 1 Slide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
+            color: white;
+            height: 100vh;
+            overflow: hidden;
+            padding: 40px;
+        }
+
+        .container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3em;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .areas-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            flex: 1;
+        }
+
+        .area {
+            background: rgba(255, 255, 255, 0.95);
+            color: #1e293b;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .area-header {
+            background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
+            color: white;
+            padding: 12px 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .area-header h2 {
+            font-size: 1.3em;
+            margin-bottom: 5px;
+        }
+
+        .area-header .responsable {
+            font-size: 0.85em;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+
+        .categorias {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .categorias::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .categorias::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 10px;
+        }
+
+        .categorias::-webkit-scrollbar-thumb {
+            background: #06b6d4;
+            border-radius: 10px;
+        }
+
+        .categoria {
+            margin-bottom: 12px;
+        }
+
+        .categoria h3 {
+            font-size: 0.95em;
+            color: #0891b2;
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+
+        .categoria ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .categoria li {
+            font-size: 0.75em;
+            line-height: 1.4;
+            padding: 3px 0 3px 15px;
+            position: relative;
+        }
+
+        .categoria li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #06b6d4;
+            font-weight: bold;
+        }
+
+        .nota {
+            background: #fef3c7;
+            border-left: 3px solid #fbbf24;
+            padding: 8px 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+            font-size: 0.75em;
+            color: #92400e;
+        }
+
+        .nota strong {
+            display: block;
+            margin-bottom: 3px;
+            font-size: 0.9em;
+        }
+
+        .highlight {
+            background: #fef3c7;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 600;
+            color: #92400e;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1em;
+            opacity: 0.95;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🏢 ESTRUCTURA OPERATIVA CENOTE - 7 ÁREAS</h1>
+
+    <div class="areas-grid">
+
+        <!-- ÁREA 1 -->
+        <div class="area">
+            <div class="area-header">
+                <h2>👑 COMANDO CENTRAL</h2>
+                <div class="responsable">Nico (CEO)</div>
+            </div>
+            <div class="categorias">
+                <div class="categoria">
+                    <h3>Estrategia & Visión</h3>
+                    <ul>
+                        <li>Objetivos y roadmap M17→M60</li>
+                        <li>Decisiones de inversión</li>
+                        <li>Relación inversores</li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>Valores CENOTE</h3>
+                    <ul>
+                        <li>Operativos, servicio cliente</li>
+                        <li>Eficiencia total</li>
+                        <li>Vida plena equipo</li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>Proyectos Especiales</h3>
+                    <ul>
+                        <li><span class="highlight">Luchadores</span> (NotChatBot)</li>
+                        <li><span class="highlight">Las Ventanas</span> (100 tareas)</li>
+                        <li><span class="highlight">Modelo Zara</span> (franquicias)</li>
+                        <li>Expansión CABA</li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>Profesionalización</h3>
+                    <ul>
+                        <li>Todas las áreas</li>
+                        <li>Regularización fiscal</li>
+                        <li>Estructura societaria</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ÁREA 2 -->
+        <div class="area">
+            <div class="area-header">
+                <h2>⚙️ OPERACIONES</h2>
+                <div class="responsable">Mati + Diego + Encargadas</div>
+            </div>
+            <div class="categorias">
+                <div class="categoria">
+                    <h3>Operaciones Locales</h3>
+                    <ul>
+                        <li>Diego+Encargadas: RRHH</li>
+                        <li>Encargadas: Horarios y turnos</li>
+                        <li>Coordinación Mtz-Núñez</li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>Atención Cliente</h3>
+                    <ul>
+                        <li>Protocolo atención</li>
+                        <li>Reservas y turnos</li>
+                        <li>Feedback y quejas</li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>Eficiencia Operativa</h3>
+                    <div class="nota">
+                        <strong>Sacha: Gastro</strong>
+                        Mati+Diego: Operativa
+                    </div>
+                    <ul>
+                        <li>Diagrama bloques/hora</li>
+                        <li>Costos operativos</li>
+                        <li><span class="highlight">Mati 10 días Núñez Dic</span></li>
+                        <li>Obj 10 Dic: Mtz=Núñez</li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>Infraestructura</h3>
+                    <ul>
+                        <li>Chicos Manu 5 días post 3/12</li>
+                        <li>Mati: Listados por categoría</li>
+                        <li>Mantenimiento y reparaciones</li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>Relación Barrio</h3>
+                    <ul>
+                        <li>Encargadas + Dueños operativos</li>
+                        <li>Vecinos y comercios</li>
+                        <li>Alianzas (Cabify Núñez)</li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>Las Ventanas</h3>
+                    <ul>
+                        <li>100 tareas + responsables</li>
+                        <li>Seguimiento semanal</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ÁREA 3 -->
+        <div class="area">
+            <div class="area-header">
+                <h2>📦 SUPPLY CHAIN</h2>
+                <div class="responsable">Agus + Mati + Julio</div>
+            </div>
+            <div class="categorias">
+                <div class="nota">
+                    <strong>Agus gran potencial</strong>
+                    Dejar de subir facturas manual
+                </div>
+                <div class="categoria">
+                    <h3>Proveedores</h3>
+                    <ul>
+                        <li>Relación y negociación</li>
+                        <li>Contratos marco</li>
+                        <li>Diversificación backup</li>
+                        <li>Proveedores barrio</li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>Inventario</h3>
+                    <ul>
+                        <li>Stock actual 2 locales</li>
+                        <li>Sistema FIFO</li>
+                        <li>Control mermas</li>
+                        <li>Alertas stock mínimo</li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>Optimización Costos</h3>
+                    <ul>
+                        <li>Food cost 28-30%</li>
+                        <li>Economías de escala</li>
+                        <li>Timing compras</li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>Logística & Compras</h3>
+                    <ul>
+                        <li>Frescos semanal</li>
+                        <li>Secos mensual</li>
+                        <li>Vajilla y material gráfico</li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>Odoo - Fase 1</h3>
+                    <ul>
+                        <li><span class="highlight">Automatización facturas</span></li>
+                        <li>Inventario tiempo real</li>
+                        <li>Costos automatizados</li>
+                        <li>Dashboard proveedores</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ÁREA 4 -->
+        <div class="area">
+            <div class="area-header">
+                <h2>💰 FINANZAS</h2>
+                <div class="responsable">Angie + Julio</div>
+            </div>
+            <div class="categorias">
+                <div class="categoria">
+                    <h3>Control Financiero</h3>
+                    <ul>
+                        <li>Facturación por local</li>
+                        <li>Márgenes y rentabilidad</li>
+                        <li>Cash flow proyectado</li>
+                        <li>Presupuestos por área</li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>Datos & Reporting</h3>
+                    <div class="nota">
+                        <strong>Angie: Todos informes</strong>
+                    </div>
+                    <ul>
+                        <li>P&L mensual por local</li>
+                        <li>Dashboard financiero</li>
+                        <li>Forecasting trimestral</li>
+                        <li>KPIs inversores</li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>Necesidades Capital</h3>
+                    <div class="nota">
+                        <strong>¿Cuánta $ para Dic?</strong>
+                    </div>
+                    <ul>
+                        <li>Sueldos + aguinaldos</li>
+                        <li>Proveedores y operación</li>
+                        <li>Deudas fiscales urgentes</li>
+                        <li>Obras y mantenimiento</li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>Calendario Nov-Dic</h3>
+                    <ul>
+                        <li>Pago sueldos Nov/Dic</li>
+                        <li>Pago aguinaldo</li>
+                        <li><span class="highlight">Fiesta AGAVE - ¿Definir?</span></li>
+                        <li>Vencimientos AFIP</li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>RRHH & Societario</h3>
+                    <ul>
+                        <li>Liquidaciones mensuales</li>
+                        <li>Renuncias Nov: Agus/Angie/Diego</li>
+                        <li>Renuncias Dic: Mati</li>
+                        <li>Nueva estructura 2026</li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>Regularización Fiscal</h3>
+                    <ul>
+                        <li>New México: $51.5M</li>
+                        <li>Triple Campana: $6.7M</li>
+                        <li>Grupo Agave: $6M</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ÁREA 5 -->
+        <div class="area">
+            <div class="area-header">
+                <h2>🎯 MARKETING</h2>
+                <div class="responsable">Nico lidera + Diego ejecuta</div>
+            </div>
+            <div class="categorias">
+                <div class="categoria">
+                    <h3>Luchadores CRM</h3>
+                    <div class="nota">
+                        <strong>HOY: Encargadas traen clientes</strong>
+                    </div>
+                    <ul>
+                        <li>NotChatBot confirmado</li>
+                        <li>Migración base actual</li>
+                        <li>Pricing por demanda</li>
+                        <li>Sistema beneficios</li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>Marketing Local</h3>
+                    <ul>
+                        <li>Encargadas + Diego + Martín</li>
+                        <li>Eventos barrio</li>
+                        <li>Alianzas (replicar Cabify)</li>
+                        <li>Impronta local</li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>B2B Empresas</h3>
+                    <ul>
+                        <li>Diego + Martín lideran</li>
+                        <li>Clientes corporativos</li>
+                        <li>Catering empresarial</li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>Digital & Redes</h3>
+                    <ul>
+                        <li>Instagram por local</li>
+                        <li>Campañas pagas</li>
+                        <li>WhatsApp Business</li>
+                        <li>Reputación online</li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>Material Gráfico</h3>
+                    <div class="nota">
+                        <strong>TODO listo en Canva</strong>
+                        NO esperar más
+                    </div>
+                    <ul>
+                        <li>Diego chequea → Encargadas ejecutan</li>
+                        <li>Flyers e individuales</li>
+                        <li><span class="highlight">Proveedores fijos</span></li>
+                        <li>Nico: Solo estética</li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>Merchandising</h3>
+                    <div class="nota">
+                        <strong>DEFINIR HOY: ¿Quién lidera?</strong>
+                        Agus o Angie compras
+                    </div>
+                    <ul>
+                        <li>Remeras (diseño listo)</li>
+                        <li>Gorras, tote bags</li>
+                        <li><span class="highlight">Proveedores fijos</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ÁREA 6 -->
+        <div class="area">
+            <div class="area-header">
+                <h2>🍳 COCINA</h2>
+                <div class="responsable">Sacha + Diego + Mati</div>
+            </div>
+            <div class="categorias">
+                <div class="nota">
+                    <strong>Roles:</strong>
+                    Sacha: Gastro | Diego+Mati: Operativa | Nico: Estética
+                </div>
+                <div class="categoria">
+                    <h3>Menú & Desarrollo</h3>
+                    <ul>
+                        <li>Sacha: Ideas</li>
+                        <li>Diego+Mati: Implementación</li>
+                        <li>Innovación (ej: tacos dulces)</li>
+                        <li>Menú infantil</li>
+                        <li>Ensaladas nuevas</li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>Calidad & Estándares</h3>
+                    <ul>
+                        <li>Sacha: Sabor y calidad</li>
+                        <li>Diego+Mati: Estándares operativos</li>
+                        <li>Control 2 locales</li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>Documentación</h3>
+                    <ul>
+                        <li>Diego+Mati: Recetas y fotos</li>
+                        <li>Fichas técnicas</li>
+                        <li>Costos por plato</li>
+                        <li>Manual de preparación</li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>Integración Odoo</h3>
+                    <div class="nota">
+                        <strong>HOY: Feedback Diego</strong>
+                        ¿Qué vio de Odoo?
+                    </div>
+                    <ul>
+                        <li>Menú integrado</li>
+                        <li>Costos tiempo real</li>
+                        <li>Rentabilidad por plato</li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>Capacitación</h3>
+                    <ul>
+                        <li>Training cocineros nuevos</li>
+                        <li>Coord. Gisele (Núñez estrella)</li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>Modelo Operativo</h3>
+                    <div class="nota">
+                        <strong>Martínez = Casa Matriz</strong>
+                        Marca nivel → CABA replica con + eficiencia
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ÁREA 7 -->
+        <div class="area">
+            <div class="area-header">
+                <h2>📱 TECNOLOGÍA</h2>
+                <div class="responsable">Diego + Julio + Nico + Mati</div>
+            </div>
+            <div class="categorias">
+                <div class="categoria">
+                    <h3>Sistemas Actuales</h3>
+                    <ul>
+                        <li>Maxirest (ventas)</li>
+                        <li>Medios pago electrónicos</li>
+                        <li>WiFi y equipos (POS, tablets)</li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>Odoo - Profesionalización</h3>
+                    <div class="nota">
+                        <strong>Julio define:</strong>
+                        Fases, costos, tiempos
+                    </div>
+                    <div class="nota">
+                        <strong>HOY: Feedback Diego</strong>
+                        ¿Puede mostrar futuro plataforma?
+                    </div>
+                </div>
+                <div class="categoria">
+                    <h3>Timeline Odoo</h3>
+                    <ul>
+                        <li><span class="highlight">Primeros 6 meses 2026:</span> Implementación</li>
+                        <li><strong>Marzo 2026:</strong> Obra Local #3</li>
+                        <li><strong>Sep 2026:</strong> Apertura #3</li>
+                        <li><span class="highlight">Pre-requisito: Odoo ANTES #3</span></li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>Áreas Odoo</h3>
+                    <ul>
+                        <li>Supply Chain (1ª prioridad)</li>
+                        <li>Menú & Cocina</li>
+                        <li>Finanzas & Reporting</li>
+                        <li>RRHH & Personal</li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>Luchadores CRM</h3>
+                    <ul>
+                        <li>Nico responsable</li>
+                        <li>NotChatBot desarrollo</li>
+                        <li>Pricing dinámico demanda</li>
+                        <li>Demanda anticipada</li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>Reportes & Dashboards</h3>
+                    <ul>
+                        <li>Diego: Operativo</li>
+                        <li>Angie: Financiero</li>
+                        <li>Tiempo real por local</li>
+                        <li>KPIs y eficiencia</li>
+                    </ul>
+                </div>
+                <div class="categoria">
+                    <h3>Infraestructura Digital</h3>
+                    <ul>
+                        <li>Redes sociales</li>
+                        <li>WhatsApp Business</li>
+                        <li>Google My Business</li>
+                        <li>Delivery integrado</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <strong>CENOTE 2026 - PROFESIONALIZACIÓN • ESCALABILIDAD • EFICIENCIA</strong> | Reunión Operativa Noviembre 2025
+    </div>
+</div>
+
+</body>
+</html>

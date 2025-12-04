@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario LAS VENTANAS - CENOTE</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 1cm;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: white;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #06b6d4;
+            padding-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #0891b2;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: #64748b;
+        }
+
+        .instrucciones {
+            background: #f0f9ff;
+            border-left: 4px solid #06b6d4;
+            padding: 15px;
+            margin-bottom: 30px;
+        }
+
+        .instrucciones h3 {
+            color: #0891b2;
+            margin-bottom: 10px;
+        }
+
+        .instrucciones p {
+            line-height: 1.6;
+            color: #334155;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        thead {
+            background: #06b6d4;
+            color: white;
+        }
+
+        th {
+            padding: 12px 8px;
+            text-align: left;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 15px 8px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        tbody tr:nth-child(odd) {
+            background: #f8fafc;
+        }
+
+        tbody tr:hover {
+            background: #f0f9ff;
+        }
+
+        .col-num {
+            width: 5%;
+            text-align: center;
+            font-weight: bold;
+            color: #0891b2;
+        }
+
+        .col-tarea {
+            width: 40%;
+        }
+
+        .col-responsable {
+            width: 20%;
+        }
+
+        .col-fecha {
+            width: 15%;
+        }
+
+        .col-area {
+            width: 20%;
+        }
+
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+            text-align: center;
+            color: #64748b;
+        }
+
+        .page-break {
+            page-break-after: always;
+        }
+
+        @media print {
+            body {
+                padding: 0;
+            }
+
+            tbody tr:hover {
+                background: inherit;
+            }
+
+            .instrucciones {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>📋 LAS VENTANAS</h1>
+    <p>Sistema de Control de Tareas Operativas - CENOTE</p>
+    <p style="font-size: 0.9em; margin-top: 10px;">Reunión Operativa - Noviembre 2025</p>
+</div>
+
+<div class="instrucciones">
+    <h3>📝 Instrucciones de Uso</h3>
+    <p>
+        <strong>Objetivo:</strong> Listar 100 tareas operativas que necesitan ejecutarse en Diciembre 2025.<br>
+        <strong>Completar:</strong> Descripción de tarea, responsable, fecha objetivo y área.<br>
+        <strong>Método:</strong> Llenar a mano durante la reunión. Nico digitalizará luego.
+    </p>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th class="col-num">#</th>
+            <th class="col-tarea">Descripción de la Tarea</th>
+            <th class="col-responsable">Responsable</th>
+            <th class="col-fecha">Fecha Objetivo</th>
+            <th class="col-area">Área</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="col-num">1</td>
+            <td class="col-tarea"></td>
+            <td class="col-responsable"></td>
+            <td class="col-fecha"></td>
+            <td class="col-area"></td>
+        </tr>
+        <tr>
+            <td class="col-num">2</td>
+            <td class="col-tarea"></td>
+            <td class="col-responsable"></td>
+            <td class="col-fecha"></td>
+            <td class="col-area"></td>
+        </tr>
+        <tr>
+            <td class="col-num">3</td>
+            <td class="col-tarea"></td>
+            <td class="col-responsable"></td>
+            <td class="col-fecha"></td>
+            <td class="col-area"></td>
+        </tr>
+        <tr>
+            <td class="col-num">4</td>
+            <td class="col-tarea"></td>
+            <td class="col-responsable"></td>
+            <td class="col-fecha"></td>
+            <td class="col-area"></td>
+        </tr>
+        <tr>
+            <td class="col-num">5</td>
+            <td class="col-tarea"></td>
+            <td class="col-responsable"></td>
+            <td class="col-fecha"></td>
+            <td class="col-area"></td>
+        </tr>
+        <tr>
+            <td class="col-num">6</td>
+            <td class="col-tarea"></td>
+            <td class="col-responsable"></td>
+            <td class="col-fecha"></td>
+            <td class="col-area"></td>
+        </tr>
+        <tr>
+            <td class="col-num">7</td>
+            <td class="col-tarea"></td>
+            <td class="col-responsable"></td>
+            <td class="col-fecha"></td>
+            <td class="col-area"></td>
+        </tr>
+        <tr>
+            <td class="col-num">8</td>
+            <td class="col-tarea"></td>
+            <td class="col-responsable"></td>
+            <td class="col-fecha"></td>
+            <td class="col-area"></td>
+        </tr>
+        <tr>
+            <td class="col-num">9</td>
+            <td class="col-tarea"></td>
+            <td class="col-responsable"></td>
+            <td class="col-fecha"></td>
+            <td class="col-area"></td>
+        </tr>
+        <tr>
+            <td class="col-num">10</td>
+            <td class="col-tarea"></td>
+            <td class="col-responsable"></td>
+            <td class="col-fecha"></td>
+            <td class="col-area"></td>
+        </tr>
+        <tr>
+            <td class="col-num">11</td>
+            <td class="col-tarea"></td>
+            <td class="col-responsable"></td>
+            <td class="col-fecha"></td>
+            <td class="col-area"></td>
+        </tr>
+        <tr>
+            <td class="col-num">12</td>
+            <td class="col-tarea"></td>
+            <td class="col-responsable"></td>
+            <td class="col-fecha"></td>
+            <td class="col-area"></td>
+        </tr>
+        <tr>
+            <td class="col-num">13</td>
+            <td class="col-tarea"></td>
+            <td class="col-responsable"></td>
+            <td class="col-fecha"></td>
+            <td class="col-area"></td>
+        </tr>
+        <tr>
+            <td class="col-num">14</td>
+            <td class="col-tarea"></td>
+            <td class="col-responsable"></td>
+            <td class="col-fecha"></td>
+            <td class="col-area"></td>
+        </tr>
+        <tr>
+            <td class="col-num">15</td>
+            <td class="col-tarea"></td>
+            <td class="col-responsable"></td>
+            <td class="col-fecha"></td>
+            <td class="col-area"></td>
+        </tr>
+        <tr>
+            <td class="col-num">16</td>
+            <td class="col-tarea"></td>
+            <td class="col-responsable"></td>
+            <td class="col-fecha"></td>
+            <td class="col-area"></td>
+        </tr>
+        <tr>
+            <td class="col-num">17</td>
+            <td class="col-tarea"></td>
+            <td class="col-responsable"></td>
+            <td class="col-fecha"></td>
+            <td class="col-area"></td>
+        </tr>
+        <tr>
+            <td class="col-num">18</td>
+            <td class="col-tarea"></td>
+            <td class="col-responsable"></td>
+            <td class="col-fecha"></td>
+            <td class="col-area"></td>
+        </tr>
+        <tr>
+            <td class="col-num">19</td>
+            <td class="col-tarea"></td>
+            <td class="col-responsable"></td>
+            <td class="col-fecha"></td>
+            <td class="col-area"></td>
+        </tr>
+        <tr>
+            <td class="col-num">20</td>
+            <td class="col-tarea"></td>
+            <td class="col-responsable"></td>
+            <td class="col-fecha"></td>
+            <td class="col-area"></td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="footer">
+    Página 1 de 5 - Tareas 1-20
+</div>
+
+<div class="page-break"></div>
+
+<!-- PÁGINA 2 -->
+<div class="header">
+    <h1>📋 LAS VENTANAS</h1>
+    <p>Sistema de Control de Tareas Operativas - CENOTE</p>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th class="col-num">#</th>
+            <th class="col-tarea">Descripción de la Tarea</th>
+            <th class="col-responsable">Responsable</th>
+            <th class="col-fecha">Fecha Objetivo</th>
+            <th class="col-area">Área</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td class="col-num">21</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">22</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">23</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">24</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">25</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">26</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">27</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">28</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">29</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">30</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">31</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">32</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">33</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">34</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">35</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">36</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">37</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">38</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">39</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">40</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+    </tbody>
+</table>
+
+<div class="footer">
+    Página 2 de 5 - Tareas 21-40
+</div>
+
+<div class="page-break"></div>
+
+<!-- PÁGINA 3 -->
+<div class="header">
+    <h1>📋 LAS VENTANAS</h1>
+    <p>Sistema de Control de Tareas Operativas - CENOTE</p>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th class="col-num">#</th>
+            <th class="col-tarea">Descripción de la Tarea</th>
+            <th class="col-responsable">Responsable</th>
+            <th class="col-fecha">Fecha Objetivo</th>
+            <th class="col-area">Área</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td class="col-num">41</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">42</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">43</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">44</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">45</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">46</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">47</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">48</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">49</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">50</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">51</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">52</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">53</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">54</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">55</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">56</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">57</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">58</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">59</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">60</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+    </tbody>
+</table>
+
+<div class="footer">
+    Página 3 de 5 - Tareas 41-60
+</div>
+
+<div class="page-break"></div>
+
+<!-- PÁGINA 4 -->
+<div class="header">
+    <h1>📋 LAS VENTANAS</h1>
+    <p>Sistema de Control de Tareas Operativas - CENOTE</p>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th class="col-num">#</th>
+            <th class="col-tarea">Descripción de la Tarea</th>
+            <th class="col-responsable">Responsable</th>
+            <th class="col-fecha">Fecha Objetivo</th>
+            <th class="col-area">Área</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td class="col-num">61</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">62</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">63</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">64</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">65</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">66</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">67</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">68</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">69</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">70</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">71</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">72</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">73</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">74</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">75</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">76</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">77</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">78</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">79</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">80</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+    </tbody>
+</table>
+
+<div class="footer">
+    Página 4 de 5 - Tareas 61-80
+</div>
+
+<div class="page-break"></div>
+
+<!-- PÁGINA 5 -->
+<div class="header">
+    <h1>📋 LAS VENTANAS</h1>
+    <p>Sistema de Control de Tareas Operativas - CENOTE</p>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th class="col-num">#</th>
+            <th class="col-tarea">Descripción de la Tarea</th>
+            <th class="col-responsable">Responsable</th>
+            <th class="col-fecha">Fecha Objetivo</th>
+            <th class="col-area">Área</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td class="col-num">81</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">82</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">83</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">84</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">85</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">86</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">87</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">88</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">89</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">90</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">91</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">92</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">93</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">94</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">95</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">96</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">97</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">98</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">99</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+        <tr><td class="col-num">100</td><td class="col-tarea"></td><td class="col-responsable"></td><td class="col-fecha"></td><td class="col-area"></td></tr>
+    </tbody>
+</table>
+
+<div class="footer">
+    Página 5 de 5 - Tareas 81-100<br>
+    <strong>CENOTE - Sistema Las Ventanas - Noviembre 2025</strong>
+</div>
+
+</body>
+</html>
