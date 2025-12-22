@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGAVE - Pricing 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px 0;
+            border-bottom: 3px solid #ff6b35;
+        }
+
+        .header h1 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 5em;
+            color: #ff6b35;
+            letter-spacing: 5px;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+        }
+
+        .header .subtitle {
+            font-size: 1.3em;
+            color: #ffd700;
+            font-weight: 300;
+        }
+
+        .header .date {
+            font-size: 0.9em;
+            color: #999;
+            margin-top: 10px;
+        }
+
+        /* Section */
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2.5em;
+            color: #ff6b35;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 107, 53, 0.3);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 215, 0, 0.05));
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #ff6b35;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: #ffd700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .stat-value {
+            font-size: 3em;
+            font-weight: 900;
+            color: #fff;
+            font-family: 'Bebas Neue', cursive;
+        }
+
+        .stat-note {
+            font-size: 0.85em;
+            color: #aaa;
+            margin-top: 10px;
+        }
+
+        /* Table */
+        .pricing-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+            margin-bottom: 30px;
+        }
+
+        .pricing-table thead th {
+            background: rgba(255, 107, 53, 0.2);
+            padding: 15px;
+            text-align: left;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+            color: #ffd700;
+        }
+
+        .pricing-table tbody tr {
+            background: rgba(255, 255, 255, 0.05);
+            transition: background 0.3s ease;
+        }
+
+        .pricing-table tbody tr:hover {
+            background: rgba(255, 107, 53, 0.1);
+        }
+
+        .pricing-table td {
+            padding: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .pricing-table td:first-child {
+            border-left: 3px solid #ff6b35;
+            font-weight: 600;
+        }
+
+        .price-old {
+            text-decoration: line-through;
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        .price-new {
+            color: #ffd700;
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+
+        .increase {
+            color: #4ade80;
+            font-weight: 600;
+        }
+
+        .decrease {
+            color: #f87171;
+            font-weight: 600;
+        }
+
+        /* Combo Cards */
+        .combo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .combo-card {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.15), rgba(255, 215, 0, 0.1));
+            border: 2px solid rgba(255, 107, 53, 0.4);
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .combo-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .combo-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .combo-title {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2em;
+            color: #ff6b35;
+            margin-bottom: 15px;
+        }
+
+        .combo-content {
+            font-size: 1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #ddd;
+        }
+
+        .combo-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .combo-total {
+            font-size: 1.8em;
+            font-weight: 900;
+            color: #ffd700;
+        }
+
+        .combo-per-person {
+            font-size: 1.2em;
+            color: #4ade80;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 107, 53, 0.1));
+            border-left: 5px solid #ffd700;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 10px;
+        }
+
+        .highlight-box h3 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1.8em;
+            color: #ffd700;
+            margin-bottom: 15px;
+        }
+
+        .highlight-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .highlight-box li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 1.1em;
+        }
+
+        .highlight-box li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #ff6b35;
+            font-weight: 900;
+            font-size: 1.3em;
+        }
+
+        /* Warning Box */
+        .warning-box {
+            background: rgba(248, 113, 113, 0.1);
+            border: 2px solid #f87171;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .warning-box h4 {
+            color: #f87171;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .warning-box h4::before {
+            content: "⚠️";
+            font-size: 1.5em;
+        }
+
+        /* Action Items */
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .action-item {
+            background: rgba(74, 222, 128, 0.1);
+            border-left: 4px solid #4ade80;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .action-item h4 {
+            color: #4ade80;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .action-item ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .action-item li {
+            padding: 5px 0;
+            color: #ddd;
+            font-size: 0.95em;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .stats-grid, .combo-grid, .action-grid {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 3.5em;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+            .stat-card, .combo-card {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>AGAVE PRICING 2026</h1>
+            <div class="subtitle">Estrategia de Precios | Martínez + Núñez</div>
+            <div class="date">22 Diciembre 2024 | Reunión Diego + Sacha</div>
+        </div>
+
+        <!-- Stats -->
+        <div class="section">
+            <div class="section-title">Objetivos Clave</div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Promedio Cubierto Actual</div>
+                    <div class="stat-value">$30K</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Promedio Cubierto Meta</div>
+                    <div class="stat-value">$35K</div>
+                    <div class="stat-note">+16.7% incremento</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Aumento General</div>
+                    <div class="stat-value">10-15%</div>
+                    <div class="stat-note">Según categoría</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Highlights -->
+        <div class="section">
+            <div class="highlight-box">
+                <h3>🎯 Filosofía de Pricing</h3>
+                <ul>
+                    <li><strong>Transparencia:</strong> Cliente sabe cuánto gasta antes de venir</li>
+                    <li><strong>Margarita como estrella:</strong> Impulsar producto más rentable</li>
+                    <li><strong>Experiencias completas:</strong> No vendemos platos, vendemos experiencias</li>
+                    <li><strong>Diferenciación clara:</strong> Cada nivel de precio = experiencia distinta</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Combos -->
+        <div class="section">
+            <div class="section-title">Combos para Comunicar</div>
+            <div class="combo-grid">
+                <div class="combo-card">
+                    <div class="combo-icon">🌮</div>
+                    <div class="combo-title">COMBO TACOS</div>
+                    <div class="combo-content">
+                        3 Tacos a elección + 1 Margarita Frozen
+                    </div>
+                    <div class="combo-price">
+                        <div class="combo-total">$30.700</div>
+                        <div class="combo-per-person">Individual</div>
+                    </div>
+                </div>
+
+                <div class="combo-card">
+                    <div class="combo-icon">🥑</div>
+                    <div class="combo-title">COMBO BOTANA</div>
+                    <div class="combo-content">
+                        1 Botana + 2 Margaritas Frozen<br>
+                        <small>(Para 2 personas)</small>
+                    </div>
+                    <div class="combo-price">
+                        <div class="combo-total">$67.400</div>
+                        <div class="combo-per-person">$33.700 p/p</div>
+                    </div>
+                </div>
+
+                <div class="combo-card">
+                    <div class="combo-icon">🔥</div>
+                    <div class="combo-title">FAJITAS PARA 2</div>
+                    <div class="combo-content">
+                        1 Fajitas para 2 + 2 Margaritas Frozen
+                    </div>
+                    <div class="combo-price">
+                        <div class="combo-total">$72.400</div>
+                        <div class="combo-per-person">$36.200 p/p</div>
+                    </div>
+                </div>
+
+                <div class="combo-card">
+                    <div class="combo-icon">🔥</div>
+                    <div class="combo-title">FAJITAS PARA 3</div>
+                    <div class="combo-content">
+                        1 Fajitas para 3 + 3 Margaritas Frozen
+                    </div>
+                    <div class="combo-price">
+                        <div class="combo-total">$109.100</div>
+                        <div class="combo-per-person">$36.400 p/p</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Changes -->
+        <div class="section">
+            <div class="section-title">Cambios Importantes</div>
+            
+            <div class="highlight-box">
+                <h3>📋 Quesadillas</h3>
+                <ul>
+                    <li><strong>NUEVO:</strong> Todas incluyen papas fritas</li>
+                    <li>Precio unificado: $18.000-$22.000</li>
+                    <li>10-15% por debajo de Burritos (justificado por relleno)</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h3>🔥 Fajitas</h3>
+                <ul>
+                    <li><strong>CAMBIO:</strong> "Media Fajita" → "Fajitas para 2"</li>
+                    <li><strong>NUEVO:</strong> "Fajitas para 3" ($86.000)</li>
+                    <li>Precio por persona: $28.600 (10% más que Botana)</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h3>☕ Café</h3>
+                <ul>
+                    <li><strong>BAJA ESTRATÉGICA:</strong> $3.700 → $3.500 (-5%)</li>
+                    <li>Costo cápsula: $878</li>
+                    <li>Margen: 299% (sigue siendo excelente)</li>
+                    <li>Incentiva consumo post-comida</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h3>💧 Agua</h3>
+                <ul>
+                    <li><strong>NUEVO:</strong> Agua TAP (jarra) GRATIS</li>
+                    <li>Agua Mineral (botella): $4.000</li>
+                    <li>Servicio diferenciador</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h3>👶 Menú Kids</h3>
+                <ul>
+                    <li><strong>NUEVO:</strong> Incluye bocha de helado + bebida libre</li>
+                    <li>Precio: $20.000 (+32% pero con mucho más valor)</li>
+                    <li>Experiencia completa para niños</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Menús Especiales -->
+        <div class="section">
+            <div class="section-title">Menús Especiales</div>
+            
+            <div class="combo-grid">
+                <div class="combo-card">
+                    <div class="combo-icon">🌅</div>
+                    <div class="combo-title">MENÚ MEDIODÍA</div>
+                    <div class="combo-content">
+                        Burrito, 3 Tacos, Quesadilla o Ensalada<br>
+                        + Bebidas libres + Postre/Café<br>
+                        <small>Solo Núñez | L-V mediodía</small>
+                    </div>
+                    <div class="combo-price">
+                        <div class="combo-total">$19.000</div>
+                    </div>
+                </div>
+
+                <div class="combo-card">
+                    <div class="combo-icon">🌙</div>
+                    <div class="combo-title">MENÚ POST-CENA</div>
+                    <div class="combo-content">
+                        <strong>NUEVO!</strong> Happy Hour Nocturno<br>
+                        Mismas opciones que mediodía<br>
+                        <small>Solo Núñez | Post servicio cena</small>
+                    </div>
+                    <div class="combo-price">
+                        <div class="combo-total">$20.000</div>
+                    </div>
+                </div>
+            </div>
+
+            <table class="pricing-table">
+                <thead>
+                    <tr>
+                        <th>Menú Grupos (15+)</th>
+                        <th>Precio Nov 2025</th>
+                        <th>Precio Ene 2026</th>
+                        <th>Aumento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Menú 1</td>
+                        <td class="price-old">$36.300</td>
+                        <td class="price-new">$42.000</td>
+                        <td class="increase">+15.7%</td>
+                    </tr>
+                    <tr>
+                        <td>Menú 2</td>
+                        <td class="price-old">$34.900</td>
+                        <td class="price-new">$40.000</td>
+                        <td class="increase">+14.6%</td>
+                    </tr>
+                    <tr>
+                        <td>After Office</td>
+                        <td class="price-old">$30.000</td>
+                        <td class="price-new">$35.000</td>
+                        <td class="increase">+16.7%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pendientes -->
+        <div class="section">
+            <div class="warning-box">
+                <h4>Puntos Pendientes</h4>
+                <ul>
+                    <li><strong>Corona:</strong> $6.000 (revisar si subir, costo $2.200, margen 173%)</li>
+                    <li><strong>Michelada:</strong> $6.500 (revisar junto con Corona)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Action Items -->
+        <div class="section">
+            <div class="section-title">Action Items</div>
+            <div class="action-grid">
+                <div class="action-item">
+                    <h4>📱 Marketing</h4>
+                    <ul>
+                        <li>Diseñar material de combos para IG</li>
+                        <li>Posts con precio por persona</li>
+                        <li>Actualizar Google My Business</li>
+                        <li>Campaña Menú Post-Cena</li>
+                    </ul>
+                </div>
+
+                <div class="action-item">
+                    <h4>🤖 Bot / NotChatbot</h4>
+                    <ul>
+                        <li>Programar respuestas de combos</li>
+                        <li>Recomendaciones de valor promedio</li>
+                        <li>Incluir precio total + por persona</li>
+                    </ul>
+                </div>
+
+                <div class="action-item">
+                    <h4>📋 Operaciones</h4>
+                    <ul>
+                        <li>Actualizar cartas físicas (31/12)</li>
+                        <li>Actualizar menús digitales</li>
+                        <li>Training equipo en nuevos precios</li>
+                        <li>Actualizar sistema POS</li>
+                    </ul>
+                </div>
+
+                <div class="action-item">
+                    <h4>🚀 Futuro</h4>
+                    <ul>
+                        <li>Foodtruck: definir menú y pricing</li>
+                        <li>Expandir menú mediodía a Mz y Nordelta</li>
+                        <li>Evaluar combos en base a data</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="section" style="text-align: center; padding-top: 40px; border-top: 2px solid rgba(255, 107, 53, 0.3);">
+            <div style="font-size: 1.3em; color: #ffd700; margin-bottom: 10px;">
+                <strong>Implementación: 1 Enero 2026</strong>
+            </div>
+            <div style="color: #999; font-size: 0.9em;">
+                Documento preparado: 22 Diciembre 2024
+            </div>
+        </div>
+    </div>
+</body>
+</html>
